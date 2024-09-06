@@ -1,0 +1,756 @@
+\section{Results and Discussions}
+
+\subsection{RQ1: What are the types and prevalence of licenses across the entire open source software landscape?}
+
+\subsubsection{Results}
+
+We first counted the total number of projects that had at least one occurrence of any license during their lifetime.
+We then identified the top 20 most used licenses, as shown in Figure~\ref{fig:dis1}.
+
+Out of the 131,171,379 projects indexed by WoC, 22,281,342 projects had at least one license committed to their project at some point in their lifetime.
+However, when examining the latest status of these projects, this number drops to 20,110,256 projects.
+
+When interpreting the numbers shown in these figures, it is important to note that the sum of these numbers exceeds the total number of projects with a license.
+This discrepancy arises because some projects have multiple licenses and are therefore counted in several categories.
+
+To calculate the retention rate for each license, we determined the number of projects that still had the license in their latest state and divided this number by the total number of projects that had ever used the license.
+This retention rate indicates the proportion of projects that continue to use the license over time, and it is also displayed in Figure~\ref{fig:dis1}.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/dis1.png}
+\caption{The Distribution and Retention Rates of the Most Used Licenses}
+\label{fig:dis1}
+\end{figure}
+
+As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
+Notably, the deprecated GPL 3 license exhibits the highest retention rate, likely due to its strong copyleft nature.
+In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retention rate among the top 20 most used licenses.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/dis3.png}
+\caption{The Distribution of License Types}
+\label{fig:dis3}
+\end{figure}
+
+We also analyze the distribution of projects according to their license types.
+Initially, we consider the distribution across the entire project history, meaning that if a project adopted a license at any point and later removed it, it is still counted as having that license.
+Next, we determine the distribution based on the most recent status of each project.
+The results are shown in Figure~\ref{fig:dis3}.
+
+These results reveals the overall trends and stability of various licenses in the open source software ecosystem, providing insights into how different licenses are maintained and preferred over time.
+
+\subsubsection{Comparison with literature}
+
+Table~\ref{tab:res1a} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope, methodology, and dataset size (see Table~\ref{tbl:litRev}).
+
+\begin{table}[h!]
+\centering
+\caption{RQ1 Results Comparison With Literature}
+\label{tab:res1a}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lcc|ccccc}
+    \toprule
+    & \textbf{Projects} & \textbf{No License} & \textbf{Copyleft} & \textbf{Weak} & \textbf{Conditional} & \textbf{Permissive} & \textbf{Public} \\
+    & & & & \textbf{Copyleft} & \textbf{Open} & & \textbf{Domain} \\
+    \midrule
+    \cite{wu2024large} & 3,474,778 & 21.12\% & 5.72\% & 5.12\% & - & 89.16\% & - \\
+    \cite{cui2023empirical} & 16,341 & 10.51\% & 11.32\% & 0.97\% & - & 87.71\% & - \\
+    \textbf{This Study} & 131,171,379 & 83.01\% & 15.35\% & 5.26\% & 4.82\% & 70.18\% & 4.39\% \\
+    \bottomrule
+\end{tabular}}
+\end{table}
+
+A key methodological difference between our study and Wu et al. lies in the treatment of data points.
+Wu et al. considered each version of a package as a separate data point, resulting in 46.59 million data points from 3.47 million projects.
+This approach could introduce bias by overrepresenting projects with many versions, potentially skewing observed trends in licensing.
+Conversely, our study treated each project as a single data point, providing a more balanced view of the open source ecosystem without overemphasizing projects with frequent updates.
+
+The focus of Wu et al. on only five package managers might explain the significant discrepancy in the percentage of projects without a license.
+Their study reported that 21.12\% of projects lacked a license\footnote{
+Since the paper provides these percentages by package manager, we calculated the overall percentage by taking a weighted average based on the number of projects per package manager.
+}, whereas our study found a much higher percentage of 83.01\%.
+On the other hand, Cui et al. reported that only 10.51\% of projects were unlicensed.
+The difference with Wu et al. likely stems from the fact that the package managers they examined are associated with more mature and well-maintained projects, which are more likely to have defined licenses.
+Additionally, Cui et al. filtered their data to include only projects with over 1,000 stars, which might explain why the percentage of unlicensed projects is so low.
+In contrast, our broader dataset includes a wide variety of projects, many of which may be less mature or less formally governed, leading to a higher incidence of unlicensed projects.
+
+The analysis of copyleft versus permissive licenses further reflects the differences in scope.
+Wu et al.'s study found a dominance of permissive licenses, with much lower percentages for copyleft and weak copyleft licenses.
+However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
+This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
+
+\subsubsection{Discussions}
+
+The analysis of OSS licensing reveals a troubling trend: 83\% of projects lack a formal license, posing significant legal risks and uncertainties.
+This underscores the urgent need for developers to prioritize licensing from the outset to protect their work and establish clear terms of use.
+The discrepancy between our findings and existing literature, which often underestimates the prevalence of unlicensed projects, highlights a critical issue in the OSS community.
+Previous studies, focusing on more mature projects, reported a much lower percentage of unlicensed projects, potentially leading to an incomplete understanding of the risks associated with software reuse. 
+
+Unlicensed projects create legal ambiguity, making it unclear how software can be used, modified, or redistributed.
+This is particularly concerning given the widespread practice of software reuse, even from smaller, lesser-known projects~\cite{jahanshahi2024beyond}.
+When such unlicensed code is integrated into other projects, it increases the risk of license non-compliance, potentially impacting a broad range of downstream users and developers.
+This risk is further exacerbated by the fact that many OSS projects do not undergo rigorous legal review before incorporating external code, especially from less prominent sources.
+
+Among projects that are licensed, the MIT license is the most prevalent, reflecting a community preference for permissive licenses that facilitate broad adoption and collaboration.
+However, the continued use of copyleft licenses like the GPL demonstrates that many developers are committed to preserving the open nature of derivative works.
+This indicates a need for the OSS community to balance the ease of adoption associated with permissive licenses with the ideological values upheld by copyleft licenses.
+
+The strong retention rates of licenses such as the EPL, MIT, and GPL further suggest their effectiveness in ensuring long-term project sustainability.
+Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
+
+To address these implications, the OSS community should prioritize enhancing education and awareness among developers about the legal significance of licensing and how to select the appropriate license for their projects.
+Furthermore, efforts should be made to develop and promote tools that streamline the licensing process, making it more accessible for developers, especially those new to the field, to apply licenses correctly.
+While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
+By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
+
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ1 Key Findings]
+\begin{enumerate}
+    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than the figures reported in previous studies.
+    \item The MIT license is the most widely used license, accounting for 65\% of all licensed projects and 10\% of all OSS projects.
+    \item Despite the overall preference for permissive licenses, copyleft licenses such as GPL exhibit strong retention rates, indicating sustained commitment to software freedom among certain developer communities.
+    \item The differences in license usage reported in our study compared to previous literature highlight the importance of dataset scope and methodology when assessing the prevalence of licenses in OSS projects.
+\end{enumerate}
+\end{tcolorbox}
+
+\subsection{RQ2: Do the characteristics of a project influence the choice of its license?}
+
+\subsubsection{Results}
+
+To answer this question, we employ a multinomial regression model as discussed in Section~\ref{sec:reg}.
+It is essential to check for correlations among predictors in a regression model, as multicollinearity—high correlation between predictors—can distort results.
+Multicollinearity makes it difficult to assess each predictor's impact, leading to unstable coefficients and inflated standard errors, ultimately compromising the model's reliability and interpretability.
+Addressing this issue improves the model's validity~\cite{dormann2013collinearity}.
+
+We used a 0.6 correlation threshold, as is commonly used to manage multicollinearity while retaining key predictors.
+Correlations above 0.6 indicate overlapping information, and removing such variables reduces multicollinearity without sacrificing significant variance.
+This cutoff strikes a balance, preserving some natural correlations while ensuring predictor independence~\cite{vatcheva2016multicollinearity}.
+
+\begin{comment}
+Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the removal of highly correlated predictors.
+
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - Correlation Matrix}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lcccccccccc}
+    \toprule
+     & \textbf{EarliestC.} & \textbf{LatestC.} & \textbf{CoreA.} & \textbf{FemaleA.} & \textbf{Forks} & \textbf{Commits} & \textbf{Files} & \textbf{Delay} & \textbf{DownP.} & \textbf{Burstiness} \\
+    \midrule
+    \textbf{EarliestCommit} & 1.00 & 0.52 & 0.09 & 0.08 & 0.17 & 0.09 & -0.15 & 0.15 & 0.19 & 0.34 \\
+    \textbf{LatestCommit} & - & 1.00 & -0.21 & -0.18 & -0.13 & -0.41 & -0.11 & -0.14 & -0.11 & -0.19 \\
+    \textbf{CoreAuthors} & - & - & 1.00 & 0.55 & 0.25 & 0.35 & 0.00 & 0.15 & 0.21 & 0.19 \\
+    \textbf{FemaleAuthors} & - & - & - & 1.00 & 0.28 & 0.33 & 0.01 & 0.13 & 0.18 & 0.09 \\
+    \textbf{Forks} & - & - & - & - & 1.00 & 0.17 & 0.02 & 0.13 & 0.21 & 0.19 \\
+    \textbf{Commits} & - & - & - & - & - & 1.00 & 0.03 & 0.27 & 0.35 & 0.30 \\
+    \textbf{Files} & - & - & - & - & - & - & 1.00 & 0.18 & 0.46 & -0.06 \\
+    \textbf{Delay} & - & - & - & - & - & - & - & 1.00 & 0.26 & 0.19 \\
+    \textbf{DownProjects} & - & - & - & - & - & - & - & - & 1.00 & 0.18 \\
+    \textbf{Burstiness} & - & - & - & - & - & - & - & - & - & 1.00 \\
+    \bottomrule
+\end{tabular}}
+\label{tbl:corr-l}
+\end{table}
+\end{comment}
+
+The basic statistics of the variables, including the 5th percentile, median, mean, and 95th percentile for the numeric variables, as well as the counts of different levels for the factor variables, are presented in Table~\ref{tbl:stat-l}.
+
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - Descriptive Statistics}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{llcccc}
+  \toprule
+  \textbf{Variable} & \textbf{Description} & & \textbf{Statistics} & & \\ 
+  \midrule
+  \midrule
+  License & \hspace{0.0cm}No License \hspace{1.5cm} Permissive & \hspace{-1.3cm} Copyleft & Weak Copyleft & Conditional Open & Public Domain \\ 
+  Counts (\%) & \hspace{-0.35cm} 263,974 (46.13\%) \hspace{0.7cm} 148,320 (25.92\%) & \hspace{-1.2cm} 60,925 (10.65\%) & 43,143 (7.54\%) & 30,933 (5.41\%) & 24,878 (4.35\%) \\
+  \midrule
+   & & \textbf{5\%} & \textbf{Median} & \textbf{Mean} & \textbf{95\%} \\ 
+  EarliestCommit & Time since the earliest commit & 05/08/2006 & 07/05/2017 & 01/31/2016 & 11/23/2021 \\
+  LatestCommit & Time since the latest commit & 04/30/2011 & 02/17/2020 & 03/15/2019 & 04/28/2023 \\
+  CoreAuthors & Authors with 80\%+ of commits & 1 & 2 & 8.62 & 17 \\
+  FemaleAuthors & Number of female authors & 0 & 0 & 2.10 & 6 \\
+  Forks & Number of forks & 0 & 0 & 27.66 & 48 \\
+  Commits & Number of commits & 2 & 155 & 2,982.63 & 5,770 \\
+  Files & Number of files & 5 & 1,820 & 17,295.57 & 59,939.60 \\ 
+  AdoptDelay & Earliest commit to license adoption (days) & 0 & 0 & 133 & 751 \\ 
+  DownProjects & Number of downstream projects & 0 & 12 & 1,831.07 & 2,342 \\ 
+  Burstiness &  (Latest - Earliest) / Active months & 0 & 1 & 1.87 & 6.37 \\
+  \multicolumn{6}{c}{\dotfill} \\
+  Language & \hspace{-0.2cm}JavaScript \hspace{1.15cm} C/C++ \hspace{1.1cm} Python & Java & PHP & Ruby & (Remaining) \\ 
+  Counts (\%) & \hspace{-0.6cm}221,588 (38.72\%) \hspace{0.1cm} 82,551 (14.43\%) \hspace{0.1cm} 53,468 (9.34\%) & 50,372 (8.80\%) & 44,952 (7.86\%) & 18,592 (3.25\%) & 100,650 (17.59\%) \\ 
+  \bottomrule
+\end{tabular}}
+\label{tbl:stat-l}
+\end{table}
+
+The estimated coefficients for the regression model are shown in Table~\ref{tbl:model-l}.
+Given that the response variable has multiple outcome levels, the model provides a distinct set of coefficients for each outcome level relative to a chosen base level.
+This approach is typical in models such as multinomial logistic regression, where the base level acts as a reference category for comparing all other outcome levels.
+Each set of coefficients indicates the influence of the predictor variables on the probability of the response variable assuming a specific outcome level relative to the base level.
+In our model, the base level is defined as projects with ``no license'', so the coefficients reflect the impact of the predictors on each license type compared to having no license.
+It is important to note that the selection of the base level is arbitrary and does not affect the estimated probabilities of each outcome level, as the relative probabilities between outcome levels remain constant regardless of the chosen base level~\cite{agresti2012categorical}.
+
+For the programming language predictor, we employed sum contrasts, also known as effect coding, where each level of the predictor variable is compared to the overall mean of all levels.
+This approach is particularly advantageous in models where the goal is to compare each category to the overall mean rather than to a specific reference category, as it offers a more symmetric interpretation of the effects.
+In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
+As a result, the coefficient for one level (typically the last level, which is TypeScript in our model) is not estimated independently but is implicitly determined by the other coefficients to ensure that the overall model remains balanced and interpretable.
+
+Furthermore, in interpreting the earliest and latest commit times, it is important to emphasize that the predictors used in the model represent the time elapsed since those commits.
+This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
+
+\begin{comment}
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - Coefficients}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lccc|ccc|ccc|ccc|ccc}
+    \toprule
+    & \multicolumn{3}{c}{\textbf{Copyleft}} & \multicolumn{3}{c}{\textbf{Weak Copyleft}} & \multicolumn{3}{c}{\textbf{Conditional Open}} & \multicolumn{3}{c}{\textbf{Permissive}} & \multicolumn{3}{c}{\textbf{Public Domain}} \\
+    \textbf{Variable} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} \\
+    \midrule
+    (Intercept) & -3.11 & 0.17 & \cellcolor{lightgreen}<0.01 & -2.82 & 0.21 & \cellcolor{lightgreen}<0.01 & 5.40 & 0.22 & \cellcolor{lightgreen}<0.01 & 7.01 & 0.12 & \cellcolor{lightgreen}<0.01 & 0.76 & 0.25 & \cellcolor{lightgreen}<0.01 \\ 
+    EarliestCommit & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & >-0.01 & 0.01 & 0.89 & -0.49 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.31 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.18 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
+    LatestCommit & -0.14 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.11 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.18 & 0.01 & \cellcolor{lightgreen}<0.01 \\ 
+    CoreAuthors & -0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.44 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.27 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.40 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
+    FemaleAuthors & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.10 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.09 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.10 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.02 & 0.02 & 0.38 \\ 
+    Forks & 0.18 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.27 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.08 & 0.01 & \cellcolor{lightgreen}<0.01 \\ 
+    Commits & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.27 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.36 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.45 & <0.01 & \cellcolor{lightgreen}<0.01 \\ 
+    Files & 0.29 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.48 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.56 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.21 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.53 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
+    AdoptDelay & 2.86 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.88 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.90 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.85 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.90 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
+    DownProjects & 0.12 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.12 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
+    Burstiness & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.21 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.37 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.14 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.32 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
+    \multicolumn{16}{c}{\dotfill} \\
+    L-other & -0.52 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.89 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.61 & 0.05 & \cellcolor{lightgreen}<0.01 & -0.71 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.01 & 0.05 & 0.83 \\ 
+    L-C/C++ & 0.76 & 0.02 & \cellcolor{lightgreen}<0.01 & 0.78 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.53 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.11 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.03 & 0.04 & 0.51 \\ 
+    L-Go & 0.84 & 0.05 & \cellcolor{lightgreen}<0.01 & 2.07 & 0.05 & \cellcolor{lightgreen}<0.01 & 2.17 & 0.06 & \cellcolor{lightgreen}<0.01 & 1.57 & 0.03 & \cellcolor{lightgreen}<0.01 & 1.31 & 0.11 & \cellcolor{lightgreen}<0.01 \\ 
+    L-Java & -0.67 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.25 & 0.03 & \cellcolor{lightgreen}<0.01 & -1.28 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.43 & 0.02 & \cellcolor{lightgreen}<0.01 & -1.34 & 0.07 & \cellcolor{lightgreen}<0.01 \\ 
+    L-JavaScript & -0.54 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.25 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.11 & 0.03 & \cellcolor{lightgreen}<0.01 & 0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & 1.49 & 0.03 & \cellcolor{lightgreen}<0.01 \\ 
+    L-PHP & 0.96 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.11 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.32 & 0.04 & \cellcolor{lightgreen}<0.01 & 0.62 & 0.02 & \cellcolor{lightgreen}<0.01 & -1.02 & 0.07 & \cellcolor{lightgreen}<0.01 \\ 
+    L-Perl & -0.45 & 0.05 & \cellcolor{lightgreen}<0.01 & 0.07 & 0.06 & 0.27 & -1.18 & 0.18 & \cellcolor{lightgreen}<0.01 & -1.63 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.50 & 0.15 & \cellcolor{lightgreen}<0.01 \\ 
+    L-Python & 0.13 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.30 & 0.03 & \cellcolor{lightgreen}<0.01 & -0.34 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.01 & 0.01 & 0.53 & -0.34 & 0.05 & \cellcolor{lightgreen}<0.01 \\ 
+    L-R & -0.46 & 0.06 & \cellcolor{lightgreen}<0.01 & -1.60 & 0.14 & \cellcolor{lightgreen}<0.01 & -1.06 & 0.19 & \cellcolor{lightgreen}<0.01 & -1.11 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.61 & 0.19 & \cellcolor{lightgreen}<0.01 \\ 
+    L-Ruby & -0.16 & 0.03 & \cellcolor{lightgreen}<0.01 & -0.27 & 0.05 & \cellcolor{lightgreen}<0.01 & -0.88 & 0.11 & \cellcolor{lightgreen}<0.01 & 0.66 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.48 & 0.11 & \cellcolor{lightgreen}<0.01 \\ 
+    L-Rust & 0.49 & 0.06 & \cellcolor{lightgreen}<0.01 & 0.48 & 0.09 & \cellcolor{lightgreen}<0.01 & 1.41 & 0.10 & \cellcolor{lightgreen}<0.01 & 0.74 & 0.04 & \cellcolor{lightgreen}<0.01 & 1.63 & 0.12 & \cellcolor{lightgreen}<0.01 \\ 
+    \bottomrule
+\end{tabular}}
+\label{tbl:model-l}
+\end{table}
+\end{comment}
+
+The ANOVA results for the fitted model is shows the p-values for all the predictors are close to zero, indicating that the null hypothesis
+% \footnote{
+% H0: The reduced model (excluding the predictor) does not fit the data significantly worse than the full model (including the predictor), implying that the predictor does not significantly enhance the model's fit.
+% } 
+can be rejected.
+This means that each predictor significantly improves our model's fit.
+
+\begin{comment}
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - ANOVA Table}
+\begin{tabular}{lccccc}
+    \toprule
+    \textbf{Variable} & \textbf{DF} & \textbf{Deviance} & \textbf{Resid. DF} & \textbf{Resid. Deviance} & \textbf{p.value} \\ 
+    \midrule
+    NULL &  &  & 572,168 & 1,641,371.30 & \\
+    EarliestCommit & 5 & 22,631.53 & 572,163 & 1,618,739.77 & \cellcolor{lightgreen}<0.01 \\ 
+    LatestCommit & 5 & 15,003.28 & 572,158 & 1,603,736.49 & \cellcolor{lightgreen}<0.01 \\ 
+    CoreAuthors & 5 & 4,106.14 & 572,153 & 1,599,630.35 & \cellcolor{lightgreen}<0.01 \\ 
+    FemaleAuthors & 5 & 766.09 & 572,148 & 1,598,864.26 & \cellcolor{lightgreen}<0.01 \\ 
+    Forks & 5 & 10,115.52 & 572,143 & 1,588,748.74 & \cellcolor{lightgreen}<0.01 \\ 
+    Commits & 5 & 9,304.28 & 572,138 & 1,579,444.46 & \cellcolor{lightgreen}<0.01 \\ 
+    Files & 5 & 173,992.60 & 572,133 & 1,405,451.86 & \cellcolor{lightgreen}<0.01 \\ 
+    Delay & 5 & 134,793.54 & 572,128 & 1,270,658.31 & \cellcolor{lightgreen}<0.01 \\ 
+    DownProjects & 5 & 7,137.78 & 572,123 & 1,263,520.53 & \cellcolor{lightgreen}<0.01 \\ 
+    Burstiness & 5 & 1,284.30 & 572,118 & 1,262,236.24 & \cellcolor{lightgreen}<0.01 \\ 
+    Language & 55 & 57,669.49 & 572,063 & 1,204,566.75 & \cellcolor{lightgreen}<0.01 \\ 
+    \bottomrule
+\end{tabular}
+\label{tbl:anova-l}
+\end{table}
+\end{comment}
+
+To enhance the interpretability of our model, we utilized the \textit{emmeans} package in R to compute marginal probabilities across various levels of the outcome variable~\cite{lenth2024emmeans}.
+The \textit{emmeans} (Estimated Marginal Means) package is a powerful tool for estimating expected marginal means and contrasts, adjusted for other variables in the model.
+
+In our analysis, we specifically calculated marginal probabilities for each level of the programming language predictor.
+This approach enables us to assess the predicted probability of each license type given a specific programming language, while controlling for the distribution of other predictors.
+
+For numerical predictors, we estimated marginal probabilities at key quantiles (25th, 50th, and 75th percentiles) of their distributions\footnote{
+Exceptions were made for variables with skewed distributions, such as female authors and forks, where the 25th and 50th quantiles were both 0; here, we used 0, 1, 3 and 0, 2, 5, respectively.
+For adoption delay, we used 1, 3, and 12 months.
+}.
+This method allows us to capture the variability in predicted outcomes across the range of each numerical variable, offering a more detailed understanding of how these predictors influence the likelihood of different license types.
+Estimating probabilities at these specific quantiles also helps account for potential non-linearities and interactions within the model, providing a clearer picture of predictor effects across their distribution.
+
+This strategy of estimating marginal probabilities for both categorical levels and key quantiles of numerical variables is well-established in applied statistics.
+It enhances the interpretation of complex models, such as multinomial logistic regression, where the direct interpretation of coefficients can be challenging due to the multiple levels of the outcome variable~\cite{agresti2012categorical}.
+By presenting results in terms of marginal probabilities, our approach improves the model's interpretability, making the findings more accessible and actionable for practitioners (see Figure~\ref{fig:probs}).
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.99\linewidth]{figures/probs.png}
+    \caption{License Choice Model - Marginal Probability Distribution}
+    \label{fig:probs}
+\end{figure}
+
+After estimating the marginal probabilities, we performed pairwise comparisons using the \textit{pairs} function from the \textit{emmeans} package to identify significant differences between the levels of predictors and outcome categories.
+We utilized the Tukey method for multiple comparisons, a conservative approach that adjusts for the family-wise error rate, thereby minimizing the likelihood of falsely identifying significant differences~\cite{hsu1996multiple,hothorn2008simultaneous}.
+
+The analysis was conducted in two directions: first, we compared the outcome probabilities within each level of the predictor (e.g., programming language) to assess whether the likelihood of each license type differs significantly across these levels\footnote{
+\(\sim\) license | predictor
+}. 
+Second, we compared the levels of the predictor within each outcome category to determine if different predictor levels are associated with significantly different probabilities for a given outcome\footnote{
+\(\sim\)  predictor | license
+}. 
+
+This bidirectional approach allows us to thoroughly explore the interaction between predictor levels and outcomes, analyzing both within-group and between-group differences.
+This comprehensive analysis provides a deeper understanding of the factors that significantly influence the probability of each license type in our model.
+
+Given the extensive nature of the pairwise comparisons and the fact that most p-values for the differences were close to zero, we have opted to present only those contrasts where the p-value exceeds 0.05.
+This approach provides a clearer and more concise summary of the results.
+Table~\ref{tbl:contrast} displays these contrasts, with the second column indicating the contrast, the third column specifying the associated condition (either the level of the predictor or the license type), and the fourth column presenting the corresponding p-value.
+
+\begin{comment}
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - Non-Significant Contrasts}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lllr|lllr}
+    \toprule
+    \textbf{Variable} & \textbf{Contrast} & \textbf{Condition} & \textbf{p.value} &
+    \textbf{Variable} & \textbf{Contrast} & \textbf{Condition} & \textbf{p.value} \\ 
+    \midrule
+    EarliestCommit & 116,241,254 - 186,373,112 & P. Domain & 0.88 & 
+        Language & Go - Java & Permissive & 0.73 \\
+    (Seconds) & 116,241,254 - 298,124,896 & P. Domain & 1.00 & 
+        & Go - Python & Permissive & 0.14 \\
+    & 186,373,112 - 298,124,896 & P. Domain & 0.85 & 
+        & Go - Rust & Permissive & 1.00 \\
+    LatestCommit & 48,116,022 - 103,629,565 & Copyleft & 0.05 & 
+        & Java - Rust & Permissive & 0.82 \\
+    (Seconds) & 48,116,022 - 191,945,416 & Copyleft & 0.05 & 
+        & PHP - R & Permissive & 1.00 \\
+    & 103,629,565 - 191,945,416 & Copyleft & 0.06 & 
+        & Python - Rust & Permissive & 0.99 \\
+    CoreAuthors & 1 - 2 & Copyleft & 0.19 & 
+        & other - Perl & P. Domain & 0.88 \\
+    & 1 - 4 & Copyleft & 0.17 & 
+        & other - R & P. Domain & 0.82 \\
+    & 2 - 4 & Copyleft & 0.16 & 
+        & other - Rust & P. Domain & 0.73 \\
+    & 1 - 2 & W. Copyleft & 0.94 & 
+        & C/C++ - Go & P. Domain & 1.00 \\
+    & 1 - 4 & W. Copyleft & 0.93 & 
+        & C/C++ - Perl & P. Domain & 0.06 \\
+    & 2 - 4 & W. Copyleft & 0.92 & 
+        & C/C++ - Python & P. Domain & 1.00 \\
+    FemaleAuthors & 0 - 1 & Permissive & 0.48 & 
+        & C/C++ - R & P. Domain & 0.48 \\
+    & 0 - 3 & Permissive & 0.38 & 
+        & C/C++ - TypeScript & P. Domain & 0.70 \\
+    & 1 - 3 & Permissive & 0.29 & 
+        & Go - Perl & P. Domain & 0.19 \\
+    & 0 - 1 & W. Copyleft & 1.00 & 
+        & Go - Python & P. Domain & 1.00 \\
+    & 0 - 3 & W. Copyleft & 1.00 & 
+        & Go - R & P. Domain & 0.71 \\
+    & 1 - 3 & W. Copyleft & 1.00 & 
+        & Go - TypeScript & P. Domain & 0.99 \\
+    Files & 114 - 18456 & Copyleft & 0.83 & 
+        & Java - Ruby & P. Domain & 1.00 \\
+    Language & PHP - Rust & No License & 0.97 & 
+        & Perl - Python & P. Domain & 0.05 \\
+    & Perl - R & No License & 1.00 & 
+        & Perl - R & P. Domain & 1.00 \\
+    & Python - TypeScript & No License & 0.30 & 
+        & Perl - Rust & P. Domain & 0.26 \\
+    & other - Perl & C. Open & 0.76 & 
+        & Perl - TypeScript & P. Domain & 0.66 \\
+    & other - R & C. Open & 1.00 & 
+        & Python - R & P. Domain & 0.46 \\
+    & other - TypeScript & C. Open & 1.00 & 
+        & Python - TypeScript & P. Domain & 0.65 \\
+    & C/C++ - Java & C. Open & 1.00 & 
+        & R - Rust & P. Domain & 0.22 \\
+    & C/C++ - Perl & C. Open & 0.57 & 
+        & R - TypeScript & P. Domain & 0.97 \\
+    & C/C++ - R & C. Open & 0.37 & 
+        & other - Python & W. Copyleft & 0.95 \\
+    & Go - PHP & C. Open & 0.69 & 
+        & other - Rust & W. Copyleft & 1.00 \\
+    & Go - Rust & C. Open & 1.00 & 
+        & C/C++ - Go & W. Copyleft & 0.93 \\
+    & Java - Perl & C. Open & 0.64 & 
+        & JavaScript - R & W. Copyleft & 0.83 \\
+    & Java - R & C. Open & 0.43 & 
+        & JavaScript - Rust & W. Copyleft & 0.60 \\
+    & JavaScript - Rust & C. Open & 0.26 & 
+        & Python - R & W. Copyleft & 0.07 \\
+    & PHP - Rust & C. Open & 0.95 & 
+        & Python - Rust & W. Copyleft & 1.00 \\
+    & Perl - Python & C. Open & 1.00 & 
+        & R - Ruby & W. Copyleft & 1.00 \\
+    & Perl - R & C. Open & 1.00 & 
+        & R - Rust & W. Copyleft & 0.21 \\
+    & Perl - Ruby & C. Open & 0.06 & 
+        & R - TypeScript & W. Copyleft & 1.00 \\
+    & Perl - TypeScript & C. Open & 0.99 & 
+        & Ruby - TypeScript & W. Copyleft & 0.48 \\
+    & Python - R & C. Open & 1.00 & 
+        License & C. Open - P. Domain & Commits = 18 & 0.20 \\
+    & Python - TypeScript & C. Open & 0.21 & 
+        & C. Open - P. Domain & C/C++ & 0.22 \\
+    & R - TypeScript & C. Open & 1.00 & 
+        & Copyleft - Permissive & C/C++ & 0.34 \\
+    & other - PHP & Copyleft & 0.34 & 
+        & C. Open - P. Domain & JavaScript & 0.80 \\
+    & other - Python & Copyleft & 1.00 & 
+        & P. Domain - W. Copyleft & JavaScript & 0.14 \\
+    & C/C++ - Perl & Copyleft & 1.00 & 
+        & C. Open - P. Domain & Perl & 0.86 \\
+    & C/C++ - R & Copyleft & 1.00 & 
+        & Permissive - W. Copyleft & Perl & 1.00 \\
+    & Go - JavaScript & Copyleft & 0.99 & 
+        & C. Open - P. Domain & R & 1.00 \\
+    & Go - Ruby & Copyleft & 0.11 & 
+        & P. Domain - W. Copyleft & R & 0.06 \\
+    & Java - Rust & Copyleft & 1.00 & 
+        & C. Open - P. Domain & Ruby & 1.00 \\
+    & PHP - Python & Copyleft & 0.66 & 
+        & C. Open - P. Domain & Rust & 0.87 \\
+    & Perl - R & Copyleft & 1.00 & 
+        & C. Open - W. Copyleft & Rust & 0.08 \\
+    & Rust - TypeScript & Copyleft & 0.99 & 
+        & C. Open - P. Domain & TypeScript & 0.07 \\
+    \bottomrule
+\end{tabular}}
+\label{tbl:contrast}
+\end{table}
+\end{comment}
+
+\begin{table}[h!]
+\centering
+\caption{License Choice Model - Non-Significant Contrasts}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lllr|lllr|lllr}
+    \toprule
+    \textbf{Variable} & \textbf{Contrast} & \textbf{Condition} & \textbf{p.value} &
+    \textbf{Var.} & \textbf{Contrast} & \textbf{Cond.} & \textbf{p.value} &
+    \textbf{Var.} & \textbf{Contrast} & \textbf{Cond.} & \textbf{p.value} \\ 
+    \midrule
+    EarliestC. & 116,241,254 - 186,373,112 & P. Domain & 0.88 & 
+        Lang. & Perl - Python & C. Open & 1.00 & 
+            Lang. & Go - TypeScript & P. Domain & 0.99 \\
+    (Seconds) & 116,241,254 - 298,124,896 & P. Domain & 1.00 & 
+        & Perl - R & C. Open & 1.00 &
+            & Java - Ruby & P. Domain & 1.00 \\
+    & 186,373,112 - 298,124,896 & P. Domain & 0.85 & 
+        & Perl - Ruby & C. Open & 0.06 & 
+            & Perl - Python & P. Domain & 0.05 \\
+    LatestC. & 48,116,022 - 103,629,565 & Copyleft & 0.05 & 
+        & Perl - TypeScript & C. Open & 0.99 &
+            & Perl - R & P. Domain & 1.00 \\
+    (Seconds) & 48,116,022 - 191,945,416 & Copyleft & 0.05 & 
+        & Python - R & C. Open & 1.00 & 
+            & Perl - Rust & P. Domain & 0.26 \\
+    & 103,629,565 - 191,945,416 & Copyleft & 0.06 & 
+        & Python - TypeScript & C. Open & 0.21 & 
+            & Perl - TypeScript & P. Domain & 0.66 \\
+    CoreA. & 1 - 2 & Copyleft & 0.19 & 
+        & R - TypeScript & C. Open & 1.00 & 
+            & Python - R & P. Domain & 0.46 \\
+    & 1 - 4 & Copyleft & 0.17 & 
+        & other - PHP & Copyleft & 0.34 &
+            & Python - TypeScript & P. Domain & 0.65 \\
+    & 2 - 4 & Copyleft & 0.16 & 
+        & other - Python & Copyleft & 1.00 & 
+            & R - Rust & P. Domain & 0.22 \\
+    & 1 - 2 & W. Copyleft & 0.94 & 
+        & C/C++ - Perl & Copyleft & 1.00 & 
+            & R - TypeScript & P. Domain & 0.97 \\
+    & 1 - 4 & W. Copyleft & 0.93 & 
+        & C/C++ - R & Copyleft & 1.00 & 
+            & other - Python & W. Copyleft & 0.95 \\
+    & 2 - 4 & W. Copyleft & 0.92 & 
+        & Go - JavaScript & Copyleft & 0.99 & 
+            & other - Rust & W. Copyleft & 1.00 \\
+    FemaleA. & 0 - 1 & Permissive & 0.48 & 
+        & Go - Ruby & Copyleft & 0.11 & 
+            & C/C++ - Go & W. Copyleft & 0.93 \\
+    & 0 - 3 & Permissive & 0.38 & 
+        & Java - Rust & Copyleft & 1.00 & 
+            & JavaScript - R & W. Copyleft & 0.83 \\
+    & 1 - 3 & Permissive & 0.29 & 
+        & PHP - Python & Copyleft & 0.66 & 
+            & JavaScript - Rust & W. Copyleft & 0.60 \\
+    & 0 - 1 & W. Copyleft & 1.00 & 
+        & Perl - R & Copyleft & 1.00 & 
+            & Python - R & W. Copyleft & 0.07 \\
+    & 0 - 3 & W. Copyleft & 1.00 & 
+        & Rust - TypeScript & Copyleft & 0.99 & 
+            & Python - Rust & W. Copyleft & 1.00 \\
+    & 1 - 3 & W. Copyleft & 1.00 & 
+        & Go - Java & Permissive & 0.73 &
+            & R - Ruby & W. Copyleft & 1.00 \\
+    Files & 114 - 18456 & Copyleft & 0.83 & 
+        & Go - Python & Permissive & 0.14 &
+            & R - Rust & W. Copyleft & 0.21 \\
+    Lang. & PHP - Rust & No License & 0.97 & 
+        & Go - Rust & Permissive & 1.00 &
+            & R - TypeScript & W. Copyleft & 1.00 \\
+    & Perl - R & No License & 1.00 & 
+        & Java - Rust & Permissive & 0.82 &
+            & Ruby - TypeScript & W. Copyleft & 0.48 \\
+    & Python - TypeScript & No License & 0.30 & 
+        & PHP - R & Permissive & 1.00 &
+            License & C. Open - P. Domain & Commits = 18 & 0.20 \\
+    & other - Perl & C. Open & 0.76 & 
+        & Python - Rust & Permissive & 0.99 &
+            & C. Open - P. Domain & C/C++ & 0.22 \\
+    & other - R & C. Open & 1.00 & 
+        & other - Perl & P. Domain & 0.88 &
+            & Copyleft - Permissive & C/C++ & 0.34 \\
+    & other - TypeScript & C. Open & 1.00 & 
+        & other - R & P. Domain & 0.82 &
+            & C. Open - P. Domain & JavaScript & 0.80 \\
+    & C/C++ - Java & C. Open & 1.00 & 
+        & other - Rust & P. Domain & 0.73 &
+            & P. Domain - W. Copyleft & JavaScript & 0.14 \\
+    & C/C++ - Perl & C. Open & 0.57 & 
+        & C/C++ - Go & P. Domain & 1.00 &
+            & C. Open - P. Domain & Perl & 0.86 \\
+    & C/C++ - R & C. Open & 0.37 & 
+        & C/C++ - Perl & P. Domain & 0.06 &
+            & Permissive - W. Copyleft & Perl & 1.00 \\
+    & Go - PHP & C. Open & 0.69 & 
+        & C/C++ - Python & P. Domain & 1.00 &
+            & C. Open - P. Domain & R & 1.00 \\
+    & Go - Rust & C. Open & 1.00 & 
+        & C/C++ - R & P. Domain & 0.48 &
+            & P. Domain - W. Copyleft & R & 0.06 \\
+    & Java - Perl & C. Open & 0.64 & 
+        & C/C++ - TypeScript & P. Domain & 0.70 &
+            & C. Open - P. Domain & Ruby & 1.00 \\
+    & Java - R & C. Open & 0.43 & 
+        & Go - Perl & P. Domain & 0.19 &
+            & C. Open - P. Domain & Rust & 0.87 \\
+    & JavaScript - Rust & C. Open & 0.26 & 
+        & Go - Python & P. Domain & 1.00 &
+            & C. Open - W. Copyleft & Rust & 0.08 \\
+    & PHP - Rust & C. Open & 0.95 & 
+        & Go - R & P. Domain & 0.71 &
+            & C. Open - P. Domain & TypeScript & 0.07 \\
+    \bottomrule
+\end{tabular}}
+\label{tbl:contrast}
+\end{table}
+
+% commits
+As the number of commits increases from 18 to 961, the probability of adopting a conditional open license decreases significantly from 4.60\% to 2.42\%, suggesting that projects with more commits are less likely to choose this type of license.
+Conversely, the probability of selecting a copyleft license increases from 23.53\% to 26.01\%, indicating a positive correlation between the number of commits and the likelihood of opting for a copyleft license.
+Similarly, the probability of adopting a permissive license rises from 54.26\% to 60.09\%, suggesting that projects with a higher number of commits are more inclined toward permissive licenses.
+
+On the other hand, the probability of choosing a public domain license decreases sharply from 4.16\% to 1.50\%, showing that more commits are associated with a lower likelihood of selecting a public domain license.
+Additionally, the likelihood of opting for a weak copyleft license decreases from 13.42\% to 9.94\% as the number of commits increases.
+
+% files
+As the number of files in a project increases from 114 to 18,456, the probability of adopting a conditional open license rises substantially from 1.66\% to 6.55\%, and the likelihood of selecting a public domain license increases from 1.32\% to 4.53\%.
+Similarly, the probability of choosing a weak copyleft license grows significantly from 7.15\% to 18.20\%, indicating that projects with a larger number of files are more likely to adopt these licenses.
+In contrast, the probability of choosing a permissive license decreases notably from 65.72\% to 46.48\%, suggesting that as the number of files increases, projects are less likely to adopt permissive licenses.
+The likelihood of adopting a copyleft license remains relatively stable, with only slight fluctuations from 24.10\% to 24.22\%.
+
+% authors
+As the number of core authors increases from 1 to 4, the probability of adopting a conditional open license decreases slightly from 3.66\% to 3.20\%, and the probability of selecting a copyleft license shows a minimal decline from 25.17\% to 24.90\%, suggesting that projects with more core authors are less likely to choose these licenses.
+Conversely, the probability of choosing a permissive license increases marginally from 56.91\% to 57.91\%, indicating that projects with more core authors are somewhat more inclined toward permissive licenses.
+The likelihood of selecting a public domain license decreases slightly from 2.65\% to 2.41\%, while the probability of choosing a weak copyleft license remains nearly unchanged, with only a slight decrease from 11.59\% to 11.55\%.
+
+As the number of female authors increases from 0 to 3, the likelihood of adopting conditional open and public domain licenses increases slightly, with conditional open rising from 3.08\% to 3.96\% and public domain from 2.36\% to 2.75\%.
+This suggests that projects with more female authors may lean slightly toward these license types.
+Conversely, the probability of selecting copyleft and permissive licenses decreases modestly, with copyleft dropping from 25.24\% to 24.31\% and permissive from 57.73\% to 57.38\%, indicating a small negative correlation between the number of female authors and the adoption of these licenses.
+The probability of choosing a weak copyleft license remains stable, showing minimal variation with the increase in female authors.
+
+% forks
+As the number of forks increases from 0 to 5, the probability of adopting a conditional open license decreases slightly from 3.61\% to 3.03\%, and the likelihood of selecting a copyleft license drops from 25.87\% to 24.00\%, indicating that projects with more forks are less likely to choose these licenses.
+Similarly, the probability of adopting a public domain license decreases from 2.79\% to 2.16\%, and the likelihood of selecting a weak copyleft license declines from 12.43\% to 10.68\%, showing a general trend away from these license types as the number of forks increases.
+In contrast, the probability of choosing a permissive license increases from 55.26\% to 60.10\%, suggesting that projects with more forks are more inclined to adopt permissive licenses.
+
+% downstream
+As the number of downstream projects increases from 1 to 98, the likelihood of choosing conditional open, public domain, and weak copyleft licenses slightly increases, suggesting that a higher number of downstream projects might encourage the adoption of licenses offering more control or protection.
+For example, the probability of adopting a conditional open license rises from 3.05\% to 3.53\%, and weak copyleft from 10.67\% to 12.25\%, possibly reflecting a desire for greater influence over how the code is used as its reach expands.
+Conversely, the probability of selecting permissive and copyleft licenses decreases slightly, with permissive licenses dropping from 58.51\% to 56.98\% and copyleft from 25.43\% to 24.62\%.
+This shift might indicate that as the number of downstream projects grows, developers become more cautious about the terms under which their code is shared, leading to a preference for licenses with more specific conditions.
+
+% earliest/latest commit
+As the time since the earliest commit increases, the likelihood of choosing conditional open and permissive licenses decreases, with conditional open dropping from 3.78\% to 2.83\% and permissive from 60.89\% to 53.70\%, suggesting that older projects are less likely to favor these licenses.
+In contrast, the probability of adopting a copyleft license increases significantly from 22.03\% to 28.60\%, indicating that older projects are more inclined to choose copyleft licenses, possibly due to a stronger emphasis on protecting the code as the project matures.
+The probability of selecting a weak copyleft license also rises slightly, from 10.82\% to 12.38\%, reflecting a similar trend.
+The public domain category remains largely unaffected by project age, with stable probabilities around 2.46\%.
+
+As the time since the latest commit increases, indicating longer periods of project inactivity, existing license choices show gradual shifts. 
+Projects that have been inactive for longer periods are more likely to have adopted conditional open, copyleft, and weak copyleft licenses before becoming inactive, with probabilities increasing slightly—3.29\% to 3.39\% for conditional open, 24.90\% to 25.15\% for copyleft, and 11.41\% to 11.93\% for weak copyleft.
+This suggests that these licenses might be more prevalent among older, inactive projects.
+Conversely, the probability of projects having adopted permissive or public domain licenses decreases as inactivity lengthens, with permissive licenses dropping from 57.87\% to 57.11\% and public domain from 2.50\% to 2.40\%.
+This trend indicates that projects with more flexible licenses may either remain active longer or are less common among older, inactive projects.
+
+The results indicate that as burstiness increases, there is a slight shift toward more permissive licenses, with their likelihood rising from 57.18\% to 57.89\%.
+This trend may stem from the fast-paced, dynamic nature of bursty development environments, where developers might favor permissive licenses for their flexibility and ease of collaboration.
+These licenses impose fewer restrictions, allowing for quicker code integration and broader adoption, which are particularly valuable during high-activity periods.
+In contrast, licenses with more conditions, such as conditional open and copyleft, experience minimal changes, likely due to their added complexity, which could slow down the development process in these settings.
+
+% delay
+As the adoption delay increases from 1 month to 12 months, the likelihood of choosing conditional open, public domain, and weak copyleft licenses slightly increases.
+This may be because longer delays give developers more time to consider legal and community implications, making these more protective licenses more appealing.
+Conversely, the probability of adopting a permissive license decreases, suggesting that the initial appeal of flexibility may diminish as other factors are weighed over time.
+The copyleft license remains relatively stable, indicating that its adoption is less influenced by the timing of decisions.
+
+% language
+The differences in licensing outcomes across various programming languages can be attributed to factors such as community culture, typical use cases, and historical influences associated with each language.
+For example, languages like JavaScript, Ruby, TypeScript, and Go demonstrate a strong preference for permissive licenses, likely due to the open and collaborative nature of their development communities.
+These languages are often used in web development and modern software projects, where permissive licenses like MIT or Apache are favored because they offer maximum flexibility.
+This flexibility is crucial in fast-paced environments, enabling developers to use, modify, and redistribute code with minimal restrictions, thereby supporting rapid adoption and innovation.
+
+In contrast, languages like Perl and R tend to favor copyleft licenses more than others.
+This preference aligns with the values of communities that prioritize openness and sharing.
+Perl's history in the open source movement and R's use in academic and research settings, where data sharing and transparency are important, contribute to the higher adoption of copyleft licenses like GPL.
+Similarly, C/C++ projects also have a strong presence of copyleft licenses.
+These languages have deep roots in the free software movement and are often used in critical system software, where maintaining open access to source code is important for security, auditing, and community contributions.
+
+The dominance of permissive licenses in languages like Java, Python, and Go is also influenced by their widespread use in commercial, enterprise, and academic settings.
+In these environments, permissive licenses are preferred because they facilitate integration with other software and proprietary solutions.
+Developers and organizations often choose these licenses to avoid legal complications and ensure that their software can be easily adopted and adapted in various contexts.
+
+On the other hand, the use of public domain and conditional open licenses is less common but still noteworthy in languages like C/C++ and Go.
+These licenses appeal to developers who want to maximize freedom for users or maintain certain controls over how their software is used, especially in projects with proprietary or sensitive applications.
+However, the lower adoption rates of these licenses suggest that most developers prefer to have some level of protection or attribution, which permissive and copyleft licenses provide.
+
+In summary, licensing preferences in software projects are shaped by a variety of factors, including the number of commits, files, core authors, female authors, forks, and downstream projects, as well as the project's age and activity level.
+As the number of commits increases, there is a trend toward higher probabilities of adopting copyleft and permissive licenses, while the likelihood of choosing conditional open, public domain, and weak copyleft licenses decreases.
+Conversely, as the number of files in a project grows, there is a noticeable shift away from permissive licenses toward conditional open, public domain, and weak copyleft licenses, with the likelihood of adopting copyleft licenses remaining stable.
+
+The number of core authors affects licensing choices differently, with a slight decrease in the likelihood of adopting conditional open, copyleft, and public domain licenses, while the preference for permissive licenses increases slightly, and weak copyleft licenses remain largely unaffected.
+Similarly, projects with more female authors tend to see a modest increase in the adoption of conditional open and public domain licenses, with a corresponding decline in copyleft and permissive licenses, while weak copyleft licenses show minimal change.
+
+As the number of forks rises, there is a shift toward a higher likelihood of adopting permissive licenses, with a decrease in the probabilities for conditional open, copyleft, public domain, and weak copyleft licenses.
+Additionally, as the number of downstream projects grows, developers may become more cautious, preferring licenses with more specific conditions.
+
+Over time, older and inactive projects tend to shift away from permissive and conditional licenses toward those offering more protection and control, such as copyleft and weak copyleft licenses.
+This trend contrasts with the influence of higher burstiness in development, which modestly favors the adoption of permissive licenses, reflecting a preference for simplicity and speed.
+
+Overall, the choice of license is influenced by a combination of cultural, historical, and practical factors.
+Permissive licenses dominate in many programming languages due to their flexibility and ease of integration, while copyleft licenses remain significant in communities that value long-term protection of software freedoms.
+The specific use cases and historical context in which a language developed also play a crucial role in shaping licensing preferences across different programming languages.
+
+\subsubsection{Comparison with literature}
+
+Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
+
+\begin{table}[h!]
+\centering
+\caption{RQ1-b Results Comparison With Literature}
+\label{tab:res1b}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{cccc|ccccc}
+    \toprule
+    \multirow{2}{*}{\textbf{Language}} & \multirow{2}{*}{\textbf{Study}} & \multirow{2}{*}{\textbf{Projects}} & \multirow{2}{*}{\textbf{Mode}} & \multirow{2}{*}{\textbf{Copyleft}} & \textbf{Weak} & \textbf{Conditional} & \multirow{2}{*}{\textbf{Permissive}} & \textbf{Public} \\
+    & & & & & \textbf{Copyleft} & \textbf{Open} & & \textbf{Domain} \\
+    \midrule
+    \multirow{3}{*}{\textbf{Java}} & \cite{wu2024large} & 513,939 & Observed & 5.00\% & 21.25\% & - & 73.75\% & - \\
+    & \multirow{2}{*}{\textbf{This Study}} & \multirow{2}{*}{50,372} & Observed & 22.25\% & 18.01\% & 1.84\% & 56.79\% & 1.11\% \\
+    & & & Model & 20.59\% & 13.53\% & 1.33\% & 63.66\% & 0.84\% \\
+    \multicolumn{8}{c}{\dotfill} \\
+    
+    \multirow{3}{*}{\textbf{JavaScript}} & \cite{wu2024large} & 2,182,959 & Observed & 3.75\% & 1.88\% & - & 94.38\% & - \\
+    & \multirow{2}{*}{\textbf{This Study}} & \multirow{2}{*}{221,588} & Observed & 9.15\% & 9.21\% & 16.86\% & 49.61\% & 15.18\% \\
+    & & & Model & 11.86\% & 6.82\% & 7.33\% & 66.83\% & 7.14\% \\
+    \multicolumn{8}{c}{\dotfill} \\
+    
+    \multirow{3}{*}{\textbf{Python}} & \cite{wu2024large} & 485,223 & Observed & 15.31\% & 4.38\% & - & 80.31\% & - \\
+    & \multirow{2}{*}{\textbf{This Study}} & \multirow{2}{*}{53,468} & Observed & 26.82\% & 9.31\% & 3.59\% & 58.10\% & 2.18\% \\
+    & & & Model & 28.45\% & 7.97\% & 2.11\% & 60.04\% & 1.41\% \\
+    \multicolumn{8}{c}{\dotfill} \\
+    
+    \multirow{3}{*}{\textbf{Ruby}} & \cite{wu2024large} & 188,807 & Observed & 6.25\% & 1.88\% & - & 91.88\% & - \\
+    & \multirow{2}{*}{\textbf{This Study}} & \multirow{2}{*}{18,592} & Observed & 16.22\% & 6.56\% & 0.95\% & 75.29\% & 0.98\% \\
+    & & & Model & 14.2\% & 5.48\% & 0.82\% & 78.67\% & 0.82\% \\
+    \multicolumn{8}{c}{\dotfill} \\
+    
+    \multirow{3}{*}{\textbf{Rust}} & \cite{wu2024large} & 103,850 & Observed & 5.00\% & 2.81\% & - & 92.19\% & - \\
+    & \multirow{2}{*}{\textbf{This Study}} & \multirow{2}{*}{3,080} & Observed & 17.62\% & 6.71\% & 5.4\% & 66.7\% & 3.57\% \\
+    & & & Model & 19.53\% & 8.34\% & 5.8\% & 61.43\% & 4.88\% \\
+    \bottomrule
+\end{tabular}}
+\end{table}
+
+The comparison between our study and Wu et al.'s findings reveals significant differences in licensing patterns across programming languages, emphasizing the importance of controlling for influencing factors.
+Wu et al.'s study, which reports raw percentages based on observed data, suggests a strong preference for permissive licenses, particularly in languages like Java, JavaScript, and Python.
+However, our study presents percentages both from observed data and from a regression model that controls for factors such as time, commits, and project activity, offering a more nuanced understanding.
+
+For instance, while Wu et al. reported a high prevalence of permissive licenses in Java (73.75\%), JavaScript (94.38\%), and Python (80.31\%), our study found lower rates of permissive licenses (Java: 56.79\%, JavaScript: 49.61\%, Python: 58.10\%) and higher adoption of copyleft and weak copyleft licenses.
+The regression model in our study further adjusted these figures, often increasing the permissive license rates but still showing a more varied licensing landscape.
+This suggests that copyleft licenses play a more significant role than Wu et al.'s raw data indicates.
+
+The discrepancy could be partly attributed to the methodologies used.
+Wu et al.'s analysis, based on package managers, might introduce biases favoring more popular or actively managed packages, leading to an overrepresentation of permissive licenses.
+In contrast, our stratified sampling method and multinomial regression model provide a broader perspective by accounting for various factors, revealing a more diverse distribution of licenses.
+For example, in languages like Java, Python, and Ruby, our study shows a substantial presence of copyleft and weak copyleft licenses, challenging the notion that permissive licenses dominate these ecosystems.
+
+This comparison underscores the importance of considering additional variables to avoid misleading conclusions and to better understand the dynamics of license adoption in open source projects.
+By accounting for these factors, our study presents a more accurate and comprehensive view of licensing trends across different programming languages.
+
+\subsubsection{Discussions}
+
+The analysis of how project characteristics influence license choices in open source software (OSS) projects offers key insights with significant implications for developers and the broader OSS community.
+
+Older projects are more inclined to adopt copyleft licenses, reflecting the early open source movement's focus on preserving software freedom.
+In contrast, newer projects often favor permissive licenses, indicating a shift toward flexibility and broad adoption.
+This trend suggests that as the OSS landscape evolves, developers increasingly prioritize ease of use and integration over strict control of derivative works.
+The OSS community should strive to balance the historical values of software freedom with the modern demand for flexibility, ensuring developers make informed licensing decisions that align with both project goals and community values.
+
+Active projects, particularly those showing recent and consistent activity, are more likely to adopt licenses, especially permissive ones.
+This highlights a growing recognition of the need for legal clarity as projects mature and attract more contributors.
+Conversely, projects with intense but sporadic activity are less likely to be licensed, indicating that rapid development phases might deprioritize legal formalities.
+Developers should understand the benefits of formalizing a license early to avoid legal uncertainties as the project grows.
+The community could benefit from tools and resources that encourage licensing decisions during active development periods.
+
+The analysis also reveals that smaller teams with fewer core authors are more likely to adopt licenses, particularly those with specific conditions, such as conditional open licenses.
+This indicates that these teams value the ability to protect their work through defined usage conditions.
+Additionally, projects with more female contributors tend to prefer licenses that include these specific conditions, possibly to ensure certain protections are in place.
+The OSS community should promote resources that assist smaller and more diverse teams in navigating licensing options that best safeguard their collaborative efforts while aligning with their project goals.
+
+The programming language used in a project also significantly influences license choice.
+For instance, C-dominant projects tend to favor copyleft and weak copyleft licenses, while Go and TypeScript projects lean toward permissive and conditional open licenses, reflecting the norms and typical use cases within these language communities.
+Developers should be aware of how their project's language community influences licensing norms and practices.
+The community could consider developing guidelines tailored to different programming languages to help new projects align with best practices in licensing.
+
+The increasing likelihood of licensing as projects gain more downstream usage indicates that developers are aware of the importance of legal clarity as their work is reused and expanded upon.
+For the OSS community, this highlights the necessity of promoting early and strategic licensing decisions, especially as projects begin to experience broader adoption.
+To support this, the community should offer resources and tools that help developers anticipate and manage the legal implications of their projects' growth, ensuring that licenses are selected with consideration for future downstream use and impact.
+
+Finally, the complexity of a project, indicated by a higher number of files or forks, correlates with a higher likelihood of adopting a license, particularly conditional or public domain licenses.
+This suggests that as projects grow in complexity, the need for clear legal structures becomes more critical.
+Developers should prioritize licensing as their projects scale to ensure that the legal framework supports the project's growth and sustainability.
+The OSS community could provide more targeted guidance for complex projects to help them navigate the intricacies of license selection.
+
+By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
+
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ2 Key Findings]
+\begin{enumerate}
+    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses.
+    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses.
+    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses.
+    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses.
+    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses.
+    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses.
+    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses.
+    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses.
+    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses.
+    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses.
+    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++.
+    \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
+\end{enumerate}
+\end{tcolorbox}

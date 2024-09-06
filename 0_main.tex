@@ -1,0 +1,111 @@
+\documentclass[acmsmall,screen,review,anonymous]{acmart}
+
+\usepackage{amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{colortbl}
+\usepackage{soul}
+% not acm supported:
+\usepackage{tcolorbox}
+
+% colors
+\definecolor{lightgray}{gray}{0.95}
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\definecolor{lightred}{rgb}{1, 0.8, 0.8}
+\definecolor{lightyellow}{rgb}{1, 1, 0.8}
+\definecolor{lightgreen}{rgb}{0.6, 1, 0.6}
+\definecolor{mint}{rgb}{0.74, 0.99, 0.79}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+\citestyle{acmauthoryear}
+
+\begin{document}
+
+\title{Understanding the Dynamics of License Selection in OSS: A Data-Driven Exploration Across Different Programming Languages}
+
+\author{Mahmoud Jahanshahi}
+\email{mjahansh@vols.utk.edu}
+\affiliation{
+  \institution{University of Tennessee}
+  \city{Knoxville}
+  \country{USA}
+}
+
+\author{Bogdan Vasilescu}
+\email{vasilescu@cmu.edu}
+\affiliation{
+  \institution{Carnegie Mellon University}
+  \city{Pittsburgh}
+  \country{USA}
+}
+
+\author{Audris Mockus}
+\email{audris@utk.edu}
+\affiliation{
+  \institution{University of Tennessee}
+  \city{Knoxville}
+  \country{USA}
+}
+
+\renewcommand{\shortauthors}{Jahanshahi et al.}
+
+\begin{abstract}
+This study investigates the factors influencing license choices in open source software (OSS) projects, utilizing a comprehensive dataset and advanced statistical models to provide a nuanced understanding of licensing trends across various programming languages.
+While previous research, has highlighted a strong preference for permissive licenses in OSS, our findings challenge this narrative by revealing a more complex landscape.
+By controlling for key variables such as project maturity, the number of commits, file counts, and team composition, we demonstrate that copyleft and weak copyleft licenses play a more significant role than previously recognized, particularly in older and more complex projects.
+The analysis also underscores the substantial legal risks posed by the high percentage of unlicensed projects, emphasizing the need for increased awareness and education within the OSS community.
+Additionally, our study highlights discrepancies in licensing outcomes when comparing raw data with results adjusted for influencing factors, suggesting that previous studies may have overlooked the diversity of licensing practices in OSS.
+These insights are crucial for developers, project maintainers, and the broader OSS community in making informed, strategic decisions about licensing that balance flexibility with the need for long-term protection and sustainability.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+   <concept>
+       <concept_id>10011007.10011074</concept_id>
+       <concept_desc>Software and its engineering~Software creation and management</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+   <concept>
+       <concept_id>10002944.10011123.10010912</concept_id>
+       <concept_desc>General and reference~Empirical studies</concept_desc>
+       <concept_significance>500</concept_significance>
+       </concept>
+ </ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Software and its engineering~Software creation and management}
+\ccsdesc[500]{General and reference~Empirical studies}
+
+\keywords{Software License, Open Source Software, Open Source License, World of Code}
+
+\maketitle
+
+\input{1_introduction}
+\input{2_background}
+\input{3_methodology}
+\input{4_results}
+\input{5_limitations}
+% \input{6_future}
+\input{7_conclusions}
+
+\clearpage
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{ref}
+
+\clearpage
+% \appendix
+% \input{8_appendix}
+
+\end{document}

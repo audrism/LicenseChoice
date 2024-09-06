@@ -1,0 +1,139 @@
+\section{Methodology}\label{method}
+
+\subsection{World of Code Infrastructure}
+
+World of Code (WoC)\footnote{https://worldofcode.org} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
+In essence, it is a software analysis pipeline that encompasses the discovery and retrieval of data, storage and updates, and the transformations and data augmentation required for downstream analytic tasks~\cite{ma2021world}.
+
+WoC offers various maps that connect git objects and metadata (commits, blobs, authors) to each other.
+It also provides higher-level maps, such as project-to-data connections (e.g. project-to-author), author aliasing~\cite{fry2020dataset}, and project deforking maps~\cite{mockus2020complete}. 
+We use the project-to-license (P2L) map~\cite{jahanshahi2024license} from WoC that provides all the times at which a license was committed to a project and also verifies whether it still exists in the project latest status\footnote{
+Version V, latest at the time of this study.}.
+We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
+Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
+
+\subsection{License Types}
+
+We group licenses based on their characteristics.
+This grouping helps categorize and understand the different ways software can be distributed and modified.
+These categories typically include permissive, copyleft, weak copyleft, and public domain/unlicensed licenses.
+This classification is widely recognized in the field and is supported by various scholarly sources.
+As noted by Kaminski and Perry~\cite{kaminski2007open}, these licensing patterns have played a crucial role in shaping the development of OSS.
+
+1. \textit{Permissive Licenses}: These licenses, such as the MIT and BSD licenses, are known for their minimal restrictions on how the software can be used.
+These licenses allow software to be freely used, modified, and redistributed, even as part of proprietary software~\cite{kapitsaki2019modeling}.
+This permissiveness promotes wider adoption and integration of the software in diverse projects, including commercial applications~\cite{kapitsaki2022help}.
+
+2. \textit{Copyleft Licenses}: These licenses, like the GNU General Public License (GPL), require that any modified versions of the software must also be distributed under the same license.
+This ensures that derivative works remain free and open, thus preserving the original freedoms granted by the license~\cite{d2007copyleft}.
+This characteristic is essential for maintaining the open source nature of software, as it prevents proprietary modifications~\cite{laurent2012free}.
+
+3. \textit{Weak Copyleft Licenses}: These licenses, such as the GNU Lesser General Public License (LGPL) and Mozilla Public License (MPL), strike a balance between permissive and strong copyleft licenses.
+They allow linking with proprietary software under certain conditions, while modifications to the licensed components themselves must remain open~\cite{alamoudi2020open}.
+This flexibility encourages the use of open source libraries in both open and closed source projects~\cite{gamalielsson2017licensing}.
+
+4. \textit{Conditional Open Licenses}: These licenses include specific conditions that must be met for usage, such as attribution (CC-BY), non-commercial use, or share-alike requirements.
+Creative Commons licenses, like CC-BY and CC-BY-SA, provide a framework for sharing while respecting the creator's conditions~\cite{de2009creative}.
+
+5. \textit{Public Domain/Unlicensed}: Public domain and unlicensed software, including those using the Creative Commons Zero (CC0) license, are not restricted by copyright law.
+The authors of such software waive all rights, allowing anyone to use, modify, and distribute the work without any conditions.
+This category provides the maximum freedom for software use and is often utilized for simple, non-critical software components.
+
+\subsection{Regression Model}\label{sec:reg}
+
+To address our research question, we selected a regression model appropriate to the nature of our response variable.
+Specifically, for RQ2, which investigates whether project characteristics influence their license choice, we use a multinomial logistic regression model.
+This model is ideal because the response variable—the license type—is categorical with multiple possible outcomes, allowing us to model the probability of each license type based on project characteristics~\cite{hosmer2013applied}.
+
+
+\subsubsection{Stratified Sampling}
+
+Since the target population encompasses the entirety of OSS projects and given its scale and heterogeneity, we employed a stratified sampling approach to enhance the representativeness of our sample~\cite{thompson2012sampling}.
+We stratified projects using six key variables: the number of commits, the number of blobs, the number of authors, the number of forks, the number of active months, and the earliest commit time of the project.
+These variables were selected because they are important indicators of project size, activity, and historical context, which are likely to influence the outcomes of our research~\cite{crowston2005social,koch2002effort}.
+
+\begin{table}[h!]
+\centering
+\caption{Basic Statistics of Projects in WoC}
+\begin{tabular}{l|cccc}
+    \toprule
+    \textbf{Variable} & \textbf{Minimum} & \textbf{Average} & \textbf{Maximum} & \textbf{Standard Deviation} \\
+    \midrule
+    NumCommits & 1 & 30.26 & 66,000,003 & 8,611.36 \\
+    NumBlobs & 1 & 379.38 & 73,240,796 & 18,053.14 \\
+    NumAuthors & 1 & 1.49 & 340,022 & 49.70 \\
+    NumForks & 0 & 0.50 & 241,217 & 66.32 \\
+    NumActiveMon & 0 & 2.11 & 3,684 & 4.40 \\
+    \bottomrule
+\end{tabular}
+\label{tab:strata}
+\end{table}
+
+The WoC's MongoDB project database comprises 131 million OSS projects, and summary statistics for the stratification variables are presented in Table~\ref{tab:strata}.
+A notable feature of the data is its heavy right skewness, common in large datasets with many small and inactive projects.
+To address this skewness and ensure meaningful strata, we binned each variable as follows:
+commits (fewer than 500, 500–2000, and over 2000), blobs (below or above 10,000), authors (one, 2–10, and more than 10), forks (none or at least one), and active months (less than three or more than three). 
+These classifications reflect different levels of activity, collaboration, complexity, and community engagement.
+
+Projects were also divided into four historical eras based on their first commit: 
+the Foundational Era (before 1998), marking the early stages of open source; 
+the Dot-com Boom and OSS Expansion (1998–2010), signifying rapid growth and adoption;
+the Maturation and Mainstream Adoption period (2010–2018), when open source became key to enterprise software;
+and the Modern Era (2019–present), reflecting recent trends in community engagement and cloud-native technologies.
+
+These stratifications produced 288 unique bins ($3\times 3\times 2\times 2\times 2\times 4$).
+We randomly selected 5,000 projects per bin, targeting a total of 1,440,000 projects.
+However, due to uneven distribution, some bins contained fewer projects, resulting in a final sample of around 500,000 projects.
+Despite this, the large sample size and stratified approach ensure a balanced and comprehensive representation of the OSS ecosystem, supporting robust and generalizable conclusions in our regression analyses.
+
+\subsubsection{Model Variables}
+
+Several project characteristics commonly studied in the literature can affect the choice of license types in open source software (OSS) projects.
+Our model includes predictors like the number of commits, blobs, files, stars, authors (core, female, and male), forks, community size, commit times, active months, burstiness, programming language, counts of upstream/downstream projects and blobs, and the delay in adopting a license.
+These predictors are based on existing OSS research, indicating their influence on a project's development and decision-making.
+
+\paragraph{Number of Commits} The number of commits is a key indicator of project activity and maintenance.
+Koch~\cite{koch2002effort} suggests that projects with frequent commits tend to have more active development cycles, making them more attractive for reuse due to their reliability and continuous improvement.
+This ongoing activity may influence license choices to encourage contributions or protect the growing codebase~\cite{koch2002effort}.
+
+\paragraph{Number of Files/Blobs} The number of files or blobs reflects a project's complexity and reuse potential.
+Mockus~\cite{mockus2007large} found that larger projects with more files are more likely to provide reusable components, which may influence the choice of a license to balance reuse and protection.
+Bird et al.~\cite{bird2009putting} also note that projects with more files, often indicating a modular structure, tend to promote greater community engagement and reuse.
+
+\paragraph{Number of Authors/Core Authors} The number of contributors, including core authors\footnote{
+Core authors are those responsible for over 80\% of the project's commits.},
+reflects the collaborative nature of an OSS project.
+Crowston et al.~\cite{crowston2005social} suggest that projects with more contributors benefit from diverse expertise, leading to higher code quality.
+This increased collaboration and quality may influence the choice of a license that promotes fair use and encourages broad community contributions.
+
+\paragraph{Number of Female/Male Authors} Accounting for male and female contributors allows us to explore the role of gender diversity in a project's contributor base.
+Gender diversity in OSS projects has garnered attention, with research showing that diverse teams, including gender diversity, often produce higher-quality, more innovative outcomes~\cite{vasilescu2015gender}.
+This diversity may influence license choices, particularly those emphasizing inclusivity and community governance.
+Projects with more gender-diverse teams might prefer licenses that ensure all contributors feel their work is protected and valued~\cite{terrell2017gender}, shedding light on how social dynamics impact licensing decisions.
+
+\paragraph{Number of Forks/Stars/Community Size} These metrics indicate a project's popularity and community involvement.
+Tsay et al.~\cite{tsay2014influence} suggest that projects with more forks are viewed as valuable and trustworthy, which may prompt the choice of a license that fosters collaboration and reuse.
+Similarly, Borges et al.~\cite{borges2018s} argue that the number of stars reflects community approval, potentially affecting whether a project adopts a permissive or protective license based on its goals.
+
+\paragraph{Number of Upstream/Downstream Projects/Blobs} An upstream project, from which a project derives code, can heavily influence license choice due to compatibility concerns.
+Projects may adopt the same license as their upstream counterparts to ensure smooth integration~\cite{gousios2014exploratory}.
+A strong upstream network may also encourage permissive licenses that promote collaboration.
+Conversely, downstream projects build on a project's code.
+A large number of downstream projects may lead to adopting restrictive licenses, like GPL, to protect the original codebase from misuse~\cite{german2009license}, balancing open use with safeguarding developers' rights.
+
+\paragraph{Earliest/Latest Commit Time, Active Months, Burstiness} These time-based metrics provide insights into a project's maturity and stability.
+Capiluppi et al.~\cite{capiluppi2003characteristics} found that older, more established projects with sustained activity are often perceived as stable and reliable, which could influence the selection of a license that supports long-term sustainability goals.
+
+\paragraph{License Adoption Delay} The time lag between a project's initiation and its license adoption can affect the license choice.
+Projects that delay adopting a license may do so to better evaluate which license aligns with their evolving goals and community feedback.
+This careful consideration helps ensure the selected license supports the project's long-term vision and the needs of its contributors.
+
+\paragraph{Programming Language} The programming language of a project often reflects its technical environment and community culture, influencing licensing preferences.
+Languages like Python and JavaScript, popular in web development, tend to favor permissive licenses like MIT or Apache due to their focus on reuse~\cite{lerner2005economics}.
+In contrast, languages like C or C++, common in systems programming, may lean toward more restrictive licenses like the GPL, which prioritize keeping derivative works open~\cite{fitzgerald2006transformation}.
+Additionally, the choice of language affects compatibility, potentially shaping license decisions to ensure interoperability.
+
+WoC's MongoDB project database tracks file counts by language extension, allowing identification of a project's main language based on the most frequent extension, consistent with standard practices~\cite{vasilescu2015data}.
+
+These factors provide a comprehensive view of OSS projects, covering project characteristics (e.g., number of commits), social dynamics (e.g., author count or gender diversity), and software supply chain relationships (e.g., upstream and downstream projects).
+By modeling these predictors, we aim to capture the complexity of OSS licensing decisions and offer insights into how these diverse elements impact license choices.

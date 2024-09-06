@@ -1,0 +1,81 @@
+\section{Related Work and Contributions}
+
+\begin{comment}
+Open source software licenses are fundamental to the software development ecosystem, dictating how software can be used, modified, and redistributed.
+The complexities and challenges associated with these licenses have been extensively researched.
+In this section, we review key studies, highlight important findings, and identify gaps that our work aims to address.
+\end{comment}
+
+\subsection{Related Work}
+
+The choice of a license in open source projects is shaped by various factors, including project goals, the intended contributor community, and legal considerations.
+Developers often choose licenses based on their preferences for the future use of the software.
+Research by Sen, Subramaniam, and Nelson~\cite{sen2008determinants} shows that developers’ motivations, such as a desire for widespread adoption or strong copyleft enforcement, play a key role in license selection.
+
+This choice can also significantly influence a project's development trajectory.
+Colazo and Fang~\cite{colazo2009impact} examined how licenses, especially copyleft licenses, affect developer contributions and engagement.
+Their study found that copyleft licenses often promote greater permanence and long-term involvement in projects.
+
+Additionally, OSS licensing is crucial for business models that depend on open source software.
+Onetti and Verma~\cite{onetti2009open} argued that some companies initially adopt open source licenses to build a community around their software but later adjust their licensing strategies to align with commercial interests.
+
+Wu et al.~\cite{wu2024large} conducted a large-scale empirical study on open source license usage, providing insights into the practices and challenges faced by developers.
+Their findings highlight the complexity of license compliance and the frequent misunderstandings and misuse of licenses in large projects.
+
+Cui et al.~\cite{cui2023empirical} investigated license conflicts in free and open source software, uncovering the prevalence and impact of such conflicts.
+They created a tool, DIKE, to detect license conflicts and examined over 16,000 popular open source projects, finding license conflicts in more than 25\% of them.
+Their study showed that license conflicts often arise from misunderstandings of license terms and the complexities of multi-license environments.
+
+Almeida et al.~\cite{almeida2017software} investigated whether software developers understand open source licenses.
+Their study revealed significant gaps in knowledge, with many developers unable to correctly interpret license terms, leading to non-compliance and legal risks.
+
+Multiple studies have shown that the declared license of a project cannot always be trusted ~\cite{german2010understanding, reid2023applying, wolter2023open}.
+Wolter et al.~\cite{wolter2023open} analyzed open source license inconsistencies on GitHub.
+They found that the license information declared at the top level of a project did not fully disclose all of the licenses found in the project in about 50\% of the projects studied.
+Their study revealed widespread inconsistencies and provided insights into common types of licensing issues encountered, stressing the need for better education and automated tools to ensure compliance.
+
+Xu et al.~\cite{xu2023lidetector, xu2023liresolver} made significant contributions with two notable papers.
+In ``Lidetector'', they introduced automated methods for detecting license incompatibilities, helping developers identify potential legal issues early in the development process.
+They used the tool to conduct an empirical study of 1,846 projects and found that over 70\% contained incompatibilities.
+Their second paper, ``LiResolver'', proposed practical solutions to resolve detected incompatibilities, emphasizing the importance of tools that assist in managing license compliance.
+
+\subsection{Contributions}
+
+The literature on open source software licenses highlights the complexity and importance of licensing decisions within the software development ecosystem.
+Recent studies have examined the dynamics of license selection across various programming languages, shedding light on how different developer communities approach license adoption and enforcement.
+While foundational works established the basic principles, contemporary research emphasizes the unique challenges posed by the specific requirements of different languages and development environments.
+Our contribution provides a data-driven analysis of these dynamics, offering a scalable framework to identify and evaluate license selection trends across programming languages.
+This research fills a critical gap in understanding how language-specific factors affect license compliance, enabling developers to make more informed choices as they navigate the complexities of open source software licensing.
+Specifically, our study contributions are as follows:
+
+\subsubsection{Comprehensive Identification of Licenses} 
+Most research, such as the work by Wu et al.~\cite{wu2024large} and Xu et al.~\cite{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
+Others, like Feng et al.~\cite{feng2019open}, apply static analysis on binaries to detect embedded license texts.
+However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
+In contrast, this study utilizes a dataset from Jahanshahi et al.~\cite{jahanshahi2024license}, which adopts a more comprehensive approach by scanning the entire OSS ecosystem for any files containing ``license'' in their filepath.
+This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
+
+\subsubsection{Scale and Scope of Analysis} 
+Previous works often limit their scope to specific platforms (e.g., GitHub), a few package manager environments (e.g., NPM), or types of licenses (e.g., OSI-approved licenses), lacking a comprehensive, large-scale approach to detecting and analyzing licenses.
+Our study expands this scope by analyzing the entire open source landscape, ensuring a more comprehensive cross-platform understanding of licensing practices.
+
+In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, and scale with the most recent comparable studies in the field.
+
+\begin{table}[h!]
+\centering
+\caption{Latest Studies in Open Source Software Licensing}
+\label{tbl:litRev}
+\resizebox{0.99\textwidth}{!}{
+\begin{tabular}{lllll}
+    \toprule
+    & \textbf{License Detection} & \textbf{Coverage} & \textbf{Scope} & \textbf{Scale} \\
+    \midrule
+    \cite{wu2024large} & Package Manager API & License Files & Maven, NPM, PyPI, RubyGems, Cargo & 3,474,778 Projects \\
+    \cite{cui2023empirical} & NLP/Extract License Terms & All Files & GitHub - >1000 Stars & 16,341 Projects \\
+    \cite{wolter2023open} & GitHub API+NLP/Extract License Terms & All Files & GitHub - Cataloged by OpenHub & 1,000 Projects \\
+    \cite{xu2023lidetector} & NLP/Extract License Terms & All Files & GitHub - Popular Python Projects & 1,846 Projects \\
+    \multicolumn{5}{c}{\dotfill} \\
+    \textbf{This Study} & \textbf{NLP/Matching Known Licenses} & \textbf{License Files} & \textbf{Entire OSS} & \textbf{131,171,379 Projects} \\
+    \bottomrule
+\end{tabular}}
+\end{table}
