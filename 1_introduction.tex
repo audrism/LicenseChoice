@@ -1,30 +1,77 @@
 \section{Introduction}\label{intro}
 
-Open Source Software (OSS) is a cornerstone of modern software development, providing a collaborative environment that fosters innovation, knowledge exchange, and the widespread use of software tools and libraries.
-The licensing of OSS projects is crucial as it dictates how software can be used, modified, and distributed.
-As the number of OSS projects has surged, understanding the intricacies of license selection has become increasingly complex.
-The choice of a software license not only establishes the legal boundaries but also reflects strategic decisions by project maintainers to balance openness, protection, and control over their codebases.
+Open Source Software (OSS) is a cornerstone of modern software
+development, providing a collaborative environment that fosters
+innovation, knowledge exchange, and the widespread use of software
+tools and libraries. 
+The licensing of OSS projects is crucial as it dictates how software
+can be used, modified, and distributed. As the number of OSS
+projects has surged, understanding the intricacies of license
+selection has become increasingly complex. 
 
-This paper aims to explore the intricate patterns of license selection within the OSS ecosystem, with a specific focus on how these patterns differ across programming languages.
-While previous research has often emphasized the popularity of permissive licenses such as the MIT or Apache licenses, known for their flexibility and minimal restrictions, this perspective does not fully capture the nuanced landscape of OSS licensing.
-In particular, the roles of copyleft and weak copyleft licenses, which impose stricter conditions to maintain the open nature of derivative works, deserve closer examination.
+Existing work either lacks scale or comprehensive identificaion of
+licenses to fully reflect license use in OSS. More importantly,
+licence choice, like the choice of
+technology~\cite{choice23,ma2020methodology}, may not only reflect strategic
+decisions by project maintainers to balance openness, protection,
+and control over their codebases, or be influenced by matters of
+technical convenience such as licenses that are used by frameworks
+they rely on, social convenience such as licennses used by their
+collaborators, or, simply by awareness (i.i.e., license
+popularity). **work backwards from the regresssion predictors to 
+see how they fit within the choice literature and within prior
+license work literature. For example, language and calendar time may be a proxy
+for GPL popularity with older products and C more exposed to  gpl***.
 
-To address these complexities, we adopt a data-driven approach, analyzing a comprehensive dataset that covers a wide array of OSS projects.
-Our analysis is enhanced by advanced statistical models that account for various project characteristics, including the number of commits, project maturity, team composition, and file counts.
-This methodology allows us to identify underlying trends and provides a deeper understanding of the factors influencing license selection.
+Prior work only tabulated observed license use, but have not
+attempted to *check* to observe evolution of license type use over
+time, nor to model explicitly how the context, such as project size,
+programming language and other aspects of the project (or individual
+developer) influence license choice. 
+
+To adress these gaps, we aim to create a model that
+a) accounts for all types, minor variations, and non-semantic
+variations comprehensively, b) is applied to a sample that
+aproximates entire OSS-scale, c) includes key context predictors that are
+likely to affect differing priorities in license choce among
+projects and individuals.
 
 The core questions our research seeks to answer are:
 \begin{itemize}
-    \item \textbf{RQ1}: What are the types and prevalence of licenses across the entire open source software landscape?
-    \item \textbf{RQ2}: Do the characteristics of a project influence the choice of its license?   
+    \item \textbf{RQ1}: What are the types, prevalence, and evolution of licenses across the entire open source software landscape?
+    \item \textbf{RQ2}: How the characteristics of a project influence the choice of its license?   
 \end{itemize}
 
-By addressing these questions, we aim to provide valuable insights for developers, project maintainers, and the broader OSS community, helping them make informed licensing decisions.
-These decisions are critical not only for legal compliance and risk mitigation but also for sustaining and growing open source projects.
 
-Our study challenges the prevailing view that permissive licenses are universally favored in OSS by presenting evidence of a more varied licensing landscape.
-We demonstrate that copyleft licenses, often considered restrictive, continue to play a significant role, especially in older and more complex projects.
-Additionally, we emphasize the considerable legal risks posed by the large number of unlicensed projects, highlighting the need for greater awareness and education within the OSS community.
+% While previous research has often emphasized the popularity of
+% permissive licenses such as the MIT or Apache licenses, known for
+% their flexibility and minimal restrictions, this perspective does
+% not fully capture the nuanced landscape of OSS licensing. 
+% In particular, the roles of copyleft and weak copyleft licenses,
+% which impose stricter conditions to maintain the open nature of
+% derivative works, deserve closer examination. 
 
-By illuminating these dynamics, our research contributes to a more profound understanding of the factors that influence license selection in OSS.
-We believe these insights will be pivotal in guiding future research and policy development, ultimately strengthening the legal and operational foundations of the OSS ecosystem.
+% To address these complexities, we adopt a data-driven approach,
+% analyzing a comprehensive dataset that covers a wide array of OSS
+% projects. 
+% Our analysis is enhanced by advanced statistical models that account
+% for various project characteristics, including the number of
+% commits, project maturity, team composition, and file counts. 
+% This methodology allows us to identify underlying trends and
+% provides a deeper understanding of the factors influencing license
+% selection. 
+
+
+% By addressing these questions, we aim to provide valuable insights
+% for developers, project maintainers, and the broader OSS community,
+% helping them make informed licensing decisions. 
+% These decisions are critical not only for legal compliance and risk
+% mitigation but also for sustaining and growing open source
+% projects. 
+
+% Our study challenges the prevailing view that permissive licenses are universally favored in OSS by presenting evidence of a more varied licensing landscape.
+% We demonstrate that copyleft licenses, often considered restrictive, continue to play a significant role, especially in older and more complex projects.
+% Additionally, we emphasize the considerable legal risks posed by the large number of unlicensed projects, highlighting the need for greater awareness and education within the OSS community.
+
+% By illuminating these dynamics, our research contributes to a more profound understanding of the factors that influence license selection in OSS.
+% We believe these insights will be pivotal in guiding future research and policy development, ultimately strengthening the legal and operational foundations of the OSS ecosystem.
