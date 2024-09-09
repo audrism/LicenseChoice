@@ -1,40 +1,23 @@
 \section{Introduction}\label{intro}
 
-Open Source Software (OSS) is a cornerstone of modern software
-development, providing a collaborative environment that fosters
-innovation, knowledge exchange, and the widespread use of software
-tools and libraries. 
-The licensing of OSS projects is crucial as it dictates how software
-can be used, modified, and distributed. As the number of OSS
-projects has surged, understanding the intricacies of license
-selection has become increasingly complex. 
+Open Source Software (OSS) is a cornerstone of modern software development, providing a collaborative environment that fosters innovation, knowledge exchange, and the widespread use of software tools and libraries. 
+The licensing of OSS projects is crucial as it dictates how software can be used, modified, and distributed.
+As the number of OSS projects has surged, understanding the intricacies of license selection has become increasingly complex. 
 
-Existing work either lacks scale or comprehensive identificaion of
-licenses to fully reflect license use in OSS. More importantly,
-licence choice, like the choice of
-technology~\cite{choice23,ma2020methodology}, may not only reflect strategic
-decisions by project maintainers to balance openness, protection,
-and control over their codebases, or be influenced by matters of
-technical convenience such as licenses that are used by frameworks
-they rely on, social convenience such as licennses used by their
-collaborators, or, simply by awareness (i.i.e., license
-popularity). **work backwards from the regresssion predictors to 
-see how they fit within the choice literature and within prior
-license work literature. For example, language and calendar time may be a proxy
-for GPL popularity with older products and C more exposed to  gpl***.
+Existing work either lacks the scale or comprehensive identification of licenses to fully reflect license usage in OSS.
+More importantly, licence choice, much like the choice of technology~\cite{choice23,ma2020methodology}, may reflect strategic decisions by project maintainers to balance openness, protection, and control over their codebases.
+It may also be influenced by matters of technical convenience (e.g., licenses used by the frameworks they depend on), social convenience (e.g., licenses favored by their
+collaborators), or simply by awareness, such as the popularity of certain licenses.
+% **work backwards from the regresssion predictors to 
+% see how they fit within the choice literature and within prior
+% license work literature. For example, language and calendar time may be a proxy
+% for GPL popularity with older products and C more exposed to  gpl***.
 
-Prior work only tabulated observed license use, but have not
-attempted to *check* to observe evolution of license type use over
-time, nor to model explicitly how the context, such as project size,
-programming language and other aspects of the project (or individual
-developer) influence license choice. 
+Prior work only tabulated observed license use, but have not attempted to 
+% *check* to observe evolution of license type use over time, nor to
+model explicitly how the context, such as project size, programming language and other aspects of the project (or individual developer) influence license choice. 
 
-To adress these gaps, we aim to create a model that
-a) accounts for all types, minor variations, and non-semantic
-variations comprehensively, b) is applied to a sample that
-aproximates entire OSS-scale, c) includes key context predictors that are
-likely to affect differing priorities in license choce among
-projects and individuals.
+To address these gaps, we aim to develop a model that a) comprehensively accounts for all license types, including minor and non-semantic variations, b) is applied to a sample that approximates the full scale of the OSS ecosystem, and c) incorporates key contextual predictors that may influence differing priorities in license selection among projects and individuals.
 
 The core questions our research seeks to answer are:
 \begin{itemize}

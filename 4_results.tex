@@ -81,6 +81,17 @@ Wu et al.'s study found a dominance of permissive licenses, with much lower perc
 However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
 This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
 
+\begin{figure}[h!]
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ1 Key Findings]
+\begin{enumerate}
+    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than the figures reported in previous studies.
+    \item The MIT license is the most widely used license, accounting for 65\% of all licensed projects and 10\% of all OSS projects.
+    \item Despite the overall preference for permissive licenses, copyleft licenses such as GPL exhibit strong retention rates, indicating sustained commitment to software freedom among certain developer communities.
+    \item The differences in license usage reported in our study compared to previous literature highlight the importance of dataset scope and methodology when assessing the prevalence of licenses in OSS projects.
+\end{enumerate}
+\end{tcolorbox}
+\end{figure}
+
 \subsubsection{Discussions}
 
 The analysis of OSS licensing reveals a troubling trend: 83\% of projects lack a formal license, posing significant legal risks and uncertainties.
@@ -104,15 +115,6 @@ To address these implications, the OSS community should prioritize enhancing edu
 Furthermore, efforts should be made to develop and promote tools that streamline the licensing process, making it more accessible for developers, especially those new to the field, to apply licenses correctly.
 While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
 By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
-
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ1 Key Findings]
-\begin{enumerate}
-    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than the figures reported in previous studies.
-    \item The MIT license is the most widely used license, accounting for 65\% of all licensed projects and 10\% of all OSS projects.
-    \item Despite the overall preference for permissive licenses, copyleft licenses such as GPL exhibit strong retention rates, indicating sustained commitment to software freedom among certain developer communities.
-    \item The differences in license usage reported in our study compared to previous literature highlight the importance of dataset scope and methodology when assessing the prevalence of licenses in OSS projects.
-\end{enumerate}
-\end{tcolorbox}
 
 \subsection{RQ2: Do the characteristics of a project influence the choice of its license?}
 
@@ -702,6 +704,25 @@ For example, in languages like Java, Python, and Ruby, our study shows a substan
 This comparison underscores the importance of considering additional variables to avoid misleading conclusions and to better understand the dynamics of license adoption in open source projects.
 By accounting for these factors, our study presents a more accurate and comprehensive view of licensing trends across different programming languages.
 
+\begin{figure}[h!]
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ2 Key Findings]
+\begin{enumerate}
+    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses.
+    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses.
+    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses.
+    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses.
+    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses.
+    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses.
+    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses.
+    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses.
+    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses.
+    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses.
+    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++.
+    \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
+\end{enumerate}
+\end{tcolorbox}
+\end{figure}
+
 \subsubsection{Discussions}
 
 The analysis of how project characteristics influence license choices in open source software (OSS) projects offers key insights with significant implications for developers and the broader OSS community.
@@ -737,20 +758,3 @@ Developers should prioritize licensing as their projects scale to ensure that th
 The OSS community could provide more targeted guidance for complex projects to help them navigate the intricacies of license selection.
 
 By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
-
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ2 Key Findings]
-\begin{enumerate}
-    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses.
-    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses.
-    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses.
-    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses.
-    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses.
-    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses.
-    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses.
-    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses.
-    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses.
-    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses.
-    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++.
-    \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
-\end{enumerate}
-\end{tcolorbox}
