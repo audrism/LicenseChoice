@@ -33,18 +33,16 @@ private value appropriation\cite{Shah06}, community sponsorship and
 licensing may address complementary developer motivations, so that
 the influence of licensing on development activity depends on what
 kind of organizational sponsor a project ``The presence of a
-nonmarket sponsor may alleviate concerns as to the
-project’s future in the same way that a restrictive
-license would, in the sense that the restrictive license
-is not perceived as necessary to protect the developers’
-interests''~\cite{stewart2006impacts} (authors use ``nonmarket'' to
-exclude for-profit organizations). 
-Study by~\cite{fershtman2007open}
-found more contributors for restrictive licenses and higher output
-per contributor for non-restrictive.
-Study by~{economicos02}, discuss advantages of firms releasing their
-proprietary code  and how less restrictive licenses may allow
-bundling of proprietary and open code. 
+nonmarket sponsor may alleviate concerns as to the project’s future
+in the same way that a restrictive license would, in the sense that
+the restrictive license is not perceived as necessary to protect the
+developers’ interests''~\cite{stewart2006impacts} (authors use
+the term ``nonmarket'' to exclude for-profit organizations).  Study
+by~\cite{fershtman2007open} found more contributors per project for
+restrictive licenses and higher output per contributor for
+non-restrictive.  Study by~{economicos02}, discuss advantages of
+firms releasing their proprietary code and how less restrictive
+licenses may allow bundling of proprietary and open code.
 
 Motivation of commercial sponsors may also vary. For example, a
 study of four firms involved in OSS discovered three ways that firms
@@ -58,11 +56,36 @@ community-focused company building a vibrant GNOME community and
 monetizing services and product-focused company relying on product
 revenues. Each model may require distinct licensing types.
 
+Since motivation of contributors and types of commercial sponsorship
+are not easy (or possible) to operationalize at scale, the only
+takeaway for modeling is that larger (in terms of contributors)
+projects would have more restrictive
+licensing~\cite{fershtman2007open}.
 
-Theory of choice~\cite{ma2020methodology,choice23} argues that 
 
-Developers often choose licenses based on their preferences for the future use of the software.
-Research by Sen, Subramaniam, and Nelson~\cite{sen2008determinants} shows that developers’ motivations, such as a desire for widespread adoption or strong copyleft enforcement, play a key role in license selection.
+Licenses, like other technology and practices
+spread. Works~\cite{ma2020methodology,choice23} used theory of
+social contagion~\cite{shoroye2015exploring} to estimate the impact
+of exposure, susceptibility, and infectiousness on developer choice
+of packages. They find exposure measured via a larger number of
+overall deployments at the time of choice had a large positive
+effect on the choice. We expect similar pattern with license
+selection: developers who do not care or understand the differences
+will gravitate to license they have seen. Developers also
+made choices that were compatible with the technologies they have
+already have been using (technical compatibility) and were more likely to
+pick what their collaborators used (social compatibility). 
+We expect a similar patter for technology choice, i.e., a developer
+will chose the same or compatible lices for their next project and
+they are lilely to chose a licence their collaborators have already
+used. 
+
+
+Developers may choose licenses based on their preferences for the
+future use of the software.  Research by Sen, Subramaniam, and
+Nelson~\cite{sen2008determinants} shows that developers’
+motivations, such as a desire for widespread adoption or strong
+copyleft enforcement, play a key role in license selection.
 
 This choice can also significantly influence a project's development trajectory.
 Colazo and Fang~\cite{colazo2009impact} examined how licenses, especially copyleft licenses, affect developer contributions and engagement.
