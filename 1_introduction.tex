@@ -75,10 +75,12 @@ problem happens if we exclude them from consideration...
 
 Once we establish this lage curated list of licences and projects,
 we use our preliminary theory to operationalize key factors where
-theory predicts a certain effect on the choice. 
+theory predicts a certain effect on the choice. We first test
+if certain types of licenses have longer retention rates based
+on predictions of our theory.  
 We then employ a multinomial regression model and a stratified
 sampling approach, to test which of the theory-predicted contextual
-factors impact license choice.
+factors impact license choice. 
 
 Our contributions include (a) a preliminary theory of license choice,
 (b) a comprehensively account for almost all license types, including minor and
@@ -89,28 +91,18 @@ license choice.
 
 Our analysis of the types and prevalence of licenses across more
 than 131 million OSS projects, finds that 83\% of these projects
-lack a formal license.
+lack a formal license. Among the licensed projects, the MIT license
+was the most commonly used, accounting for 65\% of all licensed
+projects, followed by the Apache 2.0 and ISC licenses.  Although
+permissive licenses dominate overall, copyleft licenses like the GPL
+exhibited high retention rates, reflecting a strong commitment to
+software freedom within certain communities. In comparison to prior
+studies we find *four-fold* (check) larger prevalence of unlicennsed
+code.
 
-
-This absence poses significant
-legal uncertainties for both developers and users.  Among the
-licensed projects, the MIT license was the most commonly used,
-accounting for 65\% of all licensed projects, followed by the Apache
-2.0 and ISC licenses.  Although permissive licenses dominate
-overall, copyleft licenses like the GPL exhibited high retention
-rates, reflecting a strong commitment to software freedom within
-certain communities.
-
-A comparison with previous studies highlights notable differences,
-primarily due to variations in dataset size and methodology.  Our
-study, based on a larger dataset, reveals a higher percentage of
-unlicensed projects than previously reported, underscoring the need
-to prioritize license adoption to mitigate legal risks in the OSS
-ecosystem.
-
-We further investigated whether project characteristics influence
-license selection in OSS projects using a multinomial regression
-model.  Key factors such as the number of commits, project age, and
+Our theory-derived project characteristics that should influence
+license selection in OSS projects were tested using a multinomial regression
+model. As predicted, the number of commits, project age, and
 file count were found to significantly affect license choice.
 Projects with more commits and older projects tended to adopt
 copyleft licenses, whereas permissive licenses were more commonly
@@ -118,7 +110,9 @@ chosen by newer projects and those with more contributors.
 
 Additionally, projects with a larger number of files were more
 likely to adopt conditional open or weak copyleft licenses, while
-those with fewer files favored permissive licenses.  The choice of
+those with fewer files favored permissive licenses. The choice of
 programming language also played a critical role, with languages
 such as JavaScript and Go leaning toward permissive licenses, while
 C/C++ and Perl showed higher adoption of copyleft licenses.
+(Are these thory derived, what did not pan out, how do we revise our
+theory?) 
