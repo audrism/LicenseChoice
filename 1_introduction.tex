@@ -20,7 +20,7 @@ copying no-license code is likely to result in license violation and
 because other studies have found that much of copied code even in
 large and popular projects is copied from small and inactive
 projects~\cite{jahanshahi2024beyond} that tend to have no license. 
-The problemmay be propageted further, as the active and popular
+The problem may be propageted further, as the active and popular
 projects are often upstream dependencies for numerous projects
 downstream. Hens if such inapropriate use is detected, it can affect
 a very large part of OSS ecosystem, not unlike what happend with
@@ -33,37 +33,38 @@ greatly underestimates the proportion of projects with no license
 due to heavily filtering based on size, maturity, popularity, and
 activity.
 
+In OSS, any decision is often are made based on percieved supply
+chain concers, such as chosing to participate in a project that will
+become popular, hoping to have large number of direct or downstream
+users, selecting upstream dependencies that appear healthy,
+responsive, and active~\cite{choice23,ma2020methodology} and so on.
+License choice has clear and far reaching effects on the supply
+chains in terms of attracting and retaining participants, having
+downstream dependents or users, and, of course on ways the code may
+be (re-)used. Despite that we are not aware of prior studies that model
+license choice nor any comprehensive theories that would explain it.
+
+Our aim is, therefore, to establish a preliminary theory that helps
+explain license choice in OSS software. The theory could help
+explain some of the reasons why a large fraction of projects have no
+license, why some license violations appear to be tolerated, such as
+use of unlicensed code, what are factors that may come into play
+when a developer (or an organization) chose a license.  Such theory
+can potentially lead to better tools that help developers chose the
+most suitable license according to their objectives, increase the
+proportion of projects with a license (hence spurring innovation
+that is presently inhibiting actors who do pay attention to
+licensing terms from using unlicensed code), and, more generally
+reducing risks arising from license incompatibilities in OSS supply
+chain.
+
+
 What does ``more comprehensively identify licenses'' mean? Why
 exactly do we need it? Perhaps: Projects with uncommon lincenses
 or slight variations in common licenses tend to be ignored in
 prior studies, e.g,~\cite{a,b,c}. Yet, as we show, these ignored
 licenses ...whatever problem happens if we exclude them from consideration...
 
-In OSS, decision often are made based on percieved supply chain
-concers, such as chosing to participate in a project that will
-become popular, hoping to have large number of direct or downstream
-users, selecting upstream dependencies that appear healthy,
-responsive, and active~\cite{choice23,ma2020methodology} and so on.
-
-License choice may also be influenced by technical factors (e.g.,
-licenses used by dependent frameworks), social dynamics (e.g.,
-preferences of collaborators), or simple awareness, such as the
-popularity of certain licenses. 
-
-Moreover, license choice, much like technology selection~\cite{},
-may reflect strategic decisions by project maintainers to balance
-openness, protection, and control over their codebases.
-
-
-Previous research has largely focused on cataloging license usage
-through descriptive statistics, highlighting the distribution of
-licenses across projects.  While some studies have explored
-developer intentions and goals in license selection using survey
-data~\cite{sen2008determinants}, these approaches tend to emphasize
-subjective factors.  However, they have yet to quantitatively model
-how project-specific contexts—such as project size, programming
-language, or technical characteristics—affect license choice using
-robust statistical methods.
 
 This study addresses these gaps by analyzing a large-scale dataset
 of open-source projects from the World of Code (WoC), offering a
