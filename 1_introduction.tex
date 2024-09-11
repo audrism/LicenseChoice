@@ -2,35 +2,43 @@
 
 Open Source Software (OSS) has become a cornerstone of modern
 software development, fostering innovation, knowledge exchange, and
-the widespread adoption of software tools and libraries. 
-The licensing of OSS projects is crucial, as it dictates how
-software can be used, modified, and distributed. 
-With the rapid growth in the number of OSS projects, understanding
-the intricacies of license selection has become increasingly
-complex. 
+the widespread adoption of software tools and libraries.  The
+licensing of OSS projects dictates how software can be used,
+modified, and distributed. Not all OSS participants follow or are
+aware of the ramifications licensing~\cite{}. For example, that
+their code is under exclusive copyright by default if no license is specified. 
+The lack of knowlede, and/or, possibly, the lack of enforcement,
+results in reuse of unlicences code in context where license
+incompatibilities are likely. For example, with the emergence of
+LLMs, the massive source code training data does
+include in large proprtion 
+code with no license~\cite{kocetkov2022stack,sc2}.
 
-Existing work either lacks sufficient scale or fails to
-comprehensively identify licenses to fully capture the breadth of
-OSS license usage. 
-In particular, license compliance remains a critical concern in
-open-source software development, yet many studies and tools focus
-predominantly on analyzing the licenses of large, mature, and
-popular projects. 
-While these projects receive substantial attention, smaller or
-inactive projects are frequently overlooked. 
-However, code from these smaller projects is often reused or
-incorporated into larger, well-known
-projects~\cite{jahanshahi2024beyond}. 
-This reuse can lead to serious legal risks, as code without a
-license is typically considered proprietary. 
-When such code is incorporated into larger projects without proper
-licensing, it creates the potential for license noncompliance. 
-This risk is further amplified because license obligations can
-propagate through the entire software supply chain, making it
-essential to consider the licenses of even small, seemingly inactive
-projects. 
-Thus, ignoring these projects in license analysis may lead to
-significant legal and compliance challenges. 
+Our aim is to better understand the actual practice of license
+selection, including the choice of no license, specifically because
+copying no-license code is likely to result in license violation and
+because other studies have found that much of copied code even in
+large and popular projects is copied from small and inactive
+projects~\cite{jahanshahi2024beyond} that tend to have no license. 
+The problemmay be propageted further, as the active and popular
+projects are often upstream dependencies for numerous projects
+downstream. Hens if such inapropriate use is detected, it can affect
+a very large part of OSS ecosystem, not unlike what happend with
+LEFTPAD. 
+
+
+Prior work found relativel low frequency of repositories with no
+license (e.g. X\% in ~\cite{}, Y\% in Z), that, as we demonstrate,
+greatly underestimates the proportion of projects with no license
+due to heavily filtering based on size, maturity, popularity, and
+activity.
+
+What does ``more comprehensively identify licenses'' mean? Why
+exactly do we need it? Perhaps: Projects with uncommon lincenses
+or slight variations in common licenses tend to be ignored in
+prior studies, e.g,~\cite{a,b,c}. Yet, as we show, these ignored
+licenses ...whatever problem happens if we exclude them from consideration...
+
 
 Moreover, license choice, much like technology
 selection~\cite{choice23,ma2020methodology}, often reflects
