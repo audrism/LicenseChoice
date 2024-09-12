@@ -2,54 +2,68 @@
 
 \subsection{Related Work}
 
-To model licence choice, several strands of prior research may be relevant.
-First is the motivation of individuals~\cite{von2012carrots} and businesses~\cite{Harhoff02} to participate in OSS.
-Second, technical, social, and other factors that either constraint certain choices in software development or make them more convenient~\cite{ma2020methodology}.
-Third, are the legal implications and the need to manage compliance with licenses in open-source software.
-Fourth are the specific plans and objectives of the project, and how each license choice may advance and hinder these goals~\cite{sen2008determinants}.
+To model licence choice, several strands of prior research may be
+relevant.  First is the motivation of
+individuals~\cite{von2012carrots} and businesses~\cite{Harhoff02} to
+participate in OSS.  Second, technical, social, and other factors
+that either constraint certain choices in software development or
+make them more convenient~\cite{ma2020methodology}.
+Third, the
+legal implications and the need to manage compliance with licenses
+in open-source software.
+
+%Fourth, the specific plans and
+%objectives of the project, and how each license choice may advance
+%and hinder these goals~\cite{sen2008determinants}.
 
 \subsubsection{Motivation}
 
+An extensive literature review on motivattion by von Krogh and von
+Hippel~\cite{von2012carrots} categorizes OSS participant motivations
+into ideology, altruism, kinship, fun, reputation, reciprocity,
+learning, own-use, career, and pay.  Some of these motivations can
+influence the type of licenses contributors prefer while others do
+not have a clear relevance. For instance, ideology and reciprocity
+are likely to favor strongly copyleft licenses (over all other
+considerations), which require code sharing, while altruism may lean
+toward more permissive licenses. Own-use is orthogonal with license
+type and may allow for other factors, like convenience and
+compatibility to be dominant.
 
+In case of commercial involvement, motivations may diverge from
+individual contributors, even if they generally align with profit
+maximization~\cite{Harhoff02}.  Studies of open and gated software
+communities highlight the difficulties firms face in balancing
+community-based value creation with private value
+appropriation~\cite{Shah06}.  However, community sponsorship and
+licensing strategies can address these tensions.  For instance,
+restrictive licenses can ensure long-term control over
+contributions, whereas nonmarket\footnote{ The term ``nonmarket''
+  excludes for-profit organizations.  } sponsors might alleviate
+concerns about the project’s sustainability without the need for
+restrictive licenses~\cite{stewart2006impacts}.  This highlights how
+the nature of the sponsor—market or nonmarket—may influence
+licensing strategies and developer motivations.
 
-License choice may also be influenced by technical factors (e.g.,
-licenses used by dependent frameworks), social dynamics (e.g.,
-preferences of collaborators), or simple awareness, such as the
-popularity of certain licenses. 
+Talk about cloud services and license changes done by open source
+companies that rely on service contracts (whereby cloud companies
+can take away their business by selling the same software as a
+service).
 
-Moreover, license choice, much like technology selection~\cite{},
-may reflect strategic decisions by project maintainers to balance
-openness, protection, and control over their codebases.
-
-
-Previous research has largely focused on cataloging license usage
-through descriptive statistics, highlighting the distribution of
-licenses across projects.  While some studies have explored
-developer intentions and goals in license selection using survey
-data~\cite{sen2008determinants}, these approaches tend to emphasize
-subjective factors.  However, they have yet to quantitatively model
-how project-specific contexts—such as project size, programming
-language, or technical characteristics—affect license choice using
-robust statistical methods.
-
-
-A literature review by von Krogh and von Hippel~\cite{von2012carrots} categorizes OSS participant motivations into ideology, altruism, kinship, fun, reputation, reciprocity, learning, own-use, career, and pay.
-These motivations can influence the type of licenses contributors prefer.
-For instance, ideology and reciprocity are likely to favor copyleft licenses, which require code sharing, while altruism may lean toward more permissive licenses.
-
-In the case of commercial involvement, motivations may diverge from individual contributors, even if they generally align with profit maximization~\cite{Harhoff02}.
-Studies of open and gated software communities highlight the difficulties firms face in balancing community-based value creation with private value appropriation~\cite{Shah06}.
-However, community sponsorship and licensing strategies can address these tensions.
-For instance, restrictive licenses can ensure long-term control over contributions, whereas nonmarket\footnote{
-The term ``nonmarket'' excludes for-profit organizations.
-} sponsors might alleviate concerns about the project’s sustainability without the need for restrictive licenses~\cite{stewart2006impacts}.
-This highlights how the nature of the sponsor—market or nonmarket—may influence licensing strategies and developer motivations.
-
-Empirical studies further emphasize the connection between license choice and project structure.
-Fershtman and Gandal~\cite{fershtman2007open} found that restrictive licenses attract more contributors per project, while permissive licenses lead to higher productivity per contributor.
-Similarly, research into firm involvement in OSS shows that licensing choices may be driven by strategic goals.
-For instance, firms may adopt permissive licenses to facilitate bundling proprietary and open-source code~\cite{economicos02}.
-Dahlander and Magnusson~\cite{dahlander2008firms} identified three strategies firms use to engage with OSS communities: (1) accessing community development to extend resources, (2) aligning their strategy with community efforts, and (3) assimilating the community to integrate and share outcomes.
+Empirical studies further emphasize the connection between license
+choice and project structure.  Fershtman and
+Gandal~\cite{fershtman2007open} found that restrictive licenses
+attract more contributors per project, while permissive licenses
+lead to higher productivity per contributor.  Similarly, research
+into firm involvement in OSS shows that licensing choices may be
+driven by strategic goals.  For instance, firms may adopt permissive
+licenses to facilitate bundling proprietary and open-source
+code~\cite{economicos02}. Dahlander and
+Magnusson~\cite{dahlander2008firms} identified three strategies
+firms use to engage with OSS communities: (1) accessing community
+development to extend resources, (2) aligning their strategy with
+community efforts, and (3) assimilating the community to integrate
+and share outcomes.
 
 Different commercial models necessitate distinct licensing strategies.
 Wagstrom et al.~\cite{wagstrom2010impact} and Zhou et al.~\cite{zhou2016inflow} identified two types of firm engagement:
