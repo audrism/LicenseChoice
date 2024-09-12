@@ -16,13 +16,12 @@
 
 % hypothesis - more forks -> permissive
 % hypothesis - more stars -> rapid growth -> permissive 
-% hypothesis - more stars -> protection of the codebase -> restrictive
 % result more stars - high positive correlation with NumForks
 % result - more forks -> 
 % increase: permissive (4.8)
 % decrease: copyleft (-1.9), weak (-1.8), public (-0.6), conditional (-0.6)
 
-% hypothesis - more upstream/downstream -> permissive
+% hypothesis - more upstream/downstream -> balanced
 % result - more down projects ->
 % increase: weak (1.6), conditional (0.5), public (0.3)
 % decrease: permissive (-1.5), copyleft (-0.8)
@@ -228,11 +227,9 @@ The language captures the influence of community norms and technical compatibili
 The number of forks, stars, and community size associated with a project can also impact license decisions.
 Tsay et al.~\cite{tsay2014influence} found that projects with a large number of forks are perceived as more valuable and trustworthy by the community.
 Projects aiming to encourage collaboration and reuse to maintain this momentum may favor permissive licenses.
-Similarly, Borges et al.~\cite{borges2018s} suggest that the number of stars can signal community approval, which might influence license choice by aligning with a project's goals—whether aiming for rapid growth with permissive licenses or protection of the codebase with restrictive licenses.
+Similarly, Borges et al.~\cite{borges2018s} suggest that the number of stars signals community approval, which, like forks, may influence the choice of more permissive licenses.
 
-Furthermore, the number of upstream and downstream projects a project interacts with can play a crucial role in license selection.
-Projects may adopt the same license as their upstream and downstream counterparts to ensure compatibility and seamless integration~\cite{gousios2014exploratory}.
-So if a project interacts with many upstream/downstream projects, it is likely to adopt less restrictive licenses.
+Furthermore, the number of downstream projects a project interacts with can play a crucial role in license selection. Projects may adopt the same license as their upstream counterparts to ensure compatibility and seamless integration~\cite{gousios2014exploratory}. However, if a project interacts with many upstream and downstream projects, it may opt for licenses that balance flexibility and control, favoring weaker or conditional licenses over highly permissive or restrictive ones.
 
 The decision to count upstream and downstream projects is motivated by the need to quantify a project's external interactions.
 While analyzing the specific licenses of these projects would provide more detailed insights, counting them offers a practical approach to estimate the complexity and potential challenges related to license alignment.
