@@ -1,30 +1,86 @@
-% H1:
-% more contributores -> restrictive
-% more diverse -> restrictive
+%%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
 
-% H2:
+% hypothesis - more contributores -> restrictive
+% result - more authors -> 
+% increase: permissive (1)
+% decrease: conditional (-0.5), copyleft (-0.3), public (-0.2)
+
+% hypothesis - more diverse -> more balanced
+% result - more female ->
+% increase: conditional (0.9), public (0.4)
+% decrease: copyleft (-0.9), permissive (-0.4)
+
+%%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
+
 % languages -> both ways
-% more forks -> permissive
-% more stars -> rapid growth -> permissive
-% more stars -> protection of the codebase -> restrictive
-% more upstream/downstream -> permissive
 
-% H3:
-% delay -> more complex -> both ways
-% more upstream -> premissive
-% more downstream -> restrictive
-% more contributers -> more complex -> both ways
+% hypothesis - more forks -> permissive
+% hypothesis - more stars -> rapid growth -> permissive 
+% hypothesis - more stars -> protection of the codebase -> restrictive
+% result more stars - high positive correlation with NumForks
+% result - more forks -> 
+% increase: permissive (4.8)
+% decrease: copyleft (-1.9), weak (-1.8), public (-0.6), conditional (-0.6)
 
-% H4
-% more commits -> both ways
-% more files -> both ways/more permissive
-% older -> long-term sustainability -> restrictive
-% newer -> rapid contributions -> permissive
-% higher burstiness -> more restrictive
+% hypothesis - more upstream/downstream -> permissive
+% result - more down projects ->
+% increase: weak (1.6), conditional (0.5), public (0.3)
+% decrease: permissive (-1.5), copyleft (-0.8)
 
-% results
-% more commits -> increas: copyleft, permissive | decrease: weak copyleft, conditional, public
+% result upstream projects - high positive correlation with NumFiles
+% result - more files -> 
+% increase: weak (11.1), conditional (4.9), public (3.2), copyleft (0.1)
+% decrease: permissive (-19.2)
 
+%%%%%%%%%%%%%%%%%%%%% H3 %%%%%%%%%%%%%%%%%%%%%
+% hypothesis - delay -> more complex -> both ways
+% result - more delay ->
+% increase: weak (0.6), conditional (0.5), public (0.3)
+% decrease: permissive (-1.4), copyleft (-0.1)
+
+% hypothesis - more upstream -> premissive
+% result upstream projects - high positive correlation with NumFiles
+% result - more files -> 
+% increase: weak (11.1), conditional (4.9), public (3.2), copyleft (0.1)
+% decrease: permissive (-19.2)
+
+% hypothesis - more downstream -> restrictive
+% result - more down projects ->
+% increase: weak (1.6), conditional (0.5), public (0.3)
+% decrease: permissive (-1.5), copyleft (-0.8)
+
+% hypothesis - more contributers -> more complex -> both ways
+% result - more authors -> 
+% increase: permissive (1)
+% decrease: conditional (-0.5), copyleft (-0.3), public (-0.2)
+
+%%%%%%%%%%%%%%%%%%%%% H4 %%%%%%%%%%%%%%%%%%%%%
+
+% hypothesis - more commits -> both ways
+% result - more commits -> 
+% increase: permissive (5.8), copyleft (2.5)
+% decrease: weak (-3.5), public (-2.7), conditional (-2.2)
+
+% hypothesis - more files -> both ways/more permissive
+% result - more files -> 
+% increase: weak (11.1), conditional (4.9), public (3.2), copyleft (0.1)
+% decrease: permissive (-19.2)
+
+% hypothesis - older -> long-term sustainability -> restrictive
+% hypothesis - newer -> rapid contributions -> permissive
+% result - larger earliestcommit (older) ->
+% increase: copyleft (6.6), weak (1.6)
+% decrease: permissive (-7.2), conditional (-0.9)
+
+% hypothesis - higher burstiness -> more restrictive
+% result - burtiness ->
+% increase: permissive (0.7), copyleft (0.5)
+% decrease: conditional (-0.5), weak (-0.4), public (-0.3)
+
+% no relevant hypothesis
+% larger latestcommit (inactive longer) -> 
+% increase: weak (0.5), copyleft (0.2), conditional (0.1)
+% decrease: permissive (-0.8), public (-0.1)
 
 \section{Theory development}
 
@@ -125,13 +181,13 @@ we can conclude larger projects (in terms of
 contributor count) will adopt restrictive
 licenses.
 
-Another key factor is diversity in OSS projects. Research shows 
+Another key factor is diversity in OSS projects. Research shows
 that teams with greater diversity are correlated with higher 
 levels of innovation and project quality~\cite{vasilescu2015gender}. 
-Projects with more diverse teams may favor licenses that ensure 
-inclusivity and protect all contributors equitably, often opting 
-for more restrictive licenses to require that contributions 
-remain open and accessible to all.
+Projects with more diverse teams may favor licenses that balance 
+openness and protection, choosing options that ensure inclusivity 
+and equitable contributions while also allowing some flexibility 
+in how the code is used and shared.
 
 While diversity encompasses several dimensions (e.g., ethnicity,
 experience), uniformly operationalizing these across multiple
