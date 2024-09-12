@@ -309,17 +309,23 @@ This aligns with Fershtman and Gandal's~\cite{fershtman2007open} findings that r
     \item \textbf{Hypothesis (H4)}: The number of commits, files, earliest/latest commit times, active months and burstiness affect the license choice, reflecting the project's development trajectory.
 \end{itemize}
 
-\subsection{Contributions}
+\subsection{Comparisons to prior work}
 
-The literature on open source software licenses highlights the complexity and importance of licensing decisions within the software development ecosystem.
-Recent studies have examined the dynamics of license selection across various programming languages, shedding light on how different developer communities approach license adoption and enforcement.
-While foundational works established the basic principles, contemporary research emphasizes the unique challenges posed by the specific requirements of different languages and development environments.
-Our contribution provides a data-driven analysis of these dynamics, offering a scalable framework to identify and evaluate license selection trends across programming languages.
-This research fills a critical gap in understanding how language-specific factors affect license compliance, enabling developers to make more informed choices as they navigate the complexities of open source software licensing.
-Specifically, our study contributions are as follows:
+Despite legal importance of license chice and the potential to stunt
+innovation and poison supply chains, it appears that a significant
+portion of OSS participans are ignoring the need to choose a licence
+or to verify licence compatibility. We construct a preliminary
+theory of licence choice by reviewing relevant
+literature, operationalizing potential drivers of license selection,
+and testing that theory. Furthermore:
+% The literature on open source software licenses highlights the complexity and importance of licensing decisions within the software development ecosystem.
+% Recent studies have examined the dynamics of license selection across various programming languages, shedding light on how different developer communities approach license adoption and enforcement.
+% While foundational works established the basic principles, contemporary research emphasizes the unique challenges posed by the specific requirements of different languages and development environments.
+% Our contribution provides a data-driven analysis of these dynamics, offering a scalable framework to identify and evaluate license selection trends across programming languages.
+% This research fills a critical gap in understanding how language-specific factors affect license compliance, enabling developers to make more informed choices as they navigate the complexities of open source software licensing.
+% Specifically, our study contributions are as follows:
 
-\subsubsection{Comprehensive Identification of Licenses} 
-
+\paragraph{Comprehensive Identification of Licenses.}
 Most research, such as the work by Wu et al.~\cite{wu2024large} and Xu et al.~\cite{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
 Others, like Feng et al.~\cite{feng2019open}, apply static analysis on binaries to detect embedded license texts.
 However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
@@ -327,8 +333,7 @@ In contrast, this study utilizes a dataset from Jahanshahi et al.~\cite{jahansha
 Moreover, they employ the winnowing algorithm, a robust method for matching license texts to known licenses, enhancing the accuracy of detecting both partial and full matches, even when the text is embedded or slightly modified.
 This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
 
-\subsubsection{Scale and Scope of Analysis} 
-
+\paragraph{Scale and Scope of Analysis.} 
 Previous works often limit their scope to specific platforms (e.g., GitHub), a few package manager environments (e.g., NPM), or types of licenses (e.g., OSI-approved licenses), lacking a comprehensive, large-scale approach to detecting and analyzing licenses.
 Our study expands this scope by analyzing the entire open source landscape, ensuring a more comprehensive cross-platform understanding of licensing practices.
 
