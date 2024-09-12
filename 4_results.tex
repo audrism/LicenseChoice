@@ -18,21 +18,24 @@ This retention rate indicates the proportion of projects that continue to use th
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.9\linewidth]{figures/dis1.png}
-\caption{The Distribution and Retention Rates of the Most Used Licenses}
-\label{fig:dis1}
+\begin{minipage}{0.55\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/dis1.png}
+    \caption{The Distribution and Retention Rates of the Most Used Licenses}
+    \label{fig:dis1}
+\end{minipage}
+\hfill
+\begin{minipage}{0.44\textwidth}
+    \centering
+    \raisebox{0.116\height}{\includegraphics[width=\textwidth]{figures/dis3.png}}
+    \caption{The Distribution of License Types}
+    \label{fig:dis3}
+\end{minipage}
 \end{figure}
 
 As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
 Notably, the deprecated GPL 3 license exhibits the highest retention rate, likely due to its strong copyleft nature.
 In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retention rate among the top 20 most used licenses.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.9\linewidth]{figures/dis3.png}
-\caption{The Distribution of License Types}
-\label{fig:dis3}
-\end{figure}
 
 We also analyze the distribution of projects according to their license types.
 Initially, we consider the distribution across the entire project history, meaning that if a project adopted a license at any point and later removed it, it is still counted as having that license.
@@ -198,7 +201,7 @@ The basic statistics of the variables, including the 5th percentile, median, mea
 \label{tbl:stat-l}
 \end{table}
 
-The estimated coefficients for the regression model are shown in Table~\ref{tbl:model-l}.
+% The estimated coefficients for the regression model are shown in Table~\ref{tbl:model-l}.
 Given that the response variable has multiple outcome levels, the model provides a distinct set of coefficients for each outcome level relative to a chosen base level.
 This approach is typical in models such as multinomial logistic regression, where the base level acts as a reference category for comparing all other outcome levels.
 Each set of coefficients indicates the influence of the predictor variables on the probability of the response variable assuming a specific outcome level relative to the base level.
@@ -207,7 +210,7 @@ It is important to note that the selection of the base level is arbitrary and do
 
 WoC's MongoDB project database tracks file counts by language extension, allowing identification of a project's main language based on the most frequent extension, consistent with standard practices~\cite{vasilescu2015data}.
 For this predictor, we employed sum contrasts, also known as effect coding, where each level of the predictor variable is compared to the overall mean of all levels.
-This approach is particularly advantageous in models where the goal is to compare each category to the overall mean rather than to a specific reference category, as it offers a more symmetric interpretation of the effects.
+% This approach is particularly advantageous in models where the goal is to compare each category to the overall mean rather than to a specific reference category, as it offers a more symmetric interpretation of the effects.
 In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
 As a result, the coefficient for one level (typically the last level, which is TypeScript in our model) is not estimated independently but is implicitly determined by the other coefficients to ensure that the overall model remains balanced and interpretable.
 
@@ -253,12 +256,7 @@ This means that a higher value for the earliest commit indicates that the commit
 \end{table}
 \end{comment}
 
-The ANOVA results for the fitted model is shows the p-values for all the predictors are close to zero, indicating that the null hypothesis
-% \footnote{
-% H0: The reduced model (excluding the predictor) does not fit the data significantly worse than the full model (including the predictor), implying that the predictor does not significantly enhance the model's fit.
-% } 
-can be rejected.
-This means that each predictor significantly improves our model's fit.
+The ANOVA results for the fitted model shows that the p-values for all the predictors are close to zero, indicating that each predictor significantly improves our model's fit.
 
 \begin{comment}
 \begin{table}[h!]
