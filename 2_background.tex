@@ -1,6 +1,4 @@
-\section{Related Work and Contributions}
-
-\subsection{Related Work}
+\section{Theory development}
 
 To model licence choice, several strands of prior research may be
 relevant.  First is the motivation of
@@ -16,7 +14,7 @@ in open-source software.
 %objectives of the project, and how each license choice may advance
 %and hinder these goals~\cite{sen2008determinants}.
 
-\subsubsection{Motivation}
+\subsection{Research on Motivation}
 
 An extensive literature review on motivattion by von Krogh and von
 Hippel~\cite{von2012carrots} categorizes OSS participant motivations
@@ -45,15 +43,12 @@ restrictive licenses~\cite{stewart2006impacts}.  This highlights how
 the nature of the sponsor—market or nonmarket—may influence
 licensing strategies and developer motivations.
 
-Talk about cloud services and license changes done by open source
-companies that rely on service contracts (whereby cloud companies
-can take away their business by selling the same software as a
-service).
 
 Empirical studies further emphasize the connection between license
-choice and project structure.  Fershtman and
+choice and project structure. Fershtman and
 Gandal~\cite{fershtman2007open} found that restrictive licenses
-attract more contributors per project, while permissive licenses
+attract more contributors per project ***see the paper what their theory for
+this effect***, while permissive licenses
 lead to higher productivity per contributor.  Similarly, research
 into firm involvement in OSS shows that licensing choices may be
 driven by strategic goals.  For instance, firms may adopt permissive
@@ -63,24 +58,60 @@ Magnusson~\cite{dahlander2008firms} identified three strategies
 firms use to engage with OSS communities: (1) accessing community
 development to extend resources, (2) aligning their strategy with
 community efforts, and (3) assimilating the community to integrate
-and share outcomes.
+and share outcomes. Different commercial models necessitate distinct
+licensing strategies.  Wagstrom et al.~\cite{wagstrom2010impact} and
+Zhou et al.~\cite{zhou2016inflow} identified two types of firm
+engagement: community-focused firms (e.g., GNOME), which prioritize
+building vibrant OSS communities and monetize through services
+(which favor restrictive licenses so that a competitor can not
+create proprietary enhancements without sharing the code), and
+product-focused firms (e.g., Eclipse), which rely on product
+revenues and thus favors weaker copyleft provisions to allow some
+forms of bundling with proprietary code. Emergence of cloud services
+endangered business model of OSS companies that rely on service
+contracts. Because cloud companies provide computing services, they
+can also run (and sell) the same OSS software as a service, thus
+cutting out companies that developed the software. For example,
+in 2021, Elasticsearch changed Apache license to commercial one where the products built
+from that code can not be provided to others as a managed
+service. They made another change in 2024, moving to Affero GPL,
+which is a copyleft license that requirese anyone running a modified
+program on a server and leting other users communicate with it
+there, the server must also allow them to download the source code
+corresponding to the modified version running there. As we can see,
+the mpre permisive license (Apache) was changed to more restrictive
+(commercial, then AGPL) as is typical for the service model.
 
-Different commercial models necessitate distinct licensing strategies.
-Wagstrom et al.~\cite{wagstrom2010impact} and Zhou et al.~\cite{zhou2016inflow} identified two types of firm engagement:
-community-focused firms (e.g., GNOME), which prioritize building vibrant OSS communities and monetize through services, and product-focused firms (e.g., Eclipse), which rely on product revenues.
-The community-focused model tends to favor more permissive licenses, encouraging broad participation, while product-focused firms may lean toward restrictive licenses to maintain control over proprietary product integration.
+Despite significant amount of research in the motivation and commercial
+involvement domain, few of the key predictors can be reliably
+operationalized at scale. Based on Fershtman and
+Gandal~\cite{fershtman2007open} conjecture that ....
+we can conclude larger projects (in terms of
+contributor count) will adopt restrictive
+licenses.
 
-Given the complexity of operationalizing motivations and sponsorship types at scale, a practical takeaway for modeling is that larger projects (in terms of contributor count) are more likely to adopt restrictive licenses~\cite{fershtman2007open}.
-Projects with more contributors benefit from diverse expertise and collaboration, often resulting in higher-quality contributions~\cite{crowston2005social}.
-This dynamic can influence license choice, as larger projects may prefer licenses that promote openness and fairness or, alternatively, restrictive licenses to manage contributions and maintain control.
+*** this does not point in any direction ***
+Furthermore, projects with more contributors
+benefit from diverse expertise and collaboration, often resulting in
+higher-quality contributions~\cite{crowston2005social}. This
+dynamic can influence license choice, as larger projects may prefer
+licenses that promote openness and fairness or, alternatively,
+restrictive licenses to manage contributions and maintain control.
 
-Another key factor is diversity in OSS projects.
-Research shows that teams with greater diversity are correlated with higher levels of innovation and project quality~\cite{vasilescu2015gender}.
-Projects with more diverse teams may favor licenses that ensure inclusivity and protect all contributors equitably.
-This reflects a desire to foster security, fairness, and respect for individual contributions, which may lead such projects to adopt licenses emphasizing community governance and equitable protection~\cite{terrell2017gender}.
-
-While diversity encompasses several dimensions (e.g., ethnicity, experience), uniformly operationalizing these across multiple dimensions is not feasible due to the lack of consistent data availability.
-Therefore, we use the number of female authors as a proxy for diversity in this study.
+Another key factor is diversity in OSS projects.  Research shows
+that teams with greater diversity are correlated with higher levels
+of innovation and project quality~\cite{vasilescu2015gender}.
+Projects with more diverse teams may favor licenses that ensure
+inclusivity and protect all contributors equitably.  This reflects a
+desire to foster security, fairness, and respect for individual
+contributions, which may lead such projects to adopt licenses
+emphasizing community governance and equitable
+protection~\cite{terrell2017gender} ** are these more restrictive ***.
+While diversity encompasses several dimensions (e.g., ethnicity,
+experience), uniformly operationalizing these across multiple
+dimensions is not feasible due to the lack of consistent data
+availability. Therefore, we use the number of female authors as a
+proxy for diversity in this study.
 
 In summary, we hypothesize that:
 
@@ -90,9 +121,15 @@ In summary, we hypothesize that:
 
 \subsubsection{Social and Technical Choice}
 
-Licenses, like other technologies and practices, spread through communities.
-Prior studies, such as those by Ma et al.~\cite{ma2020methodology} and others~\cite{choice23}, used the theory of social contagion~\cite{shoroye2015exploring} to estimate the impact of exposure, susceptibility, and infectiousness on developer choices regarding package selection.
-These studies found that exposure measured by the number of overall deployments at the time of choice, had a significant positive effect on package selection.
+Licenses, like other technologies and practices, spread through
+communities.  Prior studies, such as those by Ma et
+al.~\cite{ma2020methodology} and others~\cite{choice23}, used the
+theory of social contagion~\cite{shoroye2015exploring} to estimate
+the impact of exposure, susceptibility, and infectiousness on
+developer choices regarding package selection.  These studies found
+that exposure measured by the number of overall deployments at the
+time of choice, had a significant positive effect on package
+selection.
 
 We expect a similar pattern for license selection.
 Developers who are indifferent or unaware of the differences between licenses are likely to gravitate toward those they have encountered before.
