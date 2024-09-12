@@ -1,12 +1,31 @@
 \section{Limitations}
 
 \subsection{Project to License Map}
-While the World of Code (WoC) infrastructure offers a comprehensive and powerful resource for analyzing open source software projects, using its license map (P2L) for our study comes with certain limitations that must be acknowledged.
-One key limitation is that the P2L map relies on detecting license files committed to a project's repository.
-This approach assumes that licenses are consistently and accurately recorded in dedicated license files, which may not always be the case.
-In practice, licenses could be specified in other parts of the codebase, such as README files or within individual source files, potentially leading to underreporting or misclassification of a project's licensing status.
+While the World of Code (WoC) infrastructure offers a comprehensive
+and powerful resource for analyzing open source software projects,
+using its license map (P2L)~\cite{jahanshahi2024license} for our study comes with certain
+limitations that must be acknowledged.  One key limitation is that
+the P2L map relies on detecting license files committed to a
+project's repository. While this approach does not assumes that
+licenses are consistently and accurately recorded in dedicated
+license.md files, it does not check the content of all
+files~\cite{jahanshahi2024license}.  In practice, licenses could be
+specified within individual source files, potentially leading to
+underreporting or misclassification of a project's licensing status.
 
-Additionally, while the P2L map captures license changes over time, it may not fully account for licenses that were temporarily removed or altered before being reinstated, which could introduce inaccuracies in assessing a project's long-term licensing practices.
-The reliance on the latest status of licenses might also obscure important historical context, such as changes in licensing throughout a project's lifecycle, which could be crucial for understanding the project's evolution and the factors influencing license choices.
+Additionally, while the P2L map captures license changes over time,
+it may not fully account for licenses that were temporarily removed
+or altered before being reinstated, which could introduce
+inaccuracies in assessing a project's long-term licensing practices.
+The reliance on the latest status of licenses might also obscure
+important historical context, such as changes in licensing
+throughout a project's lifecycle, which could be crucial for
+understanding the project's evolution and the factors influencing
+license choices.
 
-These limitations underscore the need for caution when interpreting results based on the P2L map and suggest that complementary methods, such as manual verification or cross-referencing with other data sources, may be necessary to obtain a more complete and accurate picture of licensing practices in open source software projects.
+Despite the efforts of manual verification employed in P2L map,
+these limitations underscore the need for caution when interpreting
+results based on it. Complementary methods, such as
+cross-referencing with other data sources, may be necessary to
+obtain a more complete and accurate picture of licensing practices
+in open source software projects.
