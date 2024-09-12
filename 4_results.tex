@@ -1,3 +1,4 @@
+\vspace{-0.4cm}
 \section{Results and Discussions}
 
 \subsection{RQ1: What are the types and prevalence of licenses across the entire open source software landscape?}
@@ -33,6 +34,7 @@ This retention rate indicates the proportion of projects that continue to use th
 \end{minipage}
 \end{figure}
 
+\vspace{-0.3cm}
 As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
 Notably, the deprecated GPL 3 license exhibits the highest retention rate, likely due to its strong copyleft nature.
 In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retention rate among the top 20 most used licenses.
@@ -46,10 +48,12 @@ The results are shown in Figure~\ref{fig:dis3}.
 
 Table~\ref{tab:res1a} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope, methodology, and dataset size (see Table~\ref{tbl:litRev}).
 
+\vspace{-0.2cm}
 \begin{table}[h!]
 \centering
 \caption{RQ1 Results Comparison With Literature}
 \label{tab:res1a}
+\vspace{-0.2cm}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{lrr|rrrrr}
     \toprule
@@ -62,6 +66,7 @@ Table~\ref{tab:res1a} provides a comparison between the results in the literatur
     \bottomrule
 \end{tabular}}
 \end{table}
+\vspace{-0.2cm}
 
 A key methodological difference between our study and Wu et al. lies in the treatment of data points.
 Wu et al. considered each version of a package as a separate data point, resulting in 46.59 million data points from 3.47 million projects.
@@ -82,6 +87,7 @@ Wu et al.'s study found a dominance of permissive licenses, with much lower perc
 However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
 This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
 
+\vspace{-0.4cm}
 \begin{figure}[h!]
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ1 Key Findings]
 \begin{enumerate}
@@ -93,6 +99,7 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
 \end{tcolorbox}
 \end{figure}
 
+\vspace{-0.6cm}
 \subsubsection{Discussions}
 
 The analysis of OSS licensing reveals that 83\% of projects lack a
@@ -128,6 +135,7 @@ Furthermore, efforts should be made to develop and promote tools that streamline
 While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
 By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
 
+\vspace{-0.2cm}
 \subsection{RQ2: How do the characteristics of a project influence the choice of its license?}
 
 \subsubsection{Results}
@@ -170,9 +178,11 @@ Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the remo
 
 The basic statistics of the variables, including the 5th percentile, median, mean, and 95th percentile for the numeric variables, as well as the counts of different levels for the factor variables, are presented in Table~\ref{tbl:stat-l}.
 
+\vspace{-0.4cm}
 \begin{table}[h!]
 \centering
 \caption{License Choice Model - Descriptive Statistics}
+\vspace{-0.2cm}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{llcccc}
   \toprule
@@ -426,7 +436,7 @@ Table~\ref{tbl:contrast} summarizes these results.
 \end{tabular}}
 \label{tbl:contrast}
 \end{table}
-
+\vspace{-1.8cm}
 %%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
 
 Our findings offer mixed support for the hypothesis.
@@ -490,6 +500,7 @@ Permissive licenses dominate many programming languages due to their flexibility
 Language-specific use cases and historical context also play a key role in shaping these preferences.
 \end{comment}
 
+\vspace{-0.2cm}
 \subsubsection{Comparison with literature}
 
 Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
@@ -568,24 +579,14 @@ This comparison underscores the importance of controlling for various factors to
 
 \subsubsection{Discussions}
 
-The analysis of how project characteristics affect license choices in open source software (OSS) projects offers important insights for developers and the broader OSS community.
-
-Older projects tend to favor copyleft licenses, reflecting the early OSS movement's emphasis on preserving software freedom, while newer projects increasingly adopt permissive licenses, prioritizing flexibility and broad adoption.
-This shift suggests that modern OSS development values ease of use and integration over strict control of derivative works.
-The community should aim to balance historical ideals of software freedom with the demand for flexibility, helping developers make informed choices that align with project goals and values.
-
-\begin{comment}
-Active projects, particularly those showing recent and consistent activity, are more likely to adopt licenses, especially permissive ones.
-This highlights a growing recognition of the need for legal clarity as projects mature and attract more contributors.
-
-Smaller teams, especially those with fewer core authors, are more inclined to adopt licenses with specific conditions, such as conditional open licenses.
-Projects with more female contributors also show a preference for these licenses as well as copyleft licenses, possibly to ensure protections.
-The OSS community should provide resources to help smaller, diverse teams navigate licensing options that safeguard their collaborative efforts while aligning with their goals.
-\end{comment}
-
 Programming language significantly influences license choices.
 For example, C-based projects often prefer copyleft licenses, while Go and TypeScript projects lean toward permissive or conditional open licenses.
 Developers should be aware of how their language community influences licensing norms, and the community could offer language-specific guidelines to align new projects with best licensing practices.
+
+The shift toward permissive licenses as forks increase suggests that developers prioritize broader adoption and collaboration, but this comes at the cost of reduced control over the project's use and direction.
+As more forks typically lead to greater participation, project maintainers may need to reassess their licensing strategies to ensure they align with their goals.
+While permissive licenses encourage flexibility, establishing clear contribution guidelines and monitoring derivative works can help maintain some oversight, ensuring that the project’s original intent remains intact as it grows.
+Balancing openness and control becomes crucial as the project expands through forks.
 
 As the number of downstream projects increases, developers tend to favor licenses that offer more control, such as conditional open and weak copyleft licenses, reflecting a desire to manage how code is used and modified across multiple projects.
 The decline in permissive and copyleft licenses suggests that developers are moving away from licenses that are either too flexible or too restrictive.
@@ -598,9 +599,8 @@ The decline in permissive licenses suggests they may be seen as inadequate for m
 However, the stability of copyleft licenses shows that developers with strong ideological commitments to software freedom continue to favor these licenses regardless of project size.
 To support developers, the OSS community could promote license management tools and contribution guidelines that help maintain control while fostering collaboration in larger projects.
 
-Lastly, the shift toward permissive licenses as forks increase suggests that developers prioritize broader adoption and collaboration, but this comes at the cost of reduced control over the project's use and direction.
-As more forks typically lead to greater participation, project maintainers may need to reassess their licensing strategies to ensure they align with their goals.
-While permissive licenses encourage flexibility, establishing clear contribution guidelines and monitoring derivative works can help maintain some oversight, ensuring that the project’s original intent remains intact as it grows.
-Balancing openness and control becomes crucial as the project expands through forks.
+Lastly, older projects tend to favor copyleft licenses, reflecting the early OSS movement's emphasis on preserving software freedom, while newer projects increasingly adopt permissive licenses, prioritizing flexibility and broad adoption.
+This shift suggests that modern OSS development values ease of use and integration over strict control of derivative works.
+The community should aim to balance historical ideals of software freedom with the demand for flexibility, helping developers make informed choices that align with project goals and values.
 
 By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
