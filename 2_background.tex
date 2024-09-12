@@ -242,7 +242,7 @@ Most research, such as the work by Wu et al.~\cite{wu2024large} and Xu et al.~\c
 Others, like Feng et al.~\cite{feng2019open}, apply static analysis on binaries to detect embedded license texts.
 However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
 In contrast, this study utilizes a dataset from Jahanshahi et al.~\cite{jahanshahi2024license}, which adopts a more comprehensive approach by scanning the entire OSS ecosystem for any files containing ``license'' in their filepath.
-Their method employs winnowing text
+Moreover, they employ the winnowing algorithm, a robust method for matching license texts to known licenses, enhancing the accuracy of detecting both partial and full matches, even when the text is embedded or slightly modified.
 This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
 
 \subsubsection{Scale and Scope of Analysis} 
