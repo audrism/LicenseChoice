@@ -310,6 +310,7 @@ This method helps interpret complex models, such as multinomial logistic regress
     \caption{License Choice Model - Estimated Marginal Probabilities}
     \label{fig:probs}
 \end{figure}
+\vspace{-0.5}
 
 After estimating marginal probabilities, we used the \textit{pairs} function from the \textit{emmeans} package for pairwise comparisons to identify significant differences between predictor levels and outcome categories.
 We applied the Tukey method to control for family-wise error rates~\cite{hsu1996multiple,hothorn2008simultaneous}.
@@ -319,6 +320,26 @@ This bidirectional approach allows for a thorough exploration of the interaction
 
 Given the large number of comparisons, we report only contrasts with p-values above 0.05 for clarity.
 Table~\ref{tbl:contrast} summarizes these results.
+
+%%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
+
+Our findings offer mixed support for the hypothesis.
+As the number of core authors increases, the probability of adopting a copyleft license decreases (25.17\% to 24.90\%) and permissive licenses increase (56.91\% to 57.91\%).
+This contradicts the expectation from Fershtman and Gandal~\cite{fershtman2007open} that projects with restrictive licenses tend to have more contributors.
+
+In terms of diversity (approximated by the number of female authors), the likelihood of adopting conditional open and public domain licenses increases slightly, while both copyleft and permissive licenses show modest declines, suggesting a preference for flexible but protective licenses in more diverse teams, supporting the diversity-related aspect of our hypothesis.
+
+%%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
+
+Our analysis shows significant variation in licensing preferences across programming languages, reflecting the community culture and technical norms associated with each language.
+JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for permissive licenses (e.g., MIT, Apache), likely due to their dominant role in web development and collaborative environments.
+Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL), aligning with their historical ties to the open-source movement and academic usage, where openness is prioritized.
+
+As the number of forks increases, projects show a clear shift toward permissive licenses, with the likelihood rising from 55.26\% to 60.10\%, while the adoption of copyleft and conditional licenses declines slightly.
+This supports the hypothesis that projects with more forks, perceived as valuable by the community, tend to prioritize collaboration and reuse by favoring permissive licenses.
+
+For downstream projects, the likelihood of selecting conditional open, public domain, and weak copyleft licenses increases modestly, reflecting a desire for more control as code usage expands.
+Meanwhile, both permissive and copyleft licenses see a slight decline, suggesting that developers with more downstream interactions lean toward licenses offering specific conditions rather than fully permissive or restrictive terms.
 
 \begin{table}[h!]
 \centering
@@ -436,26 +457,10 @@ Table~\ref{tbl:contrast} summarizes these results.
 \end{tabular}}
 \label{tbl:contrast}
 \end{table}
-\vspace{-1.8cm}
-%%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
 
-Our findings offer mixed support for the hypothesis.
-As the number of core authors increases, the probability of adopting a copyleft license decreases (25.17\% to 24.90\%) and permissive licenses increase (56.91\% to 57.91\%).
-This contradicts the expectation from Fershtman and Gandal~\cite{fershtman2007open} that projects with restrictive licenses tend to have more contributors.
 
-In terms of diversity (approximated by the number of female authors), the likelihood of adopting conditional open and public domain licenses increases slightly, while both copyleft and permissive licenses show modest declines, suggesting a preference for flexible but protective licenses in more diverse teams, supporting the diversity-related aspect of our hypothesis.
 
-%%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
 
-Our analysis shows significant variation in licensing preferences across programming languages, reflecting the community culture and technical norms associated with each language.
-JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for permissive licenses (e.g., MIT, Apache), likely due to their dominant role in web development and collaborative environments.
-Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL), aligning with their historical ties to the open-source movement and academic usage, where openness is prioritized.
-
-As the number of forks increases, projects show a clear shift toward permissive licenses, with the likelihood rising from 55.26\% to 60.10\%, while the adoption of copyleft and conditional licenses declines slightly.
-This supports the hypothesis that projects with more forks, perceived as valuable by the community, tend to prioritize collaboration and reuse by favoring permissive licenses.
-
-For downstream projects, the likelihood of selecting conditional open, public domain, and weak copyleft licenses increases modestly, reflecting a desire for more control as code usage expands.
-Meanwhile, both permissive and copyleft licenses see a slight decline, suggesting that developers with more downstream interactions lean toward licenses offering specific conditions rather than fully permissive or restrictive terms.
 
 %%%%%%%%%%%%%%%%%%%%% H3 %%%%%%%%%%%%%%%%%%%%%
 
