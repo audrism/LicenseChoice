@@ -21,15 +21,10 @@
 % increase: permissive (4.8)
 % decrease: copyleft (-1.9), weak (-1.8), public (-0.6), conditional (-0.6)
 
-% hypothesis - more upstream/downstream -> balanced
+% hypothesis - more downstream -> balanced
 % result - more down projects ->
 % increase: weak (1.6), conditional (0.5), public (0.3)
 % decrease: permissive (-1.5), copyleft (-0.8)
-
-% result upstream projects - high positive correlation with NumFiles
-% result - more files -> 
-% increase: weak (11.1), conditional (4.9), public (3.2), copyleft (0.1)
-% decrease: permissive (-19.2)
 
 %%%%%%%%%%%%%%%%%%%%% H3 %%%%%%%%%%%%%%%%%%%%%
 % hypothesis - delay -> more complex -> both ways
@@ -229,13 +224,13 @@ Tsay et al.~\cite{tsay2014influence} found that projects with a large number of 
 Projects aiming to encourage collaboration and reuse to maintain this momentum may favor permissive licenses.
 Similarly, Borges et al.~\cite{borges2018s} suggest that the number of stars signals community approval, which, like forks, may influence the choice of more permissive licenses.
 
-Furthermore, the number of downstream projects a project interacts with can play a crucial role in license selection. Projects may adopt the same license as their upstream counterparts to ensure compatibility and seamless integration~\cite{gousios2014exploratory}. However, if a project interacts with many upstream and downstream projects, it may opt for licenses that balance flexibility and control, favoring weaker or conditional licenses over highly permissive or restrictive ones.
+Furthermore, the number of downstream projects a project interacts with can play a crucial role in license selection. If a project interacts with many downstream projects, it may opt for licenses that balance flexibility and control, favoring weaker or conditional licenses over highly permissive or restrictive ones.
 
-The decision to count upstream and downstream projects is motivated by the need to quantify a project's external interactions.
+The decision to count downstream projects is motivated by the need to quantify a project's external interactions.
 While analyzing the specific licenses of these projects would provide more detailed insights, counting them offers a practical approach to estimate the complexity and potential challenges related to license alignment.
 
 \begin{itemize}
-    \item \textbf{Hypothesis (H2)}: The programming language, number of forks, stars, and upstream/downstream projects will affect the license choice decision in a project.
+    \item \textbf{Hypothesis (H2)}: The programming language, number of forks, stars, and downstream projects will affect the license choice decision in a project.
 \end{itemize}
 
 \subsubsection{Legal and Regulatory Context}

@@ -427,6 +427,38 @@ Table~\ref{tbl:contrast} summarizes these results.
 \label{tbl:contrast}
 \end{table}
 
+%%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
+
+Our findings offer mixed support for the hypothesis.
+As the number of core authors increases, the probability of adopting a copyleft license decreases (25.17\% to 24.90\%) and permissive licenses increase (56.91\% to 57.91\%).
+This contradicts the expectation from Fershtman and Gandal~\cite{fershtman2007open} that projects with restrictive licenses tend to have more contributors.
+
+In terms of diversity (approximated by the number of female authors), the likelihood of adopting conditional open and public domain licenses increases slightly, while both copyleft and permissive licenses show modest declines, suggesting a preference for flexible but protective licenses in more diverse teams, supporting the diversity-related aspect of our hypothesis.
+
+%%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
+
+Our analysis shows significant variation in licensing preferences across programming languages, reflecting the community culture and technical norms associated with each language.
+JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for permissive licenses (e.g., MIT, Apache), likely due to their dominant role in web development and collaborative environments.
+Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL), aligning with their historical ties to the open-source movement and academic usage, where openness is prioritized.
+
+As the number of forks increases, projects show a clear shift toward permissive licenses, with the likelihood rising from 55.26\% to 60.10\%, while the adoption of copyleft and conditional licenses declines slightly.
+This supports the hypothesis that projects with more forks, perceived as valuable by the community, tend to prioritize collaboration and reuse by favoring permissive licenses.
+
+For downstream projects, the likelihood of selecting conditional open, public domain, and weak copyleft licenses increases modestly, reflecting a desire for more control as code usage expands.
+Meanwhile, both permissive and copyleft licenses see a slight decline, suggesting that developers with more downstream interactions lean toward licenses offering specific conditions rather than fully permissive or restrictive terms.
+
+%%%%%%%%%%%%%%%%%%%%% H3 %%%%%%%%%%%%%%%%%%%%%
+
+% delay
+As the delay in adopting a license increases (from 1 to 12 months), projects show a slight increase in the likelihood of selecting conditional open, public domain, and weak copyleft licenses.
+This suggests that longer delays allow more time for legal and community considerations, favoring more protective licenses.
+Meanwhile, the probability of choosing a permissive license decreases, indicating that flexibility becomes less attractive over time.
+The probability of selecting a copyleft license remains stable, suggesting it is less influenced by the timing of the decision.
+
+%%%%%%%%%%%%%%%%%%%%% H4 %%%%%%%%%%%%%%%%%%%%%
+
+
+
 % commits
 As the number of commits increases from 18 to 961, the probability of adopting a conditional open license drops from 4.60\% to 2.42\%.
 Conversely, the likelihood of selecting a copyleft license rises from 23.53\% to 26.01\%, and the probability of choosing a permissive license increases from 54.26\% to 60.09\%.
@@ -437,26 +469,6 @@ As the number of files in a project increases from 114 to 18,456, the probabilit
 The probability of choosing a weak copyleft license also grows from 7.15\% to 18.20\%. 
 In contrast, the probability of adopting a permissive license decreases from 65.72\% to 46.48\%.
 The likelihood of choosing a copyleft license remains relatively stable, fluctuating slightly from 24.10\% to 24.22\%.
-
-% authors
-As the number of core authors increases from 1 to 4, the probability of adopting a conditional open license decreases slightly from 3.66\% to 3.20\%, and the likelihood of selecting a copyleft license drops marginally from 25.17\% to 24.90\%.
-In contrast, the probability of choosing a permissive license rises slightly from 56.91\% to 57.91\%.
-The likelihood of adopting public domain and weak copyleft licenses shows minimal changes, decreasing slightly from 2.65\% to 2.41\% and from 11.59\% to 11.55\%, respectively.
-
-As the number of female authors increases from 0 to 3, the probability of adopting conditional open and public domain licenses rises slightly, from 3.08\% to 3.96\% and from 2.36\% to 2.75\%.
-Meanwhile, the likelihood of selecting copyleft and permissive licenses decreases modestly, with copyleft dropping from 25.24\% to 24.31\% and permissive from 57.73\% to 57.38\%.
-The probability of choosing a weak copyleft license remains almost unchanged.
-
-% forks
-As the number of forks increases from 0 to 5, the probability of adopting a conditional open license decreases from 3.61\% to 3.03\%, and the likelihood of selecting a copyleft license drops from 25.87\% to 24.00\%.
-Similarly, the probability of adopting a public domain license decreases from 2.79\% to 2.16\%, and weak copyleft declines from 12.43\% to 10.68\%.
-In contrast, the probability of choosing a permissive license rises from 55.26\% to 60.10\%, indicating a trend toward permissive licenses as forks increase.
-
-% downstream
-As the number of downstream projects increases from 1 to 98, the likelihood of choosing conditional open, public domain, and weak copyleft licenses slightly increases, suggesting that more downstream projects may encourage adopting licenses offering more control.
-For instance, the probability of adopting a conditional open license rises from 3.05\% to 3.53\% and weak copyleft from 10.67\% to 12.25\%, possibly reflecting a desire for greater influence as code usage expands.
-Conversely, the probability of selecting permissive and copyleft licenses decreases slightly, with permissive licenses dropping from 58.51\% to 56.98\% and copyleft from 25.43\% to 24.62\%.
-This may suggest that as downstream projects grow, developers prefer licenses with more specific conditions.
 
 % earliest/latest commit
 As the time since the earliest commit increases, the likelihood of choosing conditional open and permissive licenses decreases, with conditional open dropping from 3.78\% to 2.83\% and permissive from 60.89\% to 53.70\%.
@@ -471,25 +483,14 @@ The results show that as burstiness increases, the likelihood of adopting permis
 This shift may reflect the fast-paced nature of bursty development, where developers prefer permissive licenses for their flexibility and ease of collaboration, facilitating quicker code integration and broader adoption.
 In contrast, licenses with more conditions, like conditional open and copyleft, see minimal changes, likely because their complexity could slow down development in such environments.
 
-% delay
-As the adoption delay increases from 1 month to 12 months, the likelihood of choosing conditional open, public domain, and weak copyleft licenses rises slightly, possibly because longer delays give developers more time to consider legal and community implications, making protective licenses more appealing.
-In contrast, the probability of adopting a permissive license decreases, suggesting the initial appeal of flexibility diminishes over time.
-The copyleft license remains stable, indicating its adoption is less affected by the timing of decisions.
 
-% language
-The differences in licensing outcomes across various programming languages can be attributed to factors such as community culture, typical use cases, and historical influences associated with each language.
-For example, languages like JavaScript, Ruby, TypeScript, and Go demonstrate a strong preference for permissive licenses, likely due to the open and collaborative nature of their development communities.
-These languages are often used in web development and modern software projects, where permissive licenses like MIT or Apache are favored because they offer maximum flexibility.
 
-In contrast, Perl and R show a stronger preference for copyleft licenses, reflecting community values centered on openness and sharing.
-Perl's role in the open source movement and R’s academic use, where transparency is key, contribute to the popularity of copyleft licenses like GPL.
-Similarly, C/C++ projects frequently adopt copyleft licenses due to their ties to the free software movement and critical system software, where open access is essential for security and collaboration.
 
-Java, Python, and Go's dominance of permissive licenses is most likely driven by their widespread use in commercial and academic settings, where permissive licenses facilitate easy integration with proprietary solutions.
-Developers choose these licenses to avoid legal issues and ensure broad adoption.
 
-Public domain and conditional open licenses are less common but still noteworthy in languages like C/C++ and Go.
-These licenses appeal to developers seeking either maximum user freedom or control over their software's use, though lower adoption suggests most developers prefer the protection offered by permissive or copyleft licenses.
+
+
+
+
 
 In summary, software project licensing preferences are influenced by various factors, including the number of commits, files, core authors, female authors, forks, downstream projects, project age, and activity levels.
 As commits increase, projects tend to favor copyleft and permissive licenses, while conditional open, public domain, and weak copyleft licenses become less common.
