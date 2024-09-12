@@ -1,21 +1,5 @@
 \section{Methodology}\label{method}
 
-
-\subsection{World of Code Infrastructure}
-
-*** Do you need it (e.g., for predictors) or do you get all the data from P2L, if the latter,
-talk about P2L instead ***
-
-World of Code (WoC)\footnote{https://worldofcode.org} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
-In essence, it is a software analysis pipeline that encompasses the discovery and retrieval of data, storage and updates, and the transformations and data augmentation required for downstream analytic tasks~\cite{ma2021world}.
-
-WoC offers various maps that connect git objects and metadata (commits, blobs, authors) to each other.
-It also provides higher-level maps, such as project-to-data connections (e.g. project-to-author), author aliasing~\cite{fry2020dataset}, and project deforking maps~\cite{mockus2020complete}. 
-We use the project-to-license (P2L) map~\cite{jahanshahi2024license} from WoC that provides all the times at which a license was committed to a project and also verifies whether it still exists in the project latest status\footnote{
-Version V, latest at the time of this study.}.
-We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
-Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
-
 \subsection{License Types}
 
 We group licenses based on their characteristics.
@@ -44,6 +28,19 @@ The authors of such software waive all rights, allowing anyone to use, modify, a
 This category provides the maximum freedom for software use and is often utilized for simple, non-critical software components.
 
 \vspace{-0.3cm}
+
+\subsection{World of Code Infrastructure}
+
+World of Code (WoC)\footnote{https://worldofcode.org} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
+In essence, it is a software analysis pipeline that encompasses the discovery and retrieval of data, storage and updates, and the transformations and data augmentation required for downstream analytic tasks~\cite{ma2021world}.
+
+WoC offers various maps that connect git objects and metadata (commits, blobs, authors) to each other.
+It also provides higher-level maps, such as project-to-data connections (e.g. project-to-author), author aliasing~\cite{fry2020dataset}, and project deforking maps~\cite{mockus2020complete}. 
+We use the project-to-license (P2L) map~\cite{jahanshahi2024license} from WoC that provides all the times at which a license was committed to a project and also verifies whether it still exists in the project latest status\footnote{
+Version V, latest at the time of this study.}.
+We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
+Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
+
 \subsection{Regression Model}\label{sec:reg}
 
 To address our research question, we selected a regression model appropriate to the nature of our response variable.
