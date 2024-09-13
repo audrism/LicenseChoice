@@ -154,9 +154,11 @@ Projects with more than 10 stars and 100 commits.
 } accounted for only 32\% of reused artifacts.
 This highlights the importance of addressing the issue of unlicensed code within the OSS ecosystem.
 
-Among projects that are licensed, the MIT license is the most prevalent, reflecting historic community preference for permissive licenses that facilitate broad adoption and collaboration.
+Among projects that are licensed, the MIT license is the most prevalent, 
+reflecting a historic preference for permissive licenses that facilitate 
+broad adoption and collaboration.
 However, the continued use of copyleft licenses like the GPL
-(which had much larger prevalence decades ago)
+(which was popular decades ago)
 demonstrates that many developers are committed to preserving the
 open nature of derivative works.
 %\textcolor{red}{Mahmoud, this may be a good place to show how the
@@ -173,21 +175,14 @@ open nature of derivative works.
 %While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
 %By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
 
-\vspace{-0.2cm}
-\subsection{RQ2: How do the characteristics of a project influence the choice of its license?}
+% \vspace{-0.2cm}
+% \subsection{RQ2: How do the characteristics of a project influence the choice of its license?}
 
-\subsubsection{Results and Discussion}
+\subsection{The Impact of Project Characteristics on License Choice}
 
-To answer this question, we employ a multinomial regression model as discussed in Section~\ref{sec:reg}.
-First we check for correlations among predictors in a regression
-model, as high correlations between predictors
-make results unstable, inflated standard errors, and make
-coefficients hard to interpret.
-Addressing this issue improves the model's validity~\cite{dormann2013collinearity}.
-We used a $0.6$ correlation threshold, as is commonly used to reduce
-the chances of multicollinearity while retaining key predictors.
-%Correlations above 0.6 indicate overlapping information, and removing such variables reduces multicollinearity without sacrificing significant variance.
-This cutoff strikes a balance, preserving some natural correlations while ensuring predictor independence~\cite{vatcheva2016multicollinearity}.
+\subsubsection{Our Findings}
+
+Now we turn to the results of our multinomial regression model discussed in Section~\ref{sec:reg}.
 
 \begin{comment}
 Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the removal of highly correlated predictors.
