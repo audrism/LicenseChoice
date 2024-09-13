@@ -284,33 +284,32 @@ In such cases, delayed license adoption may reflect careful legal evaluation aim
 In summary, we hypothesize that:
 \begin{itemize}
 \item \textbf{Hypothesis (H3a)}: Longer delays in adoption will favor less popular licenses.
-\item \textbf{Hypothesis (H3b)}: The larger projects in terms of
-  contributors will favor restrictive licenses.
+\item \textbf{Hypothesis (H3b)}: Projects with more contributors will favor restrictive licenses.
 \end{itemize}
 
-\subsubsection{Project Needs}
+\subsection{Project Needs}
 
 While legal compliance sets essential boundaries, the specific needs and objectives of a project further influence the selection of an appropriate license.
 
 Developers often choose licenses based on their preferences for the future use of the software. 
-Research by Sen, Subramaniam, and Nelson~\cite{sen2008determinants}
+Research by \citet{sen2008determinants}
 highlights that developers' motivations --- such as a desire for
 widespread adoption or strong copyleft enforcement --- play a significant role in license selection.
 
 The choice of license can significantly influence a project’s development trajectory.
-Colazo and Fang~\cite{colazo2009impact} found that copyleft licenses promote greater permanence and long-term involvement in projects, affecting both developer contributions and engagement.
+\citet{colazo2009impact} found that copyleft licenses promote greater permanence and long-term involvement in projects, affecting both developer contributions and engagement.
 
 The number of commits is a key indicator of project activity and maintenance. 
-Koch~\cite{koch2002effort} suggests that projects with frequent commits tend to have more active development cycles, making them more reliable and attractive for reuse.
+\citet{koch2002effort} suggests that projects with frequent commits tend to have more active development cycles, making them more reliable and attractive for reuse.
 As project activity increases, maintainers may select licenses that either encourage contributions or protect the evolving codebase from potential misuse, balancing the needs for stability and control.
 
 The number of files in a project reflects its complexity and modularity.
-Mockus~\cite{mockus2007large} observed that larger projects with more files are more likely to offer reusable components, making license choice critical for balancing reuse and intellectual property protection.
-Bird et al.~\cite{bird2009putting} further suggested that projects with more files tend to have modular structures, which encourage community engagement and adoption, potentially favoring more restrictive licenses.
+\citet{mockus2007large} observed that larger projects with more files are more likely to offer reusable components, making license choice critical for balancing reuse and intellectual property protection.
+\citet{bird2009putting} further suggested that projects with more files tend to have modular structures, which encourage community engagement and adoption, potentially favoring more restrictive licenses.
 
-Time-based metrics-such as the earliest and latest commits, active
+Time-based metrics -- such as the earliest and latest commits and the number of active
 months -- provide insights into a project’s maturity and stability.
-Capiluppi et al.~\cite{capiluppi2003characteristics} noted that older, more mature projects are often seen as more reliable, which could influence the choice of licenses that support long-term sustainability, such as copyleft licenses.
+\citet{capiluppi2003characteristics} noted that older, more mature projects are often seen as more reliable, which could influence the choice of licenses that support long-term sustainability, such as copyleft licenses.
 On the other hand, newer projects may opt for permissive licenses to facilitate rapid contributions during active development phases.
 
 Burstiness, as a proxy for fluctuating activity, was operationalized by measuring the number of months in which the project had activity over its lifetime (from earliest to latest commit).
@@ -326,7 +325,7 @@ Theoretically, projects experiencing bursts of activity may prefer permissive li
 stability and favors permissive licenses.
 \end{itemize}
 
-\subsection{Comparisons to prior work}
+\section{Comparisons to Prior Work}
 
 Despite legal importance of license choice and the potential to stunt
 innovation and poison supply chains, it appears that a significant
@@ -334,7 +333,11 @@ portion of OSS participants are ignoring the need to choose a license
 or to verify license compatibility. We construct a preliminary
 theory of license choice by reviewing relevant
 literature, operationalizing potential drivers of license selection,
-and testing that theory. Furthermore:
+and testing that theory. 
+However, our work is not the first to empirically study software licenses.
+
+
+% Furthermore:
 % The literature on open source software licenses highlights the complexity and importance of licensing decisions within the software development ecosystem.
 % Recent studies have examined the dynamics of license selection across various programming languages, shedding light on how different developer communities approach license adoption and enforcement.
 % While foundational works established the basic principles, contemporary research emphasizes the unique challenges posed by the specific requirements of different languages and development environments.
@@ -343,10 +346,10 @@ and testing that theory. Furthermore:
 % Specifically, our study contributions are as follows:
 
 \paragraph{Comprehensive Identification of Licenses.}
-Most research, such as the work by Wu et al.~\cite{wu2024large} and Xu et al.~\cite{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
-Others, like Feng et al.~\cite{feng2019open}, apply static analysis on binaries to detect embedded license texts.
+Most prior research, such as the work by \citet{wu2024large} and \citet{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
+Others, like \citet{feng2019open}, apply static analysis on binaries to detect embedded license texts.
 However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
-In contrast, this study utilizes a dataset from Jahanshahi et al.~\cite{jahanshahi2024license}, which adopts a more comprehensive approach by scanning the entire OSS ecosystem for any files containing ``license'' in their filepath.
+In contrast, we use a dataset by \citet{jahanshahi2024license}, which follows a more comprehensive approach by scanning virtually the entire OSS ecosystem for any files containing ``license'' in their filepath.
 Moreover, they employ the winnowing algorithm, a robust method for matching license texts to known licenses, enhancing the accuracy of detecting both partial and full matches, even when the text is embedded or slightly modified.
 This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
 
