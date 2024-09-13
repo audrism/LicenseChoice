@@ -1,4 +1,4 @@
-% \vspace{-0.4cm}
+
 \section{Results and Discussion}
 
 We organize our results in two parts, starting with a broad exploration of license types before continuing with the regression analysis.
@@ -19,7 +19,6 @@ This discrepancy arises because some projects have multiple licenses and are the
 \begin{figure}[t]
 \centering
     \includegraphics[width=0.85\textwidth]{figures/dis1.png}
-    \vspace{-0.5cm}
     \caption{The distribution and retention rates of the most used licenses.}
     \label{fig:dis1}
 \end{figure}
@@ -43,7 +42,6 @@ This retention rate indicates the proportion of projects that continue to use th
 %     \caption{The Distribution of License Types}
 %     \label{fig:dis3}
 % \end{minipage}
-% \vspace{-0.2cm}
 % \end{figure}
 
 As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
@@ -54,7 +52,6 @@ In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retenti
 \begin{figure}[t]
 \centering
     \includegraphics[width=0.75\textwidth]{figures/dis3.png}
-    \vspace{-0.5cm}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
 \end{figure}
@@ -70,9 +67,9 @@ by their latest version. For comparison, only approximately 8\% of
 of ``copyleft'' licences were changed, which is consistent with our
 theory (H1c) that ideology-related licence choice should be most ``sticky.''   
 %These results reveals the overall trends and stability of various licenses in the open source software ecosystem, providing insights into how different licenses are maintained and preferred over time.
-\textcolor{red}{The strong retention rates of licenses such as the
-  EPL, MIT, and GPL further suggest their effectiveness in ensuring
-  long-term project sustainability. Based on what evidence?}
+% \textcolor{red}{The strong retention rates of licenses such as the
+%   EPL, MIT, and GPL further suggest their effectiveness in ensuring
+%   long-term project sustainability. Based on what evidence?}
 %Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
 
 
@@ -85,7 +82,6 @@ Table~\ref{tab:res1a} provides a comparison between the results in the literatur
 \centering
 \caption{Comparison between our results and the literature.}
 \label{tab:res1a}
-\vspace{-0.2cm}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{lrr|rrrrr}
     \toprule
@@ -119,7 +115,6 @@ Wu et al.'s study found a dominance of permissive licenses, with much lower perc
 However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
 This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
 
-% \vspace{-0.4cm}
 \begin{figure}[h!]
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
@@ -136,7 +131,6 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
 \end{tcolorbox}
 \end{figure}
 
-% \vspace{-0.6cm}
 \subsubsection{Implications}
 
 The analysis of OSS licensing reveals that 83\% of projects lack a
@@ -175,7 +169,6 @@ open nature of derivative works.
 %While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
 %By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
 
-% \vspace{-0.2cm}
 % \subsection{RQ2: How do the characteristics of a project influence the choice of its license?}
 
 \subsection{The Impact of Project Characteristics on License Choice}
@@ -209,11 +202,9 @@ Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the remo
 \end{comment}
 
 
-% \vspace{-0.4cm}
 \begin{table}[t]
 \centering
 \caption{License choice model - descriptive statistics.}
-\vspace{-0.2cm}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{llcccc}
   \toprule
@@ -301,12 +292,13 @@ It is important to note that the selection of the base level is arbitrary and do
 \end{table}
 \end{comment}
 
-The ANOVA results for the fitted model shows that the p-values for all the predictors are close to zero, indicating that each predictor significantly improves our model's fit.
+The ANOVA results (see Table~\ref{tbl:anova-l}) for the fitted model shows that the p-values for all the predictors are close to zero, indicating that each predictor significantly improves our model's fit.
 
-\begin{comment}
+%\begin{comment}
 \begin{table}[h!]
 \centering
-\caption{License Choice Model - ANOVA Table}
+\caption{License choice model - ANOVA table}
+\resizebox{0.65\textwidth}{!}{
 \begin{tabular}{lccccc}
     \toprule
     \textbf{Variable} & \textbf{DF} & \textbf{Deviance} & \textbf{Resid. DF} & \textbf{Resid. Deviance} & \textbf{p.value} \\ 
@@ -324,38 +316,25 @@ The ANOVA results for the fitted model shows that the p-values for all the predi
     Burstiness & 5 & 1,284.30 & 572,118 & 1,262,236.24 & \cellcolor{lightgreen}<0.01 \\ 
     Language & 55 & 57,669.49 & 572,063 & 1,204,566.75 & \cellcolor{lightgreen}<0.01 \\ 
     \bottomrule
-\end{tabular}
+\end{tabular}}
 \label{tbl:anova-l}
 \end{table}
-\end{comment}
+%\end{comment}
 
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.99\linewidth]{figures/probs.png}
-    \caption{License choice model - estimated marginal probabilities \textcolor{red}{Move the legend under the plot and make all the fonts bigger}}
+    \caption{License choice model - estimated marginal probabilities}
     \label{fig:probs}
-    \vspace{-0.5cm}
 \end{figure}
 
-
-
-The analysis was conducted in two ways: comparing outcome probabilities within predictor levels (e.g., programming language) and comparing predictor levels within each outcome category.
-This bidirectional approach allows for a thorough exploration of the interaction between predictors and outcomes.
-
-\textcolor{red}{no need to report insignificant contrasts, generally
-speaking, .005 is the new .05 especially for large samples}
-Given the large number of comparisons, we report only contrasts with
-p-values ****above*** 0.05 for illustration. 
-Table~\ref{tbl:contrast} summarizes these results.
 
 %%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
 
 Our findings offer mixed support for the hypothesis.
 As the number of core authors increases, the probability of adopting
-a copyleft license decreases slightly (25.17\% to 24.90\%) and permissive licenses increase (56.91\% to 57.91\%).
-\textcolor{red}{I see contrast of core1 to core2 for copyleft to
-  have p-val=.19 in \ref{tbl:contrast}, why then it `` decreases ``?}
+a permissive licenses increase (56.91\% to 57.91\%).
 
 This contradicts H1a that projects with restrictive licenses tend to
 have more contributors. 
@@ -363,28 +342,23 @@ have more contributors.
 
 In terms of diversity (approximated by the number of female
 authors), the likelihood of adopting conditional open and public
-domain licenses increases slightly, while both copyleft and
-permissive licenses show modest declines, suggesting a preference
+domain licenses increases slightly, while copyleft licenses show 
+modest declines, suggesting a preference
 for flexible but protective licenses in more diverse teams,
 supporting the diversity-related aspect of our hypothesis H1b. 
 
-\textcolor{red}{I see contrast of female for permissive and w
-  copyleft to be
-  insignificant in \ref{tbl:contrast}}
 %%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
 
 Our analysis shows significant variation in licensing preferences
 across programming languages, reflecting the community culture and
-technical norms associated with each language (as predicteb by H2a).
+technical norms associated with each language (as predicted by H2a).
 JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for
 permissive licenses (e.g., MIT, Apache), likely due to their
 dominant role in web development and collaborative environments or
 because these communities started from using such licenses. 
 Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL),
 aligning with their historical ties to the early days of open-source movement when
-copy-left liceses were more common (H2a).% and academic usage, where openness is prioritized. 
-\textcolor{red}{might be good to have a table or a chart for proportion of copyleft
-  overtime} 
+copy-left licenses were more common (H2a) (see Figure~\ref{fig:proportion}).
 
 As the number of forks increases, projects show a clear shift toward
 permissive licenses, with the likelihood rising from 55.26\% to
@@ -392,16 +366,19 @@ permissive licenses, with the likelihood rising from 55.26\% to
 declines slightly. 
 This supports the H2b that projects with more forks, perceived as valuable by the community, tend to prioritize collaboration and reuse by favoring permissive licenses.
 
-For downstream projects, the likelihood of selecting conditional
-open, public domain, and weak copyleft licenses increases modestly,
-supporting H2b, \textcolor{red}{reflecting a desire for more control as code usage expands.??}
-Meanwhile, both permissive and copyleft licenses see a slight
-decline, suggesting that developers with more downstream
-interactions lean toward licenses offering specific conditions
-rather than fully permissive or restrictive
-terms. \textcolor{red}{why ``conditional
-open, public domain, and weak copyleft'' ``offering specific conditions''?} 
+For downstream projects, the likelihood of selecting conditional open,
+public domain, and weak copyleft licenses increases modestly. 
+Meanwhile, both permissive and strong copyleft licenses see a 
+slight decline. This suggests that developers with more downstream 
+interactions are leaning toward less restrictive licenses, supporting H2b.
+This is 
+reflected by the decrease in strong copyleft and increase in weak 
+copyleft, possibly driven by motivations similar to Hypothesis H1c. 
+Additionally, the increase in public domain licensing and decline 
+in permissive licenses may also reflect a shift toward even 
+fewer restrictions.
 
+\begin{comment}
 \begin{table}[t]
 \centering
 \caption{License choice model - non-significant contrasts}
@@ -518,7 +495,7 @@ open, public domain, and weak copyleft'' ``offering specific conditions''?}
 \end{tabular}}
 \label{tbl:contrast}
 \end{table}
-
+\end{comment}
 
 
 
@@ -529,12 +506,10 @@ open, public domain, and weak copyleft'' ``offering specific conditions''?}
 As the delay in adopting a license increases (from 1 to 12 months),
 projects show a slight increase in the likelihood of selecting
 conditional open, public domain, and weak copyleft licenses. 
-This suggests that longer delays allow more time for legal and
-community considerations, favoring more protective licenses
-\textcolor{red}{why public domain is more protective?}
 Meanwhile, the probability of choosing a permissive license
-decreases, indicating that flexibility becomes less attractive over
-time. \textcolor{red}{why public domain is not ``permissive''?}
+decreases.
+This suggests that longer delays allow more time for legal and
+community considerations, leaning towards less known licenses.
 The probability of selecting a copyleft license remains stable,
 suggesting it is less influenced by the timing of the decision. 
 Overall, our hypothesis H3a that more delay translates in less common
@@ -546,24 +521,33 @@ the most used (known) licenses in OSS.
 As project activity increases, reflected by the number of commits, there is a rise in the adoption of copyleft and permissive licenses, with the probability of conditional open and public domain licenses decreasing.
 This suggests that projects with more frequent development cycles
 may lean toward either protection via copyleft or flexibility via
-permissive licenses \textcolor{red}{in contrast to H4a}
+permissive licenses. While this partially supports H4a, that too permissive 
+licenses (e.g. public domain) will not be favored, the increase in strong copyleft
+contradicts our hypothesis.
 
-For larger projects, as measured by the number of files, there is a
-notable increase in conditional open, public domain, and weak
-copyleft licenses, while permissive licenses see a decrease. 
-This indicates that as complexity grows, developers may prefer
-licenses that offer more control and protection, supporting the
-hypothesis that larger, modular projects balance reuse with
-intellectual property concerns. \textcolor{red}{how public domain
-  offers more protection?}
+For larger projects, as measured by the number of files, there is a 
+notable increase in weak copyleft licenses, while permissive licenses 
+see a sharp decrease. This suggests that as complexity grows, 
+developers may prefer licenses that offer more control and protection, 
+aligning with the hypothesis that larger, modular projects balance 
+reuse with intellectual property concerns, supporting H4b. 
+In contrast, conditional open, public domain, and strong copyleft 
+licenses show only modest increases.
 
 Older projects, as indicated by the time since the earliest commit,
 show a preference for copyleft licenses, while newer projects are
-more likely to adopt permissive or conditional open licenses. (H4c) 
+more likely to adopt permissive or conditional open licenses (H4c). 
 This reflects the hypothesis that mature projects may seek
 sustainability and protection, while newer projects prioritize rapid
-contributions or, that older projects, at theirs start, were more
-exposed to copyleft licenses (H2a).
+contributions or, that older projects, at theirs start, were relatively more
+exposed to copyleft licenses (H2a, see Figure~\ref{fig:proportion}).
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.99\linewidth]{figures/proportion.png}
+    \caption{Proportion of license type over time }
+    \label{fig:proportion}
+\end{figure}
 
 Inactive projects, marked by longer time since the latest commit,
 show slight increases in conditional open, copyleft, and weak
@@ -571,17 +555,14 @@ copyleft licenses, while permissive and public domain licenses
 decrease. 
 This suggests that flexible licenses may correlate with continued
 activity, while more restrictive licenses become prevalent as
-projects age. \textcolor{red}{or because GPL was more common when
-  they started} 
+projects age. This could also be the result of older projects
+leaning toward more restrictive licenses.
 
 In bursty projects (those with fluctuating activity), both
 permissive and copyleft licenses increase slightly, reflecting the
-dual need for flexibility and protection in \textcolor{red}{fast-paced} development
-environments. \textcolor{red}{fast-paced is not bursty}
+dual need for flexibility and protection.
 This aligns with the hypothesis that bursty projects may prefer
-these licenses to facilitate rapid contributions while ensuring that
-contributions are safeguarded during periods of high activity
-\textcolor{red}{I cant figure out why? It does not align with H4d}. 
+licenses that are more popular and used in many other projects (H4d).
 
 \begin{comment}
 As theorised, software project licensing preferences are influenced by
@@ -605,7 +586,6 @@ Permissive licenses dominate many programming languages due to their flexibility
 Language-specific use cases and historical context also play a key role in shaping these preferences.
 \end{comment}
 
-% \vspace{-0.2cm}
 \subsubsection{Comparison with Literature}
 
 Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
@@ -656,14 +636,13 @@ The difference in findings may stem from methodology: Wu et al.'s reliance on pa
 In contrast, our stratified sampling and multinomial regression provide a broader view, revealing a more varied distribution of licenses across languages like Java, Python, and Ruby, where copyleft licenses are more common.
 
 This comparison underscores the importance of controlling for various factors to avoid misleading conclusions, offering a more accurate understanding of license adoption in open source projects.
-\textcolor{red}{are statements below aligned with in previous subsubsection?}
 
 \begin{figure}[h!]
 \small
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \begin{enumerate}[leftmargin=4mm]
-    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses (H1a, H3b).
-    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses (H1b).
+    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, and public domain licenses (H1a, H3b).
+    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft licenses (H1b).
     
     \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++ (H2a).
     \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses (H2b).
@@ -672,11 +651,10 @@ This comparison underscores the importance of controlling for various factors to
     \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses (H3a).  
     
     \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses (H4a).
-    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses (H4b).
-
+    \item As file count increases, projects are more likely to adopt weak copyleft licenses, with a decrease in permissive licenses (H4b).
 
     \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses (H4c).
-    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses (H4d).
+    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses (H4c).
     \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses (H4d).
     
     \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
@@ -688,28 +666,20 @@ This comparison underscores the importance of controlling for various factors to
 
 Programming language is a choice of technology that has its own
 libraries and tools. User of that entire ecosystem, is nudged toward
-the most common licencse used within it.
+the most common licences used within it.
 For example, C-based projects often prefer copyleft licenses, while Go and TypeScript projects lean toward permissive or conditional open licenses.
 Developers should be aware of how their language community influences licensing norms, and the community could offer language-specific guidelines to align new projects with best licensing practices.
 
-The shift toward permissive licenses as forks increase \textcolor{red}{(or, more
-likely, increase in forks because of permisive licensing)}, suggests
-that developers \textcolor{red}{are more likely to fork permisively
-  licensed code, but project maintainers have no control over bundling of
-  such code with proprietary software}.
-As more forks typically lead to greater
-participation \textcolor{red}{in contrast to H1a?}, project
-maintainers may need to reassess their licensing strategies to
-ensure they align with their goals \textcolor{red}{not sure what it means?}.
-While permissive licenses enable arbitrary use of copied code,
-establishing  \textcolor{red}{clear contribution guidelines: this is
-out of nowhere} and  \textcolor{red}{monitoring derivative
-works: who and why does that?}
- \textcolor{red}{can help maintain some oversight, ensuring that the project’s
-original intent remains intact as it grows: do you mean prevent hard
-forks? or prevent commercial use without sharing back?}
-
-%alancing openness and control becomes crucial as the project expands through forks.
+The positive correlation between permissive licenses and forks suggests that 
+developers are more likely to fork permissively licensed code.
+However, project maintainers have no control over the bundling of such 
+code with proprietary software. Since more forks typically lead to 
+greater community engagement, maintainers may need to reassess their 
+licensing strategies to ensure they align with their long-term goals.
+If maintainers value open collaboration but wish to prevent proprietary 
+use, they might consider adopting licenses that offer more control, 
+such as weak copyleft, to strike a balance between encouraging forks 
+and protecting the project's openness.
 
 As the number of downstream projects increases, developers tend to
 favor licenses that offer more control, such as conditional open and
@@ -720,7 +690,7 @@ The decline in permissive and copyleft licenses suggests that developers are mov
 %This shift indicates that developers seek a balance between openness and control as their projects gain wider adoption.
 To address these trends, the OSS community should provide guidance and educational resources to help developers navigate these licensing decisions, particularly as downstream usage grows.
 
-For larger, more complex projects, developers increasingly choose licenses that offer greater control, such as conditional open, \textcolor{red}{public domain??}, and weak copyleft licenses. 
+For larger, more complex projects, developers increasingly choose licenses that offer greater control, gravitating toward weak copyleft licenses while moving away from permissive ones.
 This shift likely reflects a need to protect the project as complexity and the risk of misuse rise.
 The decline in permissive licenses suggests they may be seen as inadequate for managing large, complex codebases.
 However, the stability of copyleft licenses shows that developers with strong ideological commitments to software freedom continue to favor these licenses regardless of project size.

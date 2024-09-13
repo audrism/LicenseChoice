@@ -27,7 +27,6 @@ Creative Commons licenses, like CC-BY and CC-BY-SA, provide a framework for shar
 The authors of such software waive all rights, allowing anyone to use, modify, and distribute the work without any conditions.
 This category provides the maximum freedom for software use and is often utilized for simple, non-critical software components.
 
-% \vspace{-0.3cm}
 
 \subsection{World of Code Infrastructure}
 
@@ -110,3 +109,6 @@ For adoption delay, we used 1, 3, and 12 months.
 This method helps interpret complex models, such as multinomial logistic regression, by focusing on marginal probabilities instead of coefficients, making results clearer and more actionable~\cite{agresti2012categorical} (see Figure~\ref{fig:probs}).
 After estimating marginal probabilities, we used the \textit{pairs} function from the \textit{emmeans} package for pairwise comparisons to identify significant differences between predictor levels and outcome categories.
 We applied the Tukey method to control for family-wise error rates~\cite{hsu1996multiple,hothorn2008simultaneous}.
+
+The pairwise comparison analysis was conducted in two ways: comparing outcome probabilities within predictor levels (e.g., programming language) and comparing predictor levels within each outcome category.
+This bidirectional approach allows for a thorough exploration of the interaction between predictors and outcomes.
