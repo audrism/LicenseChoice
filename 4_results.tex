@@ -250,17 +250,17 @@ The basic statistics of the variables, including the 5th percentile, median, mea
 Given that the response variable has multiple outcome levels, the model provides a distinct set of coefficients for each outcome level relative to a chosen base level.
 This approach is typical in models such as multinomial logistic regression, where the base level acts as a reference category for comparing all other outcome levels.
 Each set of coefficients indicates the influence of the predictor variables on the probability of the response variable assuming a specific outcome level relative to the base level.
-In our model, the base level is defined as projects with ``no license'', so the coefficients reflect the impact of the predictors on each license type compared to having no license.
+In our model, the base level is defined as projects with ``no license,'' so the coefficients reflect the impact of the predictors on each license type compared to having no license.
 It is important to note that the selection of the base level is arbitrary and does not affect the estimated probabilities of each outcome level, as the relative probabilities between outcome levels remain constant regardless of the chosen base level~\cite{agresti2012categorical}.
 
-WoC's MongoDB project database tracks file counts by language extension, allowing identification of a project's main language based on the most frequent extension, consistent with standard practices~\cite{vasilescu2015data}.
-For this predictor, we employed sum contrasts, also known as effect coding, where each level of the predictor variable is compared to the overall mean of all levels.
-% This approach is particularly advantageous in models where the goal is to compare each category to the overall mean rather than to a specific reference category, as it offers a more symmetric interpretation of the effects.
-In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
-As a result, the coefficient for one level (typically the last level, which is TypeScript in our model) is not estimated independently but is implicitly determined by the other coefficients to ensure that the overall model remains balanced and interpretable.
+% WoC's MongoDB project database tracks file counts by language extension, allowing identification of a project's main language based on the most frequent extension, consistent with standard practices~\cite{vasilescu2015data}.
+% For this predictor, we employed sum contrasts, also known as effect coding, where each level of the predictor variable is compared to the overall mean of all levels.
+% % This approach is particularly advantageous in models where the goal is to compare each category to the overall mean rather than to a specific reference category, as it offers a more symmetric interpretation of the effects.
+% In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
+% As a result, the coefficient for one level (typically the last level, which is TypeScript in our model) is not estimated independently but is implicitly determined by the other coefficients to ensure that the overall model remains balanced and interpretable.
 
-Furthermore, in interpreting the earliest and latest commit times, it is important to emphasize that the predictors used in the model represent the time elapsed since those commits.
-This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
+% Furthermore, in interpreting the earliest and latest commit times, it is important to emphasize that the predictors used in the model represent the time elapsed since those commits.
+% This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
 
 \begin{comment}
 \begin{table}[h!]
@@ -402,9 +402,9 @@ rather than fully permissive or restrictive
 terms. \textcolor{red}{why ``conditional
 open, public domain, and weak copyleft'' ``offering specific conditions''?} 
 
-\begin{table}[h!]
+\begin{table}[t]
 \centering
-\caption{License Choice Model - Non-Significant Contrasts}
+\caption{License choice model - non-significant contrasts}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{lllr|lllr|lllr}
     \toprule
@@ -605,14 +605,14 @@ Permissive licenses dominate many programming languages due to their flexibility
 Language-specific use cases and historical context also play a key role in shaping these preferences.
 \end{comment}
 
-\vspace{-0.2cm}
-\subsubsection{Comparison with literature}
+% \vspace{-0.2cm}
+\subsubsection{Comparison with Literature}
 
 Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
 
 \begin{table}[h!]
 \centering
-\caption{RQ1-b Results Comparison With Literature}
+\caption{Comparison with literature}
 \label{tab:res1b}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{lllr|rrrrr}
