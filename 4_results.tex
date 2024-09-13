@@ -338,6 +338,8 @@ We applied the Tukey method to control for family-wise error rates~\cite{hsu1996
 The analysis was conducted in two ways: comparing outcome probabilities within predictor levels (e.g., programming language) and comparing predictor levels within each outcome category.
 This bidirectional approach allows for a thorough exploration of the interaction between predictors and outcomes.
 
+\textcolor{red}{no need to report insignificant contrasts, generally
+speaking, .005 is the new .05 especially for large samples}
 Given the large number of comparisons, we report only contrasts with
 p-values ****above*** 0.05 for illustration. 
 Table~\ref{tbl:contrast} summarizes these results.
@@ -347,19 +349,37 @@ Table~\ref{tbl:contrast} summarizes these results.
 Our findings offer mixed support for the hypothesis.
 As the number of core authors increases, the probability of adopting
 a copyleft license decreases slightly (25.17\% to 24.90\%) and permissive licenses increase (56.91\% to 57.91\%).
+\textcolor{red}{I see contrast of core1 to core2 for copyleft to
+  have p-val=.19 in \ref{tbl:contrast}, why then it `` decreases ``?}
+
 This contradicts H1a that projects with restrictive licenses tend to
-have more contributors.
+have more contributors. 
 %the expectation from Fershtman and Gandal~\cite{fershtman2007open} that projects with restrictive licenses tend to have more contributors.
 
-In terms of diversity (approximated by the number of female authors), the likelihood of adopting conditional open and public domain licenses increases slightly, while both copyleft and permissive licenses show modest declines, suggesting a preference for flexible but protective licenses in more diverse teams, supporting the diversity-related aspect of our hypothesis.
+In terms of diversity (approximated by the number of female
+authors), the likelihood of adopting conditional open and public
+domain licenses increases slightly, while both copyleft and
+permissive licenses show modest declines, suggesting a preference
+for flexible but protective licenses in more diverse teams,
+supporting the diversity-related aspect of our hypothesis H1b. 
 
 %%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
 
-Our analysis shows significant variation in licensing preferences across programming languages, reflecting the community culture and technical norms associated with each language.
-JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for permissive licenses (e.g., MIT, Apache), likely due to their dominant role in web development and collaborative environments.
-Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL), aligning with their historical ties to the open-source movement and academic usage, where openness is prioritized.
+Our analysis shows significant variation in licensing preferences
+across programming languages, reflecting the community culture and
+technical norms associated with each language (as predicteb by H2a).
+JavaScript, Ruby, TypeScript, and Go exhibit a strong preference for
+permissive licenses (e.g., MIT, Apache), likely due to their
+dominant role in web development and collaborative environments or
+because these communities started from using such licenses. 
+Conversely, Perl, R, and C/C++ favor copyleft licenses (e.g., GPL),
+aligning with their historical ties to the early days of open-source movement when
+copy-left liceses were more common (H2a).% and academic usage, where openness is prioritized. 
 
-As the number of forks increases, projects show a clear shift toward permissive licenses, with the likelihood rising from 55.26\% to 60.10\%, while the adoption of copyleft and conditional licenses declines slightly.
+As the number of forks increases, projects show a clear shift toward
+permissive licenses, with the likelihood rising from 55.26\% to
+60.10\%, while the adoption of copyleft and conditional licenses
+declines slightly. 
 This supports the hypothesis that projects with more forks, perceived as valuable by the community, tend to prioritize collaboration and reuse by favoring permissive licenses.
 
 For downstream projects, the likelihood of selecting conditional open, public domain, and weak copyleft licenses increases modestly, reflecting a desire for more control as code usage expands.
