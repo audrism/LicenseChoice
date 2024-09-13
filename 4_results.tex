@@ -32,9 +32,9 @@ This retention rate indicates the proportion of projects that continue to use th
     \caption{The Distribution of License Types}
     \label{fig:dis3}
 \end{minipage}
+\vspace{-0.2cm}
 \end{figure}
 
-\vspace{-0.03cm}
 As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
 Notably, the deprecated GPL 3 license exhibits the highest retention rate, likely due to its strong copyleft nature.
 In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retention rate among the top 20 most used licenses.
@@ -48,7 +48,7 @@ The results are shown in Figure~\ref{fig:dis3}.
 
 Table~\ref{tab:res1a} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope, methodology, and dataset size (see Table~\ref{tbl:litRev}).
 
-\vspace{-0.2cm}
+
 \begin{table}[h!]
 \centering
 \caption{RQ1 Results Comparison With Literature}
@@ -66,7 +66,7 @@ Table~\ref{tab:res1a} provides a comparison between the results in the literatur
     \bottomrule
 \end{tabular}}
 \end{table}
-\vspace{-0.2cm}
+
 
 A key methodological difference between our study and Wu et al. lies in the treatment of data points.
 Wu et al. considered each version of a package as a separate data point, resulting in 46.59 million data points from 3.47 million projects.
@@ -470,6 +470,7 @@ As the delay in adopting a license increases (from 1 to 12 months), projects sho
 This suggests that longer delays allow more time for legal and community considerations, favoring more protective licenses.
 Meanwhile, the probability of choosing a permissive license decreases, indicating that flexibility becomes less attractive over time.
 The probability of selecting a copyleft license remains stable, suggesting it is less influenced by the timing of the decision.
+Overall, our hypothesis that more delay translates in less known license is confirmed, as the permissive and copyleft licenses are the most used (known) licenses in OSS.
 
 %%%%%%%%%%%%%%%%%%%%% H4 %%%%%%%%%%%%%%%%%%%%%
 
@@ -561,22 +562,22 @@ This comparison underscores the importance of controlling for various factors to
 \begin{figure}[h!]
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ2 Key Findings]
 \begin{enumerate}
-    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses (H1, H3).
-    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses (H1).
+    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses (H1a, H3b).
+    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses (H1b).
     
-    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++ (H2).
-    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses (H2).
-    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses (H2, H3).
+    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++ (H2a).
+    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses (H2b).
+    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses (H2b).
     
-    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses (H3).  
+    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses (H3a).  
     
-    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses (H4).
-    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses (H4).
+    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses (H4a).
+    \item As file count increases, projects are more likely to adopt conditional open, public domain, and weak copyleft licenses, with a decrease in permissive licenses (H4b).
 
 
-    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses (H4).
-    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses (H4).
-    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses (H4).
+    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses (H4c).
+    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses (H4d).
+    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses (H4d).
     
     \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
 \end{enumerate}
