@@ -19,14 +19,15 @@ any license~\cite{yu2023codeipprompt,xu2024first}.
 Our aim is to better understand the actual practice of license
 selection, including the choice of no license, specifically because
 copying no-license code is likely to result in license violation, and
-because other studies have found that much of copied code even in
-large and popular projects is copied from small and inactive
+because other studies have found that much of the copied code, even in
+large and popular projects, is copied from small and inactive
 projects~\cite{jahanshahi2024beyond} that tend to have no license. 
 The problem may be propagated further, as the active and popular
 projects are often upstream dependencies for numerous projects
 downstream. Hence if such inappropriate use is detected, it can affect
-a very large part of OSS ecosystem, not unlike what happened with
-LEFTPAD \cite{chowdhury2021untriviality}.  Prior work found relatively low frequency of repositories with no
+a very large part of the OSS ecosystem, not unlike what happened with
+\textit{leftpad}~\cite{chowdhury2021untriviality}.  Prior work found 
+relatively low frequency of repositories with no
 license (e.g. 21.12\% in~\cite{wu2024large} and 10.51\% 
 in~\cite{cui2023empirical}), that, as we demonstrate,
 greatly underestimates the proportion of projects with no license
@@ -38,7 +39,7 @@ concerns, such as choosing to participate in a project that will
 become popular, hoping to have a large number of direct or
 downstream users (and followers), selecting upstream dependencies
 that appear healthy, responsive, and
-active~\cite{socialCoding,choice23,ma2020methodology} and so on.
+active~\cite{socialCoding,choice23,ma2020methodology}, and so on.
 License choice has clear and far reaching effects on the supply
 chains in terms of attracting and retaining participants, having
 downstream dependents or users, and, of course on ways the code may
@@ -49,16 +50,16 @@ explain it.
 Our aim is, therefore, to establish and test a preliminary theory
 that helps explain license choice in OSS software. The theory could
 help explain some of the reasons why a large fraction of projects
-have no license, why some license violations appear to be tolerated,
-such as use of unlicensed code and what are factors that may come into
-play when a developer (or an organization) chose a license.  Such
+have no license, why some license violations (such as use of unlicensed 
+code) appear to be tolerated, and what are factors that may come into
+play when a developer (or an organization) chooses a license.  Such
 theory can potentially lead to better tools that help developers
 choose the most suitable license according to their objectives,
 increase the proportion of projects with a license (hence spurring
 innovation that is presently inhibiting actors who do pay attention
 to licensing terms from using unlicensed code), and, more generally,
 reduce risks arising from license incompatibilities in OSS supply
-chain.
+chains.
 
 To accomplish our goals we start from reviewing literature in areas
 that may help us formulate a preliminary theory, such as OSS developer
@@ -68,7 +69,7 @@ literature on OSS licensing.
 We pay particular attention to phenomena that could be measured at
 scale in order to make our theory easily testable. We then utilize a
 curated list of OSS projects with identified licenses and license
-types for nearly entire OSS in order to capture not only the most
+types for nearly the entire OSS ecosystem in order to capture not only the most
 popular projects but to include small and inactive projects that are
 less likely to have a license. Based on this large curated list of
 licences and projects, we use our preliminary theory to
@@ -105,8 +106,8 @@ such as JavaScript and Go leaning toward permissive licenses, while
 C/C++ and Perl showed higher adoption of copyleft licenses.
 
 Our contributions include (a) a preliminary theory of license
-choice, (b) a comprehensively account for almost all license types,
-including minor and non-semantic variations for nearly full scale of
+choice, (b) a comprehensive account of almost all license types,
+including minor and non-semantic variations, at nearly the full scale of
 the OSS ecosystem, (c) theory-derived predictors of license choice,
 and (d) an evaluation of the preliminary theory using a multinomial
 model of license choice.
