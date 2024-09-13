@@ -239,39 +239,40 @@ Similarly, \citet{borges2018s} suggest that the number of stars signals communit
 Furthermore, the number of downstream projects a project interacts with can play a crucial role in license selection. If a project interacts with many downstream projects, it may opt for licenses that balance flexibility and control, favoring weaker or conditional licenses over highly permissive or restrictive ones.
 
 The decision to count downstream projects is motivated by the need to quantify a project's external interactions.
-While analyzing the specific licenses of these projects would provide more detailed insights, counting them offers a practical approach to estimate the complexity and potential challenges related to license alignment.
+While analyzing the specific licenses of these projects would provide more detailed insights, counting them offers a practical approach to estimate the complexity and potential challenges related to license alignment. 
+Based on this discussion, we hypothesize that:
 
 \begin{itemize}
     \item \textbf{Hypothesis (H2a)}: The overall popularity of the
       license and programming language-specific popularity will
       favor its choice.
-    \item \textbf{Hypothesis (H2b)}: The number of forks, stars and
-      downstream projects will favor permissive licenses.
+    \item \textbf{Hypothesis (H2b)}: Higher numbers of forks, stars and
+      downstream projects correlate with permissive licenses.
 \end{itemize}
 
-\subsubsection{Legal and Regulatory Context}
+\subsection{Legal and Regulatory Context}
 
 Open source software licenses serve not only as technical choices but also as legal instruments defining the rights and obligations of developers and users.
 The selection of a license carries significant implications for intellectual property, liability, and compliance with copyright laws.
 
-Wu et al.~\cite{wu2024large} conducted a large-scale empirical study revealing the complexities of license compliance and the frequent misunderstandings developers face, especially in large projects.
-Similarly, Cui et al.~\cite{cui2023empirical} found that over 25\% of the 16,000 open source projects they analyzed contained license conflicts, often due to misunderstandings of license terms.
+\citet{wu2024large} conducted a large-scale empirical study revealing the complexities of license compliance and the frequent misunderstandings developers face, especially in large projects.
+Similarly, \citet{cui2023empirical} found that over 25\% of the 16,000 open source projects they analyzed contained license conflicts, often due to misunderstandings of license terms.
 Their tool, DIKE, helps detect such conflicts, underscoring the challenges of managing multiple licenses within a project.
 
-Almeida et al.~\cite{almeida2017software} further emphasized the widespread difficulty developers have in correctly interpreting licenses, which can lead to non-compliance and legal risks.
+\citet{almeida2017software} further emphasized the widespread difficulty developers have in correctly interpreting licenses, which can lead to non-compliance and legal risks.
 These findings highlight the need for better education and tools to support effective license management.
 
 Multiple studies have shown that declared project licenses are often inaccurate or incomplete~\cite{german2010understanding, reid2023applying, wolter2023open}.
-Wolter et al.~\cite{wolter2023open} found that nearly 50\% of open source projects on GitHub exhibited inconsistencies between the declared top-level license and the actual licenses used within the codebase.
+\citet{wolter2023open} found that nearly 50\% of open source projects on GitHub exhibited inconsistencies between the declared top-level license and the actual licenses used within the codebase.
 
-Xu et al.~\cite{xu2023lidetector, xu2023liresolver} contributed to addressing these challenges with tools like Lidetector, which detects license incompatibilities, revealing that over 70\% of projects studied had such issues.
+\citet{xu2023lidetector, xu2023liresolver} contributed to addressing these challenges with tools like LiDetector, which detects license incompatibilities, revealing that over 70\% of projects studied had such issues.
 Their follow-up tool, LiResolver, provides solutions for resolving these incompatibilities, demonstrating the critical role of automated tools in managing license compliance.
 
-Regulatory frameworks, such as the European Union’s General Data Protection Regulation (GDPR) and U.S. export control laws, add further complexity to licensing decisions, particularly in international and data-sensitive projects.
+Regulatory frameworks, such as the European Union’s General Data Protection Regulation (GDPR) and U.S.\ export control laws, add further complexity to licensing decisions, particularly in international and data-sensitive projects.
 These regulations can influence license choices by introducing additional compliance challenges.
 
 Delays in adopting a license often reflect the need for careful legal deliberation to ensure compliance with intellectual property laws and other legal frameworks.
-Therefore, we anticipate that less prevalent licenses be chosen after longer delays.
+Therefore, we anticipate that less prevalent licenses will be chosen after longer delays.
 
 Additionally, projects that interact with upstream components may
 prioritize selecting legally aligned licenses to facilitate
@@ -280,8 +281,9 @@ integration~\cite{cui2023empirical, xu2023lidetector}.
 Furthermore, larger projects, especially those with many contributors, are more likely to face legal challenges regarding intellectual property, contributor agreements, and international regulations.
 In such cases, delayed license adoption may reflect careful legal evaluation aimed at mitigating risks~\cite{fershtman2007open}.
 
+In summary, we hypothesize that:
 \begin{itemize}
-\item \textbf{Hypothesis (H3a)}: The delay in adoption will favor less popular licenses.
+\item \textbf{Hypothesis (H3a)}: Longer delays in adoption will favor less popular licenses.
 \item \textbf{Hypothesis (H3b)}: The larger projects in terms of
   contributors will favor restrictive licenses.
 \end{itemize}
