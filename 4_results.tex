@@ -81,7 +81,7 @@ theory (H1c) that ideology-related licence choice should be most ``sticky.''
 Table~\ref{tab:res1a} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope, methodology, and dataset size (see Table~\ref{tbl:litRev}).
 
 
-\begin{table}[h!]
+\begin{table}[t]
 \centering
 \caption{Comparison between our results and the literature.}
 \label{tab:res1a}
@@ -119,7 +119,7 @@ Wu et al.'s study found a dominance of permissive licenses, with much lower perc
 However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
 This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
 
-\vspace{-0.4cm}
+% \vspace{-0.4cm}
 \begin{figure}[h!]
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
@@ -136,7 +136,7 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
 \end{tcolorbox}
 \end{figure}
 
-\vspace{-0.6cm}
+% \vspace{-0.6cm}
 \subsubsection{Implications}
 
 The analysis of OSS licensing reveals that 83\% of projects lack a
@@ -180,9 +180,6 @@ open nature of derivative works.
 
 \subsection{The Impact of Project Characteristics on License Choice}
 
-\subsubsection{Our Findings}
-
-Now we turn to the results of our multinomial regression model discussed in Section~\ref{sec:reg}.
 
 \begin{comment}
 Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the removal of highly correlated predictors.
@@ -211,12 +208,11 @@ Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the remo
 \end{table}
 \end{comment}
 
-The basic statistics of the variables, including the 5th percentile, median, mean, and 95th percentile for the numeric variables, as well as the counts of different levels for the factor variables, are presented in Table~\ref{tbl:stat-l}.
 
-\vspace{-0.4cm}
-\begin{table}[h!]
+% \vspace{-0.4cm}
+\begin{table}[t]
 \centering
-\caption{License Choice Model - Descriptive Statistics}
+\caption{License choice model - descriptive statistics.}
 \vspace{-0.2cm}
 \resizebox{0.99\textwidth}{!}{
 \begin{tabular}{llcccc}
@@ -246,6 +242,10 @@ The basic statistics of the variables, including the 5th percentile, median, mea
 \label{tbl:stat-l}
 \end{table}
 
+\subsubsection{Our Findings}
+
+Now we turn to the results of our multinomial regression model discussed in Section~\ref{sec:reg}.
+The basic statistics of the variables, including the 5th percentile, median, mean, and 95th percentile for the numeric variables, as well as the counts of different levels for the factor variables, are presented in Table~\ref{tbl:stat-l}.
 % The estimated coefficients for the regression model are shown in Table~\ref{tbl:model-l}.
 Given that the response variable has multiple outcome levels, the model provides a distinct set of coefficients for each outcome level relative to a chosen base level.
 This approach is typical in models such as multinomial logistic regression, where the base level acts as a reference category for comparing all other outcome levels.
@@ -329,27 +329,16 @@ The ANOVA results for the fitted model shows that the p-values for all the predi
 \end{table}
 \end{comment}
 
-To improve model interpretability, we used the \textit{emmeans} package in R to compute marginal probabilities across outcome variable levels~\cite{lenth2024emmeans}.
-This allows us to assess predicted probabilities for each license type based on programming language, while controlling for other predictors.
 
-For numerical predictors, we estimated marginal probabilities at key quantiles (25th, 50th, and 75th), capturing variability in predicted outcomes\footnote{
-Exceptions were made for variables with skewed distributions, such as female authors and forks, where the 25th and 50th quantiles were both 0; here, we used 0, 1, 3 and 0, 2, 5, respectively.
-For adoption delay, we used 1, 3, and 12 months.
-}.
-
-This method helps interpret complex models, such as multinomial logistic regression, by focusing on marginal probabilities instead of coefficients, making results clearer and more actionable~\cite{agresti2012categorical} (see Figure~\ref{fig:probs}).
-
-\begin{figure}[h!]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.99\linewidth]{figures/probs.png}
-    \caption{License Choice Model - Estimated Marginal Probabilities}
+    \caption{License choice model - estimated marginal probabilities \textcolor{red}{Move the legend under the plot and make all the fonts bigger}}
     \label{fig:probs}
     \vspace{-0.5cm}
 \end{figure}
 
 
-After estimating marginal probabilities, we used the \textit{pairs} function from the \textit{emmeans} package for pairwise comparisons to identify significant differences between predictor levels and outcome categories.
-We applied the Tukey method to control for family-wise error rates~\cite{hsu1996multiple,hothorn2008simultaneous}.
 
 The analysis was conducted in two ways: comparing outcome probabilities within predictor levels (e.g., programming language) and comparing predictor levels within each outcome category.
 This bidirectional approach allows for a thorough exploration of the interaction between predictors and outcomes.
