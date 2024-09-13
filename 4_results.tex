@@ -1,6 +1,8 @@
 % \vspace{-0.4cm}
 \section{Results and Discussion}
 
+We organize our results in two parts, starting with a broad exploration of license types before continuing with the regression analysis.
+
 \subsection{The Types and Prevalence of Licenses Across the OSS Landscape}
 
 \subsubsection{Our Findings}
@@ -60,8 +62,19 @@ In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retenti
 We also analyze the distribution of projects according to their license types.
 Initially, we consider the distribution across the entire project history, meaning that if a project adopted a license at any point and later removed it, it is still counted as having that license.
 Next, we determine the distribution based on the most recent status of each project.
-The results are shown in Figure~\ref{fig:dis3}.
-\textcolor{red}{What do they show?}
+% The results are shown in Figure~\ref{fig:dis3}.
+% \textcolor{red}{What do they show?}
+Figure~\ref{fig:dis3} shows that ``conditional-open'', ``weak-copyleft'', and ``public-domain'' license types have the lowest
+retention, with approximately a quarter of the projects that ever had such licence changing it
+by their latest version. For comparison, only approximately 8\% of
+of ``copyleft'' licences were changed, which is consistent with our
+theory (H1c) that ideology-related licence choice should be most ``sticky.''   
+%These results reveals the overall trends and stability of various licenses in the open source software ecosystem, providing insights into how different licenses are maintained and preferred over time.
+\textcolor{red}{The strong retention rates of licenses such as the
+  EPL, MIT, and GPL further suggest their effectiveness in ensuring
+  long-term project sustainability. Based on what evidence?}
+%Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
+
 
 \subsubsection{Comparison with Literature}
 
@@ -87,18 +100,18 @@ Table~\ref{tab:res1a} provides a comparison between the results in the literatur
 \end{table}
 
 
-A key methodological difference between our study and Wu et al. lies in the treatment of data points.
-Wu et al. considered each version of a package as a separate data point, resulting in 46.59 million data points from 3.47 million projects.
+A key methodological difference between our study and Wu et al.\ lies in the treatment of data points.
+Wu et al.\ considered each version of a package as a separate data point, resulting in 46.59 million data points from 3.47 million projects.
 This approach could introduce bias by overrepresenting projects with many versions, potentially skewing observed trends in licensing.
 Conversely, our study treated each project as a single data point, providing a more balanced view of the open source ecosystem without overemphasizing projects with frequent updates.
 
-The focus of Wu et al. on only five package managers might explain the significant discrepancy in the percentage of projects without a license.
-Their study reported that 21.12\% of projects lacked a license\footnote{
+The focus of the Wu et al.\ study on only five package managers might explain the significant discrepancy in the percentage of projects without a license.
+Their study reported that 21.12\% of projects lacked a license,\footnote{
 Since the paper provides these percentages by package manager, we calculated the overall percentage by taking a weighted average based on the number of projects per package manager.
-}, whereas our study found a much higher percentage of 83.01\%.
-On the other hand, Cui et al. reported that only 10.51\% of projects were unlicensed.
-The difference with Wu et al. likely stems from the fact that the package managers they examined are associated with more mature and well-maintained projects, which are more likely to have defined licenses.
-Additionally, Cui et al. filtered their data to include only projects with over 1,000 stars, which might explain why the percentage of unlicensed projects is so low.
+} whereas our study found a much higher percentage of 83.01\%.
+On the other hand, Cui et al.\ reported that only 10.51\% of projects were unlicensed.
+The difference with Wu et al.\ likely stems from the fact that the package managers they examined are associated with more mature and well-maintained projects, which are more likely to have defined licenses.
+Additionally, Cui et al.\ filtered their data to include only projects with over 1,000 stars, which might explain why the percentage of unlicensed projects is so low.
 In contrast, our broader dataset includes a wide variety of projects, many of which may be less mature or less formally governed, leading to a higher incidence of unlicensed projects.
 
 The analysis of copyleft versus permissive licenses further reflects the differences in scope.
@@ -108,8 +121,9 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
 
 \vspace{-0.4cm}
 \begin{figure}[h!]
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ1 Key Findings]
-\begin{enumerate}
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
+\small
+\begin{enumerate}[leftmargin=4mm]
     \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than the figures reported in previous studies.
     \item The MIT license is the most widely used license,
       accounting for 65\% of all licensed projects and 10\% of all
@@ -126,16 +140,16 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
 \subsubsection{Implications}
 
 The analysis of OSS licensing reveals that 83\% of projects lack a
-formal license, posing significant legal risks and discouraing
-innovation by preventing responsible actors from reusing unlicenced
+formal license, posing significant legal risks and discouraging
+innovation by preventing responsible actors from reusing unlicensed
 code. 
 This highlights the need for developers to prioritize licensing to set clear terms of use.
 Our findings challenge previous studies, which often underestimate the prevalence of unlicensed projects by focusing on mature ones, missing the broader risks of software reuse.
 
 Even though many of these unlicensed projects may seem trivial, their public availability still creates legal ambiguity and poses a risk of license noncompliance, especially when combined with the lack of thorough legal review in many downstream projects.
-Jahanshahi et al.~\cite{jahanshahi2024beyond} demonstrated that in the context of copy-based reuse, nearly 18\% of reused artifacts originated from very small projects\footnote{
+\citet{jahanshahi2024beyond} demonstrated that in the context of copy-based reuse, nearly 18\% of reused artifacts originated from very small projects,\footnote{
 Projects with no stars and fewer than 10 commits.
-}, while large projects\footnote{
+} while large projects\footnote{
 Projects with more than 10 stars and 100 commits.
 } accounted for only 32\% of reused artifacts.
 This highlights the importance of addressing the issue of unlicensed code within the OSS ecosystem.
@@ -151,17 +165,6 @@ open nature of derivative works.
 %adoption associated with permissive licenses with the ideological
 %values upheld by copyleft licenses. 
 
-Figure~\ref{fig:dis3} shows that ``conditional-open'', ``weak-copyleft'', and ``Public-domain'' license types have the lowest
-retention with approximately quarter of the projects that ever had such licence changing it
-in their latest version. For comparison, only approximately 8\% of
-of ``copyleft'' licences were changed, which is consistent with our
-theory (H1c)
-that ideology-related licence choice should be most ``sticky.''   
-%These results reveals the overall trends and stability of various licenses in the open source software ecosystem, providing insights into how different licenses are maintained and preferred over time.
-\textcolor{red}{The strong retention rates of licenses such as the
-  EPL, MIT, and GPL further suggest their effectiveness in ensuring
-  long-term project sustainability. Based on what evidence?}
-%Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
 
 % Below sounds exremely generic and belongs to discussion, not results
 %The OSS community should prioritize enhancing education and
@@ -670,9 +673,11 @@ In contrast, our stratified sampling and multinomial regression provide a broade
 
 This comparison underscores the importance of controlling for various factors to avoid misleading conclusions, offering a more accurate understanding of license adoption in open source projects.
 \textcolor{red}{are statements below aligned with in previous subsubsection?}
+
 \begin{figure}[h!]
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=RQ2 Key Findings]
-\begin{enumerate}
+\small
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
+\begin{enumerate}[leftmargin=4mm]
     \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, copyleft, and public domain licenses (H1a, H3b).
     \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft and permissive licenses (H1b).
     
