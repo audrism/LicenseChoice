@@ -1,44 +1,60 @@
-\vspace{-0.4cm}
-\section{Results and Discussions}
+% \vspace{-0.4cm}
+\section{Results and Discussion}
 
-\subsection{RQ1: What are the types and prevalence of licenses across the entire open source software landscape?}
+\subsection{The Types and Prevalence of Licenses Across the OSS Landscape}
 
-\subsubsection{Results and Discussion}
+\subsubsection{Our Findings}
 
 We first counted the total number of projects that had at least one occurrence of any license during their lifetime.
 We then identified the top 20 most used licenses, as shown in Figure~\ref{fig:dis1}.
-
+%
 Out of the 131,171,379 projects indexed by WoC, 22,281,342 projects had at least one license committed to their project at some point in their lifetime.
-However, when examining the latest status of these projects, this number drops to 20,110,256 projects.
+However, when examining the latest version of these projects, this number drops to 20,110,256 projects.
 
 When interpreting the numbers shown in these figures, it is important to note that the sum of these numbers exceeds the total number of projects with a license.
 This discrepancy arises because some projects have multiple licenses and are therefore counted in several categories.
 
+\begin{figure}[t]
+\centering
+    \includegraphics[width=0.85\textwidth]{figures/dis1.png}
+    \vspace{-0.5cm}
+    \caption{The distribution and retention rates of the most used licenses}
+    \label{fig:dis1}
+\end{figure}
+
+
 To calculate the retention rate for each license, we determined the number of projects that still had the license in their latest state and divided this number by the total number of projects that had ever used the license.
 This retention rate indicates the proportion of projects that continue to use the license over time, and it is also displayed in Figure~\ref{fig:dis1}.
 
-\begin{figure}[h!]
-\centering
-\begin{minipage}{0.55\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{figures/dis1.png}
-    \caption{The Distribution and Retention Rates of the Most Used Licenses}
-    \label{fig:dis1}
-\end{minipage}
-\hfill
-\begin{minipage}{0.44\textwidth}
-    \centering
-    \raisebox{0.116\height}{\includegraphics[width=\textwidth]{figures/dis3.png}}
-    \caption{The Distribution of License Types}
-    \label{fig:dis3}
-\end{minipage}
-\vspace{-0.2cm}
-\end{figure}
+% \begin{figure}[h!]
+% \centering
+% \begin{minipage}{0.55\textwidth}
+%     \centering
+%     \includegraphics[width=\textwidth]{figures/dis1.png}
+%     \caption{The Distribution and Retention Rates of the Most Used Licenses}
+%     \label{fig:dis1}
+% \end{minipage}
+% \hfill
+% \begin{minipage}{0.44\textwidth}
+%     \centering
+%     \raisebox{0.116\height}{\includegraphics[width=\textwidth]{figures/dis3.png}}
+%     \caption{The Distribution of License Types}
+%     \label{fig:dis3}
+% \end{minipage}
+% \vspace{-0.2cm}
+% \end{figure}
 
 As shown in the figure, the MIT license is the most prominent, followed by the Apache 2.0 and ISC licenses.
 Notably, per H1c, the deprecated GPL 3 license (with strong
 copyleft provisions) exhibits the highest retention rate.
 In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retention rate among the top 20 most used licenses.
+
+\begin{figure}[t]
+\centering
+    \includegraphics[width=\textwidth]{figures/dis3.png}
+    \caption{The Distribution of License Types}
+    \label{fig:dis3}
+\end{figure}
 
 We also analyze the distribution of projects according to their license types.
 Initially, we consider the distribution across the entire project history, meaning that if a project adopted a license at any point and later removed it, it is still counted as having that license.
