@@ -270,8 +270,13 @@ Regulatory frameworks, such as the European Union’s General Data Protection Re
 These regulations can influence license choices by introducing additional compliance challenges.
 
 Delays in adopting a license often reflect the need for careful legal deliberation to ensure compliance with intellectual property laws and other legal frameworks.
+** which licenses are selected after ``careful legal deliberation''? ***
 
-Additionally, projects that interact with upstream components may prioritize selecting legally aligned licenses to facilitate integration~\cite{cui2023empirical, xu2023lidetector}.
+Additionally, projects that interact with upstream components may
+prioritize selecting legally aligned licenses to facilitate
+integration~\cite{cui2023empirical, xu2023lidetector}.
+*** permissive or not? ***
+
 Conversely, developers may prefer more restrictive licenses, such as GPL, to safeguard their contributions from misuse and to protect developers' rights~\cite{german2009license}.
 This means if a project has many downstream projects, developers may prefer to use more restrictive licenses.
 
@@ -279,7 +284,14 @@ Furthermore, larger projects, especially those with many contributors, are more 
 In such cases, delayed license adoption may reflect careful legal evaluation aimed at mitigating risks~\cite{fershtman2007open}.
 
 \begin{itemize}
-    \item \textbf{Hypothesis (H3)}: The license adoption delay, the number of upstream/downstream projects, particularly in terms of ensuring license compatibility and legal compliance, and the number of contributors will affect the license choice due to legal considerations.
+\item \textbf{Hypothesis (H3a)}: The delay in adoption will favor ...
+\item \textbf{Hypothesis (H3b)}: The number of upstream projects **
+  No pedictor ***
+\item \textbf{Hypothesis (H3c)}: The larger numbers of downstream projects
+  wil favor a more restrictive license
+\item \textbf{Hypothesis (H3d)}:  The larger projects in terms of
+  contributors will favor restrictive licenses ** how is it
+  different from H1b? ***  
 \end{itemize}
 
 \subsubsection{Project Needs}
@@ -287,13 +299,16 @@ In such cases, delayed license adoption may reflect careful legal evaluation aim
 While legal compliance sets essential boundaries, the specific needs and objectives of a project further influence the selection of an appropriate license.
 
 Developers often choose licenses based on their preferences for the future use of the software. 
-Research by Sen, Subramaniam, and Nelson~\cite{sen2008determinants} highlights that developers' motivations—such as a desire for widespread adoption or strong copyleft enforcement—play a significant role in license selection.
+Research by Sen, Subramaniam, and Nelson~\cite{sen2008determinants}
+highlights that developers' motivations --- such as a desire for
+widespread adoption or strong copyleft enforcement --- play a significant role in license selection.
 
 The choice of license can significantly influence a project’s development trajectory.
 Colazo and Fang~\cite{colazo2009impact} found that copyleft licenses promote greater permanence and long-term involvement in projects, affecting both developer contributions and engagement.
 
 Additionally, open source licensing is crucial for business models that depend on open source software.
 Onetti and Verma~\cite{onetti2009open} argue that some companies initially adopt open source licenses to build a community around their software but may later adjust their licensing strategies to align with evolving commercial interests.
+** How is it different from the business models above ***
 
 The number of commits is a key indicator of project activity and maintenance. 
 Koch~\cite{koch2002effort} suggests that projects with frequent commits tend to have more active development cycles, making them more reliable and attractive for reuse.
@@ -303,7 +318,8 @@ The number of files in a project reflects its complexity and modularity.
 Mockus~\cite{mockus2007large} observed that larger projects with more files are more likely to offer reusable components, making license choice critical for balancing reuse and intellectual property protection.
 Bird et al.~\cite{bird2009putting} further suggested that projects with more files tend to have modular structures, which encourage community engagement and adoption, potentially favoring more permissive licenses.
 
-Time-based metrics-such as the earliest and latest commits, active months—provide insights into a project’s maturity and stability.
+Time-based metrics-such as the earliest and latest commits, active
+months -- provide insights into a project’s maturity and stability.
 Capiluppi et al.~\cite{capiluppi2003characteristics} noted that older, more mature projects are often seen as more reliable, which could influence the choice of licenses that support long-term sustainability, such as copyleft licenses.
 On the other hand, newer projects may opt for permissive licenses to facilitate rapid contributions during active development phases.
 
@@ -312,7 +328,18 @@ Theoretically, projects experiencing bursts of activity may prefer restrictive l
 This aligns with Fershtman and Gandal's~\cite{fershtman2007open} findings that restrictive licenses can help protect developers' interests.
 
 \begin{itemize}
-    \item \textbf{Hypothesis (H4)}: The number of commits, files, earliest/latest commit times, active months and burstiness affect the license choice, reflecting the project's development trajectory.
+\item \textbf{Hypothesis (H4a)}: Size in the number of commits and files
+  will favor restrictive licenses.
+\item \textbf{Hypothesis (H4b)}:  earliest commit times be a proxy
+  for license popularity at the time, with older projects being
+  surrounded by a higher proporion of restrictive licenses.
+\item \textbf{Hypothesis (H4c)}: latest commit may be a proxy for
+  license popularity at the time, with projects switching to more
+  popular licenses.
+\item \textbf{Hypothesis (H4c)}: active months indicate mature
+  projects favoring restrictive licenses.
+\item \textbf{Hypothesis (H4d)}: Burstiness reflects the lack of
+  stability and favors permissive licences.
 \end{itemize}
 
 \subsection{Comparisons to prior work}
