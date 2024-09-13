@@ -158,12 +158,14 @@ that ideology-related licence choice should be most ``sticky.''
 \subsubsection{Results and Discussion}
 
 To answer this question, we employ a multinomial regression model as discussed in Section~\ref{sec:reg}.
-It is essential to check for correlations among predictors in a regression model, as multicollinearity—high correlation between predictors—can distort results.
-Multicollinearity makes it difficult to assess each predictor's impact, leading to unstable coefficients and inflated standard errors, ultimately compromising the model's reliability and interpretability.
+First we check for correlations among predictors in a regression
+model, as high correlations between predictors
+make results unstable, inflated standard errors, and make
+coefficients hard to interpret.
 Addressing this issue improves the model's validity~\cite{dormann2013collinearity}.
-
-We used a 0.6 correlation threshold, as is commonly used to manage multicollinearity while retaining key predictors.
-Correlations above 0.6 indicate overlapping information, and removing such variables reduces multicollinearity without sacrificing significant variance.
+We used a $0.6$ correlation threshold, as is commonly used to reduce
+the chances of multicollinearity while retaining key predictors.
+%Correlations above 0.6 indicate overlapping information, and removing such variables reduces multicollinearity without sacrificing significant variance.
 This cutoff strikes a balance, preserving some natural correlations while ensuring predictor independence~\cite{vatcheva2016multicollinearity}.
 
 \begin{comment}
