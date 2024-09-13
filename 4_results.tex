@@ -111,7 +111,7 @@ The analysis of OSS licensing reveals that 83\% of projects lack a
 formal license, posing significant legal risks and discouraing
 innovation by preventing responsible actors from reusing unlicenced
 code. 
-This highlights the need for developers to prioritize licensing to protect their work and set clear terms of use.
+This highlights the need for developers to prioritize licensing to set clear terms of use.
 Our findings challenge previous studies, which often underestimate the prevalence of unlicensed projects by focusing on mature ones, missing the broader risks of software reuse.
 
 Even though many of these unlicensed projects may seem trivial, their public availability still creates legal ambiguity and poses a risk of license noncompliance, especially when combined with the lack of thorough legal review in many downstream projects.
@@ -122,23 +122,35 @@ Projects with more than 10 stars and 100 commits.
 } accounted for only 32\% of reused artifacts.
 This highlights the importance of addressing the issue of unlicensed code within the OSS ecosystem.
 
-Among projects that are licensed, the MIT license is the most prevalent, reflecting a community preference for permissive licenses that facilitate broad adoption and collaboration.
-However, the continued use of copyleft licenses like the GPL demonstrates that many developers are committed to preserving the open nature of derivative works.
-This indicates a need for the OSS community to balance the ease of adoption associated with permissive licenses with the ideological values upheld by copyleft licenses.
+Among projects that are licensed, the MIT license is the most prevalent, reflecting historic community preference for permissive licenses that facilitate broad adoption and collaboration.
+However, the continued use of copyleft licenses like the GPL
+(which had much larger prevalence decades ago)
+demonstrates that many developers are committed to preserving the
+open nature of derivative works.
+%\textcolor{red}{Mahmoud, this may be a good place to show how the
+%  relativa abundance of copy-left dropped from early days of OSS}
+%This indicates a need for the OSS community to balance the ease of
+%adoption associated with permissive licenses with the ideological
+%values upheld by copyleft licenses. 
 
 Figure~\ref{fig:dis3} shows that ``conditional-open'', ``weak-copyleft'', and ``Public-domain'' license types have the lowest
 retention with approximately quarter of the projects that ever had such licence changing it
 in their latest version. For comparison, only approximately 8\% of
-of ``copyleft'' licences were changed, which is consistent with our theory
+of ``copyleft'' licences were changed, which is consistent with our
+theory (H1c)
 that ideology-related licence choice should be most ``sticky.''   
 %These results reveals the overall trends and stability of various licenses in the open source software ecosystem, providing insights into how different licenses are maintained and preferred over time.
-The strong retention rates of licenses such as the EPL, MIT, and GPL further suggest their effectiveness in ensuring long-term project sustainability.
-Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
+\textcolor{red}{The strong retention rates of licenses such as the
+  EPL, MIT, and GPL further suggest their effectiveness in ensuring
+  long-term project sustainability. Based on what evidence?}
+%Developers should take these factors into account when selecting licenses to ensure their projects are well-supported and maintain community engagement over time.
 
-To address these implications, the OSS community should prioritize enhancing education and awareness among developers about the legal significance of licensing and how to select the appropriate license for their projects.
-Furthermore, efforts should be made to develop and promote tools that streamline the licensing process, making it more accessible for developers, especially those new to the field, to apply licenses correctly.
-While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
-By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
+% Below sounds exremely generic and belongs to discussion, not results
+%The OSS community should prioritize enhancing education and
+%awareness among developers about the legal significance of licensing and how to select the appropriate license for their projects.
+%Furthermore, efforts should be made to develop and promote tools that streamline the licensing process, making it more accessible for developers, especially those new to the field, to apply licenses correctly.
+%While standardization offers advantages, it is equally important to preserve a variety of licensing options to accommodate the diverse needs and philosophies of different projects.
+%By focusing on these areas, the OSS community can strengthen the legal security, sustainability, and collaborative potential of open source projects.
 
 \vspace{-0.2cm}
 \subsection{RQ2: How do the characteristics of a project influence the choice of its license?}
