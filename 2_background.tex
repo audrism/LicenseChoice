@@ -149,11 +149,11 @@ revenues and thus favors weaker copyleft provisions to allow some
 forms of bundling with proprietary code. 
 
 Emergence of cloud services
-endangered business model of OSS companies that rely on service
+endangered the business model of OSS companies that rely on service
 contracts. Because cloud companies provide computing services, they
 can also run (and sell) the same OSS software as a service, thus
 cutting out companies that developed the software. For example,
-in 2021, Elasticsearch changed Apache license to 
+in 2021, Elasticsearch changed its Apache license to a
 commercial one where the products built
 from that code can not be provided to others as a managed
 service. They made another change in 2024, moving to Affero GPL,
@@ -161,15 +161,15 @@ which is a copyleft license that requires anyone running a modified
 program on a server and letting other users communicate with it
 to also provide access to the source code of the modified 
 version running on the server. As we can see,
-the more permissive license (Apache) was changed to more restrictive
-(commercial, then AGPL) as is typical for the service model.
+the more permissive license (Apache) was changed to a more restrictive
+one (commercial, then AGPL), as is typical for the service model.
 
-Despite significant amount of research in the motivation and commercial
-involvement domain, few of the key predictors can be reliably
-operationalized at scale. Based on Fershtman and
-Gandal~\cite{fershtman2007open} conjecture that 
-that restrictive licenses attract more contributors per project,
-we can conclude that larger projects (in terms of
+Despite significant amount of research on the motivations to 
+participate in OSS and commercial
+involvement, few of the key predictors can be reliably
+operationalized at scale. Based on the \citet{fershtman2007open} 
+conjecture that restrictive licenses attract more contributors per project,
+we can expect that larger projects (in terms of
 contributor count) will adopt restrictive
 licenses.
 
@@ -180,37 +180,36 @@ Projects with more diverse teams may favor licenses that balance
 openness and protection, choosing options that ensure inclusivity 
 and equitable contributions while also allowing some flexibility 
 in how the code is used and shared.
-
 While diversity encompasses several dimensions (e.g., ethnicity,
 experience), uniformly operationalizing these across multiple
-dimensions is not feasible due to the lack of consistent data
-availability. Therefore, we use the number of female authors as a
-proxy for diversity in this study.
+dimensions is not feasible due to the lack of consistent data. 
+Therefore, we use the number of female authors as a
+rough proxy for team diversity in this study.
 
 In summary, we hypothesize that:
 
 \begin{itemize}
-    \item \textbf{Hypothesis (H1a)}: The total number of authors and
+    \item \textbf{Hypothesis (H1a)}: Higher total numbers of authors and
       core authors\footnote{Those responsible for 80\%+ of the
-        commits} will favor more restrictive licenses.  
-    \item \textbf{Hypothesis (H1b)}: Diversity (approximated by female author
-      involvement) will favor neither too restrictive nor too
+        commits} correlate with more restrictive licenses.  
+    \item \textbf{Hypothesis (H1b)}: Higher team diversity (approximated by female author
+      involvement) correlates with neither too restrictive nor too
       permissive licenses.
     \item \textbf{Hypothesis (H1c)}: Ideologically motivated
-      copyleft licenses will be more likely to be retained that
+      copyleft licenses will be more likely to be retained than
       other types of licenses.
 \end{itemize}
 
-\subsubsection{Social and Technical Choice}
+\subsection{Social and Technical Choice}
 
 Licenses, like other technologies and practices, spread through
-communities.  Prior studies, such as those by Ma et
-al.~\cite{ma2020methodology} and others~\cite{choice23}, used the
+communities.  Prior studies, such as those by \citet{ma2020methodology} and 
+others~\cite{lamba2020heard, choice23}, used the
 theory of social contagion~\cite{shoroye2015exploring} to estimate
 the impact of exposure, susceptibility, and infectiousness on
-developer choices regarding package selection.  These studies found
+developer choices regarding package (and tool) selection.  These studies found
 that exposure measured by the number of overall deployments at the
-time of choice, had a significant positive effect on package
+time of choice, had a significant positive effect on package (tool)
 selection.
 
 We expect a similar pattern for license selection. One dimension of
@@ -228,14 +227,14 @@ one already used by their collaborators (also, see ``Kinship''
 motivation above).
 
 The choice of programming language also influences license selection due to the culture and practices embedded within specific developer communities.
-For example, languages such as Python and JavaScript which are commonly used in web development, often favor permissive licenses like MIT or Apache, which emphasize reuse and flexibility~\cite{lerner2005economics}.
+For example, languages like Python and JavaScript, commonly used in web development, often favor permissive licenses like MIT or Apache, which emphasize reuse and flexibility~\cite{lerner2005economics}.
 In contrast, languages such as C or C++, which are dominant in systems programming, tend to be linked with copyleft licenses like GPL, prioritizing keeping derivative works open~\cite{fitzgerald2006transformation}.
 The language captures the influence of community norms and technical compatibility on license selection.
 
 The number of forks, stars, and community size associated with a project can also impact license decisions.
-Tsay et al.~\cite{tsay2014influence} found that projects with a large number of forks are perceived as more valuable and trustworthy by the community.
+\citet{tsay2014influence} found that projects with a large number of forks are perceived as more valuable and trustworthy by the community.
 Projects aiming to encourage collaboration and reuse to maintain this momentum may favor permissive licenses.
-Similarly, Borges et al.~\cite{borges2018s} suggest that the number of stars signals community approval, which, like forks, may influence the choice of more permissive licenses.
+Similarly, \citet{borges2018s} suggest that the number of stars signals community approval, which, like forks, may influence the choice of more permissive licenses.
 
 Furthermore, the number of downstream projects a project interacts with can play a crucial role in license selection. If a project interacts with many downstream projects, it may opt for licenses that balance flexibility and control, favoring weaker or conditional licenses over highly permissive or restrictive ones.
 
