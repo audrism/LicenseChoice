@@ -16,18 +16,19 @@ However, when examining the latest version of these projects, this number drops 
 When interpreting the numbers shown in these figures, it is important to note that the sum of these numbers exceeds the total number of projects with a license.
 This discrepancy arises because some projects have multiple licenses and are therefore counted in several categories.
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
     \includegraphics[width=0.85\textwidth]{figures/dis1.png}
     \caption{The distribution and retention rates of the most used licenses.}
     \label{fig:dis1}
-\end{figure}
+    \Description{The distribution and retention rates of the most used licenses.}
+\end{figure*}
 
 
 To calculate the retention rate for each license, we determined the number of projects that still had the license in their latest state and divided this number by the total number of projects that had ever used the license.
 This retention rate indicates the proportion of projects that continue to use the license over time, and it is also displayed in Figure~\ref{fig:dis1}.
 
-% \begin{figure}[h!]
+% \begin{figure}[t]
 % \centering
 % \begin{minipage}{0.55\textwidth}
 %     \centering
@@ -51,9 +52,10 @@ In contrast, the Creative Commons 3 license (CC-BY-3.0) shows the lowest retenti
 
 \begin{figure}[t]
 \centering
-    \includegraphics[width=0.75\textwidth]{figures/dis3.png}
+    \includegraphics[width=\linewidth]{figures/dis3.png}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
+    \Description{The distribution of license types across projects.}
 \end{figure}
 
 We also analyze the distribution of projects according to their license types.
@@ -82,7 +84,7 @@ Table~\ref{tab:res1a} provides a comparison between the results in the literatur
 \centering
 \caption{Comparison between our results and the literature.}
 \label{tab:res1a}
-\resizebox{0.99\textwidth}{!}{
+\resizebox{0.99\linewidth}{!}{
 \begin{tabular}{lrr|rrrrr}
     \toprule
     & \textbf{Projects} & \textbf{No License} & \textbf{Copyleft} & \textbf{Weak} & \textbf{Conditional} & \textbf{Permissive} & \textbf{Public} \\
@@ -115,7 +117,7 @@ Wu et al.'s study found a dominance of permissive licenses, with much lower perc
 However, our study, covering all programming languages, reveals a more diverse licensing landscape, with a lower percentage of permissive licenses and higher percentages of copyleft licenses.
 This suggests that by focusing on just five package managers, Wu et al.'s study might underrepresent broader licensing trends, particularly the prevalence of copyleft licenses across the global open source ecosystem.
 
-\begin{figure}[h!]
+\begin{figure}[t]
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
 \begin{enumerate}[leftmargin=4mm]
@@ -129,6 +131,7 @@ This suggests that by focusing on just five package managers, Wu et al.'s study 
     \item The differences in license usage reported in our study compared to previous literature highlight the importance of dataset scope and methodology when assessing the prevalence of licenses in OSS projects.
 \end{enumerate}
 \end{tcolorbox}
+\Description{Key Findings}
 \end{figure}
 
 \subsubsection{Implications}
@@ -177,7 +180,7 @@ open nature of derivative works.
 \begin{comment}
 Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the removal of highly correlated predictors.
 
-\begin{table}[h!]
+\begin{table}
 \centering
 \caption{License Choice Model - Correlation Matrix}
 \resizebox{0.99\textwidth}{!}{
@@ -202,7 +205,7 @@ Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the remo
 \end{comment}
 
 
-\begin{table}[t]
+\begin{table*}[t]
 \centering
 \caption{License choice model - descriptive statistics.}
 \resizebox{0.99\textwidth}{!}{
@@ -231,7 +234,7 @@ Table~\ref{tbl:corr-l} presents the Spearman's correlation matrix after the remo
   \bottomrule
 \end{tabular}}
 \label{tbl:stat-l}
-\end{table}
+\end{table*}
 
 \subsubsection{Our Findings}
 
@@ -254,7 +257,7 @@ It is important to note that the selection of the base level is arbitrary and do
 % This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
 
 \begin{comment}
-\begin{table}[h!]
+\begin{table}
 \centering
 \caption{License Choice Model - Coefficients}
 \resizebox{0.99\textwidth}{!}{
@@ -295,10 +298,10 @@ It is important to note that the selection of the base level is arbitrary and do
 The ANOVA results (see Table~\ref{tbl:anova-l}) for the fitted model shows that the p-values for all the predictors are close to zero, indicating that each predictor significantly improves our model's fit.
 
 %\begin{comment}
-\begin{table}[h!]
+\begin{table}[t]
 \centering
 \caption{License choice model - ANOVA table}
-\resizebox{0.65\textwidth}{!}{
+\resizebox{\linewidth}{!}{
 \begin{tabular}{lccccc}
     \toprule
     \textbf{Variable} & \textbf{DF} & \textbf{Deviance} & \textbf{Resid. DF} & \textbf{Resid. Deviance} & \textbf{p.value} \\ 
@@ -327,6 +330,7 @@ The ANOVA results (see Table~\ref{tbl:anova-l}) for the fitted model shows that 
     \includegraphics[width=0.99\linewidth]{figures/probs.png}
     \caption{License choice model - estimated marginal probabilities}
     \label{fig:probs}
+    \Description{License choice model - estimated marginal probabilities}
 \end{figure}
 
 
@@ -544,9 +548,10 @@ exposed to copyleft licenses (H2a, see Figure~\ref{fig:proportion}).
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=0.99\linewidth]{figures/proportion.png}
-    \caption{Proportion of license type over time }
+    \includegraphics[width=\linewidth]{figures/proportion.png}
+    \caption{Proportion of license type over time}
     \label{fig:proportion}
+    \Description{Proportion of license type over time}
 \end{figure}
 
 Inactive projects, marked by longer time since the latest commit,
@@ -590,7 +595,7 @@ Language-specific use cases and historical context also play a key role in shapi
 
 Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
 
-\begin{table}[h!]
+\begin{table*}[t]
 \centering
 \caption{Comparison with literature}
 \label{tab:res1b}
@@ -625,7 +630,7 @@ Table~\ref{tab:res1b} provides a comparison between the results in the literatur
     & & Model & & 19.53\% & 8.34\% & 5.8\% & 61.43\% & 4.88\% \\
     \bottomrule
 \end{tabular}}
-\end{table}
+\end{table*}
 
 The comparison between our study and Wu et al.'s findings highlights significant differences in licensing patterns across programming languages, emphasizing the need to control for influencing factors.
 Wu et al.'s analysis, based on raw data, suggests a strong preference for permissive licenses in languages like Java (73.75\%), JavaScript (94.38\%), and Python (80.31\%).
@@ -637,7 +642,7 @@ In contrast, our stratified sampling and multinomial regression provide a broade
 
 This comparison underscores the importance of controlling for various factors to avoid misleading conclusions, offering a more accurate understanding of license adoption in open source projects.
 
-\begin{figure}[h!]
+\begin{figure}[t]
 \small
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \begin{enumerate}[leftmargin=4mm]
@@ -660,6 +665,7 @@ This comparison underscores the importance of controlling for various factors to
     \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
 \end{enumerate}
 \end{tcolorbox}
+\Description{Key Findings}
 \end{figure}
 
 \subsubsection{Implications}

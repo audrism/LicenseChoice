@@ -2158,23 +2158,26 @@ FUNCTION { article }
   new.block
   howpublished empty.or.unknown
     { }
-    { "\bibinfo{howpublished}{" howpublished "}" * * output }
+    { howpublished empty$ 'skip$ { "\bibinfo{howpublished}{" howpublished "}" * * output } if$ }
   if$
 
   crossref missing$
-    { format.journal.volume.number.day.month.year output}
+    {
+      journal empty$ 'skip$ { format.journal.volume.number.day.month.year output } if$
+    }
     {
       "cross reference in @Article{...} is unusual" warning$
       format.article.crossref output.nonnull
     }
   if$
 
-  format.pages.check.without.articleno output
+  pages empty$ 'skip$ { format.pages.check.without.articleno output } if$
   format.articleno.numpages output
   fin.block
   output.issue.doi.coden.isxn.lccn.url.eprint.note
   fin.entry
 }
+
 
 FUNCTION { book }
 {
@@ -2197,8 +2200,8 @@ FUNCTION { book }
       new.block
       format.number.series output
       new.sentence
-      publisher "publisher" bibinfo.output.check
-      address "address" bibinfo.output.check    % jtb: require address
+      publisher empty$ 'skip$ { publisher "publisher" bibinfo.output.check } if$  % Modified line
+      address empty$ 'skip$ { address "address" bibinfo.output.check } if$        % Modified line
       fin.sentence
       pages empty.or.unknown
         { format.bookpages }    % use bookpages when pages empty
@@ -2331,8 +2334,8 @@ FUNCTION { inproceedings }
           if$
           new.sentence
           organization output
-          publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
-          address "address" bibinfo.output.check  % jtb: require address
+          publisher empty$ 'skip$ { publisher "publisher" bibinfo.output.check } if$  % Modified line
+          address empty$ 'skip$ { address "address" bibinfo.output.check } if$        % Modified line
           format.bookpages output
         }
         {

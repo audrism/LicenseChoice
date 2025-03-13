@@ -1,5 +1,15 @@
 \section{Methodology}\label{method}
 
+To test our hypotheses, we adopt a multi-step methodology.
+First, we gather descriptive statistics to quantify the prevalence, retention, 
+and temporal trends of different license types within our dataset.
+Next, we apply a stratified sampling strategy to ensure balanced representation
+of projects of various sizes and domains.
+We then employ a multivariate multiple regression model to examine how license choice influences project metrics.
+Finally, we identify projects that switched from permissive to restrictive 
+licenses (or vice versa) and measure their performance changes before and after 
+the switch, again using a multivariate multiple regression approach.
+
 \subsection{License Types}
 
 We group licenses based on their characteristics.
@@ -30,7 +40,7 @@ This category provides the maximum freedom for software use and is often utilize
 
 \subsection{World of Code Infrastructure}
 
-World of Code (WoC)\footnote{https://worldofcode.org} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
+World of Code (WoC)\footnote{\url{https://worldofcode.org}} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
 In essence, it is a software analysis pipeline that encompasses the discovery and retrieval of data, storage and updates, and the transformations and data augmentation required for downstream analytic tasks~\cite{ma2021world}.
 
 WoC offers various maps that connect git objects and metadata (commits, blobs, authors) to each other.
@@ -40,11 +50,14 @@ Version V, latest at the time of this study.}
 We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
 Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
 
-\subsection{Regression Model and Sample}\label{sec:reg}
+\subsection{Regression Model and Stratified Sampling}\label{sec:reg}
 
-To test our hypotheses, we selected a regression model appropriate to the nature of our response variable -- specifically, multinomial logistic regression.
-% Specifically, for RQ2, which investigates whether project characteristics influence their license choice, we use a multinomial logistic regression model.
-This model is ideal because the response variable -- the license type -- is categorical with multiple possible outcomes, allowing us to model the probability of each license type based on project characteristics~\cite{hosmer2013applied}.
+To test our hypotheses, we selected a regression model appropriate to the nature of our response variable -- specifically, multivariate multiple regression.
+This model is an extension of multiple 
+regression that allows for multiple dependent variables (outcomes) to be predicted
+by multiple independent variables (predictors) simultaneously.
+This model is useful when the dependent variables are correlated and need to be 
+analyzed together to improve prediction accuracy and interpretation.
 
 Since the target population encompasses virtually the entirety of OSS projects and given its scale and heterogeneity, we employed a stratified sampling approach to enhance the representativeness of our sample~\cite{thompson2012sampling}.
 We stratified projects using six key variables: the number of commits, the number of blobs, the number of authors, the number of forks, the number of active months, and the earliest commit time of the project.
@@ -70,11 +83,13 @@ These variables were selected because they are important indicators of project s
 \end{comment}
 
 The WoC's MongoDB project database comprises 131 million OSS projects.
-%, and summary statistics for the stratification variables are presented in Table~\ref{tab:strata}.
 A notable feature of the data is its heavy right skewness, common in large datasets with many small and inactive projects.
 To address this skewness and ensure meaningful strata, we binned each variable as follows:
-commits (fewer than 500, 500–2000, and over 2000), blobs (below or above 10,000), authors (one, 2–10, and more than 10), forks (none or at least one), and active months (less than three or more than three). 
-These classifications reflect different levels of activity, collaboration, complexity, and community engagement.
+commits (fewer than 500, 500–2000, and over 2000), blobs (below or above 10,000), 
+authors (one, 2–10, and more than 10), forks (none or at least one), 
+and active months (less than three or more than three). 
+These classifications reflect different levels of activity, collaboration, 
+complexity, and community engagement based on their distribution.
 
 Projects were also divided into four historical eras based on their first commit: 
 the Foundational Era (before 1998), marking the early stages of open source; 
@@ -82,12 +97,40 @@ the Dot-com Boom and OSS Expansion (1998–2010), signifying rapid growth and ad
 the Maturation and Mainstream Adoption period (2010–2018), when open source became key to enterprise software;
 and the Modern Era (2019–present), reflecting recent trends in community engagement and cloud-native technologies.
 
-These stratifications produced 288 unique bins ($3\times 3\times 2\times 2\times 2\times 4$).
+These stratification produced 288 unique bins ($3\times 3\times 2\times 2\times 2\times 4$).
 We randomly selected 5,000 projects per bin, targeting a total of 1,440,000 projects.
 However, due to uneven distribution, some bins contained fewer projects, resulting in a final sample of around 500,000 projects.
 Despite this, the large sample size and stratified approach ensure a balanced and comprehensive representation of the OSS ecosystem, supporting robust and generalizable conclusions in our regression analyses.
 
-\subsection{Modeling Considerations}
+\subsection{License Change}
+
+To investigate the impact of license switching, we begin by identifying projects
+that have had more than one license throughout their lifetime.
+We then refine this group to those that adopted exactly one license at their 
+initial license adoption time and maintained exactly one license at their latest
+recorded status, thereby excluding any projects that held multiple licenses 
+simultaneously at either point in time.
+Next, we categorize licenses into two high-level groups: ``permissive'', which 
+includes public-domain and permissive licenses, and ``restrictive'', encompassing 
+copyleft, weak-copyleft, and conditional open licenses.
+Within these groups, we select projects that switched from a permissive to a 
+restrictive license or vice versa.
+
+To measure performance changes, we compute key project metrics during two separate 
+two-year intervals: one immediately following the first license adoption and 
+another immediately following the last license adoption.
+Projects are excluded if fewer than two years separate the adoption dates of the
+first and last licenses or if less than two years have elapsed since the last 
+license adoption at the time of our data curation. 
+We then model the change in these metrics (i.e., metric values in the post-switch 
+interval minus those in the pre-switch interval) based on the direction of the 
+license change (restrictive to permissive or permissive to restrictive).
+As control variables, we include the project’s primary language, start and end 
+times, the delay before the first license adoption, and the elapsed time between 
+the first and last license adoptions.
+
+\begin{comment}
+%\subsection{Modeling Considerations}
 
 To validate our model, we 
 checked for correlations among predictors, as high correlations
@@ -112,3 +155,4 @@ We applied the Tukey method to control for family-wise error rates~\cite{hsu1996
 
 The pairwise comparison analysis was conducted in two ways: comparing outcome probabilities within predictor levels (e.g., programming language) and comparing predictor levels within each outcome category.
 This bidirectional approach allows for a thorough exploration of the interaction between predictors and outcomes.
+\end{comment}

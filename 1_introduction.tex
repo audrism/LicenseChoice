@@ -4,7 +4,9 @@ Open Source Software (OSS) has become a cornerstone of modern
 software development, fostering innovation, knowledge exchange, and
 the widespread adoption of software tools and libraries.  The
 licensing of OSS projects dictates how software can be used,
-modified, and distributed. Not all open source software (OSS) 
+modified, and distributed. 
+
+Not all open source software (OSS) 
 participants are aware of or follow the ramifications of 
 licensing~\cite{almeida2017software}. For example, 
 their code is under exclusive copyright by default if no license is specified. 
@@ -13,21 +15,27 @@ results in reuse of unlicensed code in contexts where license
 incompatibilities are likely. For example, with the rise of 
 large language models (LLMs), a significant portion of the 
 massive source code used for training consists of code without 
-any license~\cite{yu2023codeipprompt,xu2024first}.
-%kocetkov2022stack,sc2}.
+any license~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks}.
 
-Our aim is to better understand the actual practice of license
-selection, including the choice of no license, specifically because
-copying no-license code is likely to result in license violation, and
-because other studies have found that much of the copied code, even in
-large and popular projects, is copied from small and inactive
-projects~\cite{jahanshahi2024beyond} that tend to have no license. 
+Our first aim is to better understand the actual practice of license
+selection, including the choice of no license.
+We acknowledge the distinction between open source and public repositories, 
+recognizing that the latter---repositories without explicit licenses---do not 
+technically qualify as OSS. 
+Nevertheless, public repositories play a significant role in the software
+ecosystem.
+As \citet{jahanshahi2024beyond} highlight, even small, unlicensed repositories 
+contribute substantially to larger projects, emphasizing their importance in 
+understanding reuse patterns. 
+However, the absence of licenses introduces legal uncertainties that may hinder
+downstream reuse. 
 The problem may be propagated further, as the active and popular
 projects are often upstream dependencies for numerous projects
-downstream. Hence if such inappropriate use is detected, it can affect
+downstream.
+Hence if such inappropriate use is detected, it can affect
 a very large part of the OSS ecosystem, not unlike what happened with
-\textit{leftpad}~\cite{chowdhury2021untriviality}.  Prior work found 
-relatively low frequency of repositories with no
+\textit{leftpad}~\cite{chowdhury2021untriviality}.
+Prior work found relatively low frequency of repositories with no
 license (e.g. 21.12\% in~\cite{wu2024large} and 10.51\% 
 in~\cite{cui2023empirical}), that, as we demonstrate,
 greatly underestimates the proportion of projects with no license
@@ -43,17 +51,18 @@ active~\cite{socialCoding,choice23,ma2020methodology}, and so on.
 License choice has clear and far reaching effects on the supply
 chains in terms of attracting and retaining participants, having
 downstream dependents or users, and, of course on ways the code may
-be (re-)used. Despite this, we are not aware of any prior studies
+be (re-)used.
+Despite this, we are not aware of any prior studies
 that model license choice nor any comprehensive theories that would
 explain it.
 
-Our aim is, therefore, to establish and test a preliminary theory
-that helps explain license choice in OSS software. The theory could
-help explain some of the reasons why a large fraction of projects
-have no license, why some license violations (such as use of unlicensed 
-code) appear to be tolerated, and what are factors that may come into
-play when a developer (or an organization) chooses a license.  Such
-theory can potentially lead to better tools that help developers
+Our second aim is, therefore, to establish and test a preliminary theory
+that helps explain license choice in OSS software. 
+The theory could help explain some of the reasons why a large fraction 
+of projects have no license, why some license violations (such as use of
+unlicensed code) appear to be tolerated, and what are factors that may 
+come into play when a developer (or an organization) chooses a license.
+Such theory can potentially lead to better tools that help developers
 choose the most suitable license according to their objectives,
 increase the proportion of projects with a license (hence spurring
 innovation that is presently inhibiting actors who do pay attention
@@ -67,17 +76,20 @@ motivation, company involvement in OSS, existing theories on how
 technology and libraries are selected and spread, as well as
 literature on OSS licensing. 
 We pay particular attention to phenomena that could be measured at
-scale in order to make our theory easily testable. We then utilize a
-curated list of OSS projects with identified licenses and license
-types for nearly the entire OSS ecosystem in order to capture not only the most
+scale in order to make our theory easily testable.
+We then utilize a curated list of OSS projects with identified licenses 
+and license types for nearly the entire OSS ecosystem in order 
+to capture not only the most
 popular projects but to include small and inactive projects that are
-less likely to have a license. Based on this large curated list of
-licences and projects, we use our preliminary theory to
-operationalize key factors where theory predicts a certain effect on
-the license choice. We first test if certain types of licenses have longer
+less likely to have a license. 
+Based on this large curated list of
+licenses and projects, we use our preliminary theory to
+operationalize license choice where theory predicts a certain effect on 
+key project factors.
+We first test if certain types of licenses have longer
 retention rates based on predictions of our theory.  We then employ
-a multinomial regression model and a stratified sampling approach,
-to test which of the theory-predicted contextual factors impact
+a multivariate multiple regression model and a stratified sampling approach,
+to test which of the theory-predicted contextual factors are impacted by
 license choice.
 
 Our analysis of the types and prevalence of licenses across more
@@ -91,23 +103,25 @@ software freedom within certain communities. In comparison to prior
 studies we find four-fold larger prevalence of unlicensed
 code.
 
-Our theory-derived project characteristics that should influence
-license selection in OSS projects were tested using a multinomial regression
-model. As predicted, the number of commits, project age, and
-file count were found to significantly affect license choice.
-Projects with more commits and older projects tended to adopt
-copyleft licenses, whereas permissive licenses were more commonly
-chosen by newer projects and those with more contributors.
-Additionally, projects with a larger number of files were more
-likely to adopt conditional open or weak copyleft licenses, while
-those with fewer files favored permissive licenses. The choice of
-programming language also played a critical role, with languages
-such as JavaScript and Go leaning toward permissive licenses, while
-C/C++ and Perl showed higher adoption of copyleft licenses.
+% todo: should be updated
 
-Our contributions include (a) a preliminary theory of license
-choice, (b) a comprehensive account of almost all license types,
-including minor and non-semantic variations, at nearly the full scale of
-the OSS ecosystem, (c) theory-derived predictors of license choice,
-and (d) an evaluation of the preliminary theory using a multinomial
-model of license choice.
+% Our theory-derived project characteristics that should influenced by
+% license selection in OSS projects were tested using a multivariate multiple
+% regression model. As predicted, the number of commits, project age, and
+% file count were found to significantly affect license choice.
+% Projects with more commits and older projects tended to adopt
+% copyleft licenses, whereas permissive licenses were more commonly
+% chosen by newer projects and those with more contributors.
+% Additionally, projects with a larger number of files were more
+% likely to adopt conditional open or weak copyleft licenses, while
+% those with fewer files favored permissive licenses. The choice of
+% programming language also played a critical role, with languages
+% such as JavaScript and Go leaning toward permissive licenses, while
+% C/C++ and Perl showed higher adoption of copyleft licenses.
+
+% Our contributions include (a) a preliminary theory of license
+% choice, (b) a comprehensive account of almost all license types,
+% including minor and non-semantic variations, at nearly the full scale of
+% the OSS ecosystem, (c) theory-derived predictors of license choice,
+% and (d) an evaluation of the preliminary theory using a multinomial
+% model of license choice.
