@@ -209,7 +209,7 @@ However, the continued use of copyleft licenses like the GPL
 demonstrates that many developers are committed to preserving the
 open nature of derivative works.
 
-\subsection{The Impact of Project Characteristics on License Choice}
+\subsection{The Impact of License Choice on Project Characteristics}
 
 \subsubsection{Our Findings}
 
@@ -266,104 +266,48 @@ This approach is particularly advantageous in models where the goal is to
 compare each category to the overall mean rather than to a specific 
 reference category, as it offers a more symmetric interpretation of the effects.
 In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
+We also include the interaction term between language and license in the model.
 
 Furthermore, in interpreting the earliest and latest commit times, it is important to emphasize that the predictors used in the model represent the time elapsed since those commits.
-% This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
+This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
 
-\begin{comment}
-\begin{table}
-\centering
-\caption{License Choice Model - Coefficients}
-\resizebox{0.99\textwidth}{!}{
-\begin{tabular}{lccc|ccc|ccc|ccc|ccc}
-    \toprule
-    & \multicolumn{3}{c}{\textbf{Copyleft}} & \multicolumn{3}{c}{\textbf{Weak Copyleft}} & \multicolumn{3}{c}{\textbf{Conditional Open}} & \multicolumn{3}{c}{\textbf{Permissive}} & \multicolumn{3}{c}{\textbf{Public Domain}} \\
-    \textbf{Variable} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} & \rotatebox{90}{Coef.} & \rotatebox{90}{Std. Err.} & \rotatebox{90}{p-value} \\
-    \midrule
-    (Intercept) & -3.11 & 0.17 & \cellcolor{lightgreen}<0.01 & -2.82 & 0.21 & \cellcolor{lightgreen}<0.01 & 5.40 & 0.22 & \cellcolor{lightgreen}<0.01 & 7.01 & 0.12 & \cellcolor{lightgreen}<0.01 & 0.76 & 0.25 & \cellcolor{lightgreen}<0.01 \\ 
-    EarliestCommit & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & >-0.01 & 0.01 & 0.89 & -0.49 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.31 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.18 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
-    LatestCommit & -0.14 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.11 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.18 & 0.01 & \cellcolor{lightgreen}<0.01 \\ 
-    CoreAuthors & -0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.44 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.27 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.40 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
-    FemaleAuthors & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.10 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.09 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.10 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.02 & 0.02 & 0.38 \\ 
-    Forks & 0.18 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & 0.27 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.08 & 0.01 & \cellcolor{lightgreen}<0.01 \\ 
-    Commits & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.27 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.36 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.16 & <0.01 & \cellcolor{lightgreen}<0.01 & -0.45 & <0.01 & \cellcolor{lightgreen}<0.01 \\ 
-    Files & 0.29 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.48 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.56 & <0.01 & \cellcolor{lightgreen}<0.01 & 0.21 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.53 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
-    AdoptDelay & 2.86 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.88 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.90 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.85 & 0.00 & \cellcolor{lightgreen}<0.01 & 2.90 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
-    DownProjects & 0.12 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.12 & 0.00 & \cellcolor{lightgreen}<0.01 & 0.16 & 0.00 & \cellcolor{lightgreen}<0.01 \\ 
-    Burstiness & -0.13 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.21 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.37 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.14 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.32 & 0.02 & \cellcolor{lightgreen}<0.01 \\ 
-    \multicolumn{16}{c}{\dotfill} \\
-    L-other & -0.52 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.89 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.61 & 0.05 & \cellcolor{lightgreen}<0.01 & -0.71 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.01 & 0.05 & 0.83 \\ 
-    L-C/C++ & 0.76 & 0.02 & \cellcolor{lightgreen}<0.01 & 0.78 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.53 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.11 & 0.01 & \cellcolor{lightgreen}<0.01 & -0.03 & 0.04 & 0.51 \\ 
-    L-Go & 0.84 & 0.05 & \cellcolor{lightgreen}<0.01 & 2.07 & 0.05 & \cellcolor{lightgreen}<0.01 & 2.17 & 0.06 & \cellcolor{lightgreen}<0.01 & 1.57 & 0.03 & \cellcolor{lightgreen}<0.01 & 1.31 & 0.11 & \cellcolor{lightgreen}<0.01 \\ 
-    L-Java & -0.67 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.25 & 0.03 & \cellcolor{lightgreen}<0.01 & -1.28 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.43 & 0.02 & \cellcolor{lightgreen}<0.01 & -1.34 & 0.07 & \cellcolor{lightgreen}<0.01 \\ 
-    L-JavaScript & -0.54 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.25 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.11 & 0.03 & \cellcolor{lightgreen}<0.01 & 0.30 & 0.01 & \cellcolor{lightgreen}<0.01 & 1.49 & 0.03 & \cellcolor{lightgreen}<0.01 \\ 
-    L-PHP & 0.96 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.11 & 0.02 & \cellcolor{lightgreen}<0.01 & 1.32 & 0.04 & \cellcolor{lightgreen}<0.01 & 0.62 & 0.02 & \cellcolor{lightgreen}<0.01 & -1.02 & 0.07 & \cellcolor{lightgreen}<0.01 \\ 
-    L-Perl & -0.45 & 0.05 & \cellcolor{lightgreen}<0.01 & 0.07 & 0.06 & 0.27 & -1.18 & 0.18 & \cellcolor{lightgreen}<0.01 & -1.63 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.50 & 0.15 & \cellcolor{lightgreen}<0.01 \\ 
-    L-Python & 0.13 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.30 & 0.03 & \cellcolor{lightgreen}<0.01 & -0.34 & 0.04 & \cellcolor{lightgreen}<0.01 & -0.01 & 0.01 & 0.53 & -0.34 & 0.05 & \cellcolor{lightgreen}<0.01 \\ 
-    L-R & -0.46 & 0.06 & \cellcolor{lightgreen}<0.01 & -1.60 & 0.14 & \cellcolor{lightgreen}<0.01 & -1.06 & 0.19 & \cellcolor{lightgreen}<0.01 & -1.11 & 0.06 & \cellcolor{lightgreen}<0.01 & -0.61 & 0.19 & \cellcolor{lightgreen}<0.01 \\ 
-    L-Ruby & -0.16 & 0.03 & \cellcolor{lightgreen}<0.01 & -0.27 & 0.05 & \cellcolor{lightgreen}<0.01 & -0.88 & 0.11 & \cellcolor{lightgreen}<0.01 & 0.66 & 0.02 & \cellcolor{lightgreen}<0.01 & -0.48 & 0.11 & \cellcolor{lightgreen}<0.01 \\ 
-    L-Rust & 0.49 & 0.06 & \cellcolor{lightgreen}<0.01 & 0.48 & 0.09 & \cellcolor{lightgreen}<0.01 & 1.41 & 0.10 & \cellcolor{lightgreen}<0.01 & 0.74 & 0.04 & \cellcolor{lightgreen}<0.01 & 1.63 & 0.12 & \cellcolor{lightgreen}<0.01 \\ 
-    \bottomrule
-\end{tabular}}
-\label{tbl:model-l}
-\end{table}
-\end{comment}
+Table~\ref{tbl:anova-l}) shows Type III MANOVA Tests with Pillai test statistic
+for the fitted model. 
+The results show that the p-values for all the predictors are close to zero, 
+indicating that each predictor significantly improves our model's fit.
 
-The ANOVA results (see Table~\ref{tbl:anova-l}) for the fitted model shows that the p-values for all the predictors are close to zero, indicating that each predictor significantly improves our model's fit.
-
-%\begin{comment}
 \begin{table}[t]
 \centering
-\caption{License choice model - ANOVA table}
-\resizebox{\linewidth}{!}{
-\begin{tabular}{lccccc}
+\caption{License choice model - Type III MANOVA Tests: Pillai test statistic}
+% \resizebox{\linewidth}{!}{
+\begin{tabular}{lccc}
     \toprule
-    \textbf{Variable} & \textbf{DF} & \textbf{Deviance} & \textbf{Resid. DF} & \textbf{Resid. Deviance} & \textbf{p.value} \\ 
+    \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
     \midrule
-    NULL &  &  & 572,168 & 1,641,371.30 & \\
-    EarliestCommit & 5 & 22,631.53 & 572,163 & 1,618,739.77 & \cellcolor{lightgreen}<0.01 \\ 
-    LatestCommit & 5 & 15,003.28 & 572,158 & 1,603,736.49 & \cellcolor{lightgreen}<0.01 \\ 
-    CoreAuthors & 5 & 4,106.14 & 572,153 & 1,599,630.35 & \cellcolor{lightgreen}<0.01 \\ 
-    FemaleAuthors & 5 & 766.09 & 572,148 & 1,598,864.26 & \cellcolor{lightgreen}<0.01 \\ 
-    Forks & 5 & 10,115.52 & 572,143 & 1,588,748.74 & \cellcolor{lightgreen}<0.01 \\ 
-    Commits & 5 & 9,304.28 & 572,138 & 1,579,444.46 & \cellcolor{lightgreen}<0.01 \\ 
-    Files & 5 & 173,992.60 & 572,133 & 1,405,451.86 & \cellcolor{lightgreen}<0.01 \\ 
-    Delay & 5 & 134,793.54 & 572,128 & 1,270,658.31 & \cellcolor{lightgreen}<0.01 \\ 
-    DownProjects & 5 & 7,137.78 & 572,123 & 1,263,520.53 & \cellcolor{lightgreen}<0.01 \\ 
-    Burstiness & 5 & 1,284.30 & 572,118 & 1,262,236.24 & \cellcolor{lightgreen}<0.01 \\ 
-    Language & 55 & 57,669.49 & 572,063 & 1,204,566.75 & \cellcolor{lightgreen}<0.01 \\ 
+    (Intercept) & 1 & 0.29263 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    License & 5 & 0.04443 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Language & 11 & 0.09268 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    EarliestCommit & 1 & 0.60320 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Delay & 1 & 0.11327 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    License:Language & 55 & 0.07032 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
     \bottomrule
-\end{tabular}}
+\end{tabular}
 \label{tbl:anova-l}
 \end{table}
-%\end{comment}
 
 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
-    \includegraphics[width=0.99\linewidth]{figures/probs.png}
-    \caption{License choice model - estimated marginal probabilities}
+    \includegraphics[width=\linewidth]{figures/odds_ratio_plot.pdf}
+    \caption{License choice model - odds ratios}
     \label{fig:probs}
-    \Description{License choice model - estimated marginal probabilities}
-\end{figure}
+    \Description{License model - odds ratios}
+\end{figure*}
 
 
 %%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
 
-Our findings offer mixed support for the hypothesis.
-As the number of core authors increases, the probability of adopting
-a permissive licenses increase (56.91\% to 57.91\%).
 
-This contradicts H1a that projects with restrictive licenses tend to
-have more contributors. 
-%the expectation from Fershtman and Gandal~\cite{fershtman2007open} that projects with restrictive licenses tend to have more contributors.
-
-In terms of diversity (approximated by the number of female
-authors), the likelihood of adopting conditional open and public
-domain licenses increases slightly, while copyleft licenses show 
-modest declines, suggesting a preference
-for flexible but protective licenses in more diverse teams,
-supporting the diversity-related aspect of our hypothesis H1b. 
 
 %%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
 
@@ -395,128 +339,6 @@ copyleft, possibly driven by motivations similar to Hypothesis H1c.
 Additionally, the increase in public domain licensing and decline 
 in permissive licenses may also reflect a shift toward even 
 fewer restrictions.
-
-\begin{comment}
-\begin{table}[t]
-\centering
-\caption{License choice model - non-significant contrasts}
-\resizebox{0.99\textwidth}{!}{
-\begin{tabular}{lllr|lllr|lllr}
-    \toprule
-    \textbf{Variable} & \textbf{Contrast} & \textbf{Condition} & \textbf{p.value} &
-    \textbf{Var.} & \textbf{Contrast} & \textbf{Cond.} & \textbf{p.value} &
-    \textbf{Var.} & \textbf{Contrast} & \textbf{Cond.} & \textbf{p.value} \\ 
-    \midrule
-    EarliestC. & 116,241,254 - 186,373,112 & P. Domain & 0.88 & 
-        Lang. & Perl - Python & C. Open & 1.00 & 
-            Lang. & Go - TypeScript & P. Domain & 0.99 \\
-    (Seconds) & 116,241,254 - 298,124,896 & P. Domain & 1.00 & 
-        & Perl - R & C. Open & 1.00 &
-            & Java - Ruby & P. Domain & 1.00 \\
-    & 186,373,112 - 298,124,896 & P. Domain & 0.85 & 
-        & Perl - Ruby & C. Open & 0.06 & 
-            & Perl - Python & P. Domain & 0.05 \\
-    LatestC. & 48,116,022 - 103,629,565 & Copyleft & 0.05 & 
-        & Perl - TypeScript & C. Open & 0.99 &
-            & Perl - R & P. Domain & 1.00 \\
-    (Seconds) & 48,116,022 - 191,945,416 & Copyleft & 0.05 & 
-        & Python - R & C. Open & 1.00 & 
-            & Perl - Rust & P. Domain & 0.26 \\
-    & 103,629,565 - 191,945,416 & Copyleft & 0.06 & 
-        & Python - TypeScript & C. Open & 0.21 & 
-            & Perl - TypeScript & P. Domain & 0.66 \\
-    CoreA. & 1 - 2 & Copyleft & 0.19 & 
-        & R - TypeScript & C. Open & 1.00 & 
-            & Python - R & P. Domain & 0.46 \\
-    & 1 - 4 & Copyleft & 0.17 & 
-        & other - PHP & Copyleft & 0.34 &
-            & Python - TypeScript & P. Domain & 0.65 \\
-    & 2 - 4 & Copyleft & 0.16 & 
-        & other - Python & Copyleft & 1.00 & 
-            & R - Rust & P. Domain & 0.22 \\
-    & 1 - 2 & W. Copyleft & 0.94 & 
-        & C/C++ - Perl & Copyleft & 1.00 & 
-            & R - TypeScript & P. Domain & 0.97 \\
-    & 1 - 4 & W. Copyleft & 0.93 & 
-        & C/C++ - R & Copyleft & 1.00 & 
-            & other - Python & W. Copyleft & 0.95 \\
-    & 2 - 4 & W. Copyleft & 0.92 & 
-        & Go - JavaScript & Copyleft & 0.99 & 
-            & other - Rust & W. Copyleft & 1.00 \\
-    FemaleA. & 0 - 1 & Permissive & 0.48 & 
-        & Go - Ruby & Copyleft & 0.11 & 
-            & C/C++ - Go & W. Copyleft & 0.93 \\
-    & 0 - 3 & Permissive & 0.38 & 
-        & Java - Rust & Copyleft & 1.00 & 
-            & JavaScript - R & W. Copyleft & 0.83 \\
-    & 1 - 3 & Permissive & 0.29 & 
-        & PHP - Python & Copyleft & 0.66 & 
-            & JavaScript - Rust & W. Copyleft & 0.60 \\
-    & 0 - 1 & W. Copyleft & 1.00 & 
-        & Perl - R & Copyleft & 1.00 & 
-            & Python - R & W. Copyleft & 0.07 \\
-    & 0 - 3 & W. Copyleft & 1.00 & 
-        & Rust - TypeScript & Copyleft & 0.99 & 
-            & Python - Rust & W. Copyleft & 1.00 \\
-    & 1 - 3 & W. Copyleft & 1.00 & 
-        & Go - Java & Permissive & 0.73 &
-            & R - Ruby & W. Copyleft & 1.00 \\
-    Files & 114 - 18456 & Copyleft & 0.83 & 
-        & Go - Python & Permissive & 0.14 &
-            & R - Rust & W. Copyleft & 0.21 \\
-    Lang. & PHP - Rust & No License & 0.97 & 
-        & Go - Rust & Permissive & 1.00 &
-            & R - TypeScript & W. Copyleft & 1.00 \\
-    & Perl - R & No License & 1.00 & 
-        & Java - Rust & Permissive & 0.82 &
-            & Ruby - TypeScript & W. Copyleft & 0.48 \\
-    & Python - TypeScript & No License & 0.30 & 
-        & PHP - R & Permissive & 1.00 &
-            License & C. Open - P. Domain & Commits = 18 & 0.20 \\
-    & other - Perl & C. Open & 0.76 & 
-        & Python - Rust & Permissive & 0.99 &
-            & C. Open - P. Domain & C/C++ & 0.22 \\
-    & other - R & C. Open & 1.00 & 
-        & other - Perl & P. Domain & 0.88 &
-            & Copyleft - Permissive & C/C++ & 0.34 \\
-    & other - TypeScript & C. Open & 1.00 & 
-        & other - R & P. Domain & 0.82 &
-            & C. Open - P. Domain & JavaScript & 0.80 \\
-    & C/C++ - Java & C. Open & 1.00 & 
-        & other - Rust & P. Domain & 0.73 &
-            & P. Domain - W. Copyleft & JavaScript & 0.14 \\
-    & C/C++ - Perl & C. Open & 0.57 & 
-        & C/C++ - Go & P. Domain & 1.00 &
-            & C. Open - P. Domain & Perl & 0.86 \\
-    & C/C++ - R & C. Open & 0.37 & 
-        & C/C++ - Perl & P. Domain & 0.06 &
-            & Permissive - W. Copyleft & Perl & 1.00 \\
-    & Go - PHP & C. Open & 0.69 & 
-        & C/C++ - Python & P. Domain & 1.00 &
-            & C. Open - P. Domain & R & 1.00 \\
-    & Go - Rust & C. Open & 1.00 & 
-        & C/C++ - R & P. Domain & 0.48 &
-            & P. Domain - W. Copyleft & R & 0.06 \\
-    & Java - Perl & C. Open & 0.64 & 
-        & C/C++ - TypeScript & P. Domain & 0.70 &
-            & C. Open - P. Domain & Ruby & 1.00 \\
-    & Java - R & C. Open & 0.43 & 
-        & Go - Perl & P. Domain & 0.19 &
-            & C. Open - P. Domain & Rust & 0.87 \\
-    & JavaScript - Rust & C. Open & 0.26 & 
-        & Go - Python & P. Domain & 1.00 &
-            & C. Open - W. Copyleft & Rust & 0.08 \\
-    & PHP - Rust & C. Open & 0.95 & 
-        & Go - R & P. Domain & 0.71 &
-            & C. Open - P. Domain & TypeScript & 0.07 \\
-    \bottomrule
-\end{tabular}}
-\label{tbl:contrast}
-\end{table}
-\end{comment}
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%% H3 %%%%%%%%%%%%%%%%%%%%%
 
@@ -715,3 +537,27 @@ This shift suggests that modern OSS development values ease of use and integrati
 The community should aim to balance historical ideals of software freedom with the demand for flexibility, helping developers make informed choices that align with project goals and values.
 
 By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
+
+\subsection{The Impact of License Change on Project Characteristics}
+
+\begin{table}[t]
+\centering
+\caption{License change model - Type III MANOVA Tests: Pillai test statistic}
+% \resizebox{\linewidth}{!}{
+\begin{tabular}{lccc}
+    \toprule
+    \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
+    \midrule
+    (Intercept) & 1 & 0.053972 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Change Direction & 1 & 0.004243 & \cellcolor{lightgreen}$4.81\times10^{-7}$ \\
+    Language & 7 & 0.020447 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    EarliestCommit & 1 & 0.089947 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    LatestCommit & 1 & 0.170812 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Delay & 1 & 0.029923 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Distance & 1 & 0.014656 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Change:Language & 7 &0.016633 & \cellcolor{lightgreen}$5.15\times10^{-14}$ \\
+    \bottomrule
+\end{tabular}
+\label{tbl:anova-lc}
+\end{table}
+
