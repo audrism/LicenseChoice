@@ -1,12 +1,9 @@
 \section{Methodology}\label{method}
 
-To test our hypotheses, we adopt a multi-step methodology.
+To test our hypotheses, we adopt a two-step methodology.
 First, we gather descriptive statistics to quantify the prevalence, retention, 
-and temporal trends of different license types within our dataset.
-Next, we apply a stratified sampling strategy to ensure balanced representation
-of projects of various sizes and domains.
-We then employ a multivariate multiple regression model to examine how license choice influences project metrics.
-Finally, we identify projects that switched from permissive to restrictive 
+and temporal trends of different license types within publicly available repositories.
+We then identify projects that switched from permissive to restrictive 
 licenses (or vice versa) and measure their performance changes before and after 
 the switch, again using a multivariate multiple regression approach.
 
@@ -50,59 +47,15 @@ Version V, latest at the time of this study.}
 We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
 Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
 
-\subsection{Regression Model and Stratified Sampling}\label{sec:reg}
-
-To test our hypotheses, we selected a regression model appropriate to the nature of our response variable -- specifically, multivariate multiple regression.
-This model is an extension of multiple 
-regression that allows for multiple dependent variables (outcomes) to be predicted
-by multiple independent variables (predictors) simultaneously.
-This model is useful when the dependent variables are correlated and need to be 
-analyzed together to improve prediction accuracy and interpretation.
-
-Since the target population encompasses virtually the entirety of OSS projects and given its scale and heterogeneity, we employed a stratified sampling approach to enhance the representativeness of our sample~\cite{thompson2012sampling}.
-We stratified projects using six key variables: the number of commits, the number of blobs, the number of authors, the number of forks, the number of active months, and the earliest commit time of the project.
-These variables were selected because they are important indicators of project size, activity, and historical context, which are likely to influence the outcomes of our analysis~\cite{crowston2005social,koch2002effort}.
-
-\begin{comment}
-\begin{table}[h!]
-\centering
-\caption{Basic Statistics of Projects in WoC}
-\begin{tabular}{l|rrrr}
-    \toprule
-    \textbf{Variable} & \textbf{Minimum} & \textbf{Average} & \textbf{Maximum} & \textbf{Standard Deviation} \\
-    \midrule
-    NumCommits & 1 & 30.26 & 66,000,003 & 8,611.36 \\
-    NumBlobs & 1 & 379.38 & 73,240,796 & 18,053.14 \\
-    NumAuthors & 1 & 1.49 & 340,022 & 49.70 \\
-    NumForks & 0 & 0.50 & 241,217 & 66.32 \\
-    NumActiveMon & 0 & 2.11 & 3,684 & 4.40 \\
-    \bottomrule
-\end{tabular}
-\label{tab:strata}
-\end{table}
-\end{comment}
-
-The WoC's MongoDB project database comprises 131 million OSS projects.
-A notable feature of the data is its heavy right skewness, common in large datasets with many small and inactive projects.
-To address this skewness and ensure meaningful strata, we binned each variable as follows:
-commits (fewer than 500, 500–2000, and over 2000), blobs (below or above 10,000), 
-authors (one, 2–10, and more than 10), forks (none or at least one), 
-and active months (less than three or more than three). 
-These classifications reflect different levels of activity, collaboration, 
-complexity, and community engagement based on their distribution.
-
-Projects were also divided into four historical eras based on their first commit: 
-the Foundational Era (before 1998), marking the early stages of open source; 
-the Dot-com Boom and OSS Expansion (1998–2010), signifying rapid growth and adoption;
-the Maturation and Mainstream Adoption period (2010–2018), when open source became key to enterprise software;
-and the Modern Era (2019–present), reflecting recent trends in community engagement and cloud-native technologies.
-
-These stratification produced 288 unique bins ($3\times 3\times 2\times 2\times 2\times 4$).
-We randomly selected 5,000 projects per bin, targeting a total of 1,440,000 projects.
-However, due to uneven distribution, some bins contained fewer projects, resulting in a final sample of around 500,000 projects.
-Despite this, the large sample size and stratified approach ensure a balanced and comprehensive representation of the OSS ecosystem, supporting robust and generalizable conclusions in our regression analyses.
-
 \subsection{License Change}
+
+Understanding license type changes enables project maintainers and contributors
+to make more informed strategic decisions.
+For example, moving to a more restrictive license type might be chosen to 
+protect the project's intellectual property or to enforce open-source
+principles more rigorously.
+\citet{kechagia2010open} illustrate how different license types affect 
+dependency management and compliance in software projects.
 
 To investigate the impact of license switching, we begin by identifying projects
 that have had more than one license throughout their lifetime.
@@ -117,14 +70,23 @@ Within these groups, we select projects that switched from a permissive to a
 restrictive license or vice versa.
 
 To measure performance changes, we compute key project metrics during two separate 
-two-year intervals: one immediately following the first license adoption and 
+one-year intervals: one immediately following the first license adoption and 
 another immediately following the last license adoption.
-Projects are excluded if fewer than two years separate the adoption dates of the
-first and last licenses or if less than two years have elapsed since the last 
+Projects are excluded if fewer than one years separate the adoption dates of the
+first and last licenses or if less than one years have elapsed since the last 
 license adoption at the time of our data curation. 
 We then model the change in these metrics (i.e., metric values in the post-switch 
 interval minus those in the pre-switch interval) based on the direction of the 
 license change (restrictive to permissive or permissive to restrictive).
-As control variables, we include the project’s primary language, start and end 
-times, the delay before the first license adoption, and the elapsed time between 
-the first and last license adoptions.
+As control variables, we include the project’s primary language, its start and 
+end times, the delay before the first license adoption, the elapsed time between
+the first and last license adoptions, and the proportion of new projects 
+adopting that license type in OSS at the time of the last license change.
+
+To test our hypotheses, we selected a regression model appropriate to the 
+nature of our response variable, specifically, multivariate multiple regression.
+This model is an extension of multiple 
+regression that allows for multiple dependent variables (outcomes) to be predicted
+by multiple independent variables (predictors) simultaneously.
+This model is useful when the dependent variables are correlated and need to be 
+analyzed together to improve prediction accuracy and interpretation.

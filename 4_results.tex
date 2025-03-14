@@ -209,106 +209,7 @@ However, the continued use of copyleft licenses like the GPL
 demonstrates that many developers are committed to preserving the
 open nature of derivative works.
 
-\subsection{The Impact of License Choice on Project Characteristics}
-
-\subsubsection{Our Findings}
-
-Now we turn to the results of our regression model discussed in Section~\ref{sec:reg}.
-The basic statistics of the response and control variables, including the 
-5th percentile, median, mean, and 95th percentile for the numeric variables, 
-as well as the counts of different levels for the factor variables, 
-are presented in Table~\ref{tbl:stat-l}.
-
-\begin{table*}[t]
-\centering
-\caption{License type model - descriptive statistics.}
-\resizebox{0.99\textwidth}{!}{
-\begin{tabular}{cllcccc}
-  \toprule
-  & \textbf{Variable} & \textbf{Description} & & \textbf{Statistics} & & \\ 
-  \midrule
-  \midrule
-  \multirow{9}{*}{\rotatebox{90}{\textbf{Response}}} 
-  & & & \textbf{5\%} & \textbf{Median} & \textbf{Mean} & \textbf{95\%} \\ 
-  & LatestCommit & Time since the latest commit & 04/30/2011 & 02/17/2020 & 03/15/2019 & 04/28/2023 \\
-  & Active Month & Number of active months & 1 & 7 & 21.65 & 88 \\
-  & Burstiness & (Latest - Earliest) / Active months & 0 & 1 & 1.87 & 6.37 \\
-  & Authors & Number of authors & 1 & 2 & 23.31 & 56 \\
-  & Commits & Number of commits & 2 & 155 & 2,982.63 & 5,770 \\
-  & UpProjects & Number of upstream projects & 1 & 44 & 209.21 & 875 \\
-  & DownProjects & Number of downstream projects & 0 & 12 & 1,831.07 & 2,342 \\ 
-  & Files & Number of files & 5 & 1,820 & 17,295.57 & 59,939.60 \\ 
-  & Blobs & Number of blobs & 15 & 5,616 & 19,952.34 & 51,076 \\
-  \midrule
-  \multirow{5}{*}{\rotatebox{90}{\textbf{Control}}} 
-  & EarliestCommit & Time since the earliest commit & 05/08/2006 & 07/05/2017 & 01/31/2016 & 11/23/2021 \\
-  & AdoptDelay & Earliest commit to license adoption (days) & 0 & 0 & 133 & 751 \\ 
-  \multicolumn{6}{c}{\dotfill} \\
-  & Language & \hspace{-0.2cm}JavaScript \hspace{1.15cm} C/C++ \hspace{1.1cm} Python & Java & PHP & Ruby & (Remaining) \\ 
-  & Counts (\%) & \hspace{-0.6cm}221,588 (38.72\%) \hspace{0.1cm} 82,551 (14.43\%) \hspace{0.1cm} 53,468 (9.34\%) & 50,372 (8.80\%) & 44,952 (7.86\%) & 18,592 (3.25\%) & 100,650 (17.59\%) \\ 
-  \midrule
-  & License & \hspace{0.0cm}No License \hspace{1.5cm} Permissive & \hspace{-1.3cm} Copyleft & Weak Copyleft & Conditional Open & Public Domain \\ 
-  & Counts (\%) & \hspace{-0.35cm} 263,974 (46.13\%) \hspace{0.7cm} 148,320 (25.92\%) & \hspace{-1.2cm} 60,925 (10.65\%) & 43,143 (7.54\%) & 30,933 (5.41\%) & 24,878 (4.35\%) \\
-  \bottomrule
-\end{tabular}}
-\label{tbl:stat-l}
-\end{table*}
-
-Given that we have multiple response variables, the model provides a distinct set of coefficients for each outcome.
-Each set of coefficients indicates the influence of the predictor variables 
-on the probability of the response variable assuming that there might 
-be correlation between response variables.
-
-For categorical variables, we employed sum contrasts, also known as effect 
-coding, where each level of the predictor variable is compared to the 
-overall mean of all levels.
-This approach is particularly advantageous in models where the goal is to 
-compare each category to the overall mean rather than to a specific 
-reference category, as it offers a more symmetric interpretation of the effects.
-In the sum contrast method, the sum of the coefficients for all levels, including the intercept, must equal zero.
-We also include the interaction term between language and license in the model.
-
-Furthermore, in interpreting the earliest and latest commit times, it is important to emphasize that the predictors used in the model represent the time elapsed since those commits.
-This means that a higher value for the earliest commit indicates that the commit occurred further in the past (i.e., the project is older), and a lower value indicates a more recent commit.
-
-Table~\ref{tbl:anova-l}) shows Type III MANOVA Tests with Pillai test statistic
-for the fitted model. 
-The results show that the p-values for all the predictors are close to zero, 
-indicating that each predictor significantly improves our model's fit.
-
-\begin{table}[t]
-\centering
-\caption{License choice model - Type III MANOVA Tests: Pillai test statistic}
-% \resizebox{\linewidth}{!}{
-\begin{tabular}{lccc}
-    \toprule
-    \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
-    \midrule
-    (Intercept) & 1 & 0.29263 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    License & 5 & 0.04443 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Language & 11 & 0.09268 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    EarliestCommit & 1 & 0.60320 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Delay & 1 & 0.11327 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    License:Language & 55 & 0.07032 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    \bottomrule
-\end{tabular}
-\label{tbl:anova-l}
-\end{table}
-
-
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/odds_ratio_plot.pdf}
-    \caption{License choice model - odds ratios}
-    \label{fig:probs}
-    \Description{License model - odds ratios}
-\end{figure*}
-
-
-%%%%%%%%%%%%%%%%%%%%% H1 %%%%%%%%%%%%%%%%%%%%%
-
-
-
+\begin{comment}
 %%%%%%%%%%%%%%%%%%%%% H2 %%%%%%%%%%%%%%%%%%%%%
 
 Our analysis shows significant variation in licensing preferences
@@ -399,112 +300,29 @@ dual need for flexibility and protection.
 This aligns with the hypothesis that bursty projects may prefer
 licenses that are more popular and used in many other projects (H4d).
 
-\begin{comment}
-As theorised, software project licensing preferences are influenced by
-various factors, including the number of commits, files, core
-authors, female authors, forks, downstream projects, project age,
-and activity levels.
+% As theorised, software project licensing preferences are influenced by
+% various factors, including the number of commits, files, core
+% authors, female authors, forks, downstream projects, project age,
+% and activity levels.
 
-As commits increase, projects tend to favor copyleft and permissive licenses, while conditional open, public domain, and weak copyleft licenses become less common.
-In contrast, projects with more files shift away from permissive licenses toward conditional open, public domain, and weak copyleft licenses, with copyleft licenses remaining stable.
+% As commits increase, projects tend to favor copyleft and permissive licenses, while conditional open, public domain, and weak copyleft licenses become less common.
+% In contrast, projects with more files shift away from permissive licenses toward conditional open, public domain, and weak copyleft licenses, with copyleft licenses remaining stable.
 
-The number of core authors slightly reduces the likelihood of adopting conditional open, copyleft, and public domain licenses, while permissive licenses gain a slight preference.
-Projects with more female authors tend to adopt conditional open and public domain licenses more frequently, with a corresponding decline in copyleft and permissive licenses.
+% The number of core authors slightly reduces the likelihood of adopting conditional open, copyleft, and public domain licenses, while permissive licenses gain a slight preference.
+% Projects with more female authors tend to adopt conditional open and public domain licenses more frequently, with a corresponding decline in copyleft and permissive licenses.
 
-As forks increase, there is a clear preference for permissive licenses, while conditional open, copyleft, public domain, and weak copyleft licenses decrease.
-Similarly, as downstream projects grow, developers lean toward licenses with more specific conditions for control and protection.
+% As forks increase, there is a clear preference for permissive licenses, while conditional open, copyleft, public domain, and weak copyleft licenses decrease.
+% Similarly, as downstream projects grow, developers lean toward licenses with more specific conditions for control and protection.
 
-Over time, older and inactive projects shift from permissive and conditional licenses to copyleft and weak copyleft, while projects in bursty development environments slightly favor permissive licenses for their simplicity.
+% Over time, older and inactive projects shift from permissive and conditional licenses to copyleft and weak copyleft, while projects in bursty development environments slightly favor permissive licenses for their simplicity.
 
-Ultimately, licensing choices are shaped by cultural, historical, and practical factors.
-Permissive licenses dominate many programming languages due to their flexibility, while copyleft licenses are preferred in communities that prioritize long-term software freedom.
-Language-specific use cases and historical context also play a key role in shaping these preferences.
-\end{comment}
-
-\subsubsection{Comparison with Literature}
-
-Table~\ref{tab:res1b} provides a comparison between the results in the literature and our study, highlighting substantial differences primarily due to variations in scope and sampling strategy.
-
-\begin{table*}[t]
-\centering
-\caption{Comparison with literature}
-\label{tab:res1b}
-\resizebox{0.99\textwidth}{!}{
-\begin{tabular}{lllr|rrrrr}
-    \toprule
-    \multirow{2}{*}{\textbf{Language}} & \multirow{2}{*}{\textbf{Study}} & \multirow{2}{*}{\textbf{Mode}} & \multirow{2}{*}{\textbf{Projects}} & \multirow{2}{*}{\textbf{Copyleft}} & \textbf{Weak} & \textbf{Conditional} & \multirow{2}{*}{\textbf{Permissive}} & \textbf{Public} \\
-    & & & & & \textbf{Copyleft} & \textbf{Open} & & \textbf{Domain} \\
-    \midrule
-    \multirow{3}{*}{\textbf{Java}} & \cite{wu2024large} & Observed & 513,939 & 5.00\% & 21.25\% & - & 73.75\% & - \\
-    & \multirow{2}{*}{\textbf{This Study}} & Observed & \multirow{2}{*}{50,372} & 22.25\% & 18.01\% & 1.84\% & 56.79\% & 1.11\% \\
-    & & Model & & 20.59\% & 13.53\% & 1.33\% & 63.66\% & 0.84\% \\
-    \multicolumn{8}{c}{\dotfill} \\
-    
-    \multirow{3}{*}{\textbf{JavaScript}} & \cite{wu2024large} & Observed & 2,182,959 & 3.75\% & 1.88\% & - & 94.38\% & - \\
-    & \multirow{2}{*}{\textbf{This Study}} & Observed & \multirow{2}{*}{221,588} & 9.15\% & 9.21\% & 16.86\% & 49.61\% & 15.18\% \\
-    & & Model  & & 11.86\% & 6.82\% & 7.33\% & 66.83\% & 7.14\% \\
-    \multicolumn{8}{c}{\dotfill} \\
-    
-    \multirow{3}{*}{\textbf{Python}} & \cite{wu2024large} & Observed & 485,223 & 15.31\% & 4.38\% & - & 80.31\% & - \\
-    & \multirow{2}{*}{\textbf{This Study}} & Observed & \multirow{2}{*}{53,468} & 26.82\% & 9.31\% & 3.59\% & 58.10\% & 2.18\% \\
-    & & Model & & 28.45\% & 7.97\% & 2.11\% & 60.04\% & 1.41\% \\
-    \multicolumn{8}{c}{\dotfill} \\
-    
-    \multirow{3}{*}{\textbf{Ruby}} & \cite{wu2024large} & Observed & 188,807 & 6.25\% & 1.88\% & - & 91.88\% & - \\
-    & \multirow{2}{*}{\textbf{This Study}} & Observed & \multirow{2}{*}{18,592} & 16.22\% & 6.56\% & 0.95\% & 75.29\% & 0.98\% \\
-    & & Model & & 14.2\% & 5.48\% & 0.82\% & 78.67\% & 0.82\% \\
-    \multicolumn{8}{c}{\dotfill} \\
-    
-    \multirow{3}{*}{\textbf{Rust}} & \cite{wu2024large} & Observed & 103,850 & 5.00\% & 2.81\% & - & 92.19\% & - \\
-    & \multirow{2}{*}{\textbf{This Study}} & Observed & \multirow{2}{*}{3,080} & 17.62\% & 6.71\% & 5.4\% & 66.7\% & 3.57\% \\
-    & & Model & & 19.53\% & 8.34\% & 5.8\% & 61.43\% & 4.88\% \\
-    \bottomrule
-\end{tabular}}
-\end{table*}
-
-The comparison between our study and Wu et al.'s findings highlights significant differences in licensing patterns across programming languages, emphasizing the need to control for influencing factors.
-Wu et al.'s analysis, based on raw data, suggests a strong preference for permissive licenses in languages like Java (73.75\%), JavaScript (94.38\%), and Python (80.31\%).
-However, our study, which incorporates both observed data and a regression model controlling for time, commits, and project activity, shows lower permissive license rates (Java: 56.79\%, JavaScript: 49.61\%, Python: 58.10\%) and a higher prevalence of copyleft and weak copyleft licenses.
-
-Our regression model further adjusted these figures, often raising permissive license rates but still reflecting a more diverse licensing landscape, suggesting that copyleft licenses play a more prominent role than Wu et al.'s raw data indicates.
-The difference in findings may stem from methodology: Wu et al.'s reliance on package manager data could introduce biases toward more popular or actively managed packages, overrepresenting permissive licenses.
-In contrast, our stratified sampling and multinomial regression provide a broader view, revealing a more varied distribution of licenses across languages like Java, Python, and Ruby, where copyleft licenses are more common.
-
-This comparison underscores the importance of controlling for various factors to avoid misleading conclusions, offering a more accurate understanding of license adoption in open source projects.
-
-\begin{figure}[t]
-\small
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
-\begin{enumerate}[leftmargin=4mm]
-    \item More core authors slightly increase permissive license adoption, while decreasing the likelihood of conditional open, and public domain licenses (H1a, H3b).
-    \item More female authors slightly increase the adoption of conditional open and public domain licenses, with a modest decline in copyleft licenses (H1b).
-    
-    \item Permissive licenses are common in JavaScript, Ruby, TypeScript, and Go, while copyleft licenses are more prevalent in Perl, R, and C/C++ (H2a).
-    \item More forks increase the likelihood of permissive licenses, while decreasing the probabilities of conditional open, copyleft, public domain, and weak copyleft licenses (H2b).
-    \item More downstream projects slightly increase the likelihood of adopting conditional open, public domain, and weak copyleft licenses, while decreasing permissive and copyleft licenses (H2b).
-    
-    \item Longer license adoption delays slightly increase conditional open, public domain, and weak copyleft licenses, with a slight decrease in permissive licenses (H3a).  
-    
-    \item More commits increase the likelihood of adopting copyleft and permissive licenses, while decreasing the likelihood of conditional open, public domain, and weak copyleft licenses (H4a).
-    \item As file count increases, projects are more likely to adopt weak copyleft licenses, with a decrease in permissive licenses (H4b).
-
-    \item Older projects favor copyleft and weak copyleft licenses, with a decrease in conditional open and permissive licenses (H4c).
-    \item Longer inactivity increases the likelihood of conditional open, copyleft, and weak copyleft licenses, while decreasing permissive and public domain licenses (H4c).
-    \item Increased burstiness slightly favors permissive licenses, with minimal changes in conditional open and copyleft licenses (H4d).
-    
-    \item Controlling for influencing factors reveals that copyleft and weak copyleft licenses play a more significant role than previously indicated by raw data, challenging the dominance of permissive licenses reported by literature.
-\end{enumerate}
-\end{tcolorbox}
-\Description{Key Findings}
-\end{figure}
+% Ultimately, licensing choices are shaped by cultural, historical, and practical factors.
+% Permissive licenses dominate many programming languages due to their flexibility, while copyleft licenses are preferred in communities that prioritize long-term software freedom.
+% Language-specific use cases and historical context also play a key role in shaping these preferences.
 
 \subsubsection{Implications}
 
-Programming language is a choice of technology that has its own
-libraries and tools. User of that entire ecosystem, is nudged toward
-the most common licences used within it.
-For example, C-based projects often prefer copyleft licenses, while Go and TypeScript projects lean toward permissive or conditional open licenses.
-Developers should be aware of how their language community influences licensing norms, and the community could offer language-specific guidelines to align new projects with best licensing practices.
+
 
 The positive correlation between permissive licenses and forks suggests that 
 developers are more likely to fork permissively licensed code.
@@ -537,8 +355,115 @@ This shift suggests that modern OSS development values ease of use and integrati
 The community should aim to balance historical ideals of software freedom with the demand for flexibility, helping developers make informed choices that align with project goals and values.
 
 By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
+\end{comment}
 
 \subsection{The Impact of License Change on Project Characteristics}
+
+Examining the distribution of license type counts in projects 
+(Figure~\ref{fig:pie}), we observe that nearly 22\% of projects had more 
+than one license type in their lifetime.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figures/pie.png}
+\caption{Distribution of license type count in projects}
+\Description{Distribution of license type count in projects}
+\label{fig:pie}
+\end{figure}
+
+We then analyze the latest status of these 22\% of projects.
+As shown in Figure~\ref{fig:pie}, 74\% of these projects have more than one 
+license type in their latest status as well, indicating they did not 
+necessarily change their license.
+On the other hand, 15\% of these projects do not have any license in their 
+latest status, meaning they deleted their license.
+The middle group, consisting of projects that had more than one license type 
+in their lifetime but have only one type in their latest status, corresponds 
+to the group we want to focus on to analyze the license changes.
+
+\subsubsection{Our Findings}
+
+Now we turn to the results of our regression model discussed in 
+the Methodology section.
+The basic statistics of the response and control variables, including the 
+5th percentile, median, mean, and 95th percentile for the numeric variables, 
+as well as the counts of different levels for the factor variables, 
+are presented in Table~\ref{tbl:stat-l}.
+
+\begin{table*}[t]
+\centering
+\caption{License change model - descriptive statistics.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{cllcccc}
+  \toprule
+  & \textbf{Variable} & \textbf{Description} & & \textbf{Statistics} & & \\ 
+  \midrule
+  \midrule
+  \multirow{9}{*}{\rotatebox{90}{\textbf{Response}}} 
+  & & & \textbf{5\%} & \textbf{Median} & \textbf{Mean} & \textbf{95\%} \\ 
+  & AuthorsDiff & Difference in number of authors & -5 & 0 & 0.91 & 6 \\
+  & BlobsDiff & Difference in number of blobs & -1,470 & -17 & 56.6 & 1,059.2 \\
+  & CommitsDiff & Difference in number of commits & -309.1 & -6 & 0.83 & 209 \\
+  & FilesDiff & Difference in number of files & -856.1 & -4 & 116.92 & 634 \\
+  & ActiveMonDiff & Difference in number of active months & -8 & -1 & -1.06 & 5 \\
+  & UpProjectsDiff & Difference in number of upstream projects & -35 & -1 & -3.54 & 16 \\
+  & DownProjectsDiff & Difference in number of downstream projects & -7 & 0 & 19.68 & 25.1 \\ 
+  & BurstinessDiff & Difference in burstiness (duration / active months) & -7 & 0.28 & 1.27 & 10.5 \\ 
+  \midrule
+  \multirow{8}{*}{\rotatebox{90}{\textbf{Control}}} 
+  & EarliestCommit & Project age (months) & 39.87 & 84 & 90.05 & 162.04 \\
+  & LatestCommit & Project latest inactivity (months) & 3.23 & 27.57 & 34.95 & 87.64 \\
+  & AdoptDelay & Earliest commit to license adoption (months) & 0 & 0.13 & 3.35 & 19.37 \\ 
+  & Distance & Distance between first and last adoption (months) & 12 & 24 & 30.77 & 73 \\
+  & Proportion & Proportion of projects adopting same license at change time & 0.05 & 0.64 & 0.44 & 0.68 \\
+  \multicolumn{6}{c}{\dotfill} \\
+  
+  & Language & \hspace{-0.2cm}JavaScript \hspace{1cm} Python \hspace{1.15cm} C/C++ \hspace{1.3cm} Java & PHP & Go & Ruby & Other \\ 
+  
+  & Counts (\%) & \hspace{-0.4cm}7,566 (32.03\%) \hspace{0.3cm} 3,708 (15.70\%) \hspace{0.3cm} 3,027 (12.82\%) \hspace{0.3cm} 2,371 (10.04\%) & 1,782 (7.54\%) & 526 (2.23\%) & 518 (2.19\%) & 4,121 (17.45\%) \\ 
+  \midrule
+  & Change & \hspace{-1.65cm} Direction \hspace{3cm} Restrictive to Permissive & Permissive & \hspace{-2cm} to & \hspace{-3.75cm} Restrictive \\ 
+
+  & Counts (\%) & \hspace{3.3cm} 14,329 (60.67\%) & & \hspace{-3cm} 9,290	& \hspace{-4.6cm}(39.33\%) \\ 
+  
+  \bottomrule
+\end{tabular}}
+\label{tbl:stat-l}
+\end{table*}
+
+Given that we have multiple response variables, the model provides a 
+distinct set of coefficients for each outcome.
+Each set of coefficients indicates the influence of the predictor variables 
+on the probability of the response variable assuming that there might 
+be correlation between response variables.
+
+For language variable, we employed sum contrasts, also known as effect 
+coding, where each level of the predictor variable is compared to the 
+overall mean of all levels.
+This approach is particularly advantageous in models where the goal is to 
+compare each category to the overall mean rather than to a specific 
+reference category, as it offers a more symmetric interpretation of the effects.
+In the sum contrast method, the sum of the coefficients for all levels,
+including the intercept, must equal zero.
+We also include the interaction term between language and license 
+change in the model.
+
+The change direction variable has two levels, with Permissive to Restrictive 
+(P2R) set as the base level. As a result, the model outputs only display 
+coefficients for Restrictive to Permissive (R2P), which indicate the 
+difference relative to the base level (P2R).
+
+Furthermore, when interpreting the earliest and latest commit times, 
+it is important to note that the predictors in the model represent the 
+time elapsed since those commits. A higher earliest commit value indicates
+that the commit occurred further in the past, meaning the project is older, 
+whereas a lower value suggests a more recent commit. Similarly, a higher 
+latest commit value means the project has been inactive for a longer period.
+
+Table~\ref{tbl:anova-lc}) shows Type III MANOVA Tests with Pillai test statistic
+for the fitted model. 
+The results show that the p-values for all the predictors are close to zero, 
+indicating that each predictor significantly improves our model's fit.
 
 \begin{table}[t]
 \centering
@@ -548,16 +473,231 @@ By addressing these insights and implications, the OSS community can foster a mo
     \toprule
     \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
     \midrule
-    (Intercept) & 1 & 0.053972 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Change Direction & 1 & 0.004243 & \cellcolor{lightgreen}$4.81\times10^{-7}$ \\
-    Language & 7 & 0.020447 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    EarliestCommit & 1 & 0.089947 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    LatestCommit & 1 & 0.170812 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Delay & 1 & 0.029923 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Distance & 1 & 0.014656 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
-    Change:Language & 7 &0.016633 & \cellcolor{lightgreen}$5.15\times10^{-14}$ \\
+    (Intercept) & 1 & 0.024183 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Change Direction & 1 & 0.002403 & \cellcolor{lightgreen}$1.99\times10^{-9}$ \\
+    Language & 7 & 0.012655 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    EarliestCommit & 1 & 0.061345 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    LatestCommit & 1 & 0.111041 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Delay & 1 & 0.028073 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Distance & 1 & 0.018359 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
+    Proportion & 1 & 0.001388 & \cellcolor{lightgreen}$6.79\times10^{-5}$ \\
+    Change:Language & 7 & 0.008897 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
 \end{table}
 
+To better understand the effect of license change direction on project metrics,
+we calculate the odds ratios for the change direction predictor and its 
+interaction with language, considering only those predictors that are 
+statistically significant at the 95\% confidence level. This ensures that 
+the results focus on meaningful relationships rather than noise. 
+Figure~\ref{fig:odds} displays these significant odds ratios along with 
+their 95\% confidence 
+intervals, highlighting the variability and reliability of the estimates. 
+Since the analysis is based on a multivariate multiple regression model,
+the odds ratios are presented across different output variables, allowing
+for a comprehensive comparison of how the change direction predictor and 
+its interaction with language influence various aspects of the model.
+
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/odds_ratios.pdf}
+    \caption{License change model - odds ratios}
+    \label{fig:odds}
+    \Description{License change model - odds ratios}
+\end{figure*}
+
+For the difference in the number of authors, projects in C/C++ have an odds 
+ratio below 1 showing they are about 6\%  (Odds Ratio = 0.94) less 
+likely to see increased
+authorship after transitioning from restrictive to permissive licenses
+compared to permissive to restrictive shifts.
+Conversely, projects using Go show an odds ratio just over 1, approximately 
+6.6\% greater odds of increasing authorship following a restrictive to 
+permissive license change.
+Although modest in magnitude, these odds ratios represent clear 
+language-specific differences in community response to licensing shifts.
+
+Regarding the difference in the number of blobs, the odds ratio for C/C++ 
+projects is considerably lower than 1, indicating that projects shifting 
+from restrictive to permissive licenses are about 32\% less likely to
+experience growth in repository blobs compared to those shifting in 
+the opposite direction. Python projects, however, exhibit an odds 
+ratio substantially greater than 1, suggesting a 52\% higher likelihood 
+of increased repository growth after adopting permissive licenses.
+The substantial magnitude of these odds ratios highlights a strong 
+practical influence of license directionality in these languages.
+
+In the difference in the number of commits, only C/C++ projects show 
+a significant result, with an odds ratio clearly below 1, meaning 
+there's approximately a 21\% lower chance of increased commit 
+frequency when transitioning to a permissive license compared to the 
+reverse direction. This moderate odds ratio underscores a meaningful
+practical reduction in development activity following permissive
+licensing within C/C++ communities.
+
+For the difference in the number of files, the general restrictive to 
+permissive license change has an odds ratio of approximately 1.30, 
+indicating about 30\% higher odds of increased file counts. However, 
+this general positive effect is significantly weakened in C/C++ projects,
+which show an odds ratio notably below 1, meaning these projects are 
+31\% less likely to experience such growth. On the other hand, 
+PHP and Python exhibit odds ratios above 1 (approximately 1.13 and 
+1.55, respectively), indicating PHP projects have about 13\% greater 
+odds and Python projects have about 55\% greater odds of increased 
+file counts following a shift to permissive licenses.
+
+Concerning the difference in active months, C/C++ projects demonstrate
+an odds ratio slightly below 1, suggesting approximately an 8\% reduced
+likelihood of sustained project activity after a restrictive to 
+permissive license transition. Python projects have an odds ratio 
+slightly above 1, indicating about 8\% greater odds of maintaining 
+longer periods of active development under permissive licenses. 
+While modest, these differences clearly show distinct patterns by language.
+
+Regarding the difference in upstream projects, the general restrictive 
+to permissive license transition effect shows about 25\% greater odds
+of increased reusing from upstream projects. The interactions reveal 
+language-specific nuances: for C/C++ and Ruby, the odds ratios are 
+significantly less than 1 (approximately 0.85 each), suggesting 
+about 15\% lower odds of increased upstream integration after moving
+to permissive licenses. Conversely, PHP and especially Python 
+projects demonstrate greater odds (approximately 1.36 and 1.37 
+respectively), indicating 36\% to 37\% increased likelihood of
+reusing from other projects after adopting permissive licenses.
+
+In the case of difference in downstream projects, the general restrictive 
+to permissive transition shows an odds ratio slightly greater than 1,
+reflecting about 9–10\% greater odds of increased downstream project
+use or integration following a shift to permissive licenses.
+This moderate effect indicates a practical tendency toward greater
+popularity or usage within broader software ecosystems under
+permissive licensing conditions.
+
+Lastly, for the difference in burstiness, the odds ratios show 
+moderate yet meaningful language-specific impacts. Projects using
+C/C++ have about 7\% greater odds of experiencing more intense 
+bursts of activity after adopting permissive licenses. Similarly,
+PHP shows about a 3.5\% increased odds. However, Python projects 
+show reduced odds, meaning they are about 7\% less likely to 
+experience bursty activity after permissive license adoption. 
+Although moderate, these odds ratios highlight distinct behavioral 
+differences tied directly to licensing directionality.
+
+These quantified magnitudes, along with their directions, 
+clearly demonstrate that license transitions influence project 
+metrics meaningfully, with notable variations across different 
+metrics and programming languages.
+
+\begin{figure}[t]
+\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
+\small
+\begin{enumerate}[leftmargin=4mm]
+    \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses.
+    \item Python projects significantly increase repository growth and sustained activity under permissive licenses.
+    \item  PHP projects benefit from permissive licenses through increased file additions and external project integration.
+    \item Go projects attract moderately more authors after permissive license adoption.
+    \item Permissive licenses generally increase both upstream and downstream project adoption.
+    \item Ruby projects show reduced upstream integration when adopting permissive licenses.
+    \item License transitions have a moderate effect on burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
+\end{enumerate}
+\end{tcolorbox}
+\Description{Key Findings}
+\end{figure}
+
+\subsubsection{Implications}
+
+Programming language is a choice of technology that has its own
+libraries and tools. User of that entire ecosystem, is nudged toward
+the most common licences used within it.
+For example, C-based projects often prefer restrictive licenses, 
+while Go and Python projects lean toward permissive licenses.
+Developers should be aware of how their language community influences 
+licensing norms, and the community could offer language-specific
+guidelines to align new projects with best licensing practices.
+
+The observed differences in authorship after license changes highlight 
+practical considerations for OSS project maintainers. In the C/C++ 
+community, where switching to permissive licenses slightly discourages 
+new contributors, project maintainers might need to pair such license
+transitions with additional strategies---such as enhanced outreach or
+clearly defined governance policies---to retain or attract authors.
+Conversely, in the Go community, the positive response to permissive
+licenses indicates that maintainers could effectively use permissive
+licensing as a practical tool to encourage contributor participation,
+enhancing community building without significant additional effort.
+
+Repository growth implications, measured by the number of blobs,
+are particularly impactful. Python communities experience notable
+growth under permissive licenses, indicating maintainers can 
+strategically leverage permissive licensing to attract broader
+contributions, resulting in richer functionality and greater innovation.
+For C/C++, however, the practical advice would be cautious—adopting
+permissive licenses without supplemental incentives might 
+unintentionally discourage contributors from investing in 
+substantial new content. Thus, maintainers in these communities 
+should carefully weigh the trade-offs or introduce additional
+motivators (e.g., clearer contributor recognition or rewards) 
+alongside permissive licensing decisions.
+
+The findings related to commit activity in C/C++ suggest practical
+actions for OSS leaders in these communities. Since permissive 
+licensing tends to lower commit frequency, maintainers considering
+permissive licensing should prepare targeted interventions, such as
+clearly articulated development roadmaps, contributor guidelines,
+or engagement incentives to sustain development momentum after
+a licensing change.
+
+Implications for file-count differences indicate concrete strategic 
+guidance. Given that PHP and Python projects substantially
+benefit from permissive licenses regarding file creation,
+maintainers in these ecosystems can confidently adopt permissive 
+licenses when aiming for feature expansion or modularization. 
+Conversely, C/C++ maintainers should be aware that permissive licenses
+may require additional supporting strategies—such as enhanced
+documentation or modular project structures—to ensure continued growth.
+
+Practical considerations around project activity duration 
+(active months) suggest nuanced strategies: Python projects benefit 
+slightly in terms of sustained activity from permissive licenses, 
+indicating that maintainers aiming for long-term, stable contributions 
+can adopt permissive licenses confidently. In contrast, C/C++ maintainers
+should recognize that permissive licensing may slightly shorten sustained
+activity periods, making supplemental engagement strategies crucial---such 
+as periodic contribution drives or community recognition---to 
+sustain longer-term involvement.
+
+Insights on upstream project usage have clear practical 
+ramifications for project maintainers. Python and PHP communities'
+increased usage of external OSS projects after adopting permissive
+licenses suggest maintainers might strategically use permissive
+licensing to encourage their projects' broader integration into
+complex OSS ecosystems. Conversely, C/C++ and Ruby projects that 
+see decreased usage of external dependencies under permissive licenses 
+could benefit from using licensing strategically to foster self-contained,
+tightly controlled project environments—useful in contexts requiring
+high stability or predictable dependency management.
+
+The moderate improvement in downstream project adoption following
+permissive licensing highlights practical licensing guidance 
+for maintainers seeking wider adoption. Project maintainers 
+aiming for their software to become foundational or widely
+used dependencies can practically adopt permissive licenses as
+a direct strategy to facilitate their projects' broader use across
+diverse OSS communities and applications.
+
+Lastly, implications regarding burstiness—concentrated periods 
+of intense development—offer actionable guidance. Since permissive
+licensing boosts burst-like activity in C/C++ and PHP, maintainers
+aiming for rapid or intensive development cycles (e.g., to meet release 
+deadlines or achieve specific project milestones) could strategically
+employ permissive licensing to trigger and sustain such heightened 
+activity. Conversely, Python communities, experiencing steadier 
+activity under permissive licenses, may practically leverage permissive
+licensing for achieving predictable and consistent development flows 
+rather than periodic intensive bursts.
+
+Together, these practical insights enable OSS project maintainers
+to make informed licensing choices strategically tailored to specific
+community dynamics, desired project outcomes, and broader ecosystem goals.
