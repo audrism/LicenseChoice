@@ -63,6 +63,15 @@ We then refine this group to those that adopted exactly one license at their
 initial license adoption time and maintained exactly one license at their latest
 recorded status, thereby excluding any projects that held multiple licenses 
 simultaneously at either point in time.
+
+This also means that if a project starts with license A, then changes to B,
+and later changes to license C, we consider it as one change from A to C, 
+rather than two separate changes.
+Consequently, we excluded projects where the first license type and 
+the latest license type were the same.
+Although these projects had other licenses at some point, they were 
+removed, resulting in no change between the first and last license types.
+
 Next, we categorize licenses into two high-level groups: ``permissive'', which 
 includes public-domain and permissive licenses, and ``restrictive'', encompassing 
 copyleft, weak-copyleft, and conditional open licenses.
