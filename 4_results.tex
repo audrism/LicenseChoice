@@ -508,82 +508,93 @@ its interaction with language influence various aspects of the model.
     \Description{License change model - odds ratios}
 \end{figure*}
 
-For the difference in the number of authors, projects in C/C++ have an odds 
-ratio below 1 showing they are about 6\%  (Odds Ratio = 0.94) less 
-likely to see increased
-authorship after transitioning from restrictive to permissive licenses
-compared to permissive to restrictive shifts.
-Conversely, projects using Go show an odds ratio just over 1, approximately 
-6.6\% greater odds of increasing authorship following a restrictive to 
-permissive license change.
-Although modest in magnitude, these odds ratios represent clear 
-language-specific differences in community response to licensing shifts.
+In these models, each coefficient represents a change in the 
+log-odds (or log-count) of the outcome. The main R2P effect 
+\(\beta_{\text{R2P}}\) 
+shows how the outcome shifts when moving from a restrictive to 
+a permissive license under sum contrasts (i.e., averaged across 
+language levels). A significant R2P:Language interaction 
+\(\beta_{\text{R2P:Lang}}\) 
+adds to (or subtracts from) the overall R2P coefficient for 
+that specific language. To obtain the total 
+restrictive\(\rightarrow\)permissive effect for a given language, 
+we sum \(\beta_{\text{R2P}} + \beta_{\text{R2P:Lang}}\) 
+and then exponentiate. The result is the odds ratio---a multiplier on 
+the odds of an increase in the outcome metric compared to the 
+permissive\(\rightarrow\)restrictive direction.
 
-Regarding the difference in the number of blobs, the odds ratio for C/C++ 
-projects is considerably lower than 1, indicating that projects shifting 
-from restrictive to permissive licenses are about 32\% less likely to
-experience growth in repository blobs compared to those shifting in 
-the opposite direction. Python projects, however, exhibit an odds 
-ratio substantially greater than 1, suggesting a 52\% higher likelihood 
-of increased repository growth after adopting permissive licenses.
-The substantial magnitude of these odds ratios highlights a strong 
-practical influence of license directionality in these languages.
+For the difference in the number of authors, C/C++ exhibits 
+an odds ratio of about 0.95, suggesting these projects are roughly 5\% 
+less likely to see increased authorship after moving from 
+a restrictive to a permissive license compared to the opposite 
+shift. In contrast, Go shows an odds ratio of about 1.08, 
+indicating an 8\% greater likelihood of authorship growth
+under permissive licensing. Although these effects are relatively 
+modest, they demonstrate clear language-specific differences in
+how communities respond to changes in license direction.
 
-In the difference in the number of commits, only C/C++ projects show 
-a significant result, with an odds ratio clearly below 1, meaning 
-there's approximately a 21\% lower chance of increased commit 
-frequency when transitioning to a permissive license compared to the 
-reverse direction. This moderate odds ratio underscores a meaningful
-practical reduction in development activity following permissive
-licensing within C/C++ communities.
+Regarding the difference in the number of blobs, C/C++ projects 
+exhibit an odds ratio of about 0.78, indicating these projects 
+are roughly 22\% less likely to experience blob growth when shifting 
+from restrictive to permissive licenses (compared to going
+permissive to restrictive). By contrast, Python shows an odds 
+ratio of about 1.73, suggesting a 73\% higher likelihood of 
+increased repository blob counts under permissive licensing. 
+The notable magnitude of these odds ratios emphasizes that 
+licensing direction can strongly shape development dynamics 
+in these languages.
 
-For the difference in the number of files, the general restrictive to 
-permissive license change has an odds ratio of approximately 1.30, 
-indicating about 30\% higher odds of increased file counts. However, 
-this general positive effect is significantly weakened in C/C++ projects,
-which show an odds ratio notably below 1, meaning these projects are 
-31\% less likely to experience such growth. On the other hand, 
-PHP and Python exhibit odds ratios above 1 (approximately 1.13 and 
-1.55, respectively), indicating PHP projects have about 13\% greater 
-odds and Python projects have about 55\% greater odds of increased 
-file counts following a shift to permissive licenses.
+In the difference in the number of commits, only C/C++ shows a statistically 
+significant result, with an odds ratio of about 0.77—indicating a roughly 
+23\% lower likelihood of increased commit frequency when shifting to a 
+permissive license compared to the opposite direction. This moderate odds 
+ratio suggests a tangible decrease in development activity within 
+C/C++ communities following a move to permissive licensing.
 
-Concerning the difference in active months, C/C++ projects demonstrate
-an odds ratio slightly below 1, suggesting approximately an 8\% reduced
-likelihood of sustained project activity after a restrictive to 
-permissive license transition. Python projects have an odds ratio 
-slightly above 1, indicating about 8\% greater odds of maintaining 
-longer periods of active development under permissive licenses. 
-While modest, these differences clearly show distinct patterns by language.
+For the difference in the number of files, the overall restrictive to
+permissive license shift has an odds ratio of about 1.30, indicating
+roughly 30\% higher odds of increased file counts. However, this 
+positive effect is notably reduced in C/C++, where the odds ratio is 
+about 0.89 (around 11\% lower odds). In contrast, PHP and Python
+have odds ratios near 1.47 and 2.02, respectively, suggesting that 
+PHP projects are about 47\% more likely and Python projects are about 
+100\% more likely to experience file-count growth under permissive licensing.
 
-Regarding the difference in upstream projects, the general restrictive 
-to permissive license transition effect shows about 25\% greater odds
-of increased reusing from upstream projects. The interactions reveal 
-language-specific nuances: for C/C++ and Ruby, the odds ratios are 
-significantly less than 1 (approximately 0.85 each), suggesting 
-about 15\% lower odds of increased upstream integration after moving
-to permissive licenses. Conversely, PHP and especially Python 
-projects demonstrate greater odds (approximately 1.36 and 1.37 
-respectively), indicating 36\% to 37\% increased likelihood of
-reusing from other projects after adopting permissive licenses.
+Concerning the difference in active months, C/C++ projects show an odds 
+ratio of about 0.89, indicating roughly 11\% lower odds of sustained
+project activity after moving from a restrictive to a permissive license.
+By contrast, Python has an odds ratio of about 1.05, suggesting 
+around 5\% higher odds of maintaining longer periods of active 
+development under permissive licenses. Although these effects are modest, 
+they illustrate clear language-specific variations.
 
-In the case of difference in downstream projects, the general restrictive 
-to permissive transition shows an odds ratio slightly greater than 1,
-reflecting about 9–10\% greater odds of increased downstream project
-use or integration following a shift to permissive licenses.
-This moderate effect indicates a practical tendency toward greater
-popularity or usage within broader software ecosystems under
-permissive licensing conditions.
+Regarding the difference in upstream projects, the overall restrictive
+to permissive shift shows an odds ratio of about 1.25, indicating roughly 
+25\% higher odds of increased reuse from upstream. The interactions for
+C/C++ and Ruby, though negative relative to the overall effect, still
+place these languages slightly above 1 (about 1.07 and 1.06, respectively).
+In contrast, PHP stands at about 1.38, and Python reaches about 1.70, 
+suggesting considerably greater odds of upstream integration under 
+permissive licensing. These variations across languages emphasize 
+the nuanced ways in which license directionality can shape project
+dependencies.
 
-Lastly, for the difference in burstiness, the odds ratios show 
-moderate yet meaningful language-specific impacts. Projects using
-C/C++ have about 7\% greater odds of experiencing more intense 
-bursts of activity after adopting permissive licenses. Similarly,
-PHP shows about a 3.5\% increased odds. However, Python projects 
-show reduced odds, meaning they are about 7\% less likely to 
-experience bursty activity after permissive license adoption. 
-Although moderate, these odds ratios highlight distinct behavioral 
-differences tied directly to licensing directionality.
+For the difference in downstream projects, the overall effect of 
+going from a restrictive to a permissive license is an odds ratio of 
+about 1.10, indicating roughly 10\% higher odds of increased downstream
+usage or integration. This moderate boost suggests that 
+adopting a permissive license tends to enhance a project’s
+popularity within broader software ecosystems.
+
+Lastly, for the difference in burstiness, the language-specific 
+interactions point to moderate yet meaningful distinctions. C/C++ 
+projects have an odds ratio of about 1.10 (around 10\% greater odds
+of more intense activity bursts) under permissive licensing, while PHP 
+stands at about 1.06 (6\% higher odds). By contrast, Python’s total
+odds ratio is about 0.96, indicating roughly 4\% lower odds of
+experiencing bursty activity. Although modest, these differences 
+highlight notable variations in development dynamics associated 
+with licensing direction.
 
 These quantified magnitudes, along with their directions, 
 clearly demonstrate that license transitions influence project 
