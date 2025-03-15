@@ -5,7 +5,7 @@ First, we gather descriptive statistics to quantify the prevalence, retention,
 and temporal trends of different license types within publicly available repositories.
 We then identify projects that switched from permissive to restrictive 
 licenses (or vice versa) and measure their performance changes before and after 
-the switch, again using a multivariate multiple regression approach.
+the switch, using a multivariate multiple regression approach.
 
 \subsection{License Types}
 
@@ -49,8 +49,22 @@ Throughout this paper, the term ``project'' refers to this deforked project unle
 
 \subsection{License Change}
 
-Understanding license type changes enables project maintainers and contributors
-to make more informed strategic decisions.
+We use license changes within public repositories to test our hypotheses 
+on how license choice affects project performance. A project's decision 
+to switch licenses constitutes a highly deliberate, informed event, 
+typically involving careful consideration of implications related to legal 
+constraints, developer participation, and user adoption. Unlike
+initial license selections---which may be arbitrary or uninformed---license
+changes reflect strategic intent, often in response to evolving community
+needs, competitive pressures, or growth ambitions. This intentionality
+makes license changes ideal natural experiments, enabling clearer
+causal inferences regarding the impact of licensing decisions on 
+measurable performance metrics. By focusing specifically on projects 
+that have altered their licenses, this study leverages within-project 
+variation, inherently controlling for stable project characteristics, 
+thereby significantly strengthening internal validity and enhancing 
+the precision of conclusions drawn from the analysis.
+
 For example, moving to a more restrictive license type might be chosen to 
 protect the project's intellectual property or to enforce open-source
 principles more rigorously.
@@ -99,3 +113,4 @@ regression that allows for multiple dependent variables (outcomes) to be predict
 by multiple independent variables (predictors) simultaneously.
 This model is useful when the dependent variables are correlated and need to be 
 analyzed together to improve prediction accuracy and interpretation.
+

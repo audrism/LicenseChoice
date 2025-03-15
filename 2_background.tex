@@ -8,10 +8,9 @@ participate in OSS.
 Second, technical, social, and other factors
 that either constraint certain choices in software development or
 make them more convenient~\cite{ma2020methodology}.
-Third, the specific plans and objectives of the project, and how each license choice may advance and hinder these goals~\cite{sen2008determinants}.
-% Fourth, the legal implications and the need to manage compliance with licenses
-% in open source software.
-
+Third, the legal implications and the need to manage compliance with licenses
+in open source software.
+Fourth, the specific plans and objectives of the project, and how each license choice may advance and hinder these goals~\cite{sen2008determinants}.
 
 \subsection{Motivation}
 
@@ -114,7 +113,7 @@ In summary, we hypothesize that:
 
 \begin{itemize}
     \item \textbf{Hypothesis (H1a)}: More restrictive licenses results in higher total numbers of authors.  
-    \item \textbf{Hypothesis (H1b)}: More restrictive licenses which  are often ideologically motivated will be more likely to be retained.
+    \item \textbf{Hypothesis (H1b)}: More restrictive licenses which are often ideologically motivated will be more likely to be retained.
 \end{itemize}
 
 \subsection{Social and Technical Choice}
@@ -167,12 +166,64 @@ complexity and potential challenges related to license alignment.
 Based on this discussion, we hypothesize that:
 
 \begin{itemize}
-    \item \textbf{Hypothesis (H2a)}: The license choice is affected by overall popularity of the license controlled by license adoption time and the 
-    culture-specific popularity approximated by the programming language.
-    \item \textbf{Hypothesis (H2b)}: More permissive licenses result in higher community size as approximated by number of upstream and downstream projects.
+    \item \textbf{Hypothesis (H2a)}: The license choice is affected by overall popularity of the license approximated by the proportion of projects adopting the same license type at the adoption time
+    \item \textbf{Hypothesis (H2b)}: The license choice is affected by culture-specific norms approximated by the programming language.
+    \item \textbf{Hypothesis (H2c)}: More permissive licenses result in higher community size as approximated by number of upstream and downstream projects.
 \end{itemize}
 
-\begin{comment}
+\subsection{Legal and Regulatory Context}
+
+Open source software licenses serve not only as technical choices but also as
+legal instruments defining the rights and obligations of developers and users.
+The selection of a license carries significant implications for intellectual property, liability, and compliance with copyright laws.
+
+\citet{wu2024large} conducted a large-scale empirical study revealing the 
+complexities of license compliance and the frequent misunderstandings 
+developers face, especially in large projects.
+Similarly, \citet{cui2023empirical} found that over 25\% of the 16,000 
+open source projects they analyzed contained license conflicts, often due 
+to misunderstandings of license terms.
+Their tool, DIKE, helps detect such conflicts, underscoring the 
+challenges of managing multiple licenses within a project.
+
+\citet{almeida2017software} further emphasized the widespread difficulty developers have in correctly interpreting licenses, which can lead to 
+non-compliance and legal risks.
+These findings highlight the need for better education and tools to 
+support effective license management.
+
+Multiple studies have shown that declared project licenses are often inaccurate 
+or incomplete~\cite{german2010understanding, reid2023applying, wolter2023open}.
+\citet{wolter2023open} found that nearly 50\% of open source projects on GitHub
+exhibited inconsistencies between the declared top-level license and the actual
+licenses used within the codebase.
+
+Regulatory frameworks, such as the European Union’s General Data Protection 
+Regulation (GDPR) and U.S.\ export control laws, add further complexity to 
+licensing decisions, particularly in international and data-sensitive projects.
+These regulations can influence license choices by introducing additional 
+compliance challenges.
+
+We hypothesize that delays in adopting a license may reflect the
+need for careful legal deliberation to ensure compliance with intellectual 
+property laws and other legal frameworks.
+Therefore we should control for delays 
+(defined as the difference between license adoption date and project start date)
+in our model.
+
+Additionally, projects that interact with upstream components may
+prioritize selecting legally aligned licenses to facilitate
+integration~\cite{cui2023empirical, xu2023lidetector}.
+
+Furthermore, larger projects, especially those with many contributors, are more 
+likely to face legal challenges regarding intellectual property, contributor
+agreements, and international regulations.
+In such cases, delayed license adoption may reflect careful legal evaluation aimed at mitigating risks~\cite{fershtman2007open}.
+
+In summary, we hypothesize that:
+\begin{itemize}
+\item \textbf{Hypothesis (H3)}: Delays and in license adoption signals more deliberate and informed license choice. 
+\end{itemize}
+
 \subsection{Project Goals}
 
 While legal compliance sets essential boundaries, the specific needs and objectives of a project further influence the selection of an appropriate license.
@@ -202,79 +253,12 @@ Burstiness, as a proxy for fluctuating activity, was operationalized by measurin
 Projects with high burstiness may not focus heavily on legal concerns and tend to choose well-known, widely used licenses as a quick, familiar option, rather than spending time evaluating more specific licensing terms.
 
 \begin{itemize}
-\item \textbf{Hypothesis (H4a)}: More active projects in terms of
-  number of commits will favor neither too restrictive nor too
-  permissive licenses. 
-\item \textbf{Hypothesis (H4b)}: More complex projects approximated by the number of files will favor restrictive licenses.
+\item \textbf{Hypothesis (H4a)}: The license choice will affect the project activity approximated by number of commits.
+\item \textbf{Hypothesis (H4b)}: More complex projects approximated by the number of files and blobs will favor restrictive licenses.
 \item \textbf{Hypothesis (H4c)}: Restrictive licenses support long-term sustainability as approximated by project activity duration.
 \item \textbf{Hypothesis (H4d)}: Burstiness reflects the lack of
-stability and favors more popular licenses.
+stability and favors more permissive licenses.
 \end{itemize}
-
-\end{comment}
-
-\begin{comment}
-\subsection{Legal and Regulatory Context}
-
-Open source software licenses serve not only as technical choices but also as
-legal instruments defining the rights and obligations of developers and users.
-The selection of a license carries significant implications for intellectual property, liability, and compliance with copyright laws.
-
-\citet{wu2024large} conducted a large-scale empirical study revealing the 
-complexities of license compliance and the frequent misunderstandings 
-developers face, especially in large projects.
-Similarly, \citet{cui2023empirical} found that over 25\% of the 16,000 
-open source projects they analyzed contained license conflicts, often due 
-to misunderstandings of license terms.
-Their tool, DIKE, helps detect such conflicts, underscoring the 
-challenges of managing multiple licenses within a project.
-
-\citet{almeida2017software} further emphasized the widespread difficulty developers have in correctly interpreting licenses, which can lead to 
-non-compliance and legal risks.
-These findings highlight the need for better education and tools to 
-support effective license management.
-
-Multiple studies have shown that declared project licenses are often inaccurate 
-or incomplete~\cite{german2010understanding, reid2023applying, wolter2023open}.
-\citet{wolter2023open} found that nearly 50\% of open source projects on GitHub
-exhibited inconsistencies between the declared top-level license and the actual
-licenses used within the codebase.
-
-% \citet{xu2023lidetector, xu2023liresolver} contributed to addressing these 
-% challenges with tools like LiDetector, which detects license incompatibilities, 
-% revealing that over 70\% of projects studied had such issues.
-% Their follow-up tool, LiResolver, provides solutions for resolving these 
-% incompatibilities, demonstrating the critical role of automated tools in 
-% managing license compliance.
-
-Regulatory frameworks, such as the European Union’s General Data Protection 
-Regulation (GDPR) and U.S.\ export control laws, add further complexity to 
-licensing decisions, particularly in international and data-sensitive projects.
-These regulations can influence license choices by introducing additional 
-compliance challenges.
-
-We hypothesize that delays in adopting a license may reflect the
-need for careful legal deliberation to ensure compliance with intellectual 
-property laws and other legal frameworks.
-Therefore we should control for delays 
-(defined as the difference between license adoption date and project start date)
-in our model.
-
-Additionally, projects that interact with upstream components may
-prioritize selecting legally aligned licenses to facilitate
-integration~\cite{cui2023empirical, xu2023lidetector}.
-
-Furthermore, larger projects, especially those with many contributors, are more 
-likely to face legal challenges regarding intellectual property, contributor
-agreements, and international regulations.
-In such cases, delayed license adoption may reflect careful legal evaluation aimed at mitigating risks~\cite{fershtman2007open}.
-
-In summary, we hypothesize that:
-\begin{itemize}
-\item \textbf{Hypothesis (H3a)}: Longer delays in adoption will favor less popular licenses.
-\item \textbf{Hypothesis (H3b)}: Projects with more contributors will favor restrictive licenses.
-\end{itemize}
-\end{comment}
 
 \section{Comparisons to Prior Work}
 
