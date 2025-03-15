@@ -1,3 +1,4 @@
+
 \section{Results and Discussion}
 
 We organize our results in three parts. 
@@ -12,58 +13,46 @@ metrics before and after a change from permissive to restrictive (or vice versa)
 
 \subsubsection{Our Findings}
 
-We first counted the total number of projects that had at least one occurrence 
-of any license during their lifetime.
-We then identified the top 20 most used licenses, 
-as shown in Figure~\ref{fig:dis1}.
-
+We first count how many projects had at least one occurrence 
+of any license during their lifetime,
+then identify the top 20 most used licenses, 
+as shown in Figure~\ref{fig:dis1}, and analyze their frequency.
 Out of the 131,171,379 projects indexed by WoC, 22,281,342 projects had at 
 least one license committed to their project at some point in their lifetime.
 However, when examining the latest version of these projects, 
 this number drops to 20,110,256 projects.
-
-When interpreting the numbers shown in these figures, it is important to note 
-that the sum of these numbers exceeds the total number of projects with a license.
+When interpreting the numbers in the figure, note 
+that the sum of per-license counts exceeds the total number of projects with a license.
 This discrepancy arises because some projects have multiple licenses and 
 are therefore counted in several categories.
 
-\begin{figure*}[t]
-\centering
-    \includegraphics[width=\textwidth]{figures/dis1.png}
-    \caption{The distribution and retention rates of the most used licenses.}
-    \label{fig:dis1}
-    \Description{The distribution and retention rates of the most used licenses.}
-\end{figure*}
-
-To calculate the retention rate for each license, we determined the number of 
-projects that still had the license in their latest state and divided this number 
+To calculate the license retention rates, we count how many 
+projects still had the license in their latest state and divide this number 
 by the total number of projects that had ever used the license.
-This retention rate indicates the proportion of projects that continue to use 
-the license over time, and it is also displayed in Figure~\ref{fig:dis1}.
+This retention rate, also in Figure~\ref{fig:dis1}, indicates the proportion of projects that continue to use the license over time.
 
 As shown in the figure, the MIT license is the most prominent, followed
 by the Apache 2.0 and ISC licenses.
 Notably, per H1b, the deprecated GPL 3 license (with strong
-copyleft provisions) exhibits the highest retention rate.
+copyleft provisions) has the highest retention rate.
 In contrast, the Creative Commons 3 license (CC-BY-3.0) 
-shows the lowest retention rate among the top 20 most used licenses.
+has the lowest retention rate. % among the top 20 most used licenses.
 
 \begin{figure}[t]
 \centering
-    \includegraphics[width=\linewidth]{figures/dis3.png}
+    \includegraphics[width=\linewidth, clip=true, trim=0 25 0 0]{figures/dis3.png}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
     \Description{The distribution of license types across projects.}
 \end{figure}
 
-We also analyze the distribution of projects according to their license types.
-Initially, we consider the distribution across the entire project history, 
+We also analyze the distribution of projects according to their license types, in two conditions.
+First, we consider the distribution across the entire project history, 
 meaning that if a project adopted a license at any point and later removed it, 
 it is still counted as having that license.
-Next, we determine the distribution based on the most recent status of 
+Second, we determine the distribution based on the most recent status of 
 each project.
-
-Figure~\ref{fig:dis3} shows that ``conditional-open'', ``weak-copyleft'', 
+The results in Figure~\ref{fig:dis3} show that ``conditional-open'', ``weak-copyleft'', 
 and ``public-domain'' license types have the lowest
 retention, with approximately a quarter of the projects that ever had 
 such license changing it by their latest version.
@@ -78,19 +67,19 @@ licenses and assess whether certain license types have gained or declined
 in popularity. By tracking these proportions longitudinally, we can better 
 understand how licensing choices evolve and whether external factors, such 
 as regulatory changes or community norms, influence these trends.
-Th results are shown in Figure~\ref{fig:proportion}.
+The results are shown in Figure~\ref{fig:proportion}.
+Looking at the trends we clearly see that although copyleft licenses
+may be the most sticky, the tendency to adopt these licenses has decreased
+over time.
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{figures/proportion.png}
+    \includegraphics[width=\linewidth, clip=true, trim=0 5 0 0]{figures/proportion.png}
     \caption{Proportion of license type over time}
     \label{fig:proportion}
     \Description{Proportion of license type over time}
 \end{figure}
 
-Looking at the trends we clearly see that although copyleft licenses
-may be the most sticky, the tendency to adopt these licenses has decreased
-over time.
 
 \subsubsection{Comparison with Literature}
 
@@ -98,6 +87,40 @@ Table~\ref{tab:res1a} provides a comparison between the results in the
 literature and our study, highlighting substantial differences primarily 
 due to variations in scope, methodology, and dataset size 
 (see Table~\ref{tbl:litRev}).
+
+A key methodological difference between our study and \citet{wu2024large} lies in the treatment of data points.
+\citet{wu2024large} considered each version of a package as a separate data point, 
+resulting in 46.59 million data points from 3.47 million projects.
+This approach could overrepresent projects with many
+versions, potentially skewing adoption trends.
+Our study treats each project as a single data point, providing 
+a more balanced view of the ecosystem without overemphasizing 
+projects with frequent updates.
+
+The focus of the \citet{wu2024large} study on only five package managers might explain 
+the significant discrepancy in the percentage of projects without a license:
+% Their study reported that 
+21.12\%
+% of projects lacked a license
+in their case,\footnote{
+Since the paper provides these percentages by package manager, we calculated 
+% the overall percentage by taking 
+a weighted average based on the number of 
+projects per package manager.} 
+% whereas our study found a much higher percentage of 
+versus 83.01\% in ours.
+On the other hand, \citet{cui2023empirical} reported that only 10.51\% of
+projects were unlicensed.
+The difference with \citet{wu2024large} likely stems from the fact that the
+package managers they examined are associated with more mature and 
+well-maintained projects, which are more likely to have defined licenses.
+Additionally, \citet{cui2023empirical} filtered their data to include 
+only projects with over 1,000 stars, which might explain why the 
+percentage of unlicensed projects is so low.\footnote{
+These could also be influenced by the differences between OSS projects
+and publicly available projects as was explained in the introduction.}
+In contrast, our dataset is broader, including projects which may be less mature or less formally governed, leading to a higher incidence of unlicensed projects.
+
 
 \begin{table*}[t]
 \centering
@@ -117,38 +140,9 @@ due to variations in scope, methodology, and dataset size
 \end{table*}
 
 
-A key methodological difference between our study and \citet{wu2024large} lies in the treatment of data points.
-\citet{wu2024large} considered each version of a package as a separate data point, 
-resulting in 46.59 million data points from 3.47 million projects.
-This approach could introduce bias by overrepresenting projects with many
-versions, potentially skewing observed trends in licensing.
-Conversely, our study treated each project as a single data point, providing 
-a more balanced view of the open source ecosystem without overemphasizing 
-projects with frequent updates.
-
-The focus of the \citet{wu2024large} study on only five package managers might explain 
-the significant discrepancy in the percentage of projects without a license.
-Their study reported that 21.12\% of projects lacked a license,\footnote{
-Since the paper provides these percentages by package manager, we calculated the 
-overall percentage by taking a weighted average based on the number of 
-projects per package manager.} 
-whereas our study found a much higher percentage of 83.01\%.
-On the other hand, \citet{cui2023empirical} reported that only 10.51\% of
-projects were unlicensed.
-The difference with \citet{wu2024large} likely stems from the fact that the
-package managers they examined are associated with more mature and 
-well-maintained projects, which are more likely to have defined licenses.
-Additionally, \citet{cui2023empirical} filtered their data to include 
-only projects with over 1,000 stars, which might explain why the 
-percentage of unlicensed projects is so low\footnote{
-These could also be influenced by the differences between OSS projects
-and publicly available projects as was explained in the introduction.}.
-In contrast, our broader dataset includes a wide variety of projects, many 
-of which may be less mature or less formally governed, leading to a higher incidence of unlicensed projects.
-
 The analysis of copyleft versus permissive licenses further reflects 
 the differences in scope.
-\citet{wu2024large} found a dominance of permissive licenses, with much 
+\citet{wu2024large} found a preponderance of permissive licenses, with much 
 lower percentages for copyleft and weak copyleft licenses.
 However, our study, covering all programming languages, reveals a more 
 diverse licensing landscape, with a lower percentage of permissive licenses
@@ -157,23 +151,26 @@ This suggests that by focusing on just five package managers, \citet{wu2024large
 might underrepresent broader licensing trends, particularly the prevalence 
 of copyleft licenses across the global open source ecosystem.
 
-\begin{figure}[t]
+\begin{figure}[h]
+\vspace{-1mm}
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
 \begin{enumerate}[leftmargin=4mm]
-    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than the figures reported in previous studies.
+    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than previously reported.
     \item The MIT license is the most widely used license,
       accounting for 65\% of all licensed projects and 10\% of all
-      OSS projects.
+      public projects.
     \item Despite the overall preference for permissive licenses,
-      copyleft licenses such as GPL exhibit strong retention rates
-      as suggested by H1b.
+      copyleft licenses such as GPL have high retention rates
+      cf.\ H1b.
     \item The differences in license usage reported in our study compared 
-    to previous literature highlight the importance of dataset scope 
-    and methodology when assessing the prevalence of licenses in OSS projects.
+    to prior work highlight how sensitive such analyses are to sampling strategies.
+    % the importance of dataset scope 
+    % and methodology when assessing the prevalence of licenses in OSS projects.
 \end{enumerate}
 \end{tcolorbox}
 \Description{Key Findings}
+\vspace{-2mm}
 \end{figure}
 
 \subsubsection{Implications}
@@ -183,7 +180,7 @@ formal license, posing significant legal risks and discouraging
 innovation by preventing responsible actors from reusing unlicensed code. 
 This highlights the need for developers to prioritize licensing to set 
 clear terms of use.
-Our findings challenge previous studies, which often underestimate the 
+Our findings challenge previous findings, which underestimate the 
 prevalence of unlicensed projects by focusing on mature ones, missing 
 the broader risks of software reuse.
 
@@ -357,29 +354,31 @@ The community should aim to balance historical ideals of software freedom with t
 By addressing these insights and implications, the OSS community can foster a more legally secure, inclusive, and sustainable environment for open source development, encouraging developers to make informed and strategic decisions about licensing that align with both their project's needs and the broader community's values.
 \end{comment}
 
-\subsection{The Impact of License Change on Project Characteristics}
+\subsection{The Impact of License Changes} % on Project Characteristics}
 
-Examining the distribution of license type counts in projects 
-(Figure~\ref{fig:pie}), we observe that nearly 22\% of projects had more 
-than one license type in their lifetime.
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\linewidth]{figures/pie.png}
+\includegraphics[width=0.8\linewidth, clip=true, trim=10 0 90 0]{figures/pie.png}
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
 \end{figure}
 
-We then analyze the latest status of these 22\% of projects.
-As shown in Figure~\ref{fig:pie}, 74\% of these projects have more than one 
-license type in their latest status as well, indicating they did not 
+Examining the distribution of license type counts in projects 
+(Figure~\ref{fig:pie}), we observe that nearly 22\% of projects had more 
+than one license type in their lifetime.
+Among these,
+% We then analyze the latest status of these 22\% of projects.
+% As shown in Figure~\ref{fig:pie}, 74\% of these projects have 
+74\% still had more than one license type in their latest status as well, indicating they did not 
 necessarily change their license.
 On the other hand, 15\% of these projects do not have any license in their 
 latest status, meaning they deleted their license.
 The middle group, consisting of projects that had more than one license type 
-in their lifetime but have only one type in their latest status, corresponds 
-to the group we want to focus on to analyze the license changes.
+in their lifetime but have only one type ultimately, is the group
+% we want to focus on to
+we analyze license changes in.
 
 \subsubsection{Our Findings}
 
@@ -393,7 +392,7 @@ are presented in Table~\ref{tbl:stat-l}.
 \begin{table*}[t]
 \centering
 \caption{License change model - descriptive statistics.}
-\resizebox{\textwidth}{!}{
+\resizebox{0.95\textwidth}{!}{
 \begin{tabular}{cllcccc}
   \toprule
   & \textbf{Variable} & \textbf{Description} & & \textbf{Statistics} & & \\ 
@@ -466,7 +465,7 @@ The results show that the p-values for all the predictors are close to zero,
 indicating that each predictor significantly improves our model's fit.
 
 \begin{table}[t]
-\centering
+\centering \small
 \caption{License change model - Type III MANOVA Tests: Pillai test statistic}
 % \resizebox{\linewidth}{!}{
 \begin{tabular}{lccc}
@@ -494,17 +493,17 @@ statistically significant at the 95\% confidence level. This ensures that
 the results focus on meaningful relationships rather than noise. 
 Figure~\ref{fig:odds} displays these significant odds ratios along with 
 their 95\% confidence 
-intervals, highlighting the variability and reliability of the 
-estimates\footnote{Please refer to the replication package for the full 
-set of coefficients and their respective p.values.}. 
-Since the analysis is based on a multivariate multiple regression model,
+intervals.\footnote{Please refer to the replication package for the full 
+% highlighting the variability and reliability of the estimates
+set of coefficients and p-values.} 
+Since the analysis is based on a multivariate regression model,
 the odds ratios are presented across different output variables, allowing
-for a comprehensive comparison of how the change direction predictor and 
+for a comparison of how the change direction predictor and 
 its interaction with language influence various aspects of the model.
 
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=\linewidth]{figures/odds_ratios.pdf}
+    \includegraphics[width=0.9\linewidth, clip=true, trim=0 18 0 0]{figures/odds_ratios.pdf}
     \caption{License change model - odds ratios}
     \label{fig:odds}
     \Description{License change model - odds ratios}
@@ -564,7 +563,7 @@ PHP projects are about 47\% more likely and Python projects are about
 
 Concerning the difference in active months, C/C++ projects show an odds 
 ratio of about 0.89, indicating roughly 11\% lower odds of sustained
-project activity after moving from a restrictive to a permissive license.
+activity after moving from a restrictive to a permissive license.
 By contrast, Python has an odds ratio of about 1.05, suggesting 
 around 5\% higher odds of maintaining longer periods of active 
 development under permissive licenses. Although these effects are modest, 
@@ -603,12 +602,13 @@ clearly demonstrate that license transitions influence project
 metrics meaningfully, with notable variations across different 
 metrics and programming languages.
 
-\begin{figure}[t]
+\begin{figure}[h]
+\vspace{-3mm}
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
 \begin{enumerate}[leftmargin=4mm]
     \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses.
-    \item Python projects significantly increase repository growth and sustained activity under permissive licenses.
+    \item Python projects see increased repository growth and sustained activity under permissive licenses.
     \item  PHP projects benefit from permissive licenses through increased file additions and external project integration.
     \item Go projects attract moderately more authors after permissive license adoption.
     \item Permissive licenses generally increase both upstream and downstream project adoption.
@@ -617,21 +617,23 @@ metrics and programming languages.
 \end{enumerate}
 \end{tcolorbox}
 \Description{Key Findings}
+\vspace{-4mm}
 \end{figure}
 
 \subsubsection{Implications}
 
-Programming language is a choice of technology that has its own
-libraries and tools. User of that entire ecosystem, is nudged toward
-the most common licences used within it.
+Programming language implies a broader choice of technology,
+libraries, and tools. Thus, users of that entire ecosystem are probably nudged toward
+the most common licenses used within it.
 For example, C-based projects often prefer restrictive licenses, 
-while Go and Python projects lean toward permissive licenses.
+while Go and Python projects lean toward permissive ones.
 Developers should be aware of how their language community influences 
 licensing norms, and the community could offer language-specific
-guidelines to align new projects with best licensing practices.
+guidelines to align new projects with licensing best practices.
 
-The observed differences in authorship after license changes highlight 
-practical considerations for OSS project maintainers. In the C/C++ 
+% The observed differences in authorship after license changes highlight 
+% practical considerations for OSS project maintainers. 
+In the C/C++ 
 community, where switching to permissive licenses slightly discourages 
 new contributors, project maintainers might need to pair such license
 transitions with additional strategies---such as enhanced outreach or
@@ -654,9 +656,10 @@ should carefully weigh the trade-offs or introduce additional
 motivators (e.g., clearer contributor recognition or rewards) 
 alongside permissive licensing decisions.
 
-The findings related to commit activity in C/C++ suggest practical
-actions for OSS leaders in these communities. Since permissive 
-licensing tends to lower commit frequency, maintainers considering
+% The findings related to commit activity in C/C++ suggest 
+% practical actions for 
+Since permissive licensing tends to lower commit frequency in C/C++,
+those community leaders considering
 permissive licensing should prepare targeted interventions, such as
 clearly articulated development roadmaps, contributor guidelines,
 or engagement incentives to sustain development momentum after
@@ -682,9 +685,9 @@ as periodic contribution drives or community recognition---to
 sustain longer-term involvement.
 
 Insights on upstream project usage have clear practical 
-ramifications for project maintainers. Python and PHP communities'
+ramifications. Python and PHP communities'
 increased usage of external OSS projects after adopting permissive
-licenses suggest maintainers might strategically use permissive
+licenses suggests maintainers might strategically use permissive
 licensing to encourage their projects' broader integration into
 complex OSS ecosystems. Conversely, C/C++ and Ruby projects that 
 see decreased usage of external dependencies under permissive licenses 
@@ -711,6 +714,6 @@ activity under permissive licenses, may practically leverage permissive
 licensing for achieving predictable and consistent development flows 
 rather than periodic intensive bursts.
 
-Together, these practical insights enable OSS project maintainers
+Together, these practical insights enable OSS maintainers
 to make informed licensing choices strategically tailored to specific
 community dynamics, desired project outcomes, and broader ecosystem goals.

@@ -11,9 +11,9 @@ the switch, using a multivariate multiple regression approach.
 
 We group licenses based on their characteristics.
 This grouping helps categorize and understand the different ways software can be distributed and modified.
-These categories typically include permissive, copyleft, weak copyleft, and public domain/unlicensed licenses.
-This classification is widely recognized in the field and is supported by various scholarly sources.
-As noted by \citet{kaminski2007open}, these licensing patterns have shaped the development of OSS.
+These categories typically include permissive, copyleft, weak copyleft, and public domain/unlicensed code.
+This classification is widely recognized in the field~\cite{kaminski2007open} and is supported by various scholarly sources.
+% As noted by \citet{kaminski2007open}, these licensing patterns have shaped the development of OSS.
 
 1. \textit{Permissive Licenses}: These licenses, such as the MIT and BSD licenses, are known for their minimal restrictions on how the software can be used.
 They allow software to be freely used, modified, and redistributed, even as part of proprietary software~\cite{kapitsaki2019modeling}.
@@ -51,14 +51,14 @@ Throughout this paper, the term ``project'' refers to this deforked project unle
 
 We use license changes within public repositories to test our hypotheses 
 on how license choice affects project performance. A project's decision 
-to switch licenses constitutes a highly deliberate, informed event, 
+to switch licenses should constitute a highly deliberate, informed event, 
 typically involving careful consideration of implications related to legal 
 constraints, developer participation, and user adoption. Unlike
 initial license selections---which may be arbitrary or uninformed---license
 changes reflect strategic intent, often in response to evolving community
 needs, competitive pressures, or growth ambitions. This intentionality
-makes license changes ideal natural experiments, enabling clearer
-causal inferences regarding the impact of licensing decisions on 
+makes license changes ideal natural experiments, enabling clearer,
+quasi-causal inferences regarding the impact of licensing decisions on 
 measurable performance metrics. By focusing specifically on projects 
 that have altered their licenses, this study leverages within-project 
 variation, inherently controlling for stable project characteristics, 
@@ -71,12 +71,22 @@ principles more rigorously.
 \citet{kechagia2010open} illustrate how different license types affect 
 dependency management and compliance in software projects.
 
-To investigate the impact of license switching, we begin by identifying projects
-that have had more than one license throughout their lifetime.
+To investigate the impact of license switching, we first identify projects
+with more than one license throughout their lifetime.
 We then refine this group to those that adopted exactly one license at their 
 initial license adoption time and maintained exactly one license at their latest
 recorded status, thereby excluding any projects that held multiple licenses 
 simultaneously at either point in time.
+
+
+\begin{figure*}[t]
+\centering
+    \includegraphics[width=0.8\textwidth, clip=true, trim=0 30 0 0]{figures/dis1.png}
+    \caption{The distribution and retention rates of the most used licenses.}
+    \label{fig:dis1}
+    \Description{The distribution and retention rates of the most used licenses.}
+\end{figure*}
+
 
 This also means that if a project starts with license A, then changes to B,
 and later changes to license C, we consider it as one change from A to C, 
@@ -95,16 +105,17 @@ restrictive license or vice versa.
 To measure performance changes, we compute key project metrics during two separate 
 one-year intervals: one immediately following the first license adoption and 
 another immediately following the last license adoption.
-Projects are excluded if fewer than one years separate the adoption dates of the
-first and last licenses or if less than one years have elapsed since the last 
+Projects are excluded if less than one year separates the adoption dates of the
+first and last licenses or if less than one year has elapsed since the last 
 license adoption at the time of our data curation. 
 We then model the change in these metrics (i.e., metric values in the post-switch 
 interval minus those in the pre-switch interval) based on the direction of the 
 license change (restrictive to permissive or permissive to restrictive).
-As control variables, we include the project’s primary language, its start and 
+% As control variables, we include
+We control for the project’s primary language, its start and 
 end times, the delay before the first license adoption, the elapsed time between
-the first and last license adoptions, and the proportion of new projects 
-adopting that license type in OSS at the time of the last license change.
+the first and last license adoptions, and the proportion of new OSS projects 
+adopting that license type at the time of the last license change.
 
 To test our hypotheses, we selected a regression model appropriate to the 
 nature of our response variable, specifically, multivariate multiple regression.

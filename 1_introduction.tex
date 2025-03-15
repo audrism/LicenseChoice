@@ -23,19 +23,18 @@ any license~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks}.
 \end{comment}
 
 Our first aim is to better understand the actual state of license
-selection in open software projects, including the choice of no license. 
+selection in public software projects, including the choice of no license. 
 %We acknowledge the distinction between open source and public repositories, 
 %recognizing that the latter---repositories without explicit licenses---do not 
 %technically qualify as OSS. 
-Such unlicensed public repositories play a significant role in the software
-ecosystem.
-As \citet{jahanshahi2024beyond} highlight, even small, unlicensed repositories 
-contribute substantially to larger projects, emphasizing their importance in 
-understanding reuse patterns and a significant portion of the 
-massive source code used for training consists of code without 
-any license~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks}.
+Such unlicensed repositories play a significant role in the broader
+ecosystem, e.g., they contribute code substantially to larger projects~\cite{jahanshahi2024beyond} and they represent a significant portion of the 
+massive training data for LLMs~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks},
+% As \citet{jahanshahi2024beyond} highlight, even small, unlicensed repositories 
+% contribute substantially to larger projects, 
+emphasizing their importance in understanding reuse patterns.
 
-However, the absence of licenses introduces legal uncertainties that may hinder
+The absence of licenses introduces legal uncertainties that may hinder
 downstream reuse. 
 The problem may be propagated further, as the active and popular
 projects are often upstream dependencies for numerous projects
@@ -50,13 +49,13 @@ greatly underestimates the proportion of projects with no license
 due to heavily filtering based on size, maturity, popularity, and
 activity.
 
-In open software projects, any decision is often made based on perceived supply chain
+In OSS projects, decisions are often made based on perceived supply chain
 concerns, such as choosing to participate in a project that will
 become popular, hoping to have a large number of direct or
-downstream users (and followers), selecting upstream dependencies
+transitive downstream users (and followers), selecting upstream dependencies
 that appear healthy, responsive, and
 active~\cite{socialCoding,choice23,ma2020methodology}, and so on.
-License choice has clear and far reaching effects on the supply
+License choice should have clear and far reaching effects on the supply
 chains in terms of attracting and retaining participants, having
 downstream dependents or users, and, of course on ways the code may
 be (re-)used.
@@ -68,8 +67,8 @@ Our second aim is, therefore, to establish and test a preliminary theory
 that helps explain the impact of license choice in open software. 
 The theory could help explain some of the reasons why a large fraction 
 of projects have no license, why some license violations (such as the use of
-unlicensed code) appear to be tolerated, and what to expect when a developer (or an organization) change a license.
-Such theory can potentially lead to better tools that help developers
+unlicensed code) appear to be tolerated, and what to expect when a developer (or an organization) changes a license.
+Such a theory can potentially lead to better tools that help developers
 choose the most suitable license according to their objectives,
 increase the proportion of projects with a license (hence spurring
 innovation that is presently inhibiting actors who do pay attention
@@ -110,7 +109,7 @@ software freedom within certain communities. In comparison to prior
 studies we find four-fold larger prevalence of unlicensed
 code.
 
-% todo: should be updated
+
 
 % Our theory-derived project characteristics that should influenced by
 % license selection in OSS projects were tested using a multivariate multiple
