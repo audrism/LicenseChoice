@@ -4,7 +4,12 @@ Open Source Software (OSS) is central to modern
 software development, fostering innovation, knowledge exchange, and
 the widespread adoption of libraries and tools.  The
 licensing of OSS projects dictates how software can be used,
-modified, and distributed. 
+modified, and distributed. This, in turn, should affect various aspects of projects' performance, such as new joiners, coding activity, the choice of upstream projects to depend upon, or the use by downstream projects.  
+
+\begin{comment}
+%am since the latest focus is license effects on performance
+% not sure if emphasising lack of awareness / incompatibility is that central
+
 However, not all OSS 
 participants are aware of or follow the ramifications of 
 licensing~\cite{almeida2017software}. For example, 
@@ -15,17 +20,21 @@ incompatibilities are likely. For example, with the rise of
 large language models (LLMs), a significant portion of the 
 massive source code used for training consists of code without 
 any license~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks}.
+\end{comment}
 
-Our first aim is to better understand the actual practice of license
-selection, including the choice of no license.
-We acknowledge the distinction between open source and public repositories, 
-recognizing that the latter---repositories without explicit licenses---do not 
-technically qualify as OSS. 
-Nevertheless, public repositories play a significant role in the software
+Our first aim is to better understand the actual state of license
+selection in open software projects, including the choice of no license. 
+%We acknowledge the distinction between open source and public repositories, 
+%recognizing that the latter---repositories without explicit licenses---do not 
+%technically qualify as OSS. 
+Such unlicensed public repositories play a significant role in the software
 ecosystem.
 As \citet{jahanshahi2024beyond} highlight, even small, unlicensed repositories 
 contribute substantially to larger projects, emphasizing their importance in 
-understanding reuse patterns. 
+understanding reuse patterns and a significant portion of the 
+massive source code used for training consists of code without 
+any license~\cite{yu2023codeipprompt,xu2024first,jahanshahi2025cracks}.
+
 However, the absence of licenses introduces legal uncertainties that may hinder
 downstream reuse. 
 The problem may be propagated further, as the active and popular
@@ -41,7 +50,7 @@ greatly underestimates the proportion of projects with no license
 due to heavily filtering based on size, maturity, popularity, and
 activity.
 
-In OSS, any decision is often made based on perceived supply chain
+In open software projects, any decision is often made based on perceived supply chain
 concerns, such as choosing to participate in a project that will
 become popular, hoping to have a large number of direct or
 downstream users (and followers), selecting upstream dependencies
@@ -52,21 +61,20 @@ chains in terms of attracting and retaining participants, having
 downstream dependents or users, and, of course on ways the code may
 be (re-)used.
 Despite this, we are not aware of any prior studies
-that model license choice nor any comprehensive theories that would
+that model the impact of license choice nor any comprehensive theories that would
 explain it.
 
 Our second aim is, therefore, to establish and test a preliminary theory
-that helps explain license choice in OSS software. 
+that helps explain the impact of license choice in open software. 
 The theory could help explain some of the reasons why a large fraction 
-of projects have no license, why some license violations (such as use of
-unlicensed code) appear to be tolerated, and what are factors that may 
-come into play when a developer (or an organization) chooses a license.
+of projects have no license, why some license violations (such as the use of
+unlicensed code) appear to be tolerated, and what to expect when a developer (or an organization) change a license.
 Such theory can potentially lead to better tools that help developers
 choose the most suitable license according to their objectives,
 increase the proportion of projects with a license (hence spurring
 innovation that is presently inhibiting actors who do pay attention
 to licensing terms from using unlicensed code), and, more generally,
-reduce risks arising from license incompatibilities in OSS supply
+reduce risks arising from license incompatibilities in open software supply
 chains.
 
 To accomplish our goals we start from reviewing literature in areas
