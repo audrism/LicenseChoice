@@ -125,6 +125,7 @@ In contrast, our dataset is broader, including projects which may be less mature
 \caption{Comparison between our results and the literature.}
 \label{tab:res1a}
 % \resizebox{0.99\linewidth}{!}{
+\vspace{-0.2cm}
 \begin{tabular}{lrr|rrrrr}
     \toprule
     & \textbf{Projects} & \textbf{No License} & \textbf{Copyleft} & \textbf{Weak} & \textbf{Conditional} & \textbf{Permissive} & \textbf{Public} \\
@@ -135,6 +136,7 @@ In contrast, our dataset is broader, including projects which may be less mature
     \textbf{This Study} & 131,171,379 & 83.01\% & 15.35\% & 5.26\% & 4.82\% & 70.18\% & 4.39\% \\
     \bottomrule
 \end{tabular}
+\vspace{-0.3cm}
 \end{table*}
 
 
@@ -211,6 +213,7 @@ open nature of derivative works.
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
+\vspace{-0.5cm}
 \end{figure}
 
 Examining the distribution of license type counts in projects 
@@ -238,6 +241,7 @@ are presented in Table~\ref{tbl:stat-l}.
 \begin{table*}[t]
 \centering
 \caption{License change model - descriptive statistics.}
+\vspace{-0.2cm}
 \resizebox{0.95\textwidth}{!}{
 \begin{tabular}{cllcccc}
   \toprule
@@ -274,6 +278,7 @@ are presented in Table~\ref{tbl:stat-l}.
   \bottomrule
 \end{tabular}}
 \label{tbl:stat-l}
+\vspace{-0.2cm}
 \end{table*}
 
 Given that we have multiple response variables, the model provides a 
@@ -330,7 +335,16 @@ indicating that each predictor significantly improves our model's fit.
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
+\vspace{-0.5cm}
 \end{table}
+
+% model performance
+Model fit was evaluated using R² from univariate regressions, ranging from 0.02 to 0.09 
+across outcomes-modest but typical for large-scale socio-technical data with high variability. 
+Residuals showed no irregular patterns. Multicollinearity was assessed via generalized 
+variance inflation factors (GVIFs); all predictors had adjusted $GVIF^{1/(2 \times Df)}$ 
+values below standard thresholds, except the license change variable ($3.22$), which 
+remains within acceptable limits given the model’s interactions and categorical terms.
 
 To better understand the effect of license change direction on project metrics,
 we calculate the odds ratios for the change direction predictor and its 
@@ -353,6 +367,7 @@ its interaction with language influence various aspects of the model.
     \caption{License change model - odds ratios}
     \label{fig:odds}
     \Description{License change model - odds ratios}
+\vspace{-0.5cm}
 \end{figure*}
 
 In these models, each coefficient represents a change in the 
@@ -457,7 +472,6 @@ metrics meaningfully, with notable variations across different
 metrics and programming languages.
 
 \begin{figure}[h]
-\vspace{-3mm}
 \begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
 \small
 \begin{enumerate}[leftmargin=4mm]
@@ -471,7 +485,7 @@ metrics and programming languages.
 \end{enumerate}
 \end{tcolorbox}
 \Description{Key Findings}
-\vspace{-4mm}
+\vspace{-0.73cm}
 \end{figure}
 
 \subsubsection{Implications}
