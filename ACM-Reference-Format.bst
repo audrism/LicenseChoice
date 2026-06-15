@@ -3,7 +3,7 @@
 %%%  @BibTeX-style-file{
 %%%     author          = "Nelson H. F. Beebe, Boris Veytsman and Gerald Murray",
 %%%     version         = "2.1",
-%%%     acmart-version  = "1.89a",
+%%%     acmart-version  = "1.90",
 %%%     date            = "Mar 26 2023",
 %%%     filename        = "ACM-Reference-Format.bst",
 %%%     email           = "borisv@lk.net, boris@varphi.com",
@@ -65,6 +65,8 @@ ENTRY
         issn          % UTAH
         lccn          % UTAH
 	distinctURL   % whether to print url if doi is present
+	archived      % Where the url is archived
+	venue         % for presentations
   }
   {}
   { label.year extra.label sort.year sort.label basic.label.year}
@@ -501,10 +503,15 @@ FUNCTION { format.articleno }
 FUNCTION { format.year }
 { % push year string or "[n.\,d.]" onto output stack
   %% Because year is a mandatory field, we always force SOMETHING
-  %% to be output
+  %% to be output.  If we do not know year but know date, we push  date
+  %% as the last resort
   "\bibinfo{year}{"
   year empty.or.unknown
-    { "[n.\,d.]" }
+    { date empty.or.unknown
+        { "[n.\,d.]" }
+	{ date #1 #4 substring$ }
+      if$
+    }
     { year }
   if$
   *  "}" *
@@ -629,12 +636,9 @@ FUNCTION { output.doi } % UTAH
 { % output non-empty DOI as one-line sentence (stack untouched)
   doi empty.or.unknown
     { }
-    {
-      %% Use \urldef here for the same reason it is used in output.url,
-      %% see output.url for further discussion.
-      "\urldef\tempurl%" writeln
-      "\url{https://doi.org/" strip.doi * "}" * writeln
-      "\showDOI{\tempurl}" writeln
+    { 
+      "\href{https://doi.org/" strip.doi * "}{doi:\nolinkurl{" *
+      strip.doi  * "}}" * writeln
     }
   if$
 }
@@ -759,7 +763,7 @@ FUNCTION { output.url } % UTAH
   {
     url empty.or.unknown
       { }
-      {
+      {  new.sentence
           %% Use \urldef, outside \showURL, so that %nn, #, etc in URLs work
           %% correctly.  Put the actual URL on its own line to reduce the
           %% likelihood of BibTeX's nasty line wrapping after column 79.
@@ -773,7 +777,15 @@ FUNCTION { output.url } % UTAH
             { "" }
             { "Retrieved " lastaccessed * " from " * }
           if$
-          "\tempurl}" * writeln
+          "\tempurl" *
+	  archived empty.or.unknown
+	    { }
+	    {"\urldef\tempurla%" writeln
+	      "\url{" archived * "}%" * writeln
+	      ", archived at [\tempurla]" *
+	    }
+	  if$
+	  "}" * writeln
       }
       if$
   }
@@ -785,10 +797,22 @@ FUNCTION { output.year.check }
 { % warn if year empty, output top string and leave " YEAR<label>" on stack in mid-sentence
   year empty.or.unknown
      { "empty year in " cite$ * warning$
-       write$
-       " \bibinfo{year}{[n.\,d.]}"
-       "\natexlab{" extra.label * "}" * *
-       mid.sentence 'output.state :=
+       date empty.or.unknown
+       {
+          "using n.d. in " cite$ * warning$
+          write$
+          " \bibinfo{year}{[n.\,d.]}"
+          "\natexlab{" extra.label * "}" * *
+          mid.sentence 'output.state :=
+       }
+       {
+          "using date in " cite$ * warning$
+          write$
+          " \bibinfo{year}{" date #1 #4 substring$ * "}" *
+          "\natexlab{" extra.label * "}" * *
+          mid.sentence 'output.state :=
+        }
+	if$
      }
      { write$
        " \bibinfo{year}{" year * "}"  *
@@ -1734,6 +1758,20 @@ FUNCTION { format.journal.volume.number.day.month.year }
   if$
 }
 
+
+FUNCTION { format.journal.underreview }
+{
+  journal empty.or.unknown
+    { "" }
+    { "\bibinfo{journal}{"
+      journal.canon.abbrev emphasize *
+      "}." * }
+  if$
+  
+  " Manuscript submitted for review" *
+}
+
+
 FUNCTION { format.chapter.pages }
 {
   chapter empty.or.unknown
@@ -1766,6 +1804,14 @@ FUNCTION { format.in.booktitle }
   { "In \bibinfo{booktitle}{" booktitle * "}" * }
   if$
 }
+
+FUNCTION { format.venue }
+{ %Venues for presentations
+  venue empty.or.unknown
+  { "" }
+  {"Presentation at \bibinfo{venue}{" venue * "}" * }
+  if$
+  }
 
 FUNCTION { format.in.ed.booktitle }
 {
@@ -2005,7 +2051,11 @@ FUNCTION { calc.basic.label }
   if$
   duplicate$
   year empty.or.unknown
-    { "{[n.\,d.]}" }
+    { date empty.or.unknown
+        { "{[n.\,d.]}" }
+	{ date field.or.null purify$ #1 #4 substring$}
+      if$
+    }
     { year field.or.null purify$ #-1 #4 substring$}
   if$
   *
@@ -2053,7 +2103,11 @@ FUNCTION { calc.label }
   % save the year for sort processing afterwards (adding a, b, c, etc.)
   %
   year empty.or.unknown
-    { "{[n.\,d.]}" }
+    { date empty.or.unknown
+        { "{[n.\,d.]}" }
+	{ date field.or.null purify$ #1 #4 substring$}
+      if$
+    }
     { year field.or.null purify$ #-1 #4 substring$}
   if$
   'label.year :=
@@ -2106,14 +2160,13 @@ FUNCTION { output.issue.doi.coden.isxn.lccn.url.eprint }
   output.coden  % CODEN is functionally like ISSN, so output them sequentially
   output.issn
   output.lccn
-  output.doi    % DOI is ALWAYS last according to CrossRef DOI documentation
   output.eprint
+  output.doi    % DOI is ALWAYS last according to CrossRef DOI documentation
   output.url    % but ACM wants URL last
 }
 
 FUNCTION { output.issue.doi.coden.isxn.lccn.url.eprint.note }
 { % enter with stack empty, return with empty string on stack
-  output.issue.doi.coden.isxn.lccn.url.eprint
   note empty.or.unknown
     { }
     {
@@ -2121,12 +2174,12 @@ FUNCTION { output.issue.doi.coden.isxn.lccn.url.eprint.note }
       output.note
     }
   if$
+  output.issue.doi.coden.isxn.lccn.url.eprint
   ""
 }
 
 FUNCTION { output.issue.doi.coden.isxn.lccn.url.eprint.note.check }
 { % enter with stack empty, return with empty string on stack
-  output.issue.doi.coden.isxn.lccn.url.eprint
   note empty.or.unknown
     { }
     {
@@ -2134,6 +2187,7 @@ FUNCTION { output.issue.doi.coden.isxn.lccn.url.eprint.note.check }
       output.note.check
     }
   if$
+  output.issue.doi.coden.isxn.lccn.url.eprint
   ""
 }
 
@@ -2158,21 +2212,50 @@ FUNCTION { article }
   new.block
   howpublished empty.or.unknown
     { }
-    { howpublished empty$ 'skip$ { "\bibinfo{howpublished}{" howpublished "}" * * output } if$ }
+    { "\bibinfo{howpublished}{" howpublished "}" * * output }
   if$
 
   crossref missing$
-    {
-      journal empty$ 'skip$ { format.journal.volume.number.day.month.year output } if$
-    }
+    { format.journal.volume.number.day.month.year output}
     {
       "cross reference in @Article{...} is unusual" warning$
       format.article.crossref output.nonnull
     }
   if$
 
-  pages empty$ 'skip$ { format.pages.check.without.articleno output } if$
+  format.pages.check.without.articleno output
   format.articleno.numpages output
+  fin.block
+  output.issue.doi.coden.isxn.lccn.url.eprint.note
+  fin.entry
+}
+
+FUNCTION { underreview }
+{
+  output.bibitem
+
+  author empty.or.unknown
+    {
+      editor empty.or.unknown
+        { "neither author and editor supplied for " cite$ * warning$ }
+        { format.editors "editor" output.check }
+      if$
+    }
+    { format.authors "author" output.check }
+  if$
+
+  author format.no.key output       % added
+  output.year.check                 % added
+  new.block
+  format.articletitle "title" output.check
+  new.block
+  howpublished empty.or.unknown
+    { }
+    { "\bibinfo{howpublished}{" howpublished "}" * * output }
+  if$
+
+  format.journal.underreview "journal" output.check
+
   fin.block
   output.issue.doi.coden.isxn.lccn.url.eprint.note
   fin.entry
@@ -2200,8 +2283,8 @@ FUNCTION { book }
       new.block
       format.number.series output
       new.sentence
-      publisher empty$ 'skip$ { publisher "publisher" bibinfo.output.check } if$  % Modified line
-      address empty$ 'skip$ { address "address" bibinfo.output.check } if$        % Modified line
+      publisher "publisher" bibinfo.output.check
+      address "address" bibinfo.output.check    % jtb: require address
       fin.sentence
       pages empty.or.unknown
         { format.bookpages }    % use bookpages when pages empty
@@ -2334,8 +2417,8 @@ FUNCTION { inproceedings }
           if$
           new.sentence
           organization output
-          publisher empty$ 'skip$ { publisher "publisher" bibinfo.output.check } if$  % Modified line
-          address empty$ 'skip$ { address "address" bibinfo.output.check } if$        % Modified line
+          publisher "publisher" bibinfo.output.check % jtb: require publisher (?)
+          address "address" bibinfo.output.check  % jtb: require address
           format.bookpages output
         }
         {
@@ -2360,6 +2443,60 @@ FUNCTION { inproceedings }
   fin.entry
 }
 
+
+FUNCTION { presentation }
+{
+  output.bibitem
+  format.authors "author" output.check
+  author format.key output            % added
+  output.year.check                   % added
+  new.block
+  format.articletitle "title" output.check
+  howpublished empty.or.unknown
+    { }
+    { "\bibinfo{howpublished}{" howpublished "}" * * output.dot.space }
+  if$
+  crossref missing$
+    {
+      journal missing$          % jtb: proceedings appearing in journals
+        { new.sentence
+	  format.venue "venue" output.check
+          format.series output.removenospace
+          format.editors.fml output % BV 2011/09/27 Moved dot to comma
+          series empty.or.unknown
+              { format.bvolume.noseries output }
+              {}
+          if$
+          new.sentence
+          organization output
+          publisher output
+          address output
+          format.bookpages output
+        }
+        {
+	   new.sentence
+	   format.venue "venue" output.check
+           format.editors.fml output
+           new.sentence
+           format.journal.volume.number.day.month.year output
+        }
+      if$
+      format.articleno output
+      format.pages.check.without.articleno output
+    }
+    {
+      format.incoll.inproc.crossref output.nonnull
+      format.articleno output
+      format.pages.check.without.articleno output
+    }
+  if$
+  format.articleno.numpages output
+  fin.block
+  output.issue.doi.coden.isxn.lccn.url.eprint.note
+  fin.entry
+}
+
+
 FUNCTION { conference } { inproceedings }
 
 FUNCTION { manual }
@@ -2367,7 +2504,7 @@ FUNCTION { manual }
   output.bibitem
   author empty.or.unknown
     { editor empty.or.unknown
-      { organization "organization" output.check
+      { organization output
         organization format.key output }  % if all else fails, use key
       { format.editors "author and editor" output.check }
       if$
@@ -2379,7 +2516,7 @@ FUNCTION { manual }
   format.btitle "title" output.check
   organization address new.block.checkb
   % jtb: back to normal style: organization, address
-  organization "organization" output.check
+  organization output
   address output
   fin.block
   output.issue.doi.coden.isxn.lccn.url.eprint.note
@@ -2422,7 +2559,6 @@ FUNCTION { misc }
     { }
     { "\bibinfo{howpublished}{" howpublished "}" * * output }
   if$
-  "" output.nonnull.dot.space
   calc.format.page.count output
   fin.block
   output.issue.doi.coden.isxn.lccn.url.eprint.note
@@ -2433,13 +2569,18 @@ FUNCTION { online } { manual }
 
 FUNCTION { game } { manual }
 
+FUNCTION { video } { manual }
+
 FUNCTION { artifactsoftware } { manual }
 
 FUNCTION { artifactdataset } { manual }
 
-FUNCTION { software } { manual }
+FUNCTION { software } { artifactsoftware }
 
-FUNCTION { dataset } { manual }
+FUNCTION { dataset } { artifactdataset }
+
+
+FUNCTION { preprint } { manual }
 
 FUNCTION { phdthesis }
 {
@@ -3019,16 +3160,16 @@ FUNCTION { begin.bib }
   "%%% NOTE TO THE USER: you can override these defaults by providing"       writeln
   "%%% customized versions of any of these macros before the \bibliography"  writeln
   "%%% command.  Each of them MUST provide its own final punctuation,"       writeln
-  "%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two"  writeln
+  "%%% except for \shownote{} and \showURL{}.  The latter two"  writeln
   "%%% do not use final punctuation, in order to avoid confusing it with"    writeln
   "%%% the Web address."                                                     writeln
   "%%%"                                                                      writeln
   "%%% To suppress output of a particular field, define its macro to expand" writeln
   "%%% to an empty string, or better, \unskip, like this:"                   writeln
   "%%%"                                                                      writeln
-  "%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax"                   writeln
+  "%%% \newcommand{\showURL}[1]{\unskip}   % LaTeX syntax"                   writeln
   "%%%"                                                                      writeln
-  "%%% \def \showDOI #1{\unskip}           % plain TeX syntax"               writeln
+  "%%% \def \showURL #1{\unskip}           % plain TeX syntax"               writeln
   "%%%"                                                                      writeln
   "%%% ====================================================================" writeln
   ""                                                                         writeln
@@ -3050,7 +3191,6 @@ FUNCTION { begin.bib }
   %%         \newcommand{\showLCCN}[1]{LCCN #1.}
 
   "\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi" writeln
-  "\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi" writeln
   % ACM styles omit ISBNs, but they can be included by suitable definitions of
   % \showISBNx and \showISBNxiii before the .bbl file is read
   "\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi" writeln

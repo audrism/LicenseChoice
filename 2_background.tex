@@ -170,7 +170,7 @@ Based on this discussion, we hypothesize that:
     \item \textbf{Hypothesis (H2b)}: The license choice is affected by programming language culture-specific norms.
     \item \textbf{Hypothesis (H2c)}: More permissive licenses result in higher community size 
     (i.e., upstream and downstream projects).
-    \vspace{-0.2cm}
+    %\vspace{-0.2cm}
 \end{itemize}
 
 \begin{comment}
@@ -240,7 +240,7 @@ Projects with high burstiness may not focus heavily on legal concerns, and inste
 \item \textbf{Hypothesis (H3c)}: Restrictive licenses support long-term sustainability as approximated by project activity duration.
 \item \textbf{Hypothesis (H3d)}: Burstiness reflects the lack of
 stability and favors more permissive licenses.
-\vspace{-0.3cm}
+%\vspace{-0.3cm}
 \end{itemize}
 
 \section{Comparisons to Prior Work}
@@ -256,7 +256,7 @@ and testing that theory.
 However, while our work is not the first to empirically study software licenses,
 it differs from the literature in two important ways.
 
-\vspace{1mm} \noindent \textit{Comprehensive Identification of Licenses.}
+%\vspace{1mm} \noindent \textit{Comprehensive Identification of Licenses.}
 Most prior research, such as that by \citet{wu2024large} and \citet{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
 Others, like \citet{feng2019open}, apply static analysis on binaries to detect embedded license texts.
 However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
@@ -266,12 +266,12 @@ compiled by scanning virtually the entire OSS ecosystem for any files containing
 Moreover, the authors use the winnowing algorithm, a robust method for matching license texts to known licenses, enhancing the accuracy of detecting both partial and full matches, even when the text is embedded or slightly modified.
 This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
 
-\vspace{1mm} \noindent \textit{Scale and Scope of Analysis.} 
+%\vspace{1mm} \noindent \textit{Scale and Scope of Analysis.} 
 Previous works often limit their scope to specific platforms (e.g., GitHub), a few package manager environments (e.g., NPM), or types of licenses (e.g., OSI-approved licenses), lacking a comprehensive, large-scale approach to detecting and analyzing licenses.
 Our study expands this scope by analyzing essentially the entire open source landscape, ensuring a more comprehensive cross-platform understanding of licensing practices.
 
 In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, and scale with the most recent comparable studies in the field.
-\vspace{-0.1cm}
+%\vspace{-0.1cm}
 \begin{table*}[t]
 \centering 
 \caption{Latest Studies in Open Source Software Licensing}
@@ -289,5 +289,5 @@ In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, 
     \textbf{This Study} & \textbf{NLP/Matching Known Licenses} & \textbf{License Files} & \textbf{Entire OSS} & \textbf{131,171,379} \\
     \bottomrule
 \end{tabular}}
-\vspace{-0.1cm}
+%\vspace{-0.1cm}
 \end{table*}
