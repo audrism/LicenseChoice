@@ -376,7 +376,7 @@ FUNCTION { bibinfo.output.check }
 { % like output.check, adding bibinfo field
   't :=
   duplicate$ empty.or.unknown
-    { pop$ "empty " t * " in " * cite$ * warning$ }
+    { pop$} 
     { "\bibinfo{" t "}{" * * swap$ * "}" *
       output.nonnull }
   if$

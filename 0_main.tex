@@ -1,26 +1,16 @@
 \documentclass[manuscript,screen,review]{acmart}
 
-%\setcopyright{none}
-%\settopmatter{printacmref=false, printccs=false}
-%\renewcommand\footnotetextcopyrightpermission[1]{}
-
-\usepackage[T1]{fontenc}
-
 \usepackage{amsfonts}
 \usepackage{algorithmic}
-\usepackage{graphicx}
 \usepackage{textcomp}
-\usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage{listings}
 \usepackage{multirow}
 \usepackage{subcaption}
 \usepackage{enumitem}
-\usepackage{framed}
 \usepackage{colortbl}
 \usepackage{soul}
-% not acm supported:
-\usepackage{tcolorbox}
+\usepackage{fancybox}
 
 % colors
 \definecolor{lightgray}{gray}{0.95}
@@ -39,7 +29,7 @@
 
 \begin{document}
 
-\title{The Prevalence and Impact of Licenses in Open Software Projects}
+\title{License Choice, Prevalence, and Impact in Open Software Projects}
 
 \author{Mahmoud Jahanshahi}
 \email{mjahan@utk.edu}
@@ -78,7 +68,8 @@
   projects and find that most do not contain any license, that
   permissive licenses represent the bulk of most licenses, and that
   permissive licensing is representing an increasing proportion of
-  all licenses over time. Restrictive licenses are more likely to be retained, however. There is a great variation among language
+  all licenses over time. Restrictive licenses are more likely to 
+  be retained, however. There is a great variation among language
   ecosystems with C-language strongly favoring restrictive
   licenses. The analysis of license change impact comparing activity
   within one year of the adoption of the initial and final licenses
@@ -89,19 +80,6 @@
   changes in license type prevalence over time and find that the
   effects of license changes may have opposite effects depending on
   the language ecosystem.  
-
-
- %  Un- or incorrect-licensed Open Source Software (OSS) code can
-%   poison supply chains and inhibit innovation. Many OSS developers
-%   are not aware of these implications or make choices that are
-%   suboptimal.
-% We aim to understand the current state of OSS licensing by developing a preliminary theory and model for license choice and testing it using a comprehensive and nearly complete dataset of OSS licenses. Our theory makes four sets of predictions
-% on license ``stickiness'' and choice based on a number of observable project context factors. In contrast to previous work, we find that more than 80\% of publicly available projects do not have a license. We find that copyleft licenses are most sticky, permissive licenses most common, that social, technical, and ideological factors affect the choice of license. 
-% Future research into better understanding
-% reasons for and ways to change the ``no license'' defaults and devise
-% ways to anticipate license type for a project would have the most
-% practical impact on reducing licensing risks and enable more
-% innovation.
 \end{abstract}
 
 \begin{CCSXML}
@@ -122,7 +100,7 @@
 \ccsdesc[500]{Software and its engineering~Software creation and management}
 \ccsdesc[500]{General and reference~Empirical studies}
 
-% \keywords{Software License, Open Source Software, Open Source License, World of Code}
+\keywords{Software License, Open Source Software, Open Source License, World of Code}
 
 \maketitle
 
@@ -131,7 +109,7 @@
 \input{3_methodology}
 \input{4_results}
 \input{5_limitations}
-% \input{6_future}
+\input{6_future}
 \input{7_conclusions}
 
 \section{Data Availability}
@@ -143,7 +121,7 @@ The replication package, including used datasets and R code are available at:
 \bibliography{ref}
 
 \clearpage
-% \appendix
-% \input{8_appendix}
+\appendix
+\input{8_appendix}
 
 \end{document}

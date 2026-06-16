@@ -152,9 +152,15 @@ might underrepresent broader licensing trends, particularly the prevalence
 of copyleft licenses across the global open source ecosystem.
 
 \begin{figure}[h]
-%\vspace{-1mm}
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
-\small
+\begin{center}
+\setlength{\fboxsep}{6pt}
+\cornersize{0.08}
+
+\Ovalbox{%
+\colorbox{lightgray}{%
+\begin{minipage}{0.92\linewidth}
+\textbf{Key Findings}
+
 \begin{enumerate}[leftmargin=4mm]
     \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than previously reported.
     \item The MIT license is the most widely used license,
@@ -166,9 +172,11 @@ of copyleft licenses across the global open source ecosystem.
     \item The differences in license usage reported in our study compared 
     to prior work highlight how sensitive such analyses are to sampling strategies.
 \end{enumerate}
-\end{tcolorbox}
+
+\end{minipage}%
+}}
+\end{center}
 \Description{Key Findings}
-%\vspace{-2mm}
 \end{figure}
 
 \subsubsection{Implications}
@@ -187,7 +195,7 @@ technically not OSS, their
 public availability still creates legal ambiguity and poses a risk 
 of license noncompliance, especially when combined with the lack of 
 thorough legal review in many downstream projects.
-\citet{jahanshahi2024beyond} demonstrated that in the context of 
+\citet{jahanshahi2025beyond} demonstrated that in the context of 
 copy-based reuse, nearly 18\% of reused artifacts originated from 
 very small projects,\footnote{
 Projects with no stars and fewer than 10 commits.
@@ -472,8 +480,15 @@ metrics meaningfully, with notable variations across different
 metrics and programming languages.
 
 \begin{figure}[h]
-\begin{tcolorbox}[colback=gray!5!white, colframe=gray!70!black, title=Key Findings]
-\small
+\begin{center}
+\setlength{\fboxsep}{6pt}
+\cornersize{0.08}
+
+\Ovalbox{%
+\colorbox{lightgray}{%
+\begin{minipage}{0.92\linewidth}
+\textbf{Key Findings}
+
 \begin{enumerate}[leftmargin=4mm]
     \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses cf.\ H2b.
     \item Python projects see increased repository growth and sustained activity under permissive licenses cf.\ H2b.
@@ -483,9 +498,11 @@ metrics and programming languages.
     \item Ruby projects show reduced upstream integration when adopting permissive licenses.
     \item License transitions have a moderate effect on burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
 \end{enumerate}
-\end{tcolorbox}
+
+\end{minipage}%
+}}
+\end{center}
 \Description{Key Findings}
-%\vspace{-0.73cm}
 \end{figure}
 
 \subsubsection{Implications}

@@ -8,8 +8,6 @@ participate in OSS.
 Second, technical, social, and other factors
 that either constraint certain choices in software development or
 make them more convenient~\cite{ma2020methodology}.
-% Third, the legal implications and the need to manage compliance with licenses
-% in open source software.
 Third, the specific plans and objectives of the project, and how each license choice may advance and hinder these goals~\cite{sen2008determinants}.
 
 \subsection{Motivations}
@@ -19,7 +17,6 @@ into ideology, altruism, kinship, fun, reputation, reciprocity,
 learning, own-use, career, and pay. 
 Some of these motivations can probably
 influence the type of licenses contributors prefer.
-% while others do not have a clear relevance.
 For instance, ideology and reciprocity
 may favor strongly copyleft licenses (over all other
 considerations), which require code sharing, while altruism may lean
@@ -108,11 +105,10 @@ Based on the \citet{fershtman2007open}
 conjecture that restrictive licenses attract more contributors per project,
 we can expect that adopting a restrictive license will result in higher
 contributor counts:
-% In summary, we hypothesize that:
+
 \begin{itemize}
     \item \textbf{Hypothesis (H1a)}: More restrictive licenses results in higher total numbers of authors.  
     \item \textbf{Hypothesis (H1b)}: More restrictive licenses (often ideologically motivated) are more likely to be retained.
-    \vspace{-0.2cm}
 \end{itemize}
 
 \subsection{Social and Technical Choice}
@@ -127,7 +123,6 @@ developer choices regarding package (and tool) selection.
 These studies found
 that exposure measured by the number of overall deployments at the
 time of choice, had a significant positive effect on 
-% package (tool)
 selection.
 
 We expect a similar pattern for license selection. One dimension of
@@ -144,10 +139,16 @@ likely to select a license compatible with their current projects or
 one already used by their collaborators (also, see ``Kinship''
 motivation above).
 
-The choice of programming language also influences license selection due to the culture and practices embedded within specific developer communities.
-For example, languages like Python and JavaScript, commonly used in web development, often favor permissive licenses like MIT or Apache, which emphasize reuse and flexibility~\cite{lerner2005economics}.
-In contrast, languages such as C or C++, which are dominant in systems programming, tend to be linked with copyleft licenses like GPL, prioritizing keeping derivative works open~\cite{fitzgerald2006transformation}.
-The language captures the influence of community norms and technical compatibility on license selection.
+The choice of programming language also influences license selection due to the culture 
+and practices embedded within specific developer communities.
+For example, languages like Python and JavaScript, commonly used in web development, 
+often favor permissive licenses like MIT or Apache, which emphasize reuse 
+and flexibility~\cite{lerner2005economics}.
+In contrast, languages such as C or C++, which are dominant in systems programming, 
+tend to be linked with copyleft licenses like GPL, prioritizing keeping 
+derivative works open~\cite{fitzgerald2006transformation}.
+The language captures the influence of community norms and technical 
+compatibility on license selection.
 
 The community size associated with a project can also impact license decisions.
 \citet{tsay2014influence} found that projects with a large number of forks are perceived as more valuable and trustworthy by the community.
@@ -170,42 +171,7 @@ Based on this discussion, we hypothesize that:
     \item \textbf{Hypothesis (H2b)}: The license choice is affected by programming language culture-specific norms.
     \item \textbf{Hypothesis (H2c)}: More permissive licenses result in higher community size 
     (i.e., upstream and downstream projects).
-    %\vspace{-0.2cm}
 \end{itemize}
-
-\begin{comment}
-%\subsection{Legal and Regulatory Context}
-
-OSS licenses serve not only as technical choices but also as
-legal instruments defining the rights and obligations of developers and users.
-The selection of a license carries significant implications for intellectual property, liability, and compliance with copyright laws.
-
-The empirical study by \citet{wu2024large} revealed the 
-complexities of license compliance and the frequent misunderstandings 
-developers face, especially in large projects.
-Similarly, \citet{cui2023empirical} found that over 25\% of the 16,000 
-projects they analyzed contained license conflicts, often due 
-to misunderstandings of license terms.
-\citet{almeida2017software} further emphasized the widespread difficulty developers have in correctly interpreting licenses, which can lead to 
-non-compliance and legal risks.
-
-Regulatory frameworks, such as the European Union’s General Data Protection 
-Regulation (GDPR) and U.S.\ export control laws, add further complexity to 
-licensing decisions, particularly in international and data-sensitive projects.
-These regulations can influence license choices by introducing additional 
-compliance challenges.
-
-We hypothesize that delays in adopting a license may reflect the
-need for careful legal deliberation to ensure compliance with intellectual 
-property laws and other legal frameworks.
-Therefore we should control for delays 
-(defined as the difference between license adoption date and project start date)
-in our model.
-
-\begin{itemize}
-\item \textbf{Hypothesis (H3)}: Delays and in license adoption signals more deliberate and informed license choice. 
-\end{itemize}
-\end{comment}
 
 \subsection{Project Goals}
 
@@ -240,7 +206,6 @@ Projects with high burstiness may not focus heavily on legal concerns, and inste
 \item \textbf{Hypothesis (H3c)}: Restrictive licenses support long-term sustainability as approximated by project activity duration.
 \item \textbf{Hypothesis (H3d)}: Burstiness reflects the lack of
 stability and favors more permissive licenses.
-%\vspace{-0.3cm}
 \end{itemize}
 
 \section{Comparisons to Prior Work}
@@ -256,7 +221,7 @@ and testing that theory.
 However, while our work is not the first to empirically study software licenses,
 it differs from the literature in two important ways.
 
-%\vspace{1mm} \noindent \textit{Comprehensive Identification of Licenses.}
+\textit{Comprehensive Identification of Licenses.}
 Most prior research, such as that by \citet{wu2024large} and \citet{xu2023lidetector}, primarily depends on explicit license declarations found in metadata files.
 Others, like \citet{feng2019open}, apply static analysis on binaries to detect embedded license texts.
 However, these methods may overlook licenses that are not clearly stated or are stored in unconventional directories.
@@ -266,12 +231,12 @@ compiled by scanning virtually the entire OSS ecosystem for any files containing
 Moreover, the authors use the winnowing algorithm, a robust method for matching license texts to known licenses, enhancing the accuracy of detecting both partial and full matches, even when the text is embedded or slightly modified.
 This method captures not only standard license files but also other files potentially holding licensing details, ensuring that no relevant license information is missed.
 
-%\vspace{1mm} \noindent \textit{Scale and Scope of Analysis.} 
+\textit{Scale and Scope of Analysis.} 
 Previous works often limit their scope to specific platforms (e.g., GitHub), a few package manager environments (e.g., NPM), or types of licenses (e.g., OSI-approved licenses), lacking a comprehensive, large-scale approach to detecting and analyzing licenses.
 Our study expands this scope by analyzing essentially the entire open source landscape, ensuring a more comprehensive cross-platform understanding of licensing practices.
 
 In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, and scale with the most recent comparable studies in the field.
-%\vspace{-0.1cm}
+
 \begin{table*}[t]
 \centering 
 \caption{Latest Studies in Open Source Software Licensing}
@@ -289,5 +254,4 @@ In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, 
     \textbf{This Study} & \textbf{NLP/Matching Known Licenses} & \textbf{License Files} & \textbf{Entire OSS} & \textbf{131,171,379} \\
     \bottomrule
 \end{tabular}}
-%\vspace{-0.1cm}
 \end{table*}
