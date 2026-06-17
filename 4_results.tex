@@ -1,4 +1,3 @@
-
 \section{Results and Discussion}
 
 We organize our results in three parts. 
@@ -124,8 +123,7 @@ In contrast, our dataset is broader, including projects which may be less mature
 \centering
 \caption{Comparison between our results and the literature.}
 \label{tab:res1a}
-% \resizebox{0.99\linewidth}{!}{
-%\vspace{-0.2cm}
+
 \begin{tabular}{lrr|rrrrr}
     \toprule
     & \textbf{Projects} & \textbf{No License} & \textbf{Copyleft} & \textbf{Weak} & \textbf{Conditional} & \textbf{Permissive} & \textbf{Public} \\
@@ -136,7 +134,7 @@ In contrast, our dataset is broader, including projects which may be less mature
     \textbf{This Study} & 131,171,379 & 83.01\% & 15.35\% & 5.26\% & 4.82\% & 70.18\% & 4.39\% \\
     \bottomrule
 \end{tabular}
-%\vspace{-0.3cm}
+
 \end{table*}
 
 
@@ -156,8 +154,8 @@ of copyleft licenses across the global open source ecosystem.
 \setlength{\fboxsep}{6pt}
 \cornersize{0.08}
 
-\Ovalbox{%
-\colorbox{lightgray}{%
+\Ovalbox{
+\colorbox{lightgray}{
 \begin{minipage}{0.92\linewidth}
 \textbf{Key Findings}
 
@@ -173,7 +171,7 @@ of copyleft licenses across the global open source ecosystem.
     to prior work highlight how sensitive such analyses are to sampling strategies.
 \end{enumerate}
 
-\end{minipage}%
+\end{minipage}
 }}
 \end{center}
 \Description{Key Findings}
@@ -212,7 +210,7 @@ However, the continued use of copyleft licenses like the GPL
 demonstrates that many developers are committed to preserving the
 open nature of derivative works.
 
-\subsection{The Impact of License Changes} % on Project Characteristics}
+\subsection{The Impact of License Changes}
 
 
 \begin{figure}[t]
@@ -221,7 +219,6 @@ open nature of derivative works.
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
-%\vspace{-0.5cm}
 \end{figure}
 
 Examining the distribution of license type counts in projects 
@@ -234,7 +231,6 @@ On the other hand, 15\% of these projects do not have any license in their
 latest status, meaning they deleted their license.
 The middle group, consisting of projects that had more than one license type 
 in their lifetime but have only one type ultimately, is the group
-% we want to focus on to
 we analyze license changes in.
 
 \subsubsection{Our Findings}
@@ -249,7 +245,6 @@ are presented in Table~\ref{tbl:stat-l}.
 \begin{table*}[t]
 \centering
 \caption{License change model - descriptive statistics.}
-%\vspace{-0.2cm}
 \resizebox{0.95\textwidth}{!}{
 \begin{tabular}{cllcccc}
   \toprule
@@ -286,7 +281,6 @@ are presented in Table~\ref{tbl:stat-l}.
   \bottomrule
 \end{tabular}}
 \label{tbl:stat-l}
-%\vspace{-0.2cm}
 \end{table*}
 
 Given that we have multiple response variables, the model provides a 
@@ -326,7 +320,6 @@ indicating that each predictor significantly improves our model's fit.
 \begin{table}[t]
 \centering \small
 \caption{License change model - Type III MANOVA Tests: Pillai test statistic}
-% \resizebox{\linewidth}{!}{
 \begin{tabular}{lccc}
     \toprule
     \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
@@ -343,7 +336,6 @@ indicating that each predictor significantly improves our model's fit.
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
-%\vspace{-0.5cm}
 \end{table}
 
 % model performance
@@ -362,7 +354,6 @@ the results focus on meaningful relationships rather than noise.
 Figure~\ref{fig:odds} displays these significant odds ratios along with 
 their 95\% confidence 
 intervals.\footnote{Please refer to the replication package for the full 
-% highlighting the variability and reliability of the estimates
 set of coefficients and p-values.} 
 Since the analysis is based on a multivariate regression model,
 the odds ratios are presented across different output variables, allowing
@@ -375,7 +366,6 @@ its interaction with language influence various aspects of the model.
     \caption{License change model - odds ratios}
     \label{fig:odds}
     \Description{License change model - odds ratios}
-%\vspace{-0.5cm}
 \end{figure*}
 
 In these models, each coefficient represents a change in the 
@@ -484,8 +474,8 @@ metrics and programming languages.
 \setlength{\fboxsep}{6pt}
 \cornersize{0.08}
 
-\Ovalbox{%
-\colorbox{lightgray}{%
+\Ovalbox{
+\colorbox{lightgray}{
 \begin{minipage}{0.92\linewidth}
 \textbf{Key Findings}
 
@@ -499,7 +489,7 @@ metrics and programming languages.
     \item License transitions have a moderate effect on burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
 \end{enumerate}
 
-\end{minipage}%
+\end{minipage}
 }}
 \end{center}
 \Description{Key Findings}
