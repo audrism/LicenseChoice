@@ -11,13 +11,13 @@ cd "$SCRATCH"
 
 log "Step 2: re-shard by commit (single-pass)"
 
-# cPc shard format from step 1 (9 cols):
-#   newP; firstLic; firstAdop; lastLic; lastAdop; dist; firstT; lastT; commit
-# Reshape to: commit; newP; firstT; lastT
+# cPc shard format from step 1 (11 cols):
+#   Pnew; firstLic; firstAdop; lastLic; lastAdop; dist; firstT; lastT; oldList; flag; commit
+# Reshape to: commit; Pnew; firstT; lastT
 # (We drop everything else; we don't need it for the date/file/blob join.)
 
 zcat split/cPc.*.gz \
-  | awk -F';' 'BEGIN { OFS=";" } { print $9, $1, $7, $8 }' \
+  | awk -F';' 'BEGIN { OFS=";" } { print $11, $1, $7, $8 }' \
   | "$SPLITSEC" split/cByc. 128
 
 log "Step 2 done. Per-shard sizes:"

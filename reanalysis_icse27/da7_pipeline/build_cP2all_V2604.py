@@ -6,7 +6,7 @@ table compatible with the columns of cP2all.1y (plus the new PRE-window cols).
 Input:
   --windows  cP2windows.V2604.gz   project;window;ncmt;nfiles;nblobs;nmonths
   --p2change P2change.V2604.s      project;firstLic;firstAdop;lastLic;lastAdop;
-                                    distance;firstT;lastT;oldP
+                                    distance;firstT;lastT;oldList;flag
 
 Output (semicolon-separated, no header):
   project;firstLic;firstAdop;lastLic;lastAdop;distance;firstT;lastT;
@@ -56,10 +56,13 @@ def main():
     with opener(args.p2change) as fin, open(args.out, "w") as fout:
         for line in fin:
             parts = line.rstrip("\n").split(";")
-            if len(parts) < 8:
+            if len(parts) < 10:
                 continue
             pid = parts[0]
-            head = parts[:8]    # newP;firstLic;firstAdop;lastLic;lastAdop;dist;firstT;lastT
+            # keep the first 10 cols (newP;firstLic;firstAdop;lastLic;lastAdop;
+            #  dist;firstT;lastT;oldList;flag) so the output preserves the
+            # consolidation diagnostics for the supplement.
+            head = parts[:10]
             w = wnd.get(pid, {})
             first = w.get("FIRST", [0, 0, 0, 0])
             last  = w.get("LAST",  [0, 0, 0, 0])
