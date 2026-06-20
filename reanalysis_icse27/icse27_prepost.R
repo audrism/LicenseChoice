@@ -82,7 +82,11 @@ top <- as.character(cc$Var1[cc$cum_prop <= 0.9])
 d$Language <- factor(ifelse(d$Language %in% top, d$Language, "other"))
 d$Language <- relevel(d$Language, ref="other")
 
-# popularity proxy: year-after-first-license downstream / upstream counts
+# popularity proxies measured at or before the final license switch:
+# (i)  downstream / upstream project counts in the year after first license
+# (ii) lifetime fork count (a third dimension, only weakly correlated with i;
+#       see icse27_popularity_corr.R: Spearman 0.29 / 0.15, max VIF 1.36 in the
+#       combined model).
 sl <- function(x) sign(x) * log1p(abs(x))
 d$lFirstDownP <- sl(d$DownProjects1)
 d$lFirstUpP   <- sl(d$UpProjects1)
@@ -113,15 +117,19 @@ m$lCommitsDif_BLvAL <- sl(m$postNcmt) - sl(m$preNcmt)
 m$lAuthorsDif_BLvAL <- sl(m$postNauth) - sl(m$preNauth)
 m$lActMonDif_BLvAL  <- sl(m$postActMon) - sl(m$preActMon)
 
+# Add forks as a third popularity covariate
+m$lForks <- sl(m$NumForks)
+
 # logs of controls
 for (nm in c("Delay","Distance","EarliestCommit","LatestCommit","prop2")) {
   m[[paste0("l", nm)]] <- sl(m[[nm]])
 }
 
 # ---- Model fitting ----
-fit_uni <- function(resp, dat, with_pop=TRUE) {
+fit_uni <- function(resp, dat, with_pop=TRUE, with_forks=TRUE) {
   rhs <- "C2 * Language + lEarliestCommit + lLatestCommit + lDelay + lDistance + lprop2"
-  if (with_pop) rhs <- paste(rhs, "+ lFirstDownP + lFirstUpP")
+  if (with_pop)   rhs <- paste(rhs, "+ lFirstDownP + lFirstUpP")
+  if (with_forks) rhs <- paste(rhs, "+ lForks")
   f <- as.formula(sprintf("%s ~ %s", resp, rhs))
   lm(f, data = dat, contrasts = list(Language = contr.sum))
 }

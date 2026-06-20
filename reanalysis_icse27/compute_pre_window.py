@@ -12,6 +12,9 @@ P2CHANGE = "/home/mjahansh/repos/lcs/data/choice/P2change.s"
 P2MONGO  = "/home/mjahansh/repos/lcs/data/choice/cP2mongo.gz"
 OUTFILE  = "/home/audris/tmp/lcs_icse27/cP2pre_post.1y"
 
+# Use gzip.open instead of open for P2change since the file is gzipped
+# despite the .s extension.
+
 def parse_yyyy_mm(s):
     return datetime.strptime(s + "-15", "%Y-%m-%d")
 
@@ -20,7 +23,7 @@ def months_between(a, b):
 
 # Load P2change: project -> (firstAdoption, lastAdoption, distance, language placeholder)
 proj_dates = {}
-with open(P2CHANGE) as f:
+with gzip.open(P2CHANGE, "rt") as f:
     for line in f:
         parts = line.rstrip("\n").split(";")
         if len(parts) < 6:
@@ -37,7 +40,7 @@ sys.stderr.write(f"Loaded {len(proj_dates):,} projects from P2change.s (distance
 
 # Process cP2mongo.gz: per-project month dicts
 out = open(OUTFILE, "w")
-out.write("ProjectID;preNcmt;postNcmt;firstNcmt;preNauth;postNauth;firstNauth;preActMon;postActMon;firstActMon\n")
+out.write("ProjectID;preNcmt;postNcmt;firstNcmt;preNauth;postNauth;firstNauth;preActMon;postActMon;firstActMon;NumForks;CommunitySize;NumCore\n")
 
 n_written = 0
 n_seen = 0
@@ -55,6 +58,17 @@ with gzip.open(P2MONGO, "rt") as f:
 
         mon_ncmt  = d.get("MonNcmt", {})
         mon_nauth = d.get("MonNauth", {})
+
+        # Lifetime popularity proxies from mongo aggregate.
+        # Note: NumForks and CommunitySize are snapshot values at data-extraction
+        # time. They are pre-treatment with respect to the regression target
+        # (the change in metrics around the FINAL license switch) only for
+        # projects whose final switch precedes the extraction date; for the
+        # rest they are at worst contemporaneous. We treat them as static
+        # popularity proxies in the same spirit as a star count.
+        num_forks      = int(d.get("NumForks", 0) or 0)
+        community_size = int(d.get("CommunitySize", 0) or 0)
+        num_core       = int(d.get("NumCore", 0) or 0)
 
         pre_ncmt = post_ncmt = first_ncmt = 0
         pre_auth = post_auth = first_auth = 0
@@ -90,7 +104,12 @@ with gzip.open(P2MONGO, "rt") as f:
             if 0 <= delta_first < 12:
                 first_auth += c
 
-        out.write(f"{pid};{pre_ncmt};{post_ncmt};{first_ncmt};{pre_auth};{post_auth};{first_auth};{pre_act};{post_act};{first_act}\n")
+        out.write(
+            f"{pid};{pre_ncmt};{post_ncmt};{first_ncmt};"
+            f"{pre_auth};{post_auth};{first_auth};"
+            f"{pre_act};{post_act};{first_act};"
+            f"{num_forks};{community_size};{num_core}\n"
+        )
         n_written += 1
 
 out.close()

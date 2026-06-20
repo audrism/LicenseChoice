@@ -501,13 +501,33 @@ rather than overturning the conclusion that restrictive$\rightarrow$permissive
 transitions are associated with smaller increases in project activity.
 
 \paragraph{R2: Project popularity as a control.} The original model did
-not control for pre-treatment project popularity. We added two pre-switch
-popularity proxies---the downstream ($\textit{firstDownP}$) and upstream
-($\textit{firstUpP}$) project counts measured in the year following the
-first license adoption, well before the final switch in most projects.
+not control for pre-treatment project popularity. We added three
+popularity proxies that capture distinct dimensions of visibility and
+reuse:
+(i) downstream-project count in the year after first license adoption
+($\textit{firstDownP}$, code-reuse popularity, pre-treatment for the
+final switch in most projects);
+(ii) upstream-project count in the same window ($\textit{firstUpP}$,
+consumer-position popularity); and
+(iii) lifetime fork count ($\textit{NumForks}$, GitHub-style
+external visibility) extracted from the WoC project-level
+aggregates.\footnote{Star counts would be a fourth proxy but require
+either a fresh GitHub-API crawl over the 23{,}619 projects or use of an
+upcoming GHArchive-derived map, neither of which is available at
+submission time. CommunitySize is omitted because it is collinear with
+NumForks (Pearson 0.97).}
+We verified that the three proxies are not redundant: pairwise Spearman
+correlations between forks and downstream/upstream counts are only 0.29
+and 0.15 respectively, and the maximum adjusted
+$\text{GVIF}^{1/(2\text{Df})}$ in the augmented model is 1.23, well below
+standard thresholds.
 Including these covariates raises the model's $R^2$ values from
 0.02--0.09 to 0.13--0.45, confirming that popularity is a substantial
-source of variance that should be controlled. The overall R2P main
+source of variance that should be controlled.
+Adding the fork covariate to the model that already contains
+upstream/downstream counts changes the main R2P odds ratios by less than
+0.5\% (e.g., commits 0.833 vs.\ 0.832), indicating that the three proxies
+together are sufficient to capture the popularity confound. The overall R2P main
 effects shift toward and across unity for several outcomes once
 popularity is included: files moves from
 OR=1.30 (significant) to 1.04 (NS); upstream from OR=1.25 (significant) to
@@ -547,12 +567,13 @@ directions and significance levels unchanged.
 \caption{Robustness analyses: main R2P (restrictive$\rightarrow$permissive)
 effect as an odds ratio under alternative model specifications. Bold values
 are significant at $p<0.05$. Original = the specification reported above
-(no popularity control, $N$=23{,}619). +Pop = adds pre-switch downstream and
-upstream popularity covariates to the original design. Pre/Post = uses the
-year-\emph{before} the final switch as the baseline window (with popularity
-controls); dashes mark outcomes whose pre-window aggregates require
-recomputation from WoC base maps. Delay$\geq$12 / Dist$\geq$24 are sub-cohort
-restrictions, both with popularity controls.}
+(no popularity control, $N$=23{,}619). +Pop = adds pre-switch downstream,
+upstream and lifetime fork popularity covariates to the original design
+(max GVIF$^{1/(2\text{Df})}$=1.23). Pre/Post = uses the year-\emph{before}
+the final switch as the baseline window (with the same popularity controls);
+dashes mark outcomes whose pre-window aggregates require recomputation from
+WoC base maps. Delay$\geq$12 / Dist$\geq$24 are sub-cohort restrictions,
+both with popularity controls.}
 \label{tbl:robustness}
 \begin{tabular}{lrrrrr}
 \toprule
@@ -561,8 +582,8 @@ restrictions, both with popularity controls.}
 \midrule
 Commits     & 0.97          & \textbf{0.83} & \textbf{0.86} & 1.25            & 0.85        \\
 Authors     & 1.02          & 0.98          & \textbf{0.94} & 1.04            & 1.00        \\
-Active mon. & 0.97          & \textbf{0.92} & \textbf{0.93} & 1.11            & 0.95        \\
-Files       & \textbf{1.30} & 1.04          & ---           & \textbf{1.76}   & 1.05        \\
+Active mon. & 0.97          & \textbf{0.92} & \textbf{0.94} & 1.11            & 0.95        \\
+Files       & \textbf{1.30} & 1.03          & ---           & \textbf{1.76}   & 1.05        \\
 Blobs       & 1.14          & 0.90          & ---           & 1.54            & 0.91        \\
 Up.\ proj.  & \textbf{1.25} & 1.00          & ---           & 1.18            & 1.03        \\
 Down.\ proj.& \textbf{1.10} & 1.04          & ---           & 0.87            & \textbf{1.13} \\

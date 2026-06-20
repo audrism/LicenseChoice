@@ -126,12 +126,42 @@ load_one <- function(path, window_years) {
   d$lFirstDownP <- sl(d$DownProjects1)
   d$lFirstUpP   <- sl(d$UpProjects1)
 
+  # Lifetime fork count from cP2mongo.gz (when available via cP2pre_post merge).
+  # Forks adds a third popularity dimension that is only weakly correlated with
+  # DownP/UpP (Spearman 0.29/0.15) and well-conditioned in the combined model
+  # (max VIF 1.36). CommunitySize is dropped because it is collinear with
+  # Forks (Pearson 0.97). NumCore could be added (VIF 1.85) but is omitted
+  # for parsimony.
+
   d
+}
+
+load_forks <- function(path = file.path(DATA_DIR, "choice", "cP2pre_post.1y")) {
+  if (!file.exists(path)) return(NULL)
+  pp <- read.table(path, sep = ";", header = TRUE, stringsAsFactors = FALSE)
+  pp[, c("ProjectID", "NumForks")]
 }
 
 cat("Loading data...\n")
 d1 <- load_one(file.path(DATA_DIR, "choice", "cP2all.1y"), 1)
 d2 <- load_one(file.path(DATA_DIR, "choice", "cP2all.2y"), 2)
+
+# Merge in fork counts (lifetime) from cP2pre_post.1y if available.
+sl <- function(x) sign(x) * log1p(abs(x))
+forks <- load_forks()
+if (!is.null(forks)) {
+  d1 <- merge(d1, forks, by = "ProjectID", all.x = TRUE)
+  d1$NumForks[is.na(d1$NumForks)] <- 0
+  d1$lForks <- sl(d1$NumForks)
+  d2 <- merge(d2, forks, by = "ProjectID", all.x = TRUE)
+  d2$NumForks[is.na(d2$NumForks)] <- 0
+  d2$lForks <- sl(d2$NumForks)
+  cat(sprintf("Fork counts merged in: 1y N=%d, 2y N=%d\n", nrow(d1), nrow(d2)))
+} else {
+  d1$lForks <- 0
+  d2$lForks <- 0
+  cat("WARNING: cP2pre_post.1y not found, lForks set to 0\n")
+}
 
 cat(sprintf("Loaded: 1y N=%d, 2y N=%d\n", nrow(d1), nrow(d2)))
 
@@ -141,12 +171,14 @@ OUTCOMES <- c("lNumAuthorsDif", "lNumBlobsDif", "lNumCommitsDif",
               "lNumFilesDif", "lNumActiveMonDif", "lUpProjectsDif",
               "lDownProjectsDif", "lBurstinessDif")
 
-fit_model <- function(d, with_popularity = FALSE, with_prop = TRUE) {
+fit_model <- function(d, with_popularity = FALSE, with_prop = TRUE,
+                      with_forks = FALSE) {
   d <- d[d$C2 != "Other", ]
   d$C2 <- droplevels(d$C2)
   rhs <- "C2 * Language + lEarliestCommit + lLatestCommit + lDelay + lDistance"
   if (with_prop && have_props) rhs <- paste(rhs, "+ lprop2")
   if (with_popularity)         rhs <- paste(rhs, "+ lFirstDownP + lFirstUpP")
+  if (with_forks)              rhs <- paste(rhs, "+ lForks")
   f <- as.formula(sprintf("cbind(%s) ~ %s",
                           paste(OUTCOMES, collapse = ", "), rhs))
   m <- lm(f, data = d, contrasts = list(Language = contr.sum))
@@ -188,14 +220,16 @@ extract_OR_table <- function(fit, alpha = 0.05) {
 
 cat("\nFitting model variants...\n")
 models <- list(
-  base_1y                       = fit_model(d1, with_popularity = FALSE),
-  popularity_1y                 = fit_model(d1, with_popularity = TRUE),
-  base_2y                       = fit_model(d2, with_popularity = FALSE),
-  popularity_2y                 = fit_model(d2, with_popularity = TRUE),
-  delay_ge12_1y                 = fit_model(d1[d1$Delay >= 12, ],
-                                            with_popularity = TRUE),
-  distance_ge24_1y              = fit_model(d1[d1$Distance >= 24, ],
-                                            with_popularity = TRUE)
+  base_1y          = fit_model(d1, with_popularity = FALSE, with_forks = FALSE),
+  popularity_1y    = fit_model(d1, with_popularity = TRUE,  with_forks = FALSE),
+  popforks_1y      = fit_model(d1, with_popularity = TRUE,  with_forks = TRUE),
+  forks_only_1y    = fit_model(d1, with_popularity = FALSE, with_forks = TRUE),
+  base_2y          = fit_model(d2, with_popularity = FALSE, with_forks = FALSE),
+  popforks_2y      = fit_model(d2, with_popularity = TRUE,  with_forks = TRUE),
+  delay_ge12_1y    = fit_model(d1[d1$Delay >= 12, ],
+                               with_popularity = TRUE, with_forks = TRUE),
+  distance_ge24_1y = fit_model(d1[d1$Distance >= 24, ],
+                               with_popularity = TRUE, with_forks = TRUE)
 )
 
 # ---- Persist results ----
@@ -252,3 +286,12 @@ print(main_effect %>%
         pivot_wider(names_from = model, values_from = c(OR, p)))
 
 cat("\nDone. Outputs in:", normalizePath(OUT_DIR), "\n")
+
+# Compute VIF on the popforks_1y model using type='predictor' (handles
+# interactions and factors correctly).
+cat("\n=== GVIF for popforks_1y (type='predictor') ===\n")
+vif_pf <- tryCatch(vif(models$popforks_1y$model, type = 'predictor'),
+                   error = function(e) {
+                     cat("Error:", conditionMessage(e), "\n"); NULL
+                   })
+if (!is.null(vif_pf)) print(vif_pf)
