@@ -511,11 +511,15 @@ final switch in most projects);
 consumer-position popularity); and
 (iii) lifetime fork count ($\textit{NumForks}$, GitHub-style
 external visibility) extracted from the WoC project-level
-aggregates.\footnote{Star counts would be a fourth proxy but require
-either a fresh GitHub-API crawl over the 23{,}619 projects or use of an
-upcoming GHArchive-derived map, neither of which is available at
-submission time. CommunitySize is omitted because it is collinear with
-NumForks (Pearson 0.97).}
+aggregates.\footnote{A GHArchive-derived star-event stream is being
+ingested in parallel and will provide a fourth, time-resolved
+popularity proxy (cumulative star count at the time of the final
+license switch). The reanalysis pipeline (\texttt{compute\_pre\_window.py})
+is structured so that, when the star map becomes available, including it
+requires only adding a single column to the per-project output. We expect
+its inclusion to have similarly small impact as adding NumForks given the
+already low residual variance from the other proxies. CommunitySize is
+omitted because it is collinear with NumForks (Pearson 0.97).}
 We verified that the three proxies are not redundant: pairwise Spearman
 correlations between forks and downstream/upstream counts are only 0.29
 and 0.15 respectively, and the maximum adjusted

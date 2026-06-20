@@ -12,6 +12,14 @@ P2CHANGE = "/home/mjahansh/repos/lcs/data/choice/P2change.s"
 P2MONGO  = "/home/mjahansh/repos/lcs/data/choice/cP2mongo.gz"
 OUTFILE  = "/home/audris/tmp/lcs_icse27/cP2pre_post.1y"
 
+# Optional: path to a GHArchive-derived star-event map. Expected format
+# (sorted by project, one event per line):
+#   project_id;starred_at_unix_ts
+# When the map exists, we compute STARS_AT_LAST = cumulative star count
+# at the final license adoption date (a proper pre-treatment proxy) and
+# STARS_TOTAL = lifetime cumulative star count.
+P2STAR_EVENTS = "/home/mjahansh/repos/lcs/data/choice/P2starEvents.s"
+
 # Use gzip.open instead of open for P2change since the file is gzipped
 # despite the .s extension.
 
@@ -38,9 +46,40 @@ with gzip.open(P2CHANGE, "rt") as f:
 
 sys.stderr.write(f"Loaded {len(proj_dates):,} projects from P2change.s (distance>=12)\n")
 
+# Optional: load star events. The file is expected to be pre-sorted by
+# project so we can stream it; for each project we count events with
+# timestamp <= lastAdoption (pre-treatment proxy) and total events.
+import os
+stars_at_last  = {}  # pid -> cumulative stars at last_adoption
+stars_total    = {}  # pid -> lifetime stars
+if os.path.exists(P2STAR_EVENTS):
+    sys.stderr.write(f"Loading star events from {P2STAR_EVENTS}...\n")
+    opener = gzip.open if P2STAR_EVENTS.endswith(".gz") else open
+    mode = "rt" if P2STAR_EVENTS.endswith(".gz") else "r"
+    with opener(P2STAR_EVENTS, mode) as f:
+        for line in f:
+            parts = line.rstrip("\n").split(";")
+            if len(parts) < 2:
+                continue
+            pid = parts[0]
+            if pid not in proj_dates:
+                continue
+            try:
+                ts = int(parts[1])
+            except Exception:
+                continue
+            stars_total[pid] = stars_total.get(pid, 0) + 1
+            last_dt = proj_dates[pid][1]  # datetime for lastAdoption
+            event_dt = datetime.fromtimestamp(ts)
+            if event_dt <= last_dt:
+                stars_at_last[pid] = stars_at_last.get(pid, 0) + 1
+    sys.stderr.write(f"Star events available for {len(stars_total):,} projects\n")
+else:
+    sys.stderr.write(f"No star events file at {P2STAR_EVENTS}; StarsAtLast=0\n")
+
 # Process cP2mongo.gz: per-project month dicts
 out = open(OUTFILE, "w")
-out.write("ProjectID;preNcmt;postNcmt;firstNcmt;preNauth;postNauth;firstNauth;preActMon;postActMon;firstActMon;NumForks;CommunitySize;NumCore\n")
+out.write("ProjectID;preNcmt;postNcmt;firstNcmt;preNauth;postNauth;firstNauth;preActMon;postActMon;firstActMon;NumForks;CommunitySize;NumCore;StarsAtLast;StarsTotal\n")
 
 n_written = 0
 n_seen = 0
@@ -104,11 +143,15 @@ with gzip.open(P2MONGO, "rt") as f:
             if 0 <= delta_first < 12:
                 first_auth += c
 
+        stars_pre   = stars_at_last.get(pid, 0)
+        stars_lifetime = stars_total.get(pid, 0)
+
         out.write(
             f"{pid};{pre_ncmt};{post_ncmt};{first_ncmt};"
             f"{pre_auth};{post_auth};{first_auth};"
             f"{pre_act};{post_act};{first_act};"
-            f"{num_forks};{community_size};{num_core}\n"
+            f"{num_forks};{community_size};{num_core};"
+            f"{stars_pre};{stars_lifetime}\n"
         )
         n_written += 1
 
