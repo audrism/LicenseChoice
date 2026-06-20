@@ -23,11 +23,13 @@ process_shard() {
   [[ -s "$agg" ]] && return 0
 
   # 3a. Join with c2dat (keep commit + author_time). c2dat field 6 is author_time.
+  # c2datFull.V2604.*.s is already sorted by commit SHA (.s files are produced
+  # by lsort); awk emits in the same order so the join input stays sorted.
+  # cByc shards we re-sort because they come from a single-pass repartition.
   LC_ALL=C join -t';' \
     <(zcat split/cByc.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
     <(zcat "$BASEMAPS/c2datFull.V2604.$j.s" \
-        | awk -F';' 'BEGIN{OFS=";"} {print $1, $6}' \
-        | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
+        | awk -F';' 'BEGIN{OFS=";"} {print $1, $6}') \
     | awk -F';' -v Y="$YEAR_S" '
         BEGIN { OFS=";" }
         # fields: commit; project; firstT; lastT; ts
@@ -42,9 +44,11 @@ process_shard() {
 
   # 3b. Join with c2fbb to fan out per file changed by each classified commit.
   # c2fbb format: commit; filepath; blob_after; blob_before
+  # Sort cls because window-classification doesn't preserve commit order;
+  # c2fbbFull.V2604.*.s is already sorted by commit SHA.
   LC_ALL=C join -t';' \
     <(zcat split/cls.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
-    <(zcat "$BASEMAPS/c2fbbFull.V2604.$j.s" | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
+    <(zcat "$BASEMAPS/c2fbbFull.V2604.$j.s") \
     | awk -F';' 'BEGIN{OFS=";"}
         # fields from cls: c; pid; window; ts
         # appended from c2fbb: filepath; blob_after; blob_before

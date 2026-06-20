@@ -19,11 +19,13 @@ export SPLITSEC=$HERE_PIPELINE/splitSec.py
 export SPLITSECCH=$HERE_PIPELINE/splitSecCh.py
 
 # --- Parallelism / memory ---
-# Be polite to other da7 users. 8 concurrent shards × 1 GB lsort/sort = ~24 GB
-# peak in the per-shard joins. Bump PAR up if da7 is idle.
-export PAR=${PAR:-8}
-export LSMEM=${LSMEM:-1G}   # lsort buffer per task
-export SORTMEM=${SORTMEM:-1G}
+# The bottleneck in stages 30 / 50 is the merge-sort spill phase when sorting
+# the 10-15 GB p2c / c2dat / c2fbb .s shards.  da7 has ~180 GB free RAM.
+# 4-way parallel with 8 GB sort buffers fits in 64 GB and finishes the sort
+# nearly in-memory.  Override via env to scale up or down.
+export PAR=${PAR:-4}
+export LSMEM=${LSMEM:-8G}
+export SORTMEM=${SORTMEM:-8G}
 
 # --- Logging ---
 export LOGS=$SCRATCH/logs

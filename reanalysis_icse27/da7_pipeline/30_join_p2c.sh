@@ -19,10 +19,13 @@ join_one() {
   #   Pnew; firstLic; firstAdop; lastLic; lastAdop; dist; firstT; lastT; oldList; flag
   # p2c shard format: Pnew; commit_sha
   # Output: cPc.$i.gz has 11 columns -- the 10 P2change cols followed by commit_sha.
-  # Sort both on the fly (they are not guaranteed sorted by project).
+  #
+  # p2cFull.V2604.*.s is already sorted by project (verified by full scan of
+  # shard 0 = 1.45 G rows).  Only the small P2change shard needs sorting.
+  # This avoids the ~30 min spill-to-disk sort of a 13 GB file per shard.
   LC_ALL=C join -t';' \
     <(zcat split/P2change.$i.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
-    <(zcat "$BASEMAPS/p2cFull.V2604.$i.s" | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
+    <(zcat "$BASEMAPS/p2cFull.V2604.$i.s") \
   | gzip > "$out".tmp \
   && mv "$out".tmp "$out"
 }
