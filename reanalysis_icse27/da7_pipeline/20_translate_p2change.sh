@@ -35,7 +35,7 @@ fi
 
 log "Sort Pold2Pnew.modal.s by Pold"
 if [[ ! -s staging/Pold2Pnew.sorted.gz ]]; then
-  LC_ALL=C sort -t';' -k1,1 "$POLD2PNEW_LOCAL" | gzip > staging/Pold2Pnew.sorted.gz
+  LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 "$POLD2PNEW_LOCAL" | gzip > staging/Pold2Pnew.sorted.gz
 fi
 
 log "Step A: translate Pold -> Pnew; emit one row per Pold's P2change entry"
@@ -47,7 +47,7 @@ LC_ALL=C join -t';' \
       Pold=$1; firstLic=$2; firstAdop=$3; lastLic=$4; lastAdop=$5; dist=$6; Pnew=$7
       print Pnew, firstLic, firstAdop, lastLic, lastAdop, dist, Pold
     }' \
-  | LC_ALL=C sort -t';' -k1,1 -k3,3 -k5,5 \
+  | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -k3,3 -k5,5 \
   | gzip > staging/P2change.tagged.gz
 
 n_orig=$(zcat staging/P2change.s | wc -l)

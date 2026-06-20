@@ -21,8 +21,8 @@ join_one() {
   # Output: cPc.$i.gz has 11 columns -- the 10 P2change cols followed by commit_sha.
   # Sort both on the fly (they are not guaranteed sorted by project).
   LC_ALL=C join -t';' \
-    <(zcat split/P2change.$i.gz | LC_ALL=C sort -t';' -k1,1 -S "$SORTMEM") \
-    <(zcat "$BASEMAPS/p2cFull.V2604.$i.s" | LC_ALL=C sort -t';' -k1,1 -S "$SORTMEM") \
+    <(zcat split/P2change.$i.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
+    <(zcat "$BASEMAPS/p2cFull.V2604.$i.s" | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
   | gzip > "$out".tmp \
   && mv "$out".tmp "$out"
 }

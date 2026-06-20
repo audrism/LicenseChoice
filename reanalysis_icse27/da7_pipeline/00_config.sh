@@ -27,7 +27,8 @@ export SORTMEM=${SORTMEM:-1G}
 
 # --- Logging ---
 export LOGS=$SCRATCH/logs
-mkdir -p "$SCRATCH"/{staging,input,split,out,logs}
+export TMPDIR=$SCRATCH/tmp           # /tmp on da7 is small; /corrino is 36 TB
+mkdir -p "$SCRATCH"/{staging,input,split,out,logs,tmp}
 
 # --- Time anchors (must match: year window in seconds) ---
 export YEAR_S=31536000
