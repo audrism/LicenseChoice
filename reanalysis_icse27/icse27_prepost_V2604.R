@@ -70,11 +70,12 @@ cat("\nConsolidation flag distribution:\n")
 print(table(d$flag, useNA="ifany"))
 
 # ---------- 2. Translate Pt2Ptb V edges to V2604 ----------
-if (file.exists(cP2UPDOWN_V) || file.exists(paste0(cP2UPDOWN_V, ".gz"))) {
-  opener <- if (file.exists(paste0(cP2UPDOWN_V, ".gz"))) gzfile else identity
-  path_ud <- if (file.exists(paste0(cP2UPDOWN_V, ".gz"))) paste0(cP2UPDOWN_V, ".gz") else cP2UPDOWN_V
+cP2UPDOWN_GZ <- paste0(cP2UPDOWN_V, ".gz")
+if (file.exists(cP2UPDOWN_GZ) || file.exists(cP2UPDOWN_V)) {
+  path_ud <- if (file.exists(cP2UPDOWN_GZ)) cP2UPDOWN_GZ else cP2UPDOWN_V
   cat(sprintf("\nLoading %s ...\n", path_ud))
-  ud <- read.table(path_ud, sep=";", header=FALSE,
+  con <- if (endsWith(path_ud, ".gz")) gzfile(path_ud) else file(path_ud)
+  ud <- read.table(con, sep=";", header=FALSE,
                    col.names=c("Pold","window","dir","cnt"),
                    colClasses=c("character","character","character","integer"))
   cat(sprintf("  %d (Pold, window, dir) rows\n", nrow(ud)))
