@@ -110,25 +110,35 @@ zcat input/P2change.V2604.merged.gz | awk -F';' '{c[$8]++} END {
   for (k in c) printf "  %-12s %d\n", k, c[k]
 }'
 
-log "Step C: rebuild P2change.V2604.s in the original schema (8 cols incl. firstT/lastT)"
-zcat input/P2change.V2604.merged.gz \
-  | awk -F';' 'BEGIN{OFS=";"} {
-      # cols: Pnew; firstLic; firstAdop; lastLic; lastAdop; dist; oldList; flag
-      Pnew=$1; firstLic=$2; firstAdop=$3; lastLic=$4; lastAdop=$5; dist=$6
-      split(firstAdop, a, "-")
-      split(lastAdop,  b, "-")
-      cmd1 = "date -ud \"" a[1] "-" a[2] "-15 UTC\" +%s"
-      cmd2 = "date -ud \"" b[1] "-" b[2] "-15 UTC\" +%s"
-      cmd1 | getline ft; close(cmd1)
-      cmd2 | getline lt; close(cmd2)
-      # Schema: Pnew; firstLic; firstAdop; lastLic; lastAdop; dist; ft; lt; oldList; flag
-      print Pnew, firstLic, firstAdop, lastLic, lastAdop, dist, ft, lt, $7, $8
-    }' \
-  | gzip > input/P2change.V2604.s
+log "Step C: rebuild P2change.V2604.s in the original schema (10 cols incl. firstT/lastT)"
+if [[ ! -s input/P2change.V2604.s ]]; then
+  # GNU awk mktime: 1000x faster than subprocessing date(1) per row.
+  # TZ=UTC forces mktime to interpret the broken-down time as UTC;
+  # without it the trailing "UTC" string is ignored.
+  TZ=UTC zcat input/P2change.V2604.merged.gz \
+    | TZ=UTC awk -F';' 'BEGIN{OFS=";"} {
+        Pnew=$1; firstLic=$2; firstAdop=$3; lastLic=$4; lastAdop=$5; dist=$6
+        split(firstAdop, a, "-")
+        split(lastAdop,  b, "-")
+        ft = mktime(a[1] " " a[2] " 15 00 00 00")
+        lt = mktime(b[1] " " b[2] " 15 00 00 00")
+        # Schema: Pnew; firstLic; firstAdop; lastLic; lastAdop; dist; ft; lt; oldList; flag
+        print Pnew, firstLic, firstAdop, lastLic, lastAdop, dist, ft, lt, $7, $8
+      }' \
+    | gzip > input/P2change.V2604.s.tmp \
+    && mv input/P2change.V2604.s.tmp input/P2change.V2604.s
+else
+  log "  cached, skipping"
+fi
 
 log "Shard by FNV-1a-32 across 128 buckets (aligns with p2c shards)"
-zcat input/P2change.V2604.s | "$SPLITSECCH" split/P2change. 128
+if (( $(ls split/P2change.*.gz 2>/dev/null | wc -l) != 128 )); then
+  rm -f split/P2change.*.gz
+  zcat input/P2change.V2604.s | "$SPLITSECCH" split/P2change. 128
+else
+  log "  128 shards already exist, skipping"
+fi
 
 log "Done."
 ls -lh input/P2change.V2604.s
-ls split/P2change.*.gz | wc -l | xargs -I{} echo "  shards: {}"
+n=$(ls split/P2change.*.gz | wc -l); echo "  shards: $n"

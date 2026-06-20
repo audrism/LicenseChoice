@@ -13,9 +13,10 @@ export P2CHANGE_V=da5:/home/mjahansh/repos/lcs/data/choice/P2change.s
 export LSORT=$HOME/lookup/lsort
 # Note: da7 lacks the TokyoCabinet Perl module, so the perl splitters fail.
 # We use self-contained Python equivalents (same FNV-1a-32 hash function).
+# The python scripts have a shebang and are exec'd directly.
 HERE_PIPELINE=${HERE_PIPELINE:-$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)}
-export SPLITSEC="python3 $HERE_PIPELINE/splitSec.py"
-export SPLITSECCH="python3 $HERE_PIPELINE/splitSecCh.py"
+export SPLITSEC=$HERE_PIPELINE/splitSec.py
+export SPLITSECCH=$HERE_PIPELINE/splitSecCh.py
 
 # --- Parallelism / memory ---
 # Be polite to other da7 users. 8 concurrent shards × 1 GB lsort/sort = ~24 GB
