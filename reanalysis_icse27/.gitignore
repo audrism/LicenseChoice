@@ -1,0 +1,16 @@
+# Large raw inputs (downloaded from Zenodo at run time)
+project2licnese_map.csv.gz
+files.json
+record.json
+zenodo_archive.zip
+data/L2TL.s
+data/L2TL.gz
+data/choice/cP2all.1y
+data/choice/cP2all.2y
+data/choice/proportions.csv
+*.gz
+
+# Outputs and temporaries  
+out/
+.Rhistory
+.RData

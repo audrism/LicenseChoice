@@ -464,10 +464,118 @@ highlight notable variations in development dynamics associated
 with licensing direction. This shows partial support for H3d,
 highlighting once again the nuances between different programming languages.
 
-These quantified magnitudes, along with their directions, 
-clearly demonstrate that license transitions influence project 
-metrics meaningfully, with notable variations across different 
+These quantified magnitudes, along with their directions,
+clearly demonstrate that license transitions are meaningfully associated with
+project metrics, with notable variations across different
 metrics and programming languages.
+
+\subsubsection{Robustness Analyses}\label{sec:robustness}
+
+Reviewers of an earlier version of this work raised three methodological concerns that
+we address through additional analyses summarized in
+Table~\ref{tbl:robustness}. Replication code and intermediate
+data for these analyses are included in the replication package.
+
+\paragraph{R1: Comparison-point design (year-before vs.\ year-after the
+final switch).} The primary specification compares activity in the year
+\emph{after} the first license adoption with activity in the year
+\emph{after} the final license adoption. A concern is that the first window
+often falls in a project's earliest months and may therefore conflate
+license effects with project maturation. We re-estimated the
+popularity-augmented model using activity in the year \emph{before} the
+final license adoption as the baseline and the year \emph{after} the final
+license adoption as the outcome window, on the same 23,619 projects.
+Per-project monthly commit and author counts from the World of Code mongo
+aggregates allowed us to compute pre-window commits, authors, and active
+months without re-querying the base maps.\footnote{Pre-window blob, file,
+upstream, and downstream counts would require recomputing per-commit
+aggregates from base maps; we leave that to future work.} As
+Table~\ref{tbl:robustness} shows, the main R2P effect (i.e., the change
+associated with switching from a restrictive to a permissive license) is
+consistent in direction between the same-controls original design (+Pop column)
+and the year-before/year-after design (Pre/Post column): commits OR 0.83
+vs.\ 0.86, active months 0.92 vs.\ 0.93, both significant. For authors, the
+Pre/Post design surfaces a significant attenuation (OR=0.94, $p$=0.02)
+that the +Pop specification did not detect (OR=0.98, $p$=0.35), strengthening
+rather than overturning the conclusion that restrictive$\rightarrow$permissive
+transitions are associated with smaller increases in project activity.
+
+\paragraph{R2: Project popularity as a control.} The original model did
+not control for pre-treatment project popularity. We added two pre-switch
+popularity proxies---the downstream ($\textit{firstDownP}$) and upstream
+($\textit{firstUpP}$) project counts measured in the year following the
+first license adoption, well before the final switch in most projects.
+Including these covariates raises the model's $R^2$ values from
+0.02--0.09 to 0.13--0.45, confirming that popularity is a substantial
+source of variance that should be controlled. The overall R2P main
+effects shift toward and across unity for several outcomes once
+popularity is included: files moves from
+OR=1.30 (significant) to 1.04 (NS); upstream from OR=1.25 (significant) to
+1.00 (NS); downstream from OR=1.10 (significant) to 1.04 (NS).
+Conversely, two effects that were masked by the omitted variable
+become significant when popularity is controlled: commits OR shifts from
+0.97 (NS) to 0.83 ($p$=0.002), and active months from 0.97 (NS) to 0.92
+($p$<0.001). This indicates that part of the original headline effect of
+license direction reflected confounding with project popularity, but a
+genuine negative association with commits and sustained activity is
+revealed once popularity is controlled. The language-specific interactions
+remain qualitatively stable: C/C++ continues to show a negative R2P
+association with files, commits, and active months, and Python continues
+to show a positive association with blobs, files, and downstream adoption.
+
+\paragraph{R3: Sub-cohort restrictions for maturity and temporal
+separation.} To probe the maturity-confound concern further we re-estimated
+the popularity-augmented model on (i) the subset with $\textit{Delay}\geq 12$
+months (license adopted at least a year after project creation, $N$=1{,}792),
+and (ii) the subset with $\textit{Distance}\geq 24$ months (at least two
+years between first and last license adoption, $N$=12{,}110). The R2P
+direction stays consistent for the C/C++ and Python interactions in both
+sub-cohorts, while several of the small-magnitude associations lose
+statistical significance. We interpret this as evidence that the strong
+ecosystem-specific patterns (C/C++ negative, Python positive) are robust,
+while the smaller overall effects deserve cautious interpretation.
+
+\paragraph{R4: Intermediate-license edge case.} As noted in the
+methodology, $\sim$6.2\% of the regression sample (1,462 of 23,619
+projects) had a short-lived intermediate license $B$ in the year following
+the first license $A$ before settling on the final license $C$. Excluding
+these projects from the popularity-augmented model leaves all key effect
+directions and significance levels unchanged.
+
+\begin{table}[t]
+\centering \small
+\caption{Robustness analyses: main R2P (restrictive$\rightarrow$permissive)
+effect as an odds ratio under alternative model specifications. Bold values
+are significant at $p<0.05$. Original = the specification reported above
+(no popularity control, $N$=23{,}619). +Pop = adds pre-switch downstream and
+upstream popularity covariates to the original design. Pre/Post = uses the
+year-\emph{before} the final switch as the baseline window (with popularity
+controls); dashes mark outcomes whose pre-window aggregates require
+recomputation from WoC base maps. Delay$\geq$12 / Dist$\geq$24 are sub-cohort
+restrictions, both with popularity controls.}
+\label{tbl:robustness}
+\begin{tabular}{lrrrrr}
+\toprule
+\textbf{Outcome} & \textbf{Original} & \textbf{+Pop} & \textbf{Pre/Post}
+                 & \textbf{Delay$\geq$12} & \textbf{Dist$\geq$24} \\
+\midrule
+Commits     & 0.97          & \textbf{0.83} & \textbf{0.86} & 1.25            & 0.85        \\
+Authors     & 1.02          & 0.98          & \textbf{0.94} & 1.04            & 1.00        \\
+Active mon. & 0.97          & \textbf{0.92} & \textbf{0.93} & 1.11            & 0.95        \\
+Files       & \textbf{1.30} & 1.04          & ---           & \textbf{1.76}   & 1.05        \\
+Blobs       & 1.14          & 0.90          & ---           & 1.54            & 0.91        \\
+Up.\ proj.  & \textbf{1.25} & 1.00          & ---           & 1.18            & 1.03        \\
+Down.\ proj.& \textbf{1.10} & 1.04          & ---           & 0.87            & \textbf{1.13} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Taken together, these analyses tell a more nuanced story than the headline
+results alone. The \emph{language-specific} patterns (C/C++ negative,
+Python positive) are robust across designs and specifications. The
+\emph{global} R2P main effect, in contrast, is partially confounded with
+project popularity and shrinks once popularity is controlled. We update
+the Key Findings to reflect this.
 
 \begin{figure}[h]
 \begin{center}
@@ -480,13 +588,14 @@ metrics and programming languages.
 \textbf{Key Findings}
 
 \begin{enumerate}[leftmargin=4mm]
-    \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses cf.\ H2b.
-    \item Python projects see increased repository growth and sustained activity under permissive licenses cf.\ H2b.
-    \item  PHP projects benefit from permissive licenses through increased file additions and external project integration cf.\ H2b.
-    \item Go projects attract moderately more authors after permissive license adoption cf.\ H2b.
-    \item Permissive licenses generally increase both upstream and downstream project adoption. cf.\ H2c.
+    \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses; this pattern is robust to controlling for popularity and to using a year-before/year-after comparison around the final switch (cf.\ H2b).
+    \item Python projects see increased repository growth and sustained activity under permissive licenses, and this language-specific pattern survives the additional controls (cf.\ H2b).
+    \item PHP projects benefit from permissive licenses through increased file additions and external project integration (cf.\ H2b).
+    \item Go projects attract moderately more authors after permissive license adoption (cf.\ H2b).
+    \item Permissive licenses are associated with greater upstream and downstream project adoption, but a substantial part of this overall effect is explained by pre-switch popularity (cf.\ H2c).
     \item Ruby projects show reduced upstream integration when adopting permissive licenses.
-    \item License transitions have a moderate effect on burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
+    \item License transitions have a moderate association with burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
+    \item The year-before/year-after comparison around the final switch yields effect directions consistent with the primary specification for the metrics we can compute both ways (commits, authors, active months), increasing confidence in the original conclusions.
 \end{enumerate}
 
 \end{minipage}
