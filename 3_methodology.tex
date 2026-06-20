@@ -30,9 +30,18 @@ This flexibility encourages the use of open source libraries in both open and cl
 4. \textit{Conditional Open Licenses}: These licenses include specific conditions that must be met for usage, such as attribution (CC-BY), non-commercial use, or share-alike requirements.
 Creative Commons licenses, like CC-BY and CC-BY-SA, provide a framework for sharing while respecting the creator's conditions~\cite{de2009creative}.
 
-5. \textit{Public Domain/Unlicensed}: Public domain and unlicensed software, including those using the Creative Commons Zero (CC0) license, are not restricted by copyright law.
-The authors of such software waive all rights, allowing anyone to use, modify, and distribute the work without any conditions.
-This category provides the maximum freedom for software use and is often utilized for simple, non-critical software components.
+5. \textit{Public Domain/Unlicensed}: This category refers specifically to
+projects that include an explicit license declaration intended to waive
+copyright protections, such as the Unlicense or the Creative Commons Zero
+(CC0) license. In such cases, the authors deliberately release the work
+into the public domain or its functional equivalent, allowing anyone to
+use, modify, and distribute it without any conditions. This is distinct
+from projects with no license file at all, where copyright protections
+still apply by default and downstream reuse is legally constrained. The
+latter case is treated separately throughout the paper as ``no license''
+and constitutes a major source of legal ambiguity in the OSS ecosystem
+(see also the introduction and the implications discussion in the results
+section).
 
 Given 597 distinct licenses, we manually classified the top 50, covering 98.92\% of projects. 
 The remaining ~1\% were grouped as “other” to maintain reproducibility and focus on 
@@ -53,21 +62,20 @@ Throughout this paper, the term ``project'' refers to this deforked project unle
 
 \subsection{License Change}
 
-We use license changes within public repositories to test our hypotheses 
-on how license choice affects project performance. A project's decision 
-to switch licenses should constitute a highly deliberate, informed event, 
-typically involving careful consideration of implications related to legal 
-constraints, developer participation, and user adoption. Unlike
-initial license selections -- which may be arbitrary or uninformed -- license
-changes reflect strategic intent, often in response to evolving community
-needs, competitive pressures, or growth ambitions. This intentionality
-makes license changes ideal natural experiments, enabling clearer,
-quasi-causal inferences regarding the impact of licensing decisions on 
-measurable performance metrics. By focusing specifically on projects 
-that have altered their licenses, this study leverages within-project 
-variation, inherently controlling for stable project characteristics, 
-thereby significantly strengthening internal validity and enhancing 
-the precision of conclusions drawn from the analysis.
+We use license changes within public repositories to test our hypotheses
+about associations between license choice and project performance. A project's
+decision to switch licenses typically constitutes a deliberate, informed event,
+involving consideration of implications related to legal constraints, developer
+participation, and user adoption. Unlike initial license selections -- which
+may be arbitrary or uninformed -- license changes reflect strategic intent,
+often in response to evolving community needs, competitive pressures, or growth
+ambitions. This intentionality makes license changes useful as quasi-experimental
+events for studying associations between licensing decisions and measurable
+performance metrics. By focusing on projects that have altered their licenses,
+this study leverages within-project variation, which helps control for stable
+project characteristics. We emphasize, however, that because the data are
+observational, our findings should be interpreted as associations rather than
+causal effects.
 
 For example, moving to a more restrictive license type might be chosen to 
 protect the project's intellectual property or to enforce open-source
@@ -93,12 +101,22 @@ simultaneously at either point in time.
 
 
 This also means that if a project starts with license A, then changes to B,
-and later changes to license C, we consider it as one change from A to C, 
+and later changes to license C, we consider it as one change from A to C,
 rather than two separate changes.
-Consequently, we excluded projects where the first license type and 
+Consequently, we excluded projects where the first license type and
 the latest license type were the same.
-Although these projects had other licenses at some point, they were 
+Although these projects had other licenses at some point, they were
 removed, resulting in no change between the first and last license types.
+
+A subtle case arises when the comparison interval immediately following
+the first license A overlaps with a short-lived intermediate license B
+before the project settles on C. Inspecting the data, we find that this
+applies to 1,462 out of 23,619 projects (approximately 6.2\% of the
+regression sample). As a robustness check, we re-estimated the full
+regression model after excluding these projects. All key findings remained
+consistent in direction and significance, including the language-specific
+patterns reported in the results section (e.g., positive associations between
+permissive licenses and activity in Python, and negative associations in C/C++).
 
 Next, we categorize licenses into two high-level groups: ``permissive'', which 
 includes public-domain and permissive licenses, and ``restrictive'', encompassing 

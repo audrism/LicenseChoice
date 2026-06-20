@@ -4,7 +4,7 @@ Open Source Software (OSS) is central to modern
 software development, fostering innovation, knowledge exchange, and
 the widespread adoption of libraries and tools.  The
 licensing of OSS projects dictates how software can be used,
-modified, and distributed. This, in turn, should affect various aspects of projects' performance, such as new joiners, coding activity, the choice of upstream projects to depend upon, or the use by downstream projects.  
+modified, and distributed. This, in turn, may be associated with various aspects of projects' performance, such as new joiners, coding activity, the choice of upstream projects to depend upon, or the use by downstream projects.  
 
 Our first aim is to better understand the actual state of license
 selection in public software projects, including the choice of no license\footnote{
@@ -40,10 +40,9 @@ become popular, hoping to have a large number of direct or
 transitive downstream users (and followers), selecting upstream dependencies
 that appear healthy, responsive, and
 active~\cite{socialCoding,choice23,ma2020methodology}, and so on.
-License choice should have clear and far reaching effects on the supply
-chains in terms of attracting and retaining participants, having
-downstream dependents or users, and, of course on ways the code may
-be (re-)used.
+License choice plausibly relates to supply chain dynamics, including
+attracting and retaining participants, having downstream dependents
+or users, and, of course, the ways the code may be (re-)used.
 Despite this, we are not aware of any prior studies
 that model the impact of license choice nor any comprehensive theories that would
 explain it.
@@ -95,23 +94,20 @@ software freedom within certain communities. In comparison to prior
 studies we find four-fold larger prevalence of unlicensed
 code.
 
-Our theory-derived project characteristics that should be influenced by
-license selection in OSS projects were tested using a multivariate multiple
-regression model. As predicted, the number of commits, project age, and
-file count were found to be significantly affected by license choice.
-
-Our theory-derived project characteristics that should be influenced by 
-license selection in OSS projects were tested using a multivariate multiple 
-regression model. As predicted, the number of commits, project age, and file 
-count were significantly associated with license choice. However, these 
-relationships varied substantially across programming language ecosystems. 
-In particular, C/C++ projects tended to experience reduced growth in commits, 
-files, and sustained activity following transitions to permissive licenses, 
-whereas Python projects showed increased repository growth and longer activity 
-under permissive licensing. More generally, permissive licenses were associated 
-with greater upstream and downstream project adoption, suggesting that the 
-effects of licensing decisions are shaped not only by the legal properties 
-of licenses but also by language-specific community norms and development practices.
+Our theory-derived project characteristics potentially associated with
+license selection were tested using a multivariate multiple regression model
+on the subset of 23,619 projects (about 2.4\% of licensed projects) that
+underwent a license-type change. As predicted, the number of commits, project
+age, and file count were significantly associated with license choice. However,
+these relationships varied substantially across programming language ecosystems.
+In particular, C/C++ projects tended to experience reduced growth in commits,
+files, and sustained activity following transitions to permissive licenses,
+whereas Python projects showed increased repository growth and longer activity
+under permissive licensing. More generally, permissive licenses were associated
+with greater upstream and downstream project adoption, suggesting that
+licensing-related dynamics are shaped not only by the legal properties of
+licenses but also by language-specific community norms and development
+practices.
 
 Our contributions include (a) a preliminary theory of OSS license choice and 
 its expected effects on project outcomes, (b) a comprehensive characterization of 
