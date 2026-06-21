@@ -21,7 +21,7 @@ zcat split/cPc.*.gz \
   | "$SPLITSEC" split/cByc. 128
 
 log "Step 2 done. Per-shard sizes:"
-ls -lh split/cByc.*.gz | head -3
+ls -lh split/cByc.*.gz 2>/dev/null | head -3 || true
 echo "..."
 log "Total (project, commit) rows:"
 zcat split/cByc.*.gz | wc -l

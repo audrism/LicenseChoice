@@ -49,5 +49,5 @@ python3 "$HERE/build_cP2all_V2604.py" \
 
 log "Final cP2all.V2604.1y:"
 ls -lh out/cP2all.V2604.1y
-zcat out/cP2all.V2604.1y 2>/dev/null | head -2 || head -2 out/cP2all.V2604.1y
+{ zcat out/cP2all.V2604.1y 2>/dev/null || cat out/cP2all.V2604.1y; } | head -2 || true
 log "Done."

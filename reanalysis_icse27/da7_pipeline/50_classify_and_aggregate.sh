@@ -91,5 +91,5 @@ done
 wait
 
 log "Step 3 done. Per-shard agg sizes:"
-ls -lh split/agg.*.gz | head -3
+ls -lh split/agg.*.gz 2>/dev/null | head -3 || true
 echo "..."

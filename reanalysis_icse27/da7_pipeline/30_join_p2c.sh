@@ -36,8 +36,10 @@ for i in {0..127}; do
 done
 wait
 
-log "Step 1 done. Output sizes:"
-ls -lh split/cPc.*.gz | head -3
-echo "..."
+log "Step 1 done."
+n_shards=$(ls split/cPc.*.gz 2>/dev/null | wc -l)
+log "  cPc shards: $n_shards / 128"
+log "  sample sizes:"
+ls -lh split/cPc.*.gz 2>/dev/null | head -3 || true
 log "Total commits emitted:"
 zcat split/cPc.*.gz | wc -l
