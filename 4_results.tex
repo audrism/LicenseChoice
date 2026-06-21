@@ -479,26 +479,36 @@ data for these analyses are included in the replication package.
 \paragraph{R1: Comparison-point design (year-before vs.\ year-after the
 final switch).} The primary specification compares activity in the year
 \emph{after} the first license adoption with activity in the year
-\emph{after} the final license adoption. A concern is that the first window
-often falls in a project's earliest months and may therefore conflate
-license effects with project maturation. We re-estimated the
-popularity-augmented model using activity in the year \emph{before} the
+\emph{after} the final license adoption (AFvAL design). A concern is that
+the first window often falls in a project's earliest months and may
+therefore conflate license effects with project maturation. We re-estimated
+the popularity-augmented model using activity in the year \emph{before} the
 final license adoption as the baseline and the year \emph{after} the final
-license adoption as the outcome window, on the same 23,619 projects.
-Per-project monthly commit and author counts from the World of Code mongo
-aggregates allowed us to compute pre-window commits, authors, and active
-months without re-querying the base maps.\footnote{Pre-window blob, file,
-upstream, and downstream counts would require recomputing per-commit
-aggregates from base maps; we leave that to future work.} As
-Table~\ref{tbl:robustness} shows, the main R2P effect (i.e., the change
-associated with switching from a restrictive to a permissive license) is
-consistent in direction between the same-controls original design (+Pop column)
-and the year-before/year-after design (Pre/Post column): commits OR 0.83
-vs.\ 0.86, active months 0.92 vs.\ 0.93, both significant. For authors, the
-Pre/Post design surfaces a significant attenuation (OR=0.94, $p$=0.02)
-that the +Pop specification did not detect (OR=0.98, $p$=0.35), strengthening
-rather than overturning the conclusion that restrictive$\rightarrow$permissive
-transitions are associated with smaller increases in project activity.
+license adoption as the outcome window (BLvAL design), on the same 23{,}522
+projects (slightly less than the 23{,}619 of the original specification
+because of the V$\rightarrow$V2604 dedup adjustment described below).
+For full alignment, the pre-window blob, file, commit, and active-month
+counts were computed from a fresh scan of the WoC V2604 base maps
+(\texttt{p2c}, \texttt{c2dat}, \texttt{c2fbb}); the pre-window upstream and
+downstream project counts were computed from the V-era \texttt{Pt2Ptb} map
+(no V2604 build exists). Because V2604 lowercases and re-canonicalizes
+project identifiers, we translated the V-canonical IDs in
+\texttt{P2change.s} to V2604-canonical IDs through the four-step recipe
+(V\,\texttt{P2p} $\rightarrow$ lowercase raw \texttt{p} $\rightarrow$
+V2604\,\texttt{p2P}); 148{,}462 of 148{,}465 V projects mapped, with
+only 45 (0.03\%) one-to-many splits and 80 (0.05\%) many-to-one merges.
+
+As Table~\ref{tbl:robustness} shows, under V2604 alignment the BLvAL
+design surfaces significant attenuation in commits (OR=0.96, $p$=0.007),
+blobs (OR=0.93, $p$=0.03), and sustained activity (OR=0.96, $p$=0.006)
+following restrictive$\rightarrow$permissive transitions that the
+V2604 AFvAL design buries under noise (all $p>0.6$ except downstream).
+This is the directional signal previously seen in the V-era +Pop column
+and survives the cleaner V2604 measurement. Conversely, the downstream
+adoption increase under R2P is robust under the AFvAL design at V2604
+(OR=1.18, $p<10^{-5}$) but attenuates under BLvAL (OR=1.03, $p$=0.47),
+indicating that the downstream effect operates over a longer time
+horizon than the one-year window can capture.
 
 \paragraph{R2: Project popularity as a control.} The original model did
 not control for pre-treatment project popularity. We added three
@@ -570,29 +580,32 @@ directions and significance levels unchanged.
 \centering \small
 \caption{Robustness analyses: main R2P (restrictive$\rightarrow$permissive)
 effect as an odds ratio under alternative model specifications. Bold values
-are significant at $p<0.05$. Original = the specification reported above
-(no popularity control, $N$=23{,}619). +Pop = adds pre-switch downstream,
-upstream and lifetime fork popularity covariates to the original design
-(max GVIF$^{1/(2\text{Df})}$=1.23). Pre/Post = uses the year-\emph{before}
-the final switch as the baseline window (with the same popularity controls);
-dashes mark outcomes whose pre-window aggregates require recomputation from
-WoC base maps. Delay$\geq$12 / Dist$\geq$24 are sub-cohort restrictions,
-both with popularity controls.}
+are significant at $p<0.05$. Original / +Pop / Sub-cohorts use the V-era
+\texttt{cP2all.1y} ($N$=23{,}619). V2604~AFvAL and V2604~BLvAL use the
+V2604-aligned reanalysis ($N$=23{,}522) with full popularity controls
+(downstream, upstream, lifetime forks; max
+GVIF$^{1/(2\text{Df})}$=2.41). AFvAL = after-first vs.\ after-last license
+adoption (original design); BLvAL = year-before vs.\ year-after final
+switch. The V2604 pipeline does not currently emit pre-window author
+counts, so the Authors row keeps the V-era \texttt{cP2mongo}-derived
+BLvAL value (marked with $\dagger$).}
 \label{tbl:robustness}
-\begin{tabular}{lrrrrr}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrrrr}
 \toprule
-\textbf{Outcome} & \textbf{Original} & \textbf{+Pop} & \textbf{Pre/Post}
+\textbf{Outcome} & \textbf{Original} & \textbf{+Pop}
+                 & \textbf{V2604 AFvAL} & \textbf{V2604 BLvAL}
                  & \textbf{Delay$\geq$12} & \textbf{Dist$\geq$24} \\
 \midrule
-Commits     & 0.97          & \textbf{0.83} & \textbf{0.86} & 1.25            & 0.85        \\
-Authors     & 1.02          & 0.98          & \textbf{0.94} & 1.04            & 1.00        \\
-Active mon. & 0.97          & \textbf{0.92} & \textbf{0.94} & 1.11            & 0.95        \\
-Files       & \textbf{1.30} & 1.03          & ---           & \textbf{1.76}   & 1.05        \\
-Blobs       & 1.14          & 0.90          & ---           & 1.54            & 0.91        \\
-Up.\ proj.  & \textbf{1.25} & 1.00          & ---           & 1.18            & 1.03        \\
-Down.\ proj.& \textbf{1.10} & 1.04          & ---           & 0.87            & \textbf{1.13} \\
+Commits     & 0.97          & \textbf{0.83} & 1.00          & \textbf{0.96} & 1.25            & 0.85        \\
+Authors$^{\dagger}$ & 1.02  & 0.98          & ---           & \textbf{0.94}$^{\dagger}$ & 1.04 & 1.00 \\
+Active mon. & 0.97          & \textbf{0.92} & 1.00          & \textbf{0.96} & 1.11            & 0.95        \\
+Files       & \textbf{1.30} & 1.03          & 0.99          & 0.94          & \textbf{1.76}   & 1.05        \\
+Blobs       & 1.14          & 0.90          & 0.98          & \textbf{0.93} & 1.54            & 0.91        \\
+Up.\ proj.  & \textbf{1.25} & 1.00          & 1.00          & 1.01          & 1.18            & 1.03        \\
+Down.\ proj.& \textbf{1.10} & 1.04          & \textbf{1.18} & 1.03          & 0.87            & \textbf{1.13} \\
 \bottomrule
-\end{tabular}
+\end{tabular}}
 \end{table}
 
 Taken together, these analyses tell a more nuanced story than the headline
