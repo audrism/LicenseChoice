@@ -21,7 +21,12 @@ from collections import defaultdict
 
 
 def opener(p):
-    return gzip.open(p, "rt") if p.endswith(".gz") else open(p, "r")
+    # Sniff gzip magic regardless of extension.
+    with open(p, "rb") as f:
+        magic = f.read(2)
+    if magic == b"\x1f\x8b":
+        return gzip.open(p, "rt")
+    return open(p, "r")
 
 
 def main():
