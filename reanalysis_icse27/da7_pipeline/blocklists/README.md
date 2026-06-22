@@ -1,52 +1,47 @@
-# Author/email blocklists used by stage 50
+# Author blocklist used by stage 50
 
-Filter sources, used in `50_classify_and_aggregate.sh` to drop bot and
-homonym authors *before* aggregating distinct aliased-author counts per
-(project, window).
+We use the **single official WoC V2604 bad-author list**:
 
-## Canonical lists (used by the pipeline)
+```
+/data/play/forks/badV2604.ids
+```
 
-| File | Entries | Source |
-|---|---|---|
-| `bad_authors_combined.txt` | 1,677 | Union of WoC official sources (below) |
-| `bad_emails_combined.txt` | 5,156 | Union of WoC official sources (below) |
+(on da5, 155 MB, 3,206,105 entries; format `<raw_author>;<category>` where
+category is `generic` or `bot`).
 
-## Underlying official sources
-
-| File | Entries | Provenance |
-|---|---|---|
-| `bad_authors_findHomonyms.txt` | 1,734 raw (1,660 unique) | `$badAuthHere` here-doc in `~/swsc/lookup/findHomonyms.perl`, the script WoC uses to build its alias map.  This is the canonical "drop these from alias resolution" list. |
-| `bad_authors_woc.txt` | 24 | `%badAuthors` hash in `~/swsc/lookup/woc.pm` — newer additions (DANDI, github-actions, ...) layered on top of findHomonyms. |
-| `bad_emails_findHomonyms.txt` | 578 | `$badEmailHere` here-doc in `~/swsc/lookup/findHomonyms.perl` — the WoC-canonical bad-email list (noreply patterns, `example.com`, etc.). |
-| `badEmailS` | 4,776 | `~/lookup/badEmailS` — the larger live blocklist of personal/test emails. |
-
-Internal duplicates removed by `LC_ALL=C sort -u`.
-
-## No regex heuristics
-
-Earlier drafts of the filter used substring matches (`[bot]`,
-`@users.noreply.github.com`) to catch bot accounts.  We dropped this in
-favor of the explicit canonical lists because:
-
-1. The canonical findHomonyms list already includes essentially every
-   GitHub `[bot]` identity we care about (`dependabot[bot]`,
-   `renovate[bot]`, `greenkeeper[bot]`, `imgbot[bot]`, etc.).
-2. `@users.noreply.github.com` is ALSO used by many real humans who keep
-   their personal email private; the c2aAcCt alias map resolves many of
-   those to the noreply form (e.g., `Jiyong Youn <hletrd@users.noreply.github.com>`).
-   A regex filter on this domain false-positives real authors.
-
-If a new bot account appears that is not on the canonical list, the right
-fix is to add it to `findHomonyms.perl` upstream and re-derive the lists
-here, not to extend the local regex.
-
-## Rebuild
+The file is too large to commit and is not in the local pipeline tree.  It
+must be copied to `$SCRATCH/blocklists/badV2604.ids` on the run host
+before stage 50 runs:
 
 ```sh
-ssh da5 "awk 'BEGIN{f=0} /badAuthHere.*<<.*EOT/{f=1; next} /^EOT/{if(f){f=0;exit}} f' ~/swsc/lookup/findHomonyms.perl" > bad_authors_findHomonyms.txt
-ssh da5 "awk 'BEGIN{found=0; f=0} /<<.*EOT/{found++; if(found==2){f=1; next}} /^EOT/{if(f){f=0;exit}} f' ~/swsc/lookup/findHomonyms.perl" > bad_emails_findHomonyms.txt
-ssh da5 'perl -e "use lib qq{$ENV{HOME}/swsc/lookup}; require qq{woc.pm}; for my \$k (keys %woc::badAuthors) {print \"\$k\\n\"}"' > bad_authors_woc.txt
-scp da5:/home/audris/lookup/badEmailS .
-cat bad_authors_woc.txt bad_authors_findHomonyms.txt | LC_ALL=C sort -u > bad_authors_combined.txt
-cat badEmailS bad_emails_findHomonyms.txt | LC_ALL=C sort -u > bad_emails_combined.txt
+ssh da5 'scp /data/play/forks/badV2604.ids da7:/corrino/play/audris/lcs_icse27/blocklists/'
 ```
+
+`50_classify_and_aggregate.sh` will refuse to start if the file is absent.
+
+## Why not the smaller lists we used to ship
+
+Earlier drafts of this directory shipped (now removed):
+
+- `bad_authors_findHomonyms.txt` (1,734 entries from
+  `~/swsc/lookup/findHomonyms.perl`)
+- `bad_authors_woc.txt` (24 entries from `%badAuthors` in
+  `~/swsc/lookup/woc.pm`)
+- `bad_emails_findHomonyms.txt` (578 entries)
+- `badEmailS` (4,776 entries from `~/lookup/badEmailS`)
+
+`badV2604.ids` supersedes all of these.  It is the production V2604 bad-ID
+list used by the alias-map build itself, two orders of magnitude larger,
+and aligned to the V2604 raw-author namespace we are reading from
+`c2aAcCtFull.V2604.*.s` field 2.
+
+## Category breakdown (informational)
+
+| Category | Count | What it covers |
+|---|---|---|
+| `generic` | 2,652,369 | Homonyms, placeholder identities (`<Admin@.>`, `Your Name <you@example.com>`, IP-only emails, single-char names, etc.) |
+| `bot` | 553,736 | Automated identities (`dependabot[bot]`, CI bots, mirror scripts, etc.) |
+
+Both categories are dropped in stage 50: a "generic" author is a unidentifiable
+identity and should not be counted as a distinct contributor; a "bot" author
+is not a human contributor.

@@ -14,8 +14,10 @@ cd "$SCRATCH"
 j=${1:-0}     # shard index
 mkdir -p split_test
 mkdir -p blocklists
-[[ -s blocklists/bad_authors_combined.txt ]] || cp "$HERE/blocklists/bad_authors_combined.txt" blocklists/
-[[ -s blocklists/bad_emails_combined.txt ]] || cp "$HERE/blocklists/bad_emails_combined.txt" blocklists/
+if [[ ! -s blocklists/badV2604.ids ]]; then
+  echo "ERROR: blocklists/badV2604.ids missing; scp from da5:/data/play/forks/badV2604.ids" >&2
+  exit 1
+fi
 
 log "Test shard $j  (using c2aAcCtFull.V2604.$j.s)"
 
@@ -32,22 +34,23 @@ n_bot=$(LC_ALL=C join -t';' \
   <(zcat split/cByc.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
   <(zcat "$BASEMAPS/c2aAcCtFull.V2604.$j.s" \
       | awk -F';' 'BEGIN{OFS=";"} {print $1, $6, $3, $2}') \
-  | awk -F';' -v BADA=blocklists/bad_authors_combined.txt -v BADE=blocklists/bad_emails_combined.txt '
+  | awk -F';' -v BAD=blocklists/badV2604.ids '
       BEGIN {
-        while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }
-        close(BADA)
-        while ((getline line < BADE) > 0) { if (line != "") badE[line] = 1 }
-        close(BADE)
+        while ((getline line < BAD) > 0) {
+          if (line == "") continue
+          if (sub(/;generic$/, "", line)) { badA[line] = "g"; ng++ }
+          else if (sub(/;bot$/, "", line)) { badA[line] = "b"; nb++ }
+        }
+        close(BAD)
+        printf "loaded %d generic + %d bot = %d total\n", ng, nb, ng+nb > "/dev/stderr"
       }
       {
         a = $7
-        if (a in badA) {drop++; next}
-        if (match(a, /<[^>]+>/)) {
-          e = substr(a, RSTART + 1, RLENGTH - 2)
-          if (e in badE) {drop++; next}
-        }
+        if (a in badA) {
+          if (badA[a] == "g") drop_g++; else drop_b++
+        } else { kept++ }
       }
-      END { print drop+0 }')
+      END { print drop_g + drop_b }')
 log "  dropped by bot filter: $n_bot  ($(awk "BEGIN{printf \"%.2f\", 100*$n_bot/$n_in}")%)"
 
 log "Run worker (full stage 50 on shard $j) into split_test/"
@@ -61,17 +64,16 @@ SCRATCH="$SCRATCH" BASEMAPS="$BASEMAPS" TMPDIR="$TMPDIR" \
       <(zcat split/cByc.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t";" -k1,1 -S "8G") \
       <(zcat "$BASEMAPS/c2aAcCtFull.V2604.$j.s" \
           | awk -F";" "BEGIN{OFS=\";\"} {print \$1, \$6, \$3, \$2}") \
-      | awk -F";" -v Y=31536000 -v BADA="$BLOCKLIST_DIR/bad_authors_combined.txt" -v BADE="$BLOCKLIST_DIR/bad_emails_combined.txt" '"'"'
+      | awk -F";" -v Y=31536000 -v BAD="$BLOCKLIST_DIR/badV2604.ids" '"'"'
           BEGIN {
             OFS = ";"
-            while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }; close(BADA)
-            while ((getline line < BADE) > 0) { if (line != "") badE[line] = 1 }; close(BADE)
+            while ((getline line < BAD) > 0) {
+              if (line == "") continue
+              if (sub(/;generic$/, "", line) || sub(/;bot$/, "", line)) badA[line] = 1
+            }
+            close(BAD)
           }
-          function is_bot(a, e) {
-            if (a in badA) return 1
-            if (match(a, /<[^>]+>/)) { e = substr(a, RSTART + 1, RLENGTH - 2); if (e in badE) return 1 }
-            return 0
-          }
+          function is_bot(a) { return (a in badA) }
           {
             c=$1; pid=$2; ft=$3+0; lt=$4+0; ts=$5+0; A=$6; a=$7
             if (is_bot(a)) next

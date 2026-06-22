@@ -23,19 +23,19 @@ source "$HERE/00_config.sh"
 
 cd "$SCRATCH"
 
-# Canonical WoC bot/homonym blocklists extracted from ~/swsc/lookup/findHomonyms.perl
-# (the script used to BUILD the alias map) unioned with the live woc.pm and
-# ~/lookup/badEmailS lists.  See blocklists/README.md for provenance.
+# Official V2604 bad-author blocklist from /data/play/forks/badV2604.ids on da5
+# (155 MB, 3,206,105 entries: 2,652,369 "generic" homonyms + 553,736 "bot").
+# Format: <raw author>;<category>  where category is "generic" or "bot".
+# Both categories are blocklist: drop the raw author either way.
+# This is the production V2604 list used by the alias-map build; vastly more
+# comprehensive than the findHomonyms/woc.pm extracts.
 BLOCKLIST_DIR="$SCRATCH/blocklists"
-mkdir -p "$BLOCKLIST_DIR"
-for f in bad_authors_combined.txt bad_emails_combined.txt; do
-  if [[ ! -s "$BLOCKLIST_DIR/$f" ]]; then
-    cp "$HERE/blocklists/$f" "$BLOCKLIST_DIR/"
-  fi
-done
-log "Blocklists (canonical):" \
-    "$(wc -l < "$BLOCKLIST_DIR/bad_authors_combined.txt") bad authors," \
-    "$(wc -l < "$BLOCKLIST_DIR/bad_emails_combined.txt") bad emails"
+BAD_IDS="$BLOCKLIST_DIR/badV2604.ids"
+if [[ ! -s "$BAD_IDS" ]]; then
+  log "ERROR: $BAD_IDS not present; copy from da5:/data/play/forks/badV2604.ids" >&2
+  exit 1
+fi
+log "Blocklist: $(wc -l < "$BAD_IDS") bad raw-author entries (from badV2604.ids)"
 
 log "Step 3: classify + c2fbb + per-shard aggregate (PAR=$PAR)"
 log "  using c2aAcCtFull.V2604 for aliased author A (field 3) and atime (field 6)"
@@ -62,31 +62,27 @@ process_shard() {
         | awk -F';' 'BEGIN{OFS=";"} {print $1, $6, $3, $2}') \
     | awk -F';' \
           -v Y="$YEAR_S" \
-          -v BADA="$BLOCKLIST_DIR/bad_authors_combined.txt" \
-          -v BADE="$BLOCKLIST_DIR/bad_emails_combined.txt" '
+          -v BAD="$BAD_IDS" '
         BEGIN {
           OFS = ";"
-          # canonical bad-author list (1,677 entries, union of findHomonyms
-          # here-doc + woc.pm %badAuthors)
-          while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }
-          close(BADA)
-          # canonical bad-email list (5,156 entries, union of findHomonyms
-          # here-doc + ~/lookup/badEmailS)
-          while ((getline line < BADE) > 0) { if (line != "") badE[line] = 1 }
-          close(BADE)
+          # Load the official V2604 bad-author list.  File format is
+          # <raw_author>;<category> where category is "generic" or "bot".
+          # We treat both as blocklist entries.  Some raw_author strings
+          # contain semicolons; rebuild the key by stripping the trailing
+          # ";generic" or ";bot".
+          while ((getline line < BAD) > 0) {
+            if (line == "") continue
+            if (sub(/;generic$/, "", line) || sub(/;bot$/, "", line)) {
+              badA[line] = 1
+            }
+          }
+          close(BAD)
         }
         # input fields after the join:
         #   1=commit  2=project  3=firstT  4=lastT  5=atime  6=A  7=a
-        # Drop ONLY when raw a (or its email part) is explicitly listed.
-        # No regex heuristics: the canonical lists already include the GitHub
-        # "[bot]" identities we care about.
-        function is_bot(a,    e) {
-          if (a in badA) return 1
-          if (match(a, /<[^>]+>/)) {
-            e = substr(a, RSTART + 1, RLENGTH - 2)
-            if (e in badE) return 1
-          }
-          return 0
+        # Drop iff the raw author a is in the official V2604 bad-id list.
+        function is_bot(a) {
+          return (a in badA)
         }
         {
           c=$1; pid=$2; ft=$3+0; lt=$4+0; ts=$5+0; A=$6; a=$7
