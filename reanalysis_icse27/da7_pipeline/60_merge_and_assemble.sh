@@ -15,25 +15,30 @@ cd "$SCRATCH"
 
 log "Step 4: merge per-shard aggregates"
 
-# Per shard format (6 cols): pid; window; ncmt; nfiles; nblobs; nmonths
+# Per shard format (7 cols): pid; window; ncmt; nfiles; nblobs; nmonths; nauthors
+# A given (pid, window) appears in exactly one shard (commit hash routes it),
+# so the per-shard counts are already cross-shard-unique; we just need to
+# concatenate.  We still groupBy because some keys do appear across shards
+# (when a project's commits hash into >1 shard via cByc).
 zcat split/agg.*.gz \
   | "$LSORT" 32G -t';' -k1,1 -k2,2 \
   | awk -F';' '
       BEGIN { OFS=";" }
-      function flush(   k) {
-        if (curkey != "") print curkey, ncmt, nfiles, nblobs, nmonths
+      function flush() {
+        if (curkey != "") print curkey, ncmt, nfiles, nblobs, nmonths, nauthors
       }
       {
         key = $1 ";" $2
         if (key != curkey) {
           flush()
           curkey = key
-          ncmt = 0; nfiles = 0; nblobs = 0; nmonths = 0
+          ncmt = 0; nfiles = 0; nblobs = 0; nmonths = 0; nauthors = 0
         }
-        ncmt    += $3
-        nfiles  += $4
-        nblobs  += $5
-        nmonths += $6
+        ncmt     += $3
+        nfiles   += $4
+        nblobs   += $5
+        nmonths  += $6
+        nauthors += $7
       }
       END { flush() }' \
   | gzip > out/cP2windows.V2604.gz

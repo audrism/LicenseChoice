@@ -52,14 +52,34 @@ cP2PRE_POST <- file.path(DATA_DIR, "choice", "cP2pre_post.1y")         # mongo-d
 
 # ---------- 1. Load V2604 windows ----------
 cat("Loading cP2all.V2604.1y ...\n")
-V2604_COLS <- c("Pnew","firstLic","firstAdop","lastLic","lastAdop","distance",
-                "firstT","lastT","oldList","flag",
-                "firstNcmt","firstNfiles","firstNblobs","firstActMon",
-                "lastNcmt","lastNfiles","lastNblobs","lastActMon",
-                "preNcmt","preNfiles","preNblobs","preActMon")
-V2604_CLASSES <- c("character","character","character","character","character",
-                   "integer","numeric","numeric","character","character",
-                   rep("integer", 12))
+
+# Sniff the cP2all.V2604.1y schema: the original output had 4 metrics per
+# window (commits, files, blobs, active months); the bot-filtered V2604 rerun
+# adds nauthors as a 5th, yielding 25 columns total.
+n_cols_in <- length(strsplit(readLines(cP2ALL_V2604, n = 1), ";")[[1]])
+HAVE_AUTHORS <- (n_cols_in >= 25)
+cat(sprintf("  detected %d columns per row; HAVE_AUTHORS=%s\n",
+            n_cols_in, HAVE_AUTHORS))
+
+if (HAVE_AUTHORS) {
+  V2604_COLS <- c("Pnew","firstLic","firstAdop","lastLic","lastAdop","distance",
+                  "firstT","lastT","oldList","flag",
+                  "firstNcmt","firstNfiles","firstNblobs","firstActMon","firstNauthors",
+                  "lastNcmt","lastNfiles","lastNblobs","lastActMon","lastNauthors",
+                  "preNcmt","preNfiles","preNblobs","preActMon","preNauthors")
+  V2604_CLASSES <- c("character","character","character","character","character",
+                     "integer","numeric","numeric","character","character",
+                     rep("integer", 15))
+} else {
+  V2604_COLS <- c("Pnew","firstLic","firstAdop","lastLic","lastAdop","distance",
+                  "firstT","lastT","oldList","flag",
+                  "firstNcmt","firstNfiles","firstNblobs","firstActMon",
+                  "lastNcmt","lastNfiles","lastNblobs","lastActMon",
+                  "preNcmt","preNfiles","preNblobs","preActMon")
+  V2604_CLASSES <- c("character","character","character","character","character",
+                     "integer","numeric","numeric","character","character",
+                     rep("integer", 12))
+}
 d <- read.table(cP2ALL_V2604, sep=";", header=FALSE,
                 col.names=V2604_COLS, colClasses=V2604_CLASSES,
                 quote="", comment.char="", fill=TRUE)
@@ -217,6 +237,12 @@ m$lActMonDif_BLvAL  <- sl(m$lastActMon)  - sl(m$preActMon)
 m$lUpProjDif_BLvAL  <- sl(m$lastUpP)     - sl(m$preUpP)
 m$lDownProjDif_BLvAL<- sl(m$lastDownP)   - sl(m$preDownP)
 
+# Aliased-author counts, bot-filtered (only if V2604 pipeline emitted them)
+if (HAVE_AUTHORS) {
+  m$lAuthorsDif_AFvAL <- sl(m$lastNauthors) - sl(m$firstNauthors)
+  m$lAuthorsDif_BLvAL <- sl(m$lastNauthors) - sl(m$preNauthors)
+}
+
 # Log-transform numeric controls
 for (nm in c("Delay","Distance","EarliestCommit","LatestCommit","prop2")) {
   if (!nm %in% names(m)) next
@@ -252,6 +278,7 @@ fit_uni <- function(resp, dat, with_pop = TRUE) {
 
 OUTCOMES_BOTH <- c("lCommitsDif", "lFilesDif", "lBlobsDif", "lActMonDif",
                    "lUpProjDif",  "lDownProjDif")
+if (HAVE_AUTHORS) OUTCOMES_BOTH <- c(OUTCOMES_BOTH, "lAuthorsDif")
 DESIGNS <- c("AFvAL", "BLvAL")
 
 results <- list()
