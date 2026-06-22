@@ -93,16 +93,22 @@ Rscript icse27_prepost_V2604.R
     +- merged_prepost.csv
 ```
 
-## Known limitations
+## Pending follow-ups (not blockers)
 
-1. **V2604 windows do not include author counts.** The c2dat-based author
-   field needs a one-line addition to the stage-50 awk. The paper's Authors
-   row in the V2604 BLvAL column carries over the V-mongo value from
-   `out/prepost_vs_orig_design.csv` and is flagged with $\dagger$.
-2. **Pt2Ptb has no V2604 build.** Upstream/downstream windows are
-   computed at V and translated to V2604 IDs via `Pold2Pnew.modal.s`.
-   Effects are stable across V and V2604 IDs (the V$\to$V2604 churn is
-   <0.1%).
+1. **V2604 Authors row in the table is a placeholder.** `c2datFull.V2604.*.s`
+   already carries author identity in field 4 (we just drop it in stage 3a
+   to keep the cls intermediates small). Re-running stage 50 + 60 with a
+   one-line awk change adds a distinct-authors accumulator in the per-shard
+   aggregate (`seen_a[pid SUBSEP w SUBSEP author]`) and propagates one more
+   column through `build_cP2all_V2604.py` and `icse27_prepost_V2604.R`. Wall
+   time matches the original stage 50 (~13 h on da7 at PAR=4). Until then,
+   the paper's Authors / V2604 BLvAL cell carries the V-mongo value from
+   `out/prepost_vs_orig_design.csv` with a $\dagger$ marker.
+2. **Pt2Ptb has no V2604 build.** Upstream/downstream windows are computed
+   at V and translated to V2604 IDs via `Pold2Pnew.modal.s`. The V$\to$V2604
+   churn is <0.1%, so the V-canonical edge data is effectively V2604-aligned
+   after translation.
 3. **Stars are not yet incorporated.** The GHArchive star map is being
-   ingested separately; `compute_pre_window.py` already has the slot
-   wired so it can be re-run when the events file lands.
+   ingested separately; `compute_pre_window.py` already has the column
+   slot wired (`StarsAtLast`, `StarsTotal`), so plugging the events file
+   in re-populates the column without further code changes.

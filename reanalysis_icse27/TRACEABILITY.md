@@ -212,12 +212,17 @@ Rscript icse27_prepost_V2604.R
 
 ## Pending follow-ups
 
-- Authors per V2604 window: extend `da7_pipeline/50_classify_and_aggregate.sh`
-  to track distinct authors via a c2dat-derived author field; one-line
-  change to the awk END block. Currently the table's Authors row in the
-  V2604 BLvAL column is `0.94` carried over from the V-mongo Pre/Post run
-  and flagged with $\dagger$.
-- Star events from GHArchive: `da7_pipeline/compute_pre_window.py`
-  already has the slot wired (see `StarsAtLast` column); when the events
-  file lands, the column populates automatically and `icse27_prepost.R`
-  /`icse27_prepost_V2604.R` gain `lStarsAtLast` as a covariate.
+- Authors per V2604 window: the data is already in `c2datFull.V2604.*.s`
+  (field 4 = author identity). Stage 3a of
+  `da7_pipeline/50_classify_and_aggregate.sh` currently extracts only
+  field 6 (timestamp) and drops the author; restoring it and adding a
+  `seen_a[pid SUBSEP w SUBSEP author]` accumulator in the stage 3c awk
+  END block produces a 5th aggregate column, picked up automatically by
+  `build_cP2all_V2604.py` and `icse27_prepost_V2604.R`. Stage 50 wall
+  time matches the original (~13 h at PAR=4). Until that rerun lands,
+  the table's Authors row in the V2604 BLvAL column carries the V-mongo
+  value 0.94 from `out/prepost_vs_orig_design.csv` flagged with $\dagger$.
+- Star events from GHArchive: `compute_pre_window.py` already has the slot
+  wired (see `StarsAtLast` and `StarsTotal` columns); when the events
+  file lands, the column populates and `icse27_prepost_V2604.R` gains
+  `lStarsAtLast` as a covariate.
