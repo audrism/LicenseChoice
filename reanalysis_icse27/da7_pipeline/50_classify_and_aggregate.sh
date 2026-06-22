@@ -23,17 +23,19 @@ source "$HERE/00_config.sh"
 
 cd "$SCRATCH"
 
-# Blocklists are bundled with the pipeline; stage them locally if not yet
-# present (deploy script copies the directory but we double-check here).
+# Canonical WoC bot/homonym blocklists extracted from ~/swsc/lookup/findHomonyms.perl
+# (the script used to BUILD the alias map) unioned with the live woc.pm and
+# ~/lookup/badEmailS lists.  See blocklists/README.md for provenance.
 BLOCKLIST_DIR="$SCRATCH/blocklists"
 mkdir -p "$BLOCKLIST_DIR"
-if [[ ! -s "$BLOCKLIST_DIR/bad_authors_woc.txt" ]]; then
-  cp "$HERE/blocklists/bad_authors_woc.txt" "$BLOCKLIST_DIR/" 2>/dev/null || true
-fi
-if [[ ! -s "$BLOCKLIST_DIR/badEmailS" ]]; then
-  cp "$HERE/blocklists/badEmailS" "$BLOCKLIST_DIR/" 2>/dev/null || true
-fi
-log "Blocklists: $(wc -l < "$BLOCKLIST_DIR/bad_authors_woc.txt") bad authors, $(wc -l < "$BLOCKLIST_DIR/badEmailS") bad emails"
+for f in bad_authors_combined.txt bad_emails_combined.txt; do
+  if [[ ! -s "$BLOCKLIST_DIR/$f" ]]; then
+    cp "$HERE/blocklists/$f" "$BLOCKLIST_DIR/"
+  fi
+done
+log "Blocklists (canonical):" \
+    "$(wc -l < "$BLOCKLIST_DIR/bad_authors_combined.txt") bad authors," \
+    "$(wc -l < "$BLOCKLIST_DIR/bad_emails_combined.txt") bad emails"
 
 log "Step 3: classify + c2fbb + per-shard aggregate (PAR=$PAR)"
 log "  using c2aAcCtFull.V2604 for aliased author A (field 3) and atime (field 6)"
@@ -60,31 +62,30 @@ process_shard() {
         | awk -F';' 'BEGIN{OFS=";"} {print $1, $6, $3, $2}') \
     | awk -F';' \
           -v Y="$YEAR_S" \
-          -v BADA="$BLOCKLIST_DIR/bad_authors_woc.txt" \
-          -v BADE="$BLOCKLIST_DIR/badEmailS" '
+          -v BADA="$BLOCKLIST_DIR/bad_authors_combined.txt" \
+          -v BADE="$BLOCKLIST_DIR/bad_emails_combined.txt" '
         BEGIN {
           OFS = ";"
-          # load bad-author exact strings (the raw "Name <email>" form)
+          # canonical bad-author list (1,677 entries, union of findHomonyms
+          # here-doc + woc.pm %badAuthors)
           while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }
           close(BADA)
-          # load bad-email exact strings (just the email part)
+          # canonical bad-email list (5,156 entries, union of findHomonyms
+          # here-doc + ~/lookup/badEmailS)
           while ((getline line < BADE) > 0) { if (line != "") badE[line] = 1 }
           close(BADE)
         }
         # input fields after the join:
         #   1=commit  2=project  3=firstT  4=lastT  5=atime  6=A  7=a
+        # Drop ONLY when raw a (or its email part) is explicitly listed.
+        # No regex heuristics: the canonical lists already include the GitHub
+        # "[bot]" identities we care about.
         function is_bot(a,    e) {
           if (a in badA) return 1
-          # extract email between < >
           if (match(a, /<[^>]+>/)) {
             e = substr(a, RSTART + 1, RLENGTH - 2)
             if (e in badE) return 1
           }
-          # bot patterns
-          if (index(a, "[bot]") > 0) return 1
-          if (a ~ /@users\.noreply\.github\.com>/) return 1
-          if (a ~ /@users\.github\.com>/) return 1
-          if (a ~ /@noreply\.github\.com>/) return 1
           return 0
         }
         {

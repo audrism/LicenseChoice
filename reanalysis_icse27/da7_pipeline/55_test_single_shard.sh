@@ -14,8 +14,8 @@ cd "$SCRATCH"
 j=${1:-0}     # shard index
 mkdir -p split_test
 mkdir -p blocklists
-[[ -s blocklists/bad_authors_woc.txt ]] || cp "$HERE/blocklists/bad_authors_woc.txt" blocklists/
-[[ -s blocklists/badEmailS ]]           || cp "$HERE/blocklists/badEmailS" blocklists/
+[[ -s blocklists/bad_authors_combined.txt ]] || cp "$HERE/blocklists/bad_authors_combined.txt" blocklists/
+[[ -s blocklists/bad_emails_combined.txt ]] || cp "$HERE/blocklists/bad_emails_combined.txt" blocklists/
 
 log "Test shard $j  (using c2aAcCtFull.V2604.$j.s)"
 
@@ -32,7 +32,7 @@ n_bot=$(LC_ALL=C join -t';' \
   <(zcat split/cByc.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t';' -k1,1 -S "$SORTMEM") \
   <(zcat "$BASEMAPS/c2aAcCtFull.V2604.$j.s" \
       | awk -F';' 'BEGIN{OFS=";"} {print $1, $6, $3, $2}') \
-  | awk -F';' -v BADA=blocklists/bad_authors_woc.txt -v BADE=blocklists/badEmailS '
+  | awk -F';' -v BADA=blocklists/bad_authors_combined.txt -v BADE=blocklists/bad_emails_combined.txt '
       BEGIN {
         while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }
         close(BADA)
@@ -46,10 +46,6 @@ n_bot=$(LC_ALL=C join -t';' \
           e = substr(a, RSTART + 1, RLENGTH - 2)
           if (e in badE) {drop++; next}
         }
-        if (index(a, "[bot]") > 0) {drop++; next}
-        if (a ~ /@users\.noreply\.github\.com>/) {drop++; next}
-        if (a ~ /@users\.github\.com>/) {drop++; next}
-        if (a ~ /@noreply\.github\.com>/) {drop++; next}
       }
       END { print drop+0 }')
 log "  dropped by bot filter: $n_bot  ($(awk "BEGIN{printf \"%.2f\", 100*$n_bot/$n_in}")%)"
@@ -65,7 +61,7 @@ SCRATCH="$SCRATCH" BASEMAPS="$BASEMAPS" TMPDIR="$TMPDIR" \
       <(zcat split/cByc.$j.gz | LC_ALL=C sort -T "$TMPDIR" -t";" -k1,1 -S "8G") \
       <(zcat "$BASEMAPS/c2aAcCtFull.V2604.$j.s" \
           | awk -F";" "BEGIN{OFS=\";\"} {print \$1, \$6, \$3, \$2}") \
-      | awk -F";" -v Y=31536000 -v BADA="$BLOCKLIST_DIR/bad_authors_woc.txt" -v BADE="$BLOCKLIST_DIR/badEmailS" '"'"'
+      | awk -F";" -v Y=31536000 -v BADA="$BLOCKLIST_DIR/bad_authors_combined.txt" -v BADE="$BLOCKLIST_DIR/bad_emails_combined.txt" '"'"'
           BEGIN {
             OFS = ";"
             while ((getline line < BADA) > 0) { if (line != "") badA[line] = 1 }; close(BADA)
@@ -74,10 +70,6 @@ SCRATCH="$SCRATCH" BASEMAPS="$BASEMAPS" TMPDIR="$TMPDIR" \
           function is_bot(a, e) {
             if (a in badA) return 1
             if (match(a, /<[^>]+>/)) { e = substr(a, RSTART + 1, RLENGTH - 2); if (e in badE) return 1 }
-            if (index(a, "[bot]") > 0) return 1
-            if (a ~ /@users\.noreply\.github\.com>/) return 1
-            if (a ~ /@users\.github\.com>/) return 1
-            if (a ~ /@noreply\.github\.com>/) return 1
             return 0
           }
           {
