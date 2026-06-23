@@ -60,24 +60,16 @@ is therefore a hybrid measurement; its NS BLvAL value should not be
 interpreted as ruling out an upstream/downstream effect at the V2604
 horizon.
 
-\paragraph{Multiple comparisons.} The regression reports seven
-outcomes under two designs with multiple language interaction terms.
-We did not apply a Bonferroni or Benjamini--Hochberg correction; the
-borderline-significant effects (commits, authors, active months at
-OR $\approx$ 0.96, $p \approx 0.025$ in the V2604 BLvAL design) would not
-survive a strict Bonferroni adjustment at family-wise $\alpha=0.05$
-with seven outcomes. The language-interaction patterns (C/C++ negative,
-Python positive) are robust to such corrections because of their larger
-effect sizes; the marginal headline effects should be read as
-suggestive rather than definitive.
+\paragraph{Multiple comparisons.} We report 7 outcomes $\times$ 2
+designs with several language interactions and do not adjust for
+multiple testing; the borderline V2604 BLvAL effects
+(OR $\approx 0.96$, $p \approx 0.025$) would not survive a strict
+Bonferroni at family-wise $\alpha=0.05$. The larger
+language-interaction effects do.
 
-\paragraph{Author-count bot/homonym filter.} The V2604 distinct-author
-counts in the BLvAL column of Table~\ref{tbl:robustness} are
-post-filter against the official WoC V2604 bad-id list
-(\texttt{/data/play/forks/badV2604.ids}, 3.2M entries: 2.65M generic
-homonyms + 0.55M bots). The filter is applied symmetrically across
-all three windows (FIRST, LAST, PRE) of each project at the commit
-level, so a project that switched from heavy CI-bot usage to none, or
-vice versa, would still have its non-bot author count compared
-consistently. Earlier (V) author counts in the no-popularity column
-are not bot-filtered.
+\paragraph{Author-count bot/homonym filter.} The V2604 author counts
+drop commits whose raw author is in
+\texttt{/data/play/forks/badV2604.ids} (3.2M entries: 2.65M generic +
+0.55M bot). The filter is applied symmetrically across the FIRST,
+LAST, and PRE windows of each project; earlier (V) author counts in
+the no-popularity column are not bot-filtered.

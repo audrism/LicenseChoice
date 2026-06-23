@@ -1,21 +1,22 @@
 \section{Conclusions}
-The study offers a discussion of theoretical concepts combined with
-rigorous statistical data analysis of the factors influencing
-license choices in open source software projects.
-Not all predictions were bourne out, suggesting that prior work used
-to support the hypothesized effect was either no longer relevant or
-obtained in a different context. Key finding that over 80\% of the
-projects have no license making their code legally virtually unusable
-highlight both risks of inadvertent poisoning of the software supply
-chain and, perhaps more importantly, the obstacle for innovation
-through its wider use. Many of the theorized predictions were
-supported by the analysis, yet there was almost always meaningful 
-differences between different programming languages, suggesting 
-that a more mature theory of
-license choice could be developed. The observed relationships may
-help develop recommenders that can provide projects with the most
-suitable default license and suggest changes as project matures or
-its goals change.   
+
+Two findings emerge clearly.
+\textbf{(1)} 83\% of OSS projects lack a formal license, four times the
+rate reported by prior studies that filtered on stars or
+package-manager presence; this exposes a much larger long tail of
+legally-ambiguous reusable code than was previously known.
+\textbf{(2)} For projects that switch license types, the apparent
+global effects of switching to a permissive license on files,
+upstream and downstream project counts collapse under
+popularity controls and are not robust. What remains robust across
+designs is a language-ecosystem-mediated pattern: C/C++ projects show
+reduced activity after switching to permissive licenses, Python the
+opposite. The V2604-aligned, bot-filtered year-before/year-after
+reanalysis surfaces small ($\sim 4\%$) but consistent attenuations in
+commits, distinct human authors, and sustained activity under
+restrictive$\rightarrow$permissive transitions, suggesting future work
+should combine the regression with qualitative case studies in
+specific language communities.   
 % Key trends that shape the
 % licensing landscape include the impact of project maturity, team
 % composition, activity levels, and programming languages. 
