@@ -27,6 +27,10 @@
 
 \citestyle{acmauthoryear}
 
+% \icsetrim{...}: arXiv/manuscript build keeps the argument; the ICSE'27
+% two-column build (icse27_main.tex) drops it for space. See README.md.
+\providecommand{\icsetrim}[1]{#1}
+
 \begin{document}
 
 \title{License Choice, Prevalence, and Impact in Open Software Projects}
