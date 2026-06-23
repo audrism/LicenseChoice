@@ -9,86 +9,77 @@ the switch, using a multivariate multiple regression approach.
 
 \subsection{License Types}
 
-We group licenses based on their characteristics.
-This grouping helps categorize and understand the different ways software can be distributed and modified.
-These categories typically include permissive, copyleft, weak copyleft, and public domain/unlicensed code.
-This classification is widely recognized in the field~\cite{kaminski2007open} and is supported by various scholarly sources.
-% As noted by \citet{kaminski2007open}, these licensing patterns have shaped the development of OSS.
+We group licenses using the standard classification~\cite{kaminski2007open}:
+\emph{Permissive} (e.g., MIT, BSD; minimal restrictions; can be bundled
+with proprietary code~\cite{kapitsaki2019modeling,kapitsaki2022help});
+\emph{Copyleft} (e.g., GPL; derivative works must share the same
+license~\cite{d2007copyleft,laurent2012free});
+\emph{Weak Copyleft} (e.g., LGPL, MPL; linking permitted, modifications
+to the licensed components must stay
+open~\cite{alamoudi2020open,gamalielsson2017licensing});
+\emph{Conditional Open} (e.g., CC-BY/CC-BY-SA; attribution or
+share-alike required~\cite{de2009creative}); and
+\emph{Public Domain} (e.g., CC0, Unlicense; explicit waiver of
+copyright). We treat \emph{no-license} projects (no LICENSE file at
+all; default ``all rights reserved'') as a \emph{separate} category,
+not part of public-domain: the legal effect is opposite.
 
-1. \textit{Permissive Licenses}: These licenses, such as the MIT and BSD licenses, are known for their minimal restrictions on how the software can be used.
-They allow software to be freely used, modified, and redistributed, even as part of proprietary software~\cite{kapitsaki2019modeling}.
-This permissiveness promotes wider adoption and integration of the software in diverse projects, including commercial applications~\cite{kapitsaki2022help}.
+\icsetrim{1. \textit{Permissive Licenses}: These licenses, such as the
+MIT and BSD licenses, are known for their minimal restrictions on how
+the software can be used. They allow software to be freely used,
+modified, and redistributed, even as part of proprietary
+software~\cite{kapitsaki2019modeling}. This permissiveness promotes
+wider adoption and integration of the software in diverse projects,
+including commercial applications~\cite{kapitsaki2022help}.
 
-2. \textit{Copyleft Licenses}: These licenses, like the GNU General Public License (GPL), require that any modified versions of the software must also be distributed under the same license.
-This ensures that derivative works remain free and open, thus preserving the original freedoms granted by the license~\cite{d2007copyleft}.
-This characteristic is essential for maintaining the open source nature of software, as it prevents proprietary modifications~\cite{laurent2012free}.
+2. \textit{Copyleft Licenses}: These licenses, like the GNU General
+Public License (GPL), require that any modified versions of the
+software must also be distributed under the same
+license~\cite{d2007copyleft,laurent2012free}.
 
-3. \textit{Weak Copyleft Licenses}: These licenses, such as the GNU Lesser General Public License (LGPL) and Mozilla Public License (MPL), strike a balance between permissive and strong copyleft licenses.
-They allow linking with proprietary software under certain conditions, while modifications to the licensed components themselves must remain open~\cite{alamoudi2020open}.
-This flexibility encourages the use of open source libraries in both open and closed source projects~\cite{gamalielsson2017licensing}.
+3. \textit{Weak Copyleft Licenses}: These licenses, such as the LGPL
+and MPL, strike a balance between permissive and strong copyleft
+licenses~\cite{alamoudi2020open,gamalielsson2017licensing}.
 
-4. \textit{Conditional Open Licenses}: These licenses include specific conditions that must be met for usage, such as attribution (CC-BY), non-commercial use, or share-alike requirements.
-Creative Commons licenses, like CC-BY and CC-BY-SA, provide a framework for sharing while respecting the creator's conditions~\cite{de2009creative}.
+4. \textit{Conditional Open Licenses}: These licenses include specific
+conditions that must be met for usage, such as attribution (CC-BY),
+non-commercial use, or share-alike
+requirements~\cite{de2009creative}.
 
 5. \textit{Public Domain}: This category refers specifically to
-projects that include an \emph{explicit} license declaration intended to waive
-copyright protections, such as the Unlicense or the Creative Commons Zero
-(CC0) license. In such cases, the authors deliberately release the work
-into the public domain or its functional equivalent, allowing anyone to
-use, modify, and distribute it without any conditions. We deliberately
-do \emph{not} include in this category projects that simply have no license
-file (``no license''); under default copyright law, no-license projects
-still have all rights reserved, which is the opposite of the public-domain
-intent, and we treat that case as a separate category that constitutes
-a major source of legal ambiguity in the OSS ecosystem (see Section~\ref{intro}
-and the no-license implications discussion in the results).
+projects that include an \emph{explicit} license declaration intended
+to waive copyright protections (Unlicense, CC0).}
 
-Given 597 distinct licenses, we manually classified the top 50, covering 98.92\% of projects. 
-The remaining ~1\% were grouped as “other” to maintain reproducibility and focus on 
-licenses most relevant at scale.
+Given 597 distinct licenses we manually classified the top 50,
+covering 98.92\% of licensed projects;\icsetrim{ the full list is
+in Appendix~\ref{ap:type};} the remaining $\sim 1\%$ were grouped as
+\emph{other}.
 
 
 \subsection{World of Code Infrastructure}
 
-World of Code (WoC)\footnote{\url{https://worldofcode.org}} is an infrastructure designed to cross-reference source code change data across the entire FLOSS community, facilitating sampling, measurement, and analysis within and across software ecosystems~\cite{ma2019world,ma2021world}.
-In essence, it is a software analysis pipeline that encompasses the discovery and retrieval of data, storage and updates, and the transformations and data augmentation required for downstream analytic tasks~\cite{ma2021world}.
-
-WoC offers various maps that connect git objects and metadata (commits, blobs, authors) to each other.
-It also provides higher-level maps, such as project-to-data connections (e.g., project-to-author), author aliasing~\cite{fry2020dataset}, and project deforking maps~\cite{mockus2020complete}. 
-We use the project-to-license (P2L) map~\cite{jahanshahi2024license} from WoC that provides all the times at which a license was committed to a project and also verifies whether it still exists in the project's latest version.\footnote{
-Version V, latest at the time of this study.}
-We also employ the concept of deforked projects as introduced by~\cite{mockus2020complete} to avoid potential biases from forks and duplicates of the same project.
-Throughout this paper, the term ``project'' refers to this deforked project unless stated otherwise.
+We work with World of Code
+(WoC)~\cite{ma2019world,ma2021world},\footnote{\url{https://worldofcode.org}}
+which cross-references source-code change data across the FLOSS
+ecosystem and provides maps connecting git objects (commits, blobs,
+authors) plus higher-level project-level maps including author
+aliasing~\cite{fry2020dataset} and a project-deforking
+map~\cite{mockus2020complete}. We use the project-to-license (P2L)
+map~\cite{jahanshahi2024license} for license events with timestamps
+and the deforked-project map to avoid fork/duplicate bias. The term
+\emph{project} refers to a deforked project throughout.
 
 \subsection{License Change}
 
-We use license changes within public repositories to test our hypotheses
-about associations between license choice and project performance. A project's
-decision to switch licenses typically constitutes a deliberate, informed event,
-involving consideration of implications related to legal constraints, developer
-participation, and user adoption. Unlike initial license selections -- which
-may be arbitrary or uninformed -- license changes reflect strategic intent,
-often in response to evolving community needs, competitive pressures, or growth
-ambitions. This intentionality makes license changes useful as quasi-experimental
-events for studying associations between licensing decisions and measurable
-performance metrics. By focusing on projects that have altered their licenses,
-this study leverages within-project variation, which helps control for stable
-project characteristics. We emphasize, however, that because the data are
-observational, our findings should be interpreted as associations rather than
-causal effects.
+A within-project license change constitutes a deliberate event:
+unlike the initial choice, which can be arbitrary, a switch reflects
+strategic intent~\cite{kechagia2010open}, and the within-project
+design implicitly controls for stable project characteristics. Because
+the data are observational, we interpret findings as associations.
 
-For example, moving to a more restrictive license type might be chosen to 
-protect the project's intellectual property or to enforce open-source
-principles more rigorously.
-\citet{kechagia2010open} illustrate how different license types affect 
-dependency management and compliance in software projects.
-
-To investigate the impact of license switching, we first identify projects
-with more than one license throughout their lifetime.
-We then refine this group to those that adopted exactly one license at their 
-initial license adoption time and maintained exactly one license at their latest
-recorded status, thereby excluding any projects that held multiple licenses 
-simultaneously at either point in time.
+To investigate license switching, we select projects with more than
+one license type in their lifetime and exactly one license type at
+both first adoption and the latest state.
 
 
 \begin{figure*}[t]

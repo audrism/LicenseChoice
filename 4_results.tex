@@ -1,41 +1,21 @@
 \section{Results and Discussion}
 
-We organize our results in three parts. 
-First, we present a broad exploration of different license types, highlighting 
-their prevalence, retention, and general trends.
-Next, we detail the regression analysis that examines how the choice of license 
-relates to project performance. 
-Finally, we focus on the phenomenon of license switching by analyzing performance
-metrics before and after a change from permissive to restrictive (or vice versa).
+\icsetrim{We organize our results in three parts: prevalence and
+retention of license types, the regression analysis of how license
+choice relates to project performance, and the year-before/year-after
+robustness analysis of license switches.}
 
 \subsection{Types and Prevalence of Licenses}
 
 \subsubsection{Our Findings}
 
-We first count how many projects had at least one occurrence 
-of any license during their lifetime,
-then identify the top 20 most used licenses, 
-as shown in Figure~\ref{fig:dis1}, and analyze their frequency.
-Out of the 131,171,379 projects indexed by WoC, 22,281,342 projects had at 
-least one license committed to their project at some point in their lifetime.
-However, when examining the latest version of these projects, 
-this number drops to 20,110,256 projects.
-When interpreting the numbers in the figure, note 
-that the sum of per-license counts exceeds the total number of projects with a license.
-This discrepancy arises because some projects have multiple licenses and 
-are therefore counted in several categories.
-
-To calculate the license retention rates, we count how many 
-projects still had the license in their latest state and divide this number 
-by the total number of projects that had ever used the license.
-This retention rate, also in Figure~\ref{fig:dis1}, indicates the proportion of projects that continue to use the license over time.
-
-As shown in the figure, the MIT license is the most prominent, followed
-by the Apache 2.0 and ISC licenses.
-Notably, per H1b, the deprecated GPL 3 license (with strong
-copyleft provisions) has the highest retention rate.
-In contrast, the Creative Commons 3 license (CC-BY-3.0) 
-has the lowest retention rate.
+Of the $131{,}171{,}379$ deforked WoC projects, $22{,}281{,}342$
+($17\%$) had committed at least one license file in their lifetime;
+$20{,}110{,}256$ still had one at the latest state. Figure~\ref{fig:dis1}
+shows the top-20 licenses and their retention rates (latest / ever).
+MIT, Apache-2.0 and ISC dominate; consistent with H1b, the
+ideology-driven deprecated GPL-3 has the highest retention and the
+attribution-only CC-BY-3.0 the lowest.
 
 \begin{figure}[t]
 \centering
@@ -45,31 +25,12 @@ has the lowest retention rate.
     \Description{The distribution of license types across projects.}
 \end{figure}
 
-We also analyze the distribution of projects according to their license types, in two conditions.
-First, we consider the distribution across the entire project history, 
-meaning that if a project adopted a license at any point and later removed it, 
-it is still counted as having that license.
-Second, we determine the distribution based on the most recent status of 
-each project.
-The results in Figure~\ref{fig:dis3} show that ``conditional-open'', ``weak-copyleft'', 
-and ``public-domain'' license types have the lowest
-retention, with approximately a quarter of the projects that ever had 
-such license changing it by their latest version.
-For comparison, only approximately 8\% of ``copyleft'' licenses were changed, 
-which is consistent with our theory (H1b) that ideology-related license choice should be most ``sticky''. 
-
-
-We also analyze the proportion of adopted licenses at each point in time, 
-categorized by license type, to identify trends in licensing preferences over 
-time. This allows us to observe shifts in the adoption of different 
-licenses and assess whether certain license types have gained or declined 
-in popularity. By tracking these proportions longitudinally, we can better 
-understand how licensing choices evolve and whether external factors, such 
-as regulatory changes or community norms, influence these trends.
-The results are shown in Figure~\ref{fig:proportion}.
-Looking at the trends we clearly see that although copyleft licenses
-may be the most sticky, the tendency to adopt these licenses has decreased
-over time (H2a).
+By license type (Figure~\ref{fig:dis3}), conditional-open,
+weak-copyleft, and public-domain licenses lose roughly a quarter of
+their ever-adopters by the latest state; copyleft loses only $\sim 8\%$,
+consistent with H1b. Tracking adopted-license proportions over time
+(Figure~\ref{fig:proportion}) shows copyleft adoption has steadily
+declined while permissive has risen (H2a).
 
 \begin{figure}[t]
     \centering
@@ -82,41 +43,22 @@ over time (H2a).
 
 \subsubsection{Comparison with Literature}
 
-Table~\ref{tab:res1a} provides a comparison between the results in the 
-literature and our study, highlighting substantial differences primarily 
-due to variations in scope, methodology, and dataset size 
-(see Table~\ref{tbl:litRev}).
-
-A key methodological difference between our study and \citet{wu2024large} lies in the treatment of data points.
-\citet{wu2024large} considered each version of a package as a separate data point, 
-resulting in 46.59 million data points from 3.47 million projects.
-This approach could overrepresent projects with many
-versions, potentially skewing adoption trends.
-Our study treats each project as a single data point, providing 
-a more balanced view of the ecosystem without overemphasizing 
-projects with frequent updates.
-
-The focus of the \citet{wu2024large} study on only five package managers might explain 
-the significant discrepancy in the percentage of projects without a license:
-% Their study reported that 
-21.12\%
-% of projects lacked a license
-in their case,\footnote{
-Since the paper provides these percentages by package manager, we calculated 
-a weighted average based on the number of 
-projects per package manager.} 
-versus 83.01\% in ours.
-On the other hand, \citet{cui2023empirical} reported that only 10.51\% of
-projects were unlicensed.
-The difference with \citet{wu2024large} likely stems from the fact that the
-package managers they examined are associated with more mature and 
-well-maintained projects, which are more likely to have defined licenses.
-Additionally, \citet{cui2023empirical} filtered their data to include 
-only projects with over 1,000 stars, which might explain why the 
-percentage of unlicensed projects is so low.\footnote{
-These could also be influenced by the differences between OSS projects
-and publicly available projects as was explained in the introduction.}
-In contrast, our dataset is broader, including projects which may be less mature or less formally governed, leading to a higher incidence of unlicensed projects.
+Table~\ref{tab:res1a} compares our no-license rate and license-type
+mix against prior work (see also Table~\ref{tbl:litRev}). The
+no-license fraction is the most striking: $83.01\%$ in our
+$131$M-project sample vs.\ $21.12\%$ in \citet{wu2024large}
+(weighted across 5 package managers, $3.47$M projects) and $10.51\%$
+in \citet{cui2023empirical} ($\geq 1000$-star GitHub projects).
+\icsetrim{\citet{wu2024large}'s package-manager scope draws from
+mature, well-maintained projects; \citet{cui2023empirical}'s star
+threshold excludes the long tail; ours is essentially the whole OSS
+ecosystem (excluded only by deforking and lack of any license file at
+any time).}
+The four-fold gap is sample-selection-driven: package-manager
+membership and stars both filter for mature projects with explicit
+governance, of which fully licensed status is one indicator. Our broader
+sample exposes a much larger long tail of unlicensed
+repositories.
 
 
 \begin{table*}[t]
@@ -138,16 +80,11 @@ In contrast, our dataset is broader, including projects which may be less mature
 \end{table*}
 
 
-The analysis of copyleft versus permissive licenses further reflects 
-the differences in scope.
-\citet{wu2024large} found a preponderance of permissive licenses, with much 
-lower percentages for copyleft and weak copyleft licenses.
-However, our study, covering all programming languages, reveals a more 
-diverse licensing landscape, with a lower percentage of permissive licenses
-and higher percentages of copyleft licenses.
-This suggests that by focusing on just five package managers, \citet{wu2024large}
-might underrepresent broader licensing trends, particularly the prevalence 
-of copyleft licenses across the global open source ecosystem.
+The license-type mix tells a similar story: \citet{wu2024large}
+reports a much higher permissive share ($89.16\%$) and a lower
+copyleft share than our cross-platform sample
+(Table~\ref{tab:res1a}), suggesting that package-manager-only samples
+under-represent copyleft prevalence.
 
 \begin{figure}[h]
 \begin{center}
@@ -179,35 +116,22 @@ of copyleft licenses across the global open source ecosystem.
 
 \subsubsection{Implications}
 
-The analysis of public repository licensing reveals that 83\% of projects lack a
-formal license, posing significant legal risks and discouraging
-innovation by preventing responsible actors from reusing unlicensed code. 
-This highlights the need for developers to prioritize licensing to set 
-clear terms of use.
-Our findings challenge previous findings, which underestimate the 
-prevalence of unlicensed projects by focusing on mature ones, missing 
-the broader risks of software reuse.
-
-Even though many of these unlicensed projects may seem trivial and 
-technically not OSS, their 
-public availability still creates legal ambiguity and poses a risk 
-of license noncompliance, especially when combined with the lack of 
-thorough legal review in many downstream projects.
-\citet{jahanshahi2025beyond} demonstrated that in the context of 
-copy-based reuse, nearly 18\% of reused artifacts originated from 
-very small projects,\footnote{
-Projects with no stars and fewer than 10 commits.
-} while large projects\footnote{
-Projects with more than 10 stars and 100 commits.
-} accounted for only 32\% of reused artifacts.
-This highlights the importance of addressing the issue of unlicensed code within the OSS ecosystem.
-
-Among projects that are licensed, the MIT license is the most prevalent, 
-reflecting a historic preference for permissive licenses that facilitate 
-broad adoption and collaboration.
-However, the continued use of copyleft licenses like the GPL
-(which was popular decades ago)
-demonstrates that many developers are committed to preserving the
+The 83\% no-license rate poses legal risk to downstream reusers and
+discourages innovation by preventing actors who do attend to licensing
+from using these projects.
+\icsetrim{Our findings challenge prior estimates, which underestimate
+the prevalence of unlicensed projects by focusing on mature ones,
+missing the broader risks of software reuse. Even though many of
+these unlicensed projects may seem trivial and technically not OSS,
+their public availability still creates legal ambiguity and poses a
+risk of license noncompliance, especially when combined with the lack
+of thorough legal review in many downstream projects.}
+The risk is not academic: \citet{jahanshahi2025beyond} report that
+$\sim$18\% of reused artifacts originate from very small
+projects.\icsetrim{\footnote{No stars and fewer than 10 commits.}}
+MIT's dominance reflects a long-running preference for permissive
+licenses; the continued use of copyleft licenses like GPL shows that a
+meaningful subset of developers remain committed to preserving the
 open nature of derivative works.
 
 \subsection{The Impact of License Changes}
@@ -285,46 +209,24 @@ are presented in Table~\ref{tbl:stat-l}.
 \label{tbl:stat-l}
 \end{table*}
 
-Given that we have multiple response variables, the model provides a 
-distinct set of coefficients for each outcome.
-Each set of coefficients indicates the influence of the predictor variables 
-on the probability of the response variable assuming that there might 
-be correlation between response variables.
+The model produces a coefficient set per outcome. We use
+sum contrasts for the language factor (each level compared to the
+across-language mean) and include a Language $\times$ change-direction
+interaction.\icsetrim{ In the sum-contrast convention the level
+coefficients sum to zero, so the global R2P effect averages across
+languages.} R2P (restrictive$\rightarrow$permissive) is contrasted
+against P2R (permissive$\rightarrow$restrictive) as the base.
 
-For language variable, we employed sum contrasts, also known as effect 
-coding, where each level of the predictor variable is compared to the 
-overall mean of all levels.
-This approach is particularly advantageous in models where the goal is to 
-compare each category to the overall mean rather than to a specific 
-reference category, as it offers a more symmetric interpretation of the effects.
-In the sum contrast method, the sum of the coefficients for all levels,
-including the intercept, must equal zero.
-We also include the interaction term between language and license 
-change in the model.
+Type III MANOVA tests (Pillai's trace) show all predictors
+significantly improve model fit ($p \ll 0.001$).\icsetrim{ Full test
+statistics are reported in Table~\ref{tbl:anova-lc}.}
 
-The change direction variable has two levels, with Permissive to Restrictive 
-(P2R) set as the base level. As a result, the model outputs only display 
-coefficients for Restrictive to Permissive (R2P), which indicate the 
-difference relative to the base level (P2R).
-
-Furthermore, when interpreting the earliest and latest commit times, 
-it is important to note that the predictors in the model represent the 
-time elapsed since those commits. A higher earliest commit value indicates
-that the commit occurred further in the past, meaning the project is older, 
-whereas a lower value suggests a more recent commit. Similarly, a higher 
-latest commit value means the project has been inactive for a longer period.
-
-Table~\ref{tbl:anova-lc} shows Type III MANOVA Tests with Pillai test statistic
-for the fitted model. 
-The results show that the p-values for all the predictors are close to zero, 
-indicating that each predictor significantly improves our model's fit.
-
-\begin{table}[t]
+\icsetrim{\begin{table}[t]
 \centering \small
 \caption{License change model - Type III MANOVA Tests: Pillai test statistic}
 \begin{tabular}{lccc}
     \toprule
-    \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\ 
+    \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\
     \midrule
     (Intercept) & 1 & 0.024183 & \cellcolor{lightgreen}$<2\times10^{-16}$ \\
     Change Direction & 1 & 0.002403 & \cellcolor{lightgreen}$1.99\times10^{-9}$ \\
@@ -338,7 +240,7 @@ indicating that each predictor significantly improves our model's fit.
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
-\end{table}
+\end{table}}
 
 % model performance
 Model fit was evaluated using R² from univariate regressions, ranging from 0.02 to 0.09 
@@ -392,93 +294,27 @@ We therefore treat the language-specific interactions, which are
 flag below where the global main effect collapses under
 popularity controls.
 
-For the difference in the number of authors, C/C++ exhibits 
-an odds ratio of about 0.95, suggesting these projects are roughly 5\% 
-less likely to see increased authorship after moving from 
-a restrictive to a permissive license compared to the opposite 
-shift. In contrast, Go shows an odds ratio of about 1.08, 
-indicating an 8\% greater likelihood of authorship growth
-under permissive licensing. Although these effects are relatively 
-modest, they demonstrate clear language-specific differences in
-how communities respond to changes in license direction. While this partially
-confirms H1a for C/C++ projects, it is not the same for all languages.
-
-Regarding the difference in the number of blobs, C/C++ projects 
-exhibit an odds ratio of about 0.78, indicating these projects 
-are roughly 22\% less likely to experience blob growth when shifting 
-from restrictive to permissive licenses (compared to going
-permissive to restrictive). By contrast, Python shows an odds 
-ratio of about 1.73, suggesting a 73\% higher likelihood of 
-increased repository blob counts under permissive licensing. 
-The notable magnitude of these odds ratios emphasizes that 
-licensing direction can strongly shape development dynamics 
-in these languages.
-
-For the difference in the number of files, the overall restrictive to
-permissive license shift has a no-popularity odds ratio of about 1.30,
-indicating roughly 30\% higher odds of increased file counts; this
-global effect attenuates to OR=1.03 (NS) once pre-treatment popularity
-is controlled (Table~\ref{tbl:robustness}). The language-specific
-interactions, however, are stable: in C/C++ the OR is about 0.89
-(around 11\% lower odds); PHP and Python remain near 1.47 and 2.02,
-suggesting that PHP projects are about 47\% more likely and Python
-projects are about 100\% more likely to experience file-count growth
-under permissive licensing.
-
-C/C++ (often complex projects) reduced growth (blobs/files) after shifting
-to permissive licenses that suggests restrictive licenses were 
-originally preferred to manage complexity effectively, partially supporting H3b.
-
-In the difference in the number of commits, only C/C++ shows a statistically 
-significant result, with an odds ratio of about 0.77—indicating a roughly 
-23\% lower likelihood of increased commit frequency when shifting to a 
-permissive license compared to the opposite direction. This moderate odds 
-ratio suggests a tangible decrease in development activity within 
-C/C++ communities following a move to permissive licensing, partially
-supporting H3a.
-
-Concerning the difference in active months, C/C++ projects show an odds 
-ratio of about 0.89, indicating roughly 11\% lower odds of sustained
-activity after moving from a restrictive to a permissive license,
-partially supporting H3c.
-By contrast, Python has an odds ratio of about 1.05, suggesting 
-around 5\% higher odds of maintaining longer periods of active 
-development under permissive licenses. Although these effects are modest, 
-they illustrate clear language-specific variations.
-
-Regarding the difference in upstream projects, the no-popularity
-overall restrictive-to-permissive shift shows an odds ratio of about
-1.25, indicating roughly 25\% higher odds of increased reuse from
-upstream. \emph{This global effect collapses to OR=1.00 (NS) once
-popularity is controlled} (Table~\ref{tbl:robustness}), so the 25\%
-number should not be read as a license-direction effect; it largely
-reflects confounding with pre-treatment popularity. The language
-interactions are sharper: PHP stands at about 1.38 and Python
-reaches about 1.70, while C/C++ and Ruby place near 1.07 and 1.06.
-These variations across languages emphasize the nuanced ways in
-which license directionality can shape project dependencies once
-popularity is held constant.
-
-For the difference in downstream projects, the no-popularity overall
-effect of going from restrictive to permissive is an odds ratio of
-about 1.10, indicating roughly 10\% higher odds of increased
-downstream usage. \emph{This too collapses under popularity controls}
-(+Pop OR=1.04, NS); however, in the V2604 AFvAL specification, the
-downstream effect re-emerges at OR=1.18 ($p<10^{-5}$), suggesting that
-the multi-year-horizon downstream signal is real but only detectable
-when comparing the two post-adoption windows directly (see
-Section~\ref{sec:robustness}).
-
-Lastly, for the difference in burstiness, the language-specific 
-interactions point to moderate yet meaningful distinctions. C/C++ 
-projects have an odds ratio of about 1.10 (around 10\% greater odds
-of more intense activity bursts) under permissive licensing, while PHP 
-stands at about 1.06 (6\% higher odds). By contrast, Python’s total
-odds ratio is about 0.96, indicating roughly 4\% lower odds of
-experiencing bursty activity. Although modest, these differences 
-highlight notable variations in development dynamics associated 
-with licensing direction. This shows partial support for H3d,
-highlighting once again the nuances between different programming languages.
+Figure~\ref{fig:odds} plots the significant odds ratios. The
+language-specific contrast is the headline: \emph{C/C++ projects
+show consistently \emph{reduced} growth} in authorship (OR=0.95),
+blobs (0.78), files (0.89), commits (0.77), and sustained activity
+(0.89) under restrictive$\rightarrow$permissive transitions, partially
+supporting H1a, H3a, H3b, and H3c for that ecosystem. \emph{Python
+projects show the opposite}: blobs OR=1.73, files 2.02, slight gains
+in sustained activity (1.05). PHP, Go, and Ruby show smaller and
+mixed effects. Three \emph{global} R2P effects appear large in this
+no-popularity specification: files (1.30), upstream (1.25), and
+downstream (1.10). All three collapse to non-significance once
+pre-treatment popularity is controlled
+(Table~\ref{tbl:robustness}, +Pop column: 1.03, 1.00, 1.04);
+the downstream effect re-emerges at OR=1.18 ($p<10^{-5}$) under the
+V2604 AFvAL specification, suggesting it operates over a multi-year
+horizon. \icsetrim{Lastly, for burstiness, C/C++ has OR$\approx$1.10
+and PHP 1.06 (more intense activity bursts under permissive
+licensing), while Python is at 0.96 (steadier activity); partial
+support for H3d with language-specific direction.}
+Burstiness shows partial support for H3d with mixed language-specific
+direction (C/C++ 1.10, PHP 1.06, Python 0.96).
 
 These quantified magnitudes, along with their directions,
 clearly demonstrate that license transitions are meaningfully associated with
@@ -579,24 +415,19 @@ remain qualitatively stable: C/C++ continues to show a negative R2P
 association with files, commits, and active months, and Python continues
 to show a positive association with blobs, files, and downstream adoption.
 
-\paragraph{R3: Sub-cohort restrictions for maturity and temporal
-separation.} To probe the maturity-confound concern further we re-estimated
-the popularity-augmented model on (i) the subset with $\textit{Delay}\geq 12$
-months (license adopted at least a year after project creation, $N$=1{,}792),
-and (ii) the subset with $\textit{Distance}\geq 24$ months (at least two
-years between first and last license adoption, $N$=12{,}110). The R2P
-direction stays consistent for the C/C++ and Python interactions in both
-sub-cohorts, while several of the small-magnitude associations lose
-statistical significance. We interpret this as evidence that the strong
-ecosystem-specific patterns (C/C++ negative, Python positive) are robust,
-while the smaller overall effects deserve cautious interpretation.
+\paragraph{R3: Sub-cohort restrictions.} Restricting to
+$\textit{Delay}\geq 12$ months (license adopted $\geq 1$ year after
+project creation, $N$=1{,}792) and to $\textit{Distance}\geq 24$ months
+(at least 2 years between first and last license, $N$=12{,}110), the
+R2P direction stays consistent for the C/C++ and Python interactions
+in both sub-cohorts (Table~\ref{tbl:robustness}); the strong
+ecosystem-specific patterns are robust, while the smaller overall
+effects deserve cautious interpretation.
 
-\paragraph{R4: Intermediate-license edge case.} As noted in the
-methodology, $\sim$6.2\% of the regression sample (1,462 of 23,619
-projects) had a short-lived intermediate license $B$ in the year following
-the first license $A$ before settling on the final license $C$. Excluding
-these projects from the popularity-augmented model leaves all key effect
-directions and significance levels unchanged.
+\paragraph{R4: Intermediate-license edge case.} For the $\sim 6.2\%$
+of the regression sample (1{,}462 / 23{,}619) with a short-lived
+intermediate license between first and final, excluding them leaves
+all key effect directions and significance levels unchanged.
 
 \begin{table}[t]
 \centering \small
@@ -719,35 +550,18 @@ H3d & Burstiness associated with more permissive licenses. & inconclusive (mixed
 
 \subsubsection{Implications}
 
-Our analysis is observational and conditioned on the
-\textasciitilde 2.4\% slice of licensed projects that switched
-license types, so we report associations rather than prescriptions.
-With that caveat, two patterns are stable enough across designs to
-inform downstream tooling:
-
-First, \emph{language ecosystem mediates the association} between
-license direction and project dynamics far more than license
-direction does on its own. The robust C/C++-negative / Python-positive
-contrast holds with popularity controls and under the
-year-before/year-after specification. License-recommender or
-governance tools that suggest license changes purely on a
-project's surface properties (size, activity) without conditioning
-on its language ecosystem will give systematically biased advice.
-
-Second, \emph{a project's pre-treatment popularity (forks,
-downstream adoption, upstream dependencies) absorbs much of what
-looks like a global ``permissive licenses help'' effect}. The
-no-popularity ORs of 1.30 (files), 1.25 (upstream), and 1.10
-(downstream) collapse to non-significance once popularity is
-controlled (Table~\ref{tbl:robustness}). Recommendations that
-encourage a permissive switch in pursuit of growth should be
-expressed conditional on popularity, not as universal advice.
-
-Beyond these, the V2604 BLvAL design surfaces a small
-($\sim$4\%) but consistent attenuation in commits, distinct
-human authors, and sustained activity after
-restrictive$\rightarrow$permissive transitions; these are too
-modest, and too sensitive to multiple-comparisons adjustment, to
-support strong prescriptive claims, but they are useful as priors
-for follow-up studies that combine the regression with qualitative
-case work in specific language communities.
+The analysis is observational and conditioned on the $\sim 2.4\%$ slice
+of licensed projects that switched license types, so we report
+associations rather than prescriptions. Two patterns are stable enough
+to inform downstream tooling: (i) \emph{language ecosystem mediates the
+association} between license direction and project dynamics far more
+than direction does on its own (C/C++-negative / Python-positive
+contrast holds across designs); license-recommender tools that ignore
+language ecosystem will give systematically biased advice; (ii) a
+project's pre-treatment \emph{popularity} absorbs much of the apparent
+global ``permissive helps'' effect (Table~\ref{tbl:robustness},
++Pop column). Beyond these, the V2604 BLvAL design surfaces small
+($\sim 4\%$) attenuations in commits, bot-filtered distinct authors,
+and sustained activity after restrictive$\rightarrow$permissive
+transitions; too modest for strong claims, but useful priors for
+follow-up qualitative studies in specific language communities.

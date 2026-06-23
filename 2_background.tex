@@ -12,99 +12,70 @@ Third, the specific plans and objectives of the project, and how each license ch
 
 \subsection{Motivations}
 
-In an extensive literature review, \citet{von2012carrots} categorized OSS participant motivations
-into ideology, altruism, kinship, fun, reputation, reciprocity,
-learning, own-use, career, and pay. 
-Some of these motivations can probably
-influence the type of licenses contributors prefer.
-For instance, ideology and reciprocity
-may favor strongly copyleft licenses (over all other
-considerations), which require code sharing, while altruism may lean
-toward more permissive licenses.
-Kinship should drive adoption of
-licenses used by developers' social network, while own-use
-motivation appears to be orthogonal with license choice and may
-allow for other factors, like convenience and compatibility, to 
-dominate.
-
-In case of commercial involvement, motivations may diverge from
-individual contributors, even if they generally align with profit
-maximization~\cite{Harhoff02}.
-Studies of open and gated software
+\citet{von2012carrots} categorize OSS participant motivations
+\icsetrim{into ideology, altruism, kinship, fun, reputation,
+reciprocity, learning, own-use, career, and pay}
+into ten classes, several of which plausibly influence the type of
+licenses contributors prefer (ideology and reciprocity favor strong
+copyleft; altruism leans permissive; kinship drives adoption of
+licenses already used by collaborators).
+\icsetrim{In case of commercial involvement, motivations may diverge
+from individual contributors, even if they generally align with profit
+maximization~\cite{Harhoff02}. Studies of open and gated software
 communities highlight the difficulties firms face in balancing
 community-based value creation with private value
-appropriation~\cite{Shah06}.
-However, community sponsorship and
-licensing strategies can address these tensions.
-For instance,
-restrictive licenses can ensure long-term control over
-contributions, whereas nonmarket\footnote{
-The term ``nonmarket'' excludes for-profit organizations.}
-sponsors might alleviate
-concerns about the project’s sustainability without the need for
-restrictive licenses~\cite{stewart2006impacts}.
-This highlights how
-the nature of the sponsor—market or nonmarket—may influence
-licensing strategies and developer motivations.
+appropriation~\cite{Shah06}. However, community sponsorship and
+licensing strategies can address these tensions. For instance,
+restrictive licenses can ensure long-term control over contributions,
+whereas nonmarket\footnote{The term ``nonmarket'' excludes for-profit
+organizations.} sponsors might alleviate concerns about the project's
+sustainability without the need for restrictive
+licenses~\cite{stewart2006impacts}.}
+For commercial actors, motivations align with profit maximization
+and shape licensing strategy in characteristic
+ways~\cite{Harhoff02,Shah06,stewart2006impacts}.
+\citet{fershtman2007open} observed empirically that restrictive
+licenses attract more contributors per project, while permissive
+licenses yield higher productivity per contributor.
+\icsetrim{Similarly, research into firm involvement in OSS shows that
+licensing choices may be driven by strategic goals. For instance, firms
+may adopt permissive licenses to facilitate bundling proprietary and
+open source code~\cite{economicos02}. \citet{dahlander2008firms}
+identified three strategies firms use to engage with OSS communities:
+(1) accessing community development to extend resources, (2) aligning
+their strategy with community efforts, and (3) assimilating the
+community to integrate and share outcomes. Different commercial models
+necessitate distinct licensing strategies. \citet{wagstrom2010impact}
+and \citet{zhou2016inflow} identified two types of firm engagement:
+community-focused firms (e.g., GNOME), which prioritize building
+vibrant OSS communities and monetize through services (which favor
+restrictive licenses so that a competitor can not create proprietary
+enhancements without sharing the code), and product-focused firms
+(e.g., Eclipse), which rely on product revenues and thus favor weaker
+copyleft provisions to allow some forms of bundling with proprietary
+code.}
+Firms differentiate further by engagement model
+(\citet{dahlander2008firms}, \citet{wagstrom2010impact},
+\citet{zhou2016inflow}): community-focused firms favor restrictive
+licenses to prevent third-party proprietary enhancements,
+product-focused firms prefer weak copyleft to allow proprietary
+bundling.
+\icsetrim{Emergence of cloud services endangered the business model of
+OSS companies that rely on service contracts. Because cloud companies
+provide computing services, they can also run (and sell) the same OSS
+software as a service, thus cutting out companies that developed the
+software. For example, in 2021, Elasticsearch changed its Apache
+license to a commercial one where the products built from that code
+can not be provided to others as a managed service. They made another
+change in 2024, moving to Affero GPL, which is a copyleft license
+that requires anyone running a modified program on a server and
+letting other users communicate with it to also provide access to the
+source code of the modified version running on the server. As we can
+see, the more permissive license (Apache) was changed to a more
+restrictive one (commercial, then AGPL), as is typical for the service
+model.}
 
-Empirical studies further emphasize the connection between license
-choice and project structure. 
-\citet{fershtman2007open} applied economic theories of motivation 
-and found that factors such as status, 
-signaling, or intrinsic motivation for participation in OSS projects are 
-linked to restrictive licenses.
-They observed that restrictive licenses 
-attract more contributors per project, while permissive licenses result in 
-higher productivity per contributor.
-Similarly, research
-into firm involvement in OSS shows that licensing choices may be
-driven by strategic goals.
-For instance, firms may adopt permissive
-licenses to facilitate bundling proprietary and open source
-code~\cite{economicos02}.
-\citet{dahlander2008firms} identified three strategies
-firms use to engage with OSS communities:
-(1) accessing community development to extend resources, 
-(2) aligning their strategy with community efforts, and 
-(3) assimilating the community to integrate
-and share outcomes.
-Different commercial models necessitate distinct
-licensing strategies.
-\citet{wagstrom2010impact} and \citet{zhou2016inflow} identified 
-two types of firm engagement:
-community-focused firms (e.g., GNOME), which prioritize
-building vibrant OSS communities and monetize through services
-(which favor restrictive licenses so that a competitor can not
-create proprietary enhancements without sharing the code), and
-product-focused firms (e.g., Eclipse), which rely on product
-revenues and thus favors weaker copyleft provisions to allow some
-forms of bundling with proprietary code. 
-
-Emergence of cloud services
-endangered the business model of OSS companies that rely on service
-contracts.
-Because cloud companies provide computing services, they
-can also run (and sell) the same OSS software as a service, thus
-cutting out companies that developed the software.
-For example, in 2021, Elasticsearch changed its Apache license to a
-commercial one where the products built
-from that code can not be provided to others as a managed service.
-They made another change in 2024, moving to Affero GPL,
-which is a copyleft license that requires anyone running a modified
-program on a server and letting other users communicate with it
-to also provide access to the source code of the modified 
-version running on the server. 
-As we can see, the more permissive license (Apache) was changed to a 
-more restrictive one (commercial, then AGPL), as is typical for the service model.
-
-Despite significant amount of research on the motivations to 
-participate in OSS and commercial
-involvement, few of the key predictors can be reliably
-operationalized at scale.
-Based on the \citet{fershtman2007open}
-conjecture that restrictive licenses attract more contributors per project,
-we expect adoption of a restrictive license to be associated with higher
-contributor counts:
+Following \citet{fershtman2007open}'s conjecture:
 
 \begin{itemize}
     \item \textbf{Hypothesis (H1a)}: More restrictive licenses are associated with higher total numbers of authors.
@@ -125,46 +96,30 @@ that exposure measured by the number of overall deployments at the
 time of choice, had a significant positive effect on 
 selection.
 
-We expect a similar pattern for license selection. One dimension of
-exposure is the prevalence of a license (which is relatively
-constant over time) and favors the selection of popular
-licenses. i.e., developers who are indifferent or unaware of the
-differences between licenses are likely to gravitate toward those
-they have encountered.
-Just as developers tend to choose packages
-that are technically compatible with their existing technology stack
-and socially aligned with their collaborators' choices, we
-anticipate a similar behavior in license choice. Developers are
-likely to select a license compatible with their current projects or
-one already used by their collaborators (also, see ``Kinship''
-motivation above).
-
-The choice of programming language also influences license selection due to the culture 
-and practices embedded within specific developer communities.
-For example, languages like Python and JavaScript, commonly used in web development, 
-often favor permissive licenses like MIT or Apache, which emphasize reuse 
-and flexibility~\cite{lerner2005economics}.
-In contrast, languages such as C or C++, which are dominant in systems programming, 
-tend to be linked with copyleft licenses like GPL, prioritizing keeping 
-derivative works open~\cite{fitzgerald2006transformation}.
-The language captures the influence of community norms and technical 
-compatibility on license selection.
-
-The community size associated with a project can also impact license decisions.
-\citet{tsay2014influence} found that projects with a large number of forks are perceived as more valuable and trustworthy by the community.
-Projects aiming to encourage collaboration and reuse to maintain this momentum may favor permissive licenses.
-Similarly, \citet{borges2018s} suggest that the number of stars signals community approval, which, like forks, may influence the choice of more permissive licenses.
-
-Furthermore, the number of upstream/downstream projects a project interacts with
-can play a crucial role in license selection.
-If a project interacts with many downstream projects, it may opt for licenses that balance flexibility and control,
-favoring weaker or conditional licenses over highly permissive or restrictive ones.
-
-The decision to count upstream/downstream projects is motivated by the need to quantify a project's external interactions.
-While analyzing the specific licenses of these projects would provide more 
-detailed insights, counting them offers a practical approach to estimate the 
-complexity and potential challenges related to license alignment. 
-Based on this discussion, we hypothesize that:
+By analogy, developers indifferent to or unaware of license
+distinctions likely gravitate to licenses they have encountered
+(prevalence-driven adoption), and compatibility with collaborators'
+existing choices reinforces this (kinship-driven adoption).
+\icsetrim{The choice of programming language also influences license
+selection due to the culture and practices embedded within specific
+developer communities.}
+Programming language captures community norms and technical
+compatibility: Python and JavaScript projects favor permissive licenses
+like MIT or Apache~\cite{lerner2005economics}, while C/C++ projects
+tend toward GPL~\cite{fitzgerald2006transformation}.
+\icsetrim{The community size associated with a project can also impact
+license decisions. \citet{tsay2014influence} found that projects with a
+large number of forks are perceived as more valuable and trustworthy by
+the community. Projects aiming to encourage collaboration and reuse to
+maintain this momentum may favor permissive licenses. Similarly,
+\citet{borges2018s} suggest that the number of stars signals community
+approval, which, like forks, may influence the choice of more
+permissive licenses.}
+Community size (forks~\cite{tsay2014influence},
+stars~\cite{borges2018s}) and the number of upstream/downstream
+projects also plausibly influence license choice, with more interacting
+projects favoring balanced (weak-copyleft or conditional) licenses over
+extremes. Hence:
 \begin{itemize}
     \item \textbf{Hypothesis (H2a)}: License choice is associated with the overall popularity of the license
     at adoption time.
@@ -175,30 +130,29 @@ Based on this discussion, we hypothesize that:
 
 \subsection{Project Goals}
 
-While legal compliance sets essential boundaries, the specific needs and objectives of a project further influence the selection of an appropriate license.
-Developers often choose licenses based on their preferences for the future use of the software. 
-Research by \citet{sen2008determinants}
-highlights that developers' motivations -- such as a desire for
-widespread adoption or strong copyleft enforcement -- also play a significant role in license selection.
-
-The choice of license can significantly influence a project’s development trajectory.
-\citet{colazo2009impact} found that copyleft licenses promote greater permanence and long-term involvement in projects, affecting both developer contributions and engagement.
-
-The number of commits is a key indicator of project activity and maintenance. 
-\citet{koch2002effort} suggests that projects with frequent commits tend to have more active development cycles, making them more reliable and attractive for reuse.
-As project activity increases, maintainers may select licenses that either encourage contributions or protect the evolving codebase from potential misuse, balancing the needs for stability and control.
-
-The number of files in a project reflects its complexity and modularity.
-\citet{mockus2007large} observed that larger projects with more files are more likely to offer reusable components, making license choice critical for balancing reuse and intellectual property protection.
-\citet{bird2009putting} further suggested that projects with more files tend to have modular structures, which encourage community engagement and adoption, potentially favoring more restrictive licenses.
-
-Time-based metrics -- such as the earliest and latest commits and the number of active
-months -- provide insights into a project’s maturity and stability.
-\citet{capiluppi2003characteristics} noted that older, more mature projects are often seen as more reliable, which could be influenced by the choice of licenses that support long-term sustainability, such as copyleft licenses.
-On the other hand, newer projects may opt for permissive licenses to facilitate rapid contributions during active development phases.
-
-Burstiness, as a proxy for fluctuating activity, was operationalized by measuring the number of months in which the project had activity over its lifetime (from earliest to latest commit).
-Projects with high burstiness may not focus heavily on legal concerns, and instead tend to choose well-known, widely used licenses: 
+\icsetrim{While legal compliance sets essential boundaries, the
+specific needs and objectives of a project further influence the
+selection of an appropriate license. Developers often choose licenses
+based on their preferences for the future use of the
+software.}
+Project-level objectives (e.g., preference for
+widespread adoption versus strong copyleft
+enforcement~\cite{sen2008determinants}) and the resulting trajectory
+\cite{colazo2009impact} also matter.
+We use four observable measures to operationalize trajectory:
+commit count (activity~\cite{koch2002effort}),
+file count (complexity/modularity~\cite{mockus2007large,bird2009putting}),
+active-months (maturity~\cite{capiluppi2003characteristics}), and
+burstiness (fluctuation, computed as active-months over lifetime).
+\icsetrim{Projects with frequent commits tend to have more active
+development cycles, making them more reliable and attractive for reuse.
+Larger projects with more files are more likely to offer reusable
+components, making license choice critical for balancing reuse and
+intellectual property protection. Older, more mature projects are
+often seen as more reliable, which could be influenced by the choice
+of licenses that support long-term sustainability. Projects with high
+burstiness may not focus heavily on legal concerns, and instead tend
+to choose well-known, widely used licenses.}
 
 \begin{itemize}
 \item \textbf{Hypothesis (H3a)}: License choice is associated with project activity, approximated by number of commits.
@@ -234,10 +188,12 @@ This method captures not only standard license files but also other files potent
 Previous works often limit their scope to specific platforms (e.g., GitHub), a few package manager environments (e.g., NPM), or types of licenses (e.g., OSI-approved licenses), lacking a comprehensive, large-scale approach to detecting and analyzing licenses.
 Our study expands this scope by analyzing essentially the entire open source landscape, ensuring a more comprehensive cross-platform understanding of licensing practices.
 
-In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, and scale with the most recent comparable studies in the field.
+\icsetrim{In Table~\ref{tbl:litRev}, we compare our study's
+methodology, coverage, scope, and scale with the most recent
+comparable studies in the field.
 
 \begin{table*}[t]
-\centering 
+\centering
 \caption{Latest Studies in Open Source Software Licensing}
 \label{tbl:litRev}
 \resizebox{0.95\textwidth}{!}{
@@ -253,4 +209,12 @@ In Table~\ref{tbl:litRev}, we compare our study's methodology, coverage, scope, 
     \textbf{This Study} & \textbf{NLP/Matching Known Licenses} & \textbf{License Files} & \textbf{Entire OSS} & \textbf{131,171,379} \\
     \bottomrule
 \end{tabular}}
-\end{table*}
+\end{table*}}
+Compared to recent licensing studies
+(\citet{wu2024large}: 3.5M projects across 5 package managers;
+\citet{cui2023empirical}: 16k high-star GitHub repos;
+\citet{wolter2023open}: 1k OpenHub-catalogued repos;
+\citet{xu2023lidetector}: 1.8k popular Python repos), our analysis
+covers $131$M deforked WoC projects -- two orders of magnitude
+larger and not filtered by platform, stars, or package-manager
+presence.
