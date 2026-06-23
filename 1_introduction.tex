@@ -96,18 +96,23 @@ code.
 
 Our theory-derived project characteristics potentially associated with
 license selection were tested using a multivariate multiple regression model
-on the subset of 23,619 projects (about 2.4\% of licensed projects) that
-underwent a license-type change. As predicted, the number of commits, project
-age, and file count were significantly associated with license choice. However,
-these relationships varied substantially across programming language ecosystems.
-In particular, C/C++ projects tended to experience reduced growth in commits,
-files, and sustained activity following transitions to permissive licenses,
-whereas Python projects showed increased repository growth and longer activity
-under permissive licensing. More generally, permissive licenses were associated
-with greater upstream and downstream project adoption, suggesting that
-licensing-related dynamics are shaped not only by the legal properties of
-licenses but also by language-specific community norms and development
-practices.
+on the subset of 23{,}619 projects (about 2.4\% of licensed projects) that
+underwent a license-type change. The robust finding is that these
+associations vary substantially across programming language ecosystems:
+C/C++ projects tended to experience reduced growth in commits, files,
+and sustained activity following transitions to permissive licenses,
+whereas Python projects showed increased repository growth and longer
+activity under permissive licensing. The global apparent effects of
+license direction on files, blobs, upstream, and downstream project
+counts -- present without popularity controls -- attenuate to
+non-significance once pre-treatment popularity (downstream and upstream
+project counts, lifetime fork count) is included. A year-before vs.\
+year-after-final-switch reanalysis aligned to WoC version 2604 surfaces
+small ($\sim$4\%) but consistent attenuations in commits, distinct
+aliased authors, and sustained activity following
+restrictive$\rightarrow$permissive transitions. The takeaway is that
+licensing-related dynamics are shaped less by license direction per se
+than by language-specific community norms and development practices.
 
 Our contributions include (a) a preliminary theory of OSS license choice and 
 its expected effects on project outcomes, (b) a comprehensive characterization of 
