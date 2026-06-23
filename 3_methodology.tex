@@ -30,18 +30,18 @@ This flexibility encourages the use of open source libraries in both open and cl
 4. \textit{Conditional Open Licenses}: These licenses include specific conditions that must be met for usage, such as attribution (CC-BY), non-commercial use, or share-alike requirements.
 Creative Commons licenses, like CC-BY and CC-BY-SA, provide a framework for sharing while respecting the creator's conditions~\cite{de2009creative}.
 
-5. \textit{Public Domain/Unlicensed}: This category refers specifically to
-projects that include an explicit license declaration intended to waive
+5. \textit{Public Domain}: This category refers specifically to
+projects that include an \emph{explicit} license declaration intended to waive
 copyright protections, such as the Unlicense or the Creative Commons Zero
 (CC0) license. In such cases, the authors deliberately release the work
 into the public domain or its functional equivalent, allowing anyone to
-use, modify, and distribute it without any conditions. This is distinct
-from projects with no license file at all, where copyright protections
-still apply by default and downstream reuse is legally constrained. The
-latter case is treated separately throughout the paper as ``no license''
-and constitutes a major source of legal ambiguity in the OSS ecosystem
-(see also the introduction and the implications discussion in the results
-section).
+use, modify, and distribute it without any conditions. We deliberately
+do \emph{not} include in this category projects that simply have no license
+file (``no license''); under default copyright law, no-license projects
+still have all rights reserved, which is the opposite of the public-domain
+intent, and we treat that case as a separate category that constitutes
+a major source of legal ambiguity in the OSS ecosystem (see Section~\ref{intro}
+and the no-license implications discussion in the results).
 
 Given 597 distinct licenses, we manually classified the top 50, covering 98.92\% of projects. 
 The remaining ~1\% were grouped as “other” to maintain reproducibility and focus on 

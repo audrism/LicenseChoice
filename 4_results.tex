@@ -73,7 +73,7 @@ over time (H2a).
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth, clip=true, trim=0 5 0 0]{figures/proportion.png}
+    \includegraphics[width=\linewidth]{figures/proportion.pdf}
     \caption{Proportion of license type over time}
     \label{fig:proportion}
     \Description{Proportion of license type over time}
@@ -368,20 +368,27 @@ its interaction with language influence various aspects of the model.
     \Description{License change model - odds ratios}
 \end{figure*}
 
-In these models, each coefficient represents a change in the 
-log-odds (or log-count) of the outcome. The main R2P effect 
-\(\beta_{\text{R2P}}\) 
-shows how the outcome shifts when moving from a restrictive to 
-a permissive license under sum contrasts (i.e., averaged across 
-language levels). A significant R2P:Language interaction 
-\(\beta_{\text{R2P:Lang}}\) 
-adds to (or subtracts from) the overall R2P coefficient for 
-that specific language. To obtain the total 
-restrictive\(\rightarrow\)permissive effect for a given language, 
-we sum \(\beta_{\text{R2P}} + \beta_{\text{R2P:Lang}}\) 
-and then exponentiate. The result is the odds ratio -- a multiplier on 
-the odds of an increase in the outcome metric compared to the 
-permissive\(\rightarrow\)restrictive direction.
+In these models, each coefficient represents a change in the
+log-odds (or log-count) of the outcome. The main R2P effect
+\(\beta_{\text{R2P}}\)
+shows how the outcome shifts when moving from a restrictive to
+a permissive license under sum contrasts (i.e., averaged across
+language levels). A significant R2P:Language interaction
+\(\beta_{\text{R2P:Lang}}\)
+adds to (or subtracts from) the overall R2P coefficient for
+that specific language. To obtain the total
+restrictive\(\rightarrow\)permissive effect for a given language,
+we sum \(\beta_{\text{R2P}} + \beta_{\text{R2P:Lang}}\)
+and then exponentiate.
+
+The per-metric numbers reported below are for the \emph{no-popularity}
+specification (the ``Original'' column in Table~\ref{tbl:robustness});
+several of the global R2P main effects shrink toward unity once
+popularity covariates are introduced (Section~\ref{sec:robustness}).
+We therefore treat the language-specific interactions, which are
+\emph{robust} across specifications, as the primary narrative, and we
+flag below where the global main effect collapses under
+popularity controls.
 
 For the difference in the number of authors, C/C++ exhibits 
 an odds ratio of about 0.95, suggesting these projects are roughly 5\% 
@@ -406,13 +413,15 @@ licensing direction can strongly shape development dynamics
 in these languages.
 
 For the difference in the number of files, the overall restrictive to
-permissive license shift has an odds ratio of about 1.30, indicating
-roughly 30\% higher odds of increased file counts. However, this 
-positive effect is notably reduced in C/C++, where the odds ratio is 
-about 0.89 (around 11\% lower odds). In contrast, PHP and Python
-have odds ratios near 1.47 and 2.02, respectively, suggesting that 
-PHP projects are about 47\% more likely and Python projects are about 
-100\% more likely to experience file-count growth under permissive licensing.
+permissive license shift has a no-popularity odds ratio of about 1.30,
+indicating roughly 30\% higher odds of increased file counts; this
+global effect attenuates to OR=1.03 (NS) once pre-treatment popularity
+is controlled (Table~\ref{tbl:robustness}). The language-specific
+interactions, however, are stable: in C/C++ the OR is about 0.89
+(around 11\% lower odds); PHP and Python remain near 1.47 and 2.02,
+suggesting that PHP projects are about 47\% more likely and Python
+projects are about 100\% more likely to experience file-count growth
+under permissive licensing.
 
 C/C++ (often complex projects) reduced growth (blobs/files) after shifting
 to permissive licenses that suggests restrictive licenses were 
@@ -435,23 +444,28 @@ around 5\% higher odds of maintaining longer periods of active
 development under permissive licenses. Although these effects are modest, 
 they illustrate clear language-specific variations.
 
-Regarding the difference in upstream projects, the overall restrictive
-to permissive shift shows an odds ratio of about 1.25, indicating roughly 
-25\% higher odds of increased reuse from upstream. The interactions for
-C/C++ and Ruby, though negative relative to the overall effect, still
-place these languages slightly above 1 (about 1.07 and 1.06, respectively).
-In contrast, PHP stands at about 1.38, and Python reaches about 1.70, 
-suggesting considerably greater odds of upstream integration under 
-permissive licensing. These variations across languages emphasize 
-the nuanced ways in which license directionality can shape project
-dependencies.
+Regarding the difference in upstream projects, the no-popularity
+overall restrictive-to-permissive shift shows an odds ratio of about
+1.25, indicating roughly 25\% higher odds of increased reuse from
+upstream. \emph{This global effect collapses to OR=1.00 (NS) once
+popularity is controlled} (Table~\ref{tbl:robustness}), so the 25\%
+number should not be read as a license-direction effect; it largely
+reflects confounding with pre-treatment popularity. The language
+interactions are sharper: PHP stands at about 1.38 and Python
+reaches about 1.70, while C/C++ and Ruby place near 1.07 and 1.06.
+These variations across languages emphasize the nuanced ways in
+which license directionality can shape project dependencies once
+popularity is held constant.
 
-For the difference in downstream projects, the overall effect of 
-going from a restrictive to a permissive license is an odds ratio of 
-about 1.10, indicating roughly 10\% higher odds of increased downstream
-usage or integration. This moderate boost suggests that 
-adopting a permissive license tends to enhance a project’s
-popularity within broader software ecosystems.
+For the difference in downstream projects, the no-popularity overall
+effect of going from restrictive to permissive is an odds ratio of
+about 1.10, indicating roughly 10\% higher odds of increased
+downstream usage. \emph{This too collapses under popularity controls}
+(+Pop OR=1.04, NS); however, in the V2604 AFvAL specification, the
+downstream effect re-emerges at OR=1.18 ($p<10^{-5}$), suggesting that
+the multi-year-horizon downstream signal is real but only detectable
+when comparing the two post-adoption windows directly (see
+Section~\ref{sec:robustness}).
 
 Lastly, for the difference in burstiness, the language-specific 
 interactions point to moderate yet meaningful distinctions. C/C++ 
@@ -623,6 +637,39 @@ Python positive) are robust across designs and specifications. The
 project popularity and shrinks once popularity is controlled. We update
 the Key Findings to reflect this.
 
+\paragraph{Hypothesis-by-hypothesis verdict.}
+Table~\ref{tbl:hverdict} maps each theory-derived hypothesis from
+Section~\ref{sec:background} to its verdict under the V2604-aligned,
+popularity-controlled specification. ``Supported'' indicates a robust
+effect in the predicted direction with $p<0.05$; ``partial'' indicates
+the direction holds for some language ecosystems but not all
+(language-interaction-driven); ``inconclusive'' indicates the global
+main effect attenuates to non-significance under popularity controls
+and the language interactions split.
+
+\begin{table}[t]
+\centering \small
+\caption{Theory-derived hypotheses and their verdicts under the
+V2604-aligned, popularity-augmented specification (sources cited in
+Section~\ref{sec:background}).}
+\label{tbl:hverdict}
+\begin{tabular}{p{0.16\linewidth} p{0.42\linewidth} l}
+\toprule
+\textbf{Hyp.} & \textbf{Claim} & \textbf{Verdict} \\
+\midrule
+H1a & More restrictive licenses are associated with higher author counts. & partial (C/C++ only) \\
+H1b & More restrictive (often ideology-driven) licenses are more likely to be retained. & supported (GPL family) \\
+H2a & License choice is associated with overall popularity of the license at adoption. & supported (Fig.~\ref{fig:proportion}) \\
+H2b & License choice is associated with programming-language culture-specific norms. & supported (robust across designs) \\
+H2c & More permissive licenses are associated with larger community size (upstream/downstream). & inconclusive (global effect collapses under popularity controls; AFvAL downstream re-emerges) \\
+H3a & License choice is associated with project activity (commits). & partial (C/C++ negative; V2604 BLvAL OR=0.96, $p$=0.027) \\
+H3b & More complex projects (more files/blobs) use more restrictive licenses. & partial (C/C++ only) \\
+H3c & Restrictive licenses associated with longer-term sustainability. & partial (C/C++ negative under R2P; V2604 BLvAL OR=0.96 for active months) \\
+H3d & Burstiness associated with more permissive licenses. & inconclusive (mixed by language) \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \begin{figure}[h]
 \begin{center}
 \setlength{\fboxsep}{6pt}
@@ -634,14 +681,32 @@ the Key Findings to reflect this.
 \textbf{Key Findings}
 
 \begin{enumerate}[leftmargin=4mm]
-    \item C/C++ projects see reduced authorship, commits, files, blobs, and activity after switching to permissive licenses; this pattern is robust to controlling for popularity and to using a year-before/year-after comparison around the final switch (cf.\ H2b).
-    \item Python projects see increased repository growth and sustained activity under permissive licenses, and this language-specific pattern survives the additional controls (cf.\ H2b).
-    \item PHP projects benefit from permissive licenses through increased file additions and external project integration (cf.\ H2b).
-    \item Go projects attract moderately more authors after permissive license adoption (cf.\ H2b).
-    \item Permissive licenses are associated with greater upstream and downstream project adoption, but a substantial part of this overall effect is explained by pre-switch popularity (cf.\ H2c).
-    \item Ruby projects show reduced upstream integration when adopting permissive licenses.
-    \item License transitions have a moderate association with burstiness: permissive licenses increase bursty activity for C/C++ and PHP, but reduce it for Python.
-    \item The year-before/year-after comparison around the final switch yields effect directions consistent with the primary specification for the metrics we can compute both ways (commits, authors, active months), increasing confidence in the original conclusions.
+    \item \emph{C/C++ projects} see reduced authorship, commits, files, blobs,
+      and activity after switching to permissive licenses; this language-specific
+      pattern is robust across the no-popularity, +Pop, and V2604 BLvAL
+      specifications (cf.\ H2b, supported).
+    \item \emph{Python projects} see increased repository growth and sustained
+      activity under permissive licenses, robust to the same set of controls
+      (cf.\ H2b, supported).
+    \item PHP projects benefit from permissive licenses through increased file
+      additions and external project integration (cf.\ H2b, partial).
+    \item Go projects attract moderately more authors after permissive license
+      adoption (cf.\ H2b, partial; small N for Go).
+    \item The \emph{global} R2P main effect on files (1.30), upstream (1.25),
+      and downstream (1.10) is \emph{not robust}: it attenuates to non-significance
+      once pre-treatment popularity (downstream/upstream/forks) is controlled
+      (Table~\ref{tbl:robustness}, +Pop column; cf.\ H2c, inconclusive).
+    \item V2604 BLvAL surfaces consistent $\sim$4\% attenuations under
+      restrictive$\rightarrow$permissive transitions in commits (OR=0.96,
+      $p$=0.027), bot-filtered distinct aliased authors (0.96, $p$=0.027),
+      and sustained activity (0.96, $p$=0.024). These borderline effects
+      would not survive a strict Bonferroni correction across the seven outcomes
+      and should be read as suggestive (cf.\ H3a / H1a, partial; H3c, partial).
+    \item Downstream adoption increases under R2P at the multi-year horizon
+      (V2604 AFvAL OR=1.18, $p<10^{-5}$) but attenuates at the one-year
+      pre/post horizon (BLvAL OR=1.03, NS), suggesting downstream uptake
+      operates over a longer time scale than the one-year BLvAL window can
+      capture.
 \end{enumerate}
 
 \end{minipage}
@@ -652,94 +717,35 @@ the Key Findings to reflect this.
 
 \subsubsection{Implications}
 
-Programming language implies a broader choice of technology,
-libraries, and tools. Thus, users of that entire ecosystem are probably nudged toward
-the most common licenses used within it.
-For example, C-based projects often prefer restrictive licenses, 
-while Go and Python projects lean toward permissive ones.
-Developers should be aware of how their language community influences 
-licensing norms, and the community could offer language-specific
-guidelines to align new projects with licensing best practices.
+Our analysis is observational and conditioned on the
+\textasciitilde 2.4\% slice of licensed projects that switched
+license types, so we report associations rather than prescriptions.
+With that caveat, two patterns are stable enough across designs to
+inform downstream tooling:
 
-In the C/C++ 
-community, where switching to permissive licenses slightly discourages 
-new contributors, project maintainers might need to pair such license
-transitions with additional strategies -- such as enhanced outreach or
-clearly defined governance policies -- to retain or attract authors.
-Conversely, in the Go community, the positive response to permissive
-licenses indicates that maintainers could effectively use permissive
-licensing as a practical tool to encourage contributor participation,
-enhancing community building without significant additional effort.
+First, \emph{language ecosystem mediates the association} between
+license direction and project dynamics far more than license
+direction does on its own. The robust C/C++-negative / Python-positive
+contrast holds with popularity controls and under the
+year-before/year-after specification. License-recommender or
+governance tools that suggest license changes purely on a
+project's surface properties (size, activity) without conditioning
+on its language ecosystem will give systematically biased advice.
 
-Repository growth implications, measured by the number of blobs,
-are particularly impactful. Python communities experience notable
-growth under permissive licenses, indicating maintainers can 
-strategically leverage permissive licensing to attract broader
-contributions, resulting in richer functionality and greater innovation.
-For C/C++, however, the practical advice would be cautious—adopting
-permissive licenses without supplemental incentives might 
-unintentionally discourage contributors from investing in 
-substantial new content. Thus, maintainers in these communities 
-should carefully weigh the trade-offs or introduce additional
-motivators (e.g., clearer contributor recognition or rewards) 
-alongside permissive licensing decisions.
+Second, \emph{a project's pre-treatment popularity (forks,
+downstream adoption, upstream dependencies) absorbs much of what
+looks like a global ``permissive licenses help'' effect}. The
+no-popularity ORs of 1.30 (files), 1.25 (upstream), and 1.10
+(downstream) collapse to non-significance once popularity is
+controlled (Table~\ref{tbl:robustness}). Recommendations that
+encourage a permissive switch in pursuit of growth should be
+expressed conditional on popularity, not as universal advice.
 
-Since permissive licensing tends to lower commit frequency in C/C++,
-those community leaders considering
-permissive licensing should prepare targeted interventions, such as
-clearly articulated development roadmaps, contributor guidelines,
-or engagement incentives to sustain development momentum after
-a licensing change.
-
-Implications for file-count differences indicate concrete strategic 
-guidance. Given that PHP and Python projects substantially
-benefit from permissive licenses regarding file creation,
-maintainers in these ecosystems can confidently adopt permissive 
-licenses when aiming for feature expansion or modularization. 
-Conversely, C/C++ maintainers should be aware that permissive licenses
-may require additional supporting strategies—such as enhanced
-documentation or modular project structures—to ensure continued growth.
-
-Practical considerations around project activity duration 
-(active months) suggest nuanced strategies: Python projects benefit 
-slightly in terms of sustained activity from permissive licenses, 
-indicating that maintainers aiming for long-term, stable contributions 
-can adopt permissive licenses confidently. In contrast, C/C++ maintainers
-should recognize that permissive licensing may slightly shorten sustained
-activity periods, making supplemental engagement strategies crucial -- such 
-as periodic contribution drives or community recognition -- to 
-sustain longer-term involvement.
-
-Insights on upstream project usage have clear practical 
-ramifications. Python and PHP communities'
-increased usage of external OSS projects after adopting permissive
-licenses suggests maintainers might strategically use permissive
-licensing to encourage their projects' broader integration into
-complex OSS ecosystems. Conversely, C/C++ and Ruby projects that 
-see decreased usage of external dependencies under permissive licenses 
-could benefit from using licensing strategically to foster self-contained,
-tightly controlled project environments—useful in contexts requiring
-high stability or predictable dependency management.
-
-The moderate improvement in downstream project adoption following
-permissive licensing highlights practical licensing guidance 
-for maintainers seeking wider adoption. Project maintainers 
-aiming for their software to become foundational or widely
-used dependencies can practically adopt permissive licenses as
-a direct strategy to facilitate their projects' broader use across
-diverse OSS communities and applications.
-
-Lastly, implications regarding burstiness—concentrated periods 
-of intense development—offer actionable guidance. Since permissive
-licensing boosts burst-like activity in C/C++ and PHP, maintainers
-aiming for rapid or intensive development cycles (e.g., to meet release 
-deadlines or achieve specific project milestones) could strategically
-employ permissive licensing to trigger and sustain such heightened 
-activity. Conversely, Python communities, experiencing steadier 
-activity under permissive licenses, may practically leverage permissive
-licensing for achieving predictable and consistent development flows 
-rather than periodic intensive bursts.
-
-Together, these practical insights enable OSS maintainers
-to make informed licensing choices strategically tailored to specific
-community dynamics, desired project outcomes, and broader ecosystem goals.
+Beyond these, the V2604 BLvAL design surfaces a small
+($\sim$4\%) but consistent attenuation in commits, distinct
+human authors, and sustained activity after
+restrictive$\rightarrow$permissive transitions; these are too
+modest, and too sensitive to multiple-comparisons adjustment, to
+support strong prescriptive claims, but they are useful as priors
+for follow-up studies that combine the regression with qualitative
+case work in specific language communities.
