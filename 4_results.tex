@@ -499,16 +499,22 @@ V2604\,\texttt{p2P}); 148{,}462 of 148{,}465 V projects mapped, with
 only 45 (0.03\%) one-to-many splits and 80 (0.05\%) many-to-one merges.
 
 As Table~\ref{tbl:robustness} shows, under V2604 alignment the BLvAL
-design surfaces significant attenuation in commits (OR=0.96, $p$=0.007),
-blobs (OR=0.93, $p$=0.03), and sustained activity (OR=0.96, $p$=0.006)
-following restrictive$\rightarrow$permissive transitions that the
-V2604 AFvAL design buries under noise (all $p>0.6$ except downstream).
-This is the directional signal previously seen in the V-era +Pop column
-and survives the cleaner V2604 measurement. Conversely, the downstream
-adoption increase under R2P is robust under the AFvAL design at V2604
-(OR=1.18, $p<10^{-5}$) but attenuates under BLvAL (OR=1.03, $p$=0.47),
-indicating that the downstream effect operates over a longer time
-horizon than the one-year window can capture.
+design surfaces consistent $\sim$4\% attenuations under
+restrictive$\rightarrow$permissive transitions in commits (OR=0.96,
+$p$=0.027), distinct aliased authors (OR=0.96, $p$=0.027), and
+sustained activity (OR=0.96, $p$=0.024). The V2604 AFvAL design buries
+all of these under noise (all $p>0.5$ except downstream). This is the
+directional signal previously seen in the V-era +Pop column and
+survives the cleaner V2604 measurement, including a fresh distinct-author
+count with WoC-canonical bot/homonym exclusion. The blob effect that was
+marginally significant under a less-strict V2604 filter (OR=0.93, $p$=0.03)
+attenuates to NS once bot-driven blob churn is removed (OR=0.95,
+$p$=0.10), consistent with bots inflating the blob signal more than
+the human-author signal. Conversely, the downstream adoption increase
+under R2P is robust under the AFvAL design at V2604 (OR=1.18,
+$p<10^{-5}$) but attenuates under BLvAL (OR=1.03, $p$=0.47), indicating
+that the downstream effect operates over a longer time horizon than the
+one-year window can capture.
 
 \paragraph{R2: Project popularity as a control.} The original model did
 not control for pre-treatment project popularity. We added three
@@ -586,9 +592,11 @@ V2604-aligned reanalysis ($N$=23{,}522) with full popularity controls
 (downstream, upstream, lifetime forks; max
 GVIF$^{1/(2\text{Df})}$=2.41). AFvAL = after-first vs.\ after-last license
 adoption (original design); BLvAL = year-before vs.\ year-after final
-switch. The V2604 pipeline does not currently emit pre-window author
-counts, so the Authors row keeps the V-era \texttt{cP2mongo}-derived
-BLvAL value (marked with $\dagger$).}
+switch. Author counts in the V2604 columns are distinct \emph{aliased}
+authors (\texttt{c2aAcCt} field A), after dropping any commit whose raw
+author is in the WoC V2604 bot/homonym blocklist
+(\texttt{/data/play/forks/badV2604.ids}, 3.2M entries: 0.55M bot +
+2.65M generic). Author counts in the V-era columns are not bot-filtered.}
 \label{tbl:robustness}
 \resizebox{\columnwidth}{!}{%
 \begin{tabular}{lrrrrrr}
@@ -597,12 +605,12 @@ BLvAL value (marked with $\dagger$).}
                  & \textbf{V2604 AFvAL} & \textbf{V2604 BLvAL}
                  & \textbf{Delay$\geq$12} & \textbf{Dist$\geq$24} \\
 \midrule
-Commits     & 0.97          & \textbf{0.83} & 1.00          & \textbf{0.96} & 1.25            & 0.85        \\
-Authors$^{\dagger}$ & 1.02  & 0.98          & ---           & \textbf{0.94}$^{\dagger}$ & 1.04 & 1.00 \\
-Active mon. & 0.97          & \textbf{0.92} & 1.00          & \textbf{0.96} & 1.11            & 0.95        \\
-Files       & \textbf{1.30} & 1.03          & 0.99          & 0.94          & \textbf{1.76}   & 1.05        \\
-Blobs       & 1.14          & 0.90          & 0.98          & \textbf{0.93} & 1.54            & 0.91        \\
-Up.\ proj.  & \textbf{1.25} & 1.00          & 1.00          & 1.01          & 1.18            & 1.03        \\
+Commits     & 0.97          & \textbf{0.83} & 1.01 & \textbf{0.96} & 1.25            & 0.85        \\
+Authors     & 1.02          & 0.98          & 1.01 & \textbf{0.96} & 1.04            & 1.00 \\
+Active mon. & 0.97          & \textbf{0.92} & 1.01 & \textbf{0.96} & 1.11            & 0.95        \\
+Files       & \textbf{1.30} & 1.03          & 1.03 & 0.95 & \textbf{1.76}   & 1.05        \\
+Blobs       & 1.14          & 0.90          & 1.01 & 0.95 & 1.54            & 0.91        \\
+Up.\ proj.  & \textbf{1.25} & 1.00          & 1.00 & 1.01 & 1.18            & 1.03        \\
 Down.\ proj.& \textbf{1.10} & 1.04          & \textbf{1.18} & 1.03          & 0.87            & \textbf{1.13} \\
 \bottomrule
 \end{tabular}}

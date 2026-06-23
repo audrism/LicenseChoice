@@ -35,11 +35,14 @@ P2change.s (V, from Mahmoud's choice_paper.sh)
 | V Pold mapped to V2604 Pnew | 148,462 / 148,465 | `translation/Pold2Pnew.diagnostics.log` + `wc -l translation/Pold2Pnew.modal.s` |
 | 1->many splits | 45 | `translation/Pold2Pnew.diagnostics.log` |
 | many->1 merges | 80 | `translation/Pold2Pnew.diagnostics.log` |
-| V2604 BLvAL commits OR=0.96, p=0.007 | 0.9553, 6.62e-3 | `out/V2604_prepost.csv` row 8 (BLvAL/lCommitsDif/C2R2P) |
-| V2604 BLvAL blobs OR=0.93, p=0.03 | 0.9305, 3.19e-2 | `out/V2604_prepost.csv` row 10 (BLvAL/lBlobsDif/C2R2P) |
-| V2604 BLvAL activity OR=0.96, p=0.006 | 0.9548, 5.96e-3 | `out/V2604_prepost.csv` row 11 (BLvAL/lActMonDif/C2R2P) |
-| V2604 AFvAL DownProj OR=1.18, p<1e-5 | 1.1839, 2.32e-6 | `out/V2604_prepost.csv` row 7 (AFvAL/lDownProjDif/C2R2P) |
-| V2604 BLvAL DownProj OR=1.03, p=0.47 | 1.0289, 4.72e-1 | `out/V2604_prepost.csv` row 13 (BLvAL/lDownProjDif/C2R2P) |
+| V2604 BLvAL commits OR=0.96, p=0.027 | 0.9642, 2.70e-2 | `out/V2604_prepost.csv` design=BLvAL outcome=lCommitsDif term=C2R2P |
+| V2604 BLvAL authors OR=0.96, p=0.027 | 0.9643, 2.65e-2 | `out/V2604_prepost.csv` design=BLvAL outcome=lAuthorsDif term=C2R2P |
+| V2604 BLvAL activity OR=0.96, p=0.024 | 0.9636, 2.42e-2 | `out/V2604_prepost.csv` design=BLvAL outcome=lActMonDif term=C2R2P |
+| V2604 BLvAL blobs OR=0.95, p=0.10 (NS) | 0.9471, 1.00e-1 | `out/V2604_prepost.csv` design=BLvAL outcome=lBlobsDif term=C2R2P |
+| V2604 AFvAL DownProj OR=1.18, p<1e-5 | 1.1839, 2.32e-6 | `out/V2604_prepost.csv` design=AFvAL outcome=lDownProjDif term=C2R2P |
+| V2604 BLvAL DownProj OR=1.03, p=0.47 | 1.0289, 4.72e-1 | `out/V2604_prepost.csv` design=BLvAL outcome=lDownProjDif term=C2R2P |
+| Bot/homonym blocklist source | `/data/play/forks/badV2604.ids` on da5, 155 MB, 3,206,105 entries (2,652,369 generic + 553,736 bot) | `da7_pipeline/blocklists/README.md` |
+| Aliased-author resolution | `c2aAcCtFull.V2604.{0..127}.s` field A (3) from da7 pipeline stage 50 | `da7_pipeline/50_classify_and_aggregate.sh` |
 
 ### Table tbl:robustness
 
@@ -74,39 +77,39 @@ Source: `out/main_effect_stability.csv` where `model == "popforks_1y"`.
 | Up. proj. | 1.00 | 0.9979 |
 | Down. proj. | 1.04 | 1.0370 |
 
-#### V2604 AFvAL column (V2604, after-first vs after-last)
+#### V2604 AFvAL column (V2604, after-first vs after-last, bot-filtered)
 
 Source: `out/V2604_prepost.csv` where `design == "AFvAL"` AND `term == "C2R2P"`.
 
 | Outcome | Paper value | CSV OR | CSV p |
 |---|---|---|---|
-| Commits | 1.00 | 0.9964 | 0.864 |
-| Authors | --- | (not in V2604 pipeline) | --- |
-| Active mon. | 1.00 | 0.9964 | 0.863 |
-| Files | 0.99 | 0.9921 | 0.849 |
-| Blobs | 0.98 | 0.9804 | 0.621 |
+| Commits | 1.01 | 1.0135 | 0.515 |
+| Authors | 1.01 | 1.0129 | 0.532 |
+| Active mon. | 1.01 | 1.0133 | 0.519 |
+| Files | 1.03 | 1.0251 | 0.546 |
+| Blobs | 1.01 | 1.0128 | 0.748 |
 | Up. proj. | 1.00 | 0.9958 | 0.906 |
 | Down. proj. | **1.18** | 1.1839 | 2.32e-6 |
 
-#### V2604 BLvAL column (V2604, year-before vs year-after final switch)
+#### V2604 BLvAL column (V2604, year-before vs year-after final switch, bot-filtered)
 
 Source: `out/V2604_prepost.csv` where `design == "BLvAL"` AND `term == "C2R2P"`.
 
 | Outcome | Paper value | CSV OR | CSV p |
 |---|---|---|---|
-| Commits | **0.96** | 0.9553 | 6.62e-3 |
-| Authors$^\dagger$ | **0.94**$^\dagger$ | 0.9376 (BLvAL/lAuthorsDif/C2R2P from `out/prepost_vs_orig_design.csv`, V-mongo) | 0.0229 |
-| Active mon. | **0.96** | 0.9548 | 5.96e-3 |
-| Files | 0.94 | 0.9377 | 0.066 (NS) |
-| Blobs | **0.93** | 0.9305 | 0.032 |
+| Commits | **0.96** | 0.9642 | 0.0270 |
+| Authors | **0.96** | 0.9643 | 0.0265 |
+| Active mon. | **0.96** | 0.9636 | 0.0242 |
+| Files | 0.95 | 0.9543 | 0.174 (NS) |
+| Blobs | 0.95 | 0.9471 | 0.100 (NS) |
 | Up. proj. | 1.01 | 1.0116 | 0.811 |
 | Down. proj. | 1.03 | 1.0289 | 0.472 |
 
-The Authors row carries the dagger because the V2604 commit pipeline
-(da7_pipeline/) does not currently aggregate author counts per window
-(see TODO in da7_pipeline/README.md). To preserve a value in this row
-we use the V-mongo BLvAL value from the earlier round, which is the
-only place where authors can be derived for the pre-window.
+Authors are distinct aliased authors `A` (field 3 of `c2aAcCtFull.V2604.*.s`)
+per (project, window). Commits whose raw author `a` (field 2) is in
+`/data/play/forks/badV2604.ids` (3.2M-entry official V2604 blocklist:
+2.65M generic + 0.55M bot) are dropped before aggregation, so the
+distinct-author count never includes a bot or homonym.
 
 #### Delay>=12 column (V, sub-cohort restriction)
 
@@ -212,16 +215,6 @@ Rscript icse27_prepost_V2604.R
 
 ## Pending follow-ups
 
-- Authors per V2604 window: the data is already in `c2datFull.V2604.*.s`
-  (field 4 = author identity). Stage 3a of
-  `da7_pipeline/50_classify_and_aggregate.sh` currently extracts only
-  field 6 (timestamp) and drops the author; restoring it and adding a
-  `seen_a[pid SUBSEP w SUBSEP author]` accumulator in the stage 3c awk
-  END block produces a 5th aggregate column, picked up automatically by
-  `build_cP2all_V2604.py` and `icse27_prepost_V2604.R`. Stage 50 wall
-  time matches the original (~13 h at PAR=4). Until that rerun lands,
-  the table's Authors row in the V2604 BLvAL column carries the V-mongo
-  value 0.94 from `out/prepost_vs_orig_design.csv` flagged with $\dagger$.
 - Star events from GHArchive: `compute_pre_window.py` already has the slot
   wired (see `StarsAtLast` and `StarsTotal` columns); when the events
   file lands, the column populates and `icse27_prepost_V2604.R` gains
