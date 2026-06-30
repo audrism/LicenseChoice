@@ -24,37 +24,9 @@ copyright). We treat \emph{no-license} projects (no LICENSE file at
 all; default ``all rights reserved'') as a \emph{separate} category,
 not part of public-domain: the legal effect is opposite.
 
-\icsetrim{1. \textit{Permissive Licenses}: These licenses, such as the
-MIT and BSD licenses, are known for their minimal restrictions on how
-the software can be used. They allow software to be freely used,
-modified, and redistributed, even as part of proprietary
-software~\cite{kapitsaki2019modeling}. This permissiveness promotes
-wider adoption and integration of the software in diverse projects,
-including commercial applications~\cite{kapitsaki2022help}.
-
-2. \textit{Copyleft Licenses}: These licenses, like the GNU General
-Public License (GPL), require that any modified versions of the
-software must also be distributed under the same
-license~\cite{d2007copyleft,laurent2012free}.
-
-3. \textit{Weak Copyleft Licenses}: These licenses, such as the LGPL
-and MPL, strike a balance between permissive and strong copyleft
-licenses~\cite{alamoudi2020open,gamalielsson2017licensing}.
-
-4. \textit{Conditional Open Licenses}: These licenses include specific
-conditions that must be met for usage, such as attribution (CC-BY),
-non-commercial use, or share-alike
-requirements~\cite{de2009creative}.
-
-5. \textit{Public Domain}: This category refers specifically to
-projects that include an \emph{explicit} license declaration intended
-to waive copyright protections (Unlicense, CC0).}
-
 Given 597 distinct licenses we manually classified the top 50,
-covering 98.92\% of licensed projects;\icsetrim{ the full list is
-in Appendix~\ref{ap:type};} the remaining $\sim 1\%$ were grouped as
+covering 98.92\% of licensed projects; the remaining $\sim 1\%$ were grouped as
 \emph{other}.
-
 
 \subsection{World of Code Infrastructure}
 
@@ -81,16 +53,6 @@ To investigate license switching, we select projects with more than
 one license type in their lifetime and exactly one license type at
 both first adoption and the latest state.
 
-
-\begin{figure*}[t]
-\centering
-    \includegraphics[width=0.8\textwidth]{figures/dis1.pdf}
-    \caption{The distribution and retention rates of the most used licenses.}
-    \label{fig:dis1}
-    \Description{The distribution and retention rates of the most used licenses.}
-\end{figure*}
-
-
 This also means that if a project starts with license A, then changes to B,
 and later changes to license C, we consider it as one change from A to C,
 rather than two separate changes.
@@ -99,6 +61,7 @@ the latest license type were the same.
 Although these projects had other licenses at some point, they were
 removed, resulting in no change between the first and last license types.
 
+\begin{comment}
 A subtle case arises when the comparison interval immediately following
 the first license A overlaps with a short-lived intermediate license B
 before the project settles on C. Inspecting the data, we find that this
@@ -108,6 +71,7 @@ regression model after excluding these projects. All key findings remained
 consistent in direction and significance, including the language-specific
 patterns reported in the results section (e.g., positive associations between
 permissive licenses and activity in Python, and negative associations in C/C++).
+\end{comment}
 
 Next, we categorize licenses into two high-level groups: ``permissive'', which 
 includes public-domain and permissive licenses, and ``restrictive'', encompassing 
@@ -121,13 +85,20 @@ another immediately following the last license adoption.
 Projects are excluded if less than one year separates the adoption dates of the
 first and last licenses or if less than one year has elapsed since the last 
 license adoption at the time of our data curation. 
-We then model the change in these metrics (i.e., metric values in the post-switch 
+To verify that results are not an artifact of this baseline window, we additionally
+re-estimate the model using the year \emph{before} the last license adoption as the
+pre-switch interval in place of the year following the first adoption.
+The seven response metrics are the changes in the number of authors, blobs,
+commits, files, active months, and upstream and downstream project counts.
+We model the change in each metric (i.e., metric values in the post-switch 
 interval minus those in the pre-switch interval) based on the direction of the 
 license change (restrictive to permissive or permissive to restrictive).
-We control for the project’s primary language, its start and 
+We control for the project's primary language, its start and 
 end times, the delay before the first license adoption, the elapsed time between
-the first and last license adoptions, and the proportion of new OSS projects 
-adopting that license type at the time of the last license change.
+the first and last license adoptions, the proportion of new OSS projects 
+adopting that license type at the time of the last license change, and the
+project's pre-treatment popularity, measured as the number of upstream and
+downstream projects in the year following the first license adoption.
 
 To test our hypotheses, we selected a regression model appropriate to the 
 nature of our response variable, specifically, multivariate multiple regression.
@@ -136,4 +107,6 @@ regression that allows for multiple dependent variables (outcomes) to be predict
 by multiple independent variables (predictors) simultaneously.
 This model is useful when the dependent variables are correlated and need to be 
 analyzed together to improve prediction accuracy and interpretation.
-
+All count- and duration-valued response and control variables are log-transformed
+as $\mathrm{sign}(x)\cdot\log(1+|x|)$ before entering the model to reduce skew;
+the descriptive statistics report untransformed values for interpretability.

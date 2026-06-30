@@ -1,39 +1,32 @@
 \section{Conclusions}
 
-Two findings emerge clearly.
+We characterized the prevalence and types of licenses across more than
+131 million open source projects and modeled how within-project license
+transitions relate to subsequent project activity. Two findings emerge
+clearly.
 \textbf{(1)} 83\% of OSS projects lack a formal license, four times the
 rate reported by prior studies that filtered on stars or
 package-manager presence; this exposes a much larger long tail of
-legally-ambiguous reusable code than was previously known.
+legally-ambiguous reusable code than was previously known, posing
+compliance risk to downstream reusers and potentially inhibiting reuse
+by actors who attend to licensing terms.
 \textbf{(2)} For projects that switch license types, the apparent
 global effects of switching to a permissive license on files,
-upstream and downstream project counts collapse under
-popularity controls and are not robust. What remains robust across
-designs is a language-ecosystem-mediated pattern: C/C++ projects show
-reduced activity after switching to permissive licenses, Python the
-opposite. The V2604-aligned, bot-filtered year-before/year-after
-reanalysis surfaces small ($\sim 4\%$) but consistent attenuations in
-commits, distinct human authors, and sustained activity under
-restrictive$\rightarrow$permissive transitions, suggesting future work
-should combine the regression with qualitative case studies in
-specific language communities.   
-% Key trends that shape the
-% licensing landscape include the impact of project maturity, team
-% composition, activity levels, and programming languages. 
-% While permissive licenses dominate many areas
-% of the open source ecosystem, particularly in newer and more dynamic
-% projects, a significant and often underappreciated
-% presence of copyleft and weak copyleft licenses exists in older
-% and more complex projects. The overhelming prevalence of unlicensed
-% code may pose risk and prevent full potential for innovation by building on this
-% abundant but legaly uncertain foundation. 
-%These insights underscore the importance
-%of developers and the broader open source community making informed,
-%strategic decisions about licensing that balance the flexibility and
-%collaborative potential of permissive licenses with the protective
-%qualities of copyleft licenses.
-% As the open source landscape
-% continues to evolve, it is crucial to foster an environment where
-% legal clarity, sustainability, and community values guide the
-% selection of licenses, ensuring the long-term health and success of
-% open source projects.
+upstream and downstream project counts collapse under popularity
+controls and are not robust. What remains robust across designs is a
+language-ecosystem-mediated pattern: C/C++ projects show reduced
+activity after switching to permissive licenses, Python the opposite. A
+year-before/year-after reanalysis on the same projects confirms that
+these patterns are not an artifact of the baseline window: the
+language-ecosystem contrast persists, as do modest negative
+associations between restrictive$\rightarrow$permissive transitions and
+both commits and sustained activity.
+
+These results carry a concrete implication for tooling: because license
+direction interacts so strongly with language ecosystem, license
+recommenders and compliance tools that ignore a project's ecosystem
+will give systematically biased advice. The small magnitude of the
+remaining global effects further suggests that future work should
+combine this regression with qualitative case studies in specific
+language communities to understand the mechanisms behind the
+C/C++ and Python contrast.

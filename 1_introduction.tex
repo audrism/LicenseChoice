@@ -43,12 +43,13 @@ active~\cite{socialCoding,choice23,ma2020methodology}, and so on.
 License choice plausibly relates to supply chain dynamics, including
 attracting and retaining participants, having downstream dependents
 or users, and, of course, the ways the code may be (re-)used.
-Despite this, we are not aware of any prior studies
-that model the impact of license choice nor any comprehensive theories that would
+Despite this, comparatively little prior work models the impact of
+license choice, and we are not aware of a comprehensive theory that would
 explain it.
 
 Our second aim is, therefore, to establish and test a preliminary theory
-that helps explain the impact of license choice in open software. 
+that helps explain how license choice is associated with project
+outcomes in open software.
 The theory could help explain some of the reasons why a large fraction 
 of projects have no license, why some license violations (such as the use of
 unlicensed code) appear to be tolerated, and what to expect when a 
@@ -78,15 +79,14 @@ licenses and projects, we use our preliminary theory to
 operationalize license choice where theory predicts a certain effect on 
 key project factors.
 We first test if certain types of licenses have longer
-retention rates based on predictions of our theory.  We then employ
-a multivariate multiple regression model
-to test which of the theory-predicted contextual factors are impacted by
-license choice.
+retention rates based on predictions of our theory.  
+We then employ a multivariate multiple regression model to test 
+how license transitions are associated with subsequent project outcomes.
 
 Our analysis of the types and prevalence of licenses across more
 than 131 million OSS projects, finds that 83\% of these projects
 lack a formal license. Among the licensed projects, the MIT license
-was the most commonly used, accounting for 65\% of all licensed
+was the most commonly used, accounting for 67\% of all licensed
 projects, followed by the Apache 2.0 and ISC licenses.  Although
 permissive licenses dominate overall, copyleft licenses like the GPL
 exhibited high retention rates, reflecting a strong commitment to
@@ -95,27 +95,30 @@ studies we find four-fold larger prevalence of unlicensed
 code.
 
 Our theory-derived project characteristics potentially associated with
-license selection were tested using a multivariate multiple regression model
-on the subset of 23{,}619 projects (about 2.4\% of licensed projects) that
-underwent a license-type change. The robust finding is that these
-associations vary substantially across programming language ecosystems:
-C/C++ projects tended to experience reduced growth in commits, files,
-and sustained activity following transitions to permissive licenses,
-whereas Python projects showed increased repository growth and longer
-activity under permissive licensing. The global apparent effects of
-license direction on files, blobs, upstream, and downstream project
-counts -- present without popularity controls -- attenuate to
-non-significance once pre-treatment popularity (downstream and upstream
-project counts, lifetime fork count) is included. A year-before vs.\
-year-after-final-switch reanalysis aligned to WoC version 2604 surfaces
-small ($\sim$4\%) but consistent attenuations in commits, distinct
-aliased authors, and sustained activity following
-restrictive$\rightarrow$permissive transitions. The takeaway is that
-licensing-related dynamics are shaped less by license direction per se
-than by language-specific community norms and development practices.
+license selection were tested using a multivariate multiple regression
+model on the $23{,}619$ projects that underwent a license-type change.
+The robust finding is that these associations vary substantially across
+programming language ecosystems: C/C++ projects tended to experience
+reduced growth following transitions to permissive licenses --- fewer
+commits (OR~$0.69$), files (OR~$0.76$), and blobs (OR~$0.66$), and
+shorter sustained activity (OR~$0.85$) --- whereas Python projects showed
+the opposite, with increased file (OR~$1.46$) and blob (OR~$1.24$) growth
+and broader upstream integration (OR~$1.22$) under permissive licensing.
+After controlling for pre-treatment project popularity (upstream and
+downstream project counts), license direction has no significant global
+effect on files, upstream, or downstream project counts; the robust
+associations are language-specific rather than global. To confirm that
+these effects are not an artifact of the baseline window, we re-estimate
+the model against a year-before/year-after-final-switch baseline on the
+same projects; the language-ecosystem pattern persists, as does a
+significant negative association between restrictive$\rightarrow$permissive
+transitions and both commits (OR~$0.83$) and sustained activity
+(OR~$0.92$). The takeaway is that licensing-related dynamics are shaped
+less by license direction \emph{per se} than by language-specific
+community norms and development practices.
 
 Our contributions include (a) a preliminary theory of OSS license choice and 
-its expected effects on project outcomes, (b) a comprehensive characterization of 
+its expected associations with project outcomes, (b) a comprehensive characterization of 
 software licenses and license types across nearly the entire OSS ecosystem, 
 including minor and non-semantic license variations, (c) a set of theory-derived 
 hypotheses linking license selection to project characteristics, and (d) a 

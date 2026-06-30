@@ -1,9 +1,9 @@
 \section{Results and Discussion}
 
-\icsetrim{We organize our results in three parts: prevalence and
-retention of license types, the regression analysis of how license
-choice relates to project performance, and the year-before/year-after
-robustness analysis of license switches.}
+We organize our results in three parts: prevalence and retention of license 
+types, the regression analysis of how license transitions relate to 
+project performance, and the year-before/year-after robustness analysis
+of license switches.
 
 \subsection{Types and Prevalence of Licenses}
 
@@ -17,24 +17,34 @@ MIT, Apache-2.0 and ISC dominate; consistent with H1b, the
 ideology-driven deprecated GPL-3 has the highest retention and the
 attribution-only CC-BY-3.0 the lowest.
 
+\begin{figure*}[t]
+\centering
+    \includegraphics[width=\textwidth]{figures/dis1.png}
+    \caption{The distribution and retention rates of the most used licenses.}
+    \label{fig:dis1}
+    \Description{The distribution and retention rates of the most used licenses.}
+\end{figure*}
+
+By license type (Figure~\ref{fig:dis3}), conditional-open,
+weak-copyleft, and public-domain licenses lose roughly a quarter of
+their ever-adopters by the latest state; copyleft loses only $\sim 8\%$,
+consistent with H1b. 
+
 \begin{figure}[t]
 \centering
-    \includegraphics[width=\linewidth]{figures/dis3.pdf}
+    \includegraphics[width=\linewidth]{figures/dis3.png}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
     \Description{The distribution of license types across projects.}
 \end{figure}
 
-By license type (Figure~\ref{fig:dis3}), conditional-open,
-weak-copyleft, and public-domain licenses lose roughly a quarter of
-their ever-adopters by the latest state; copyleft loses only $\sim 8\%$,
-consistent with H1b. Tracking adopted-license proportions over time
+Tracking adopted-license proportions over time
 (Figure~\ref{fig:proportion}) shows copyleft adoption has steadily
 declined while permissive has risen (H2a).
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{figures/proportion.pdf}
+    \includegraphics[width=\linewidth]{figures/proportion.png}
     \caption{Proportion of license type over time}
     \label{fig:proportion}
     \Description{Proportion of license type over time}
@@ -49,11 +59,6 @@ no-license fraction is the most striking: $83.01\%$ in our
 $131$M-project sample vs.\ $21.12\%$ in \citet{wu2024large}
 (weighted across 5 package managers, $3.47$M projects) and $10.51\%$
 in \citet{cui2023empirical} ($\geq 1000$-star GitHub projects).
-\icsetrim{\citet{wu2024large}'s package-manager scope draws from
-mature, well-maintained projects; \citet{cui2023empirical}'s star
-threshold excludes the long tail; ours is essentially the whole OSS
-ecosystem (excluded only by deforking and lack of any license file at
-any time).}
 The four-fold gap is sample-selection-driven: package-manager
 membership and stars both filter for mature projects with explicit
 governance, of which fully licensed status is one indicator. Our broader
@@ -87,20 +92,20 @@ copyleft share than our cross-platform sample
 under-represent copyleft prevalence.
 
 \begin{figure}[h]
-\begin{center}
-\setlength{\fboxsep}{6pt}
+\centering
+\setlength{\fboxsep}{4pt}
 \cornersize{0.08}
 
 \Ovalbox{
 \colorbox{lightgray}{
-\begin{minipage}{0.92\linewidth}
+\begin{minipage}{0.82\linewidth}
 \textbf{Key Findings}
 
 \begin{enumerate}[leftmargin=4mm]
     \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than previously reported.
-    \item The MIT license is the most widely used license,
-      accounting for 65\% of all licensed projects and 10\% of all
-      public projects.
+    \item The MIT license is the most widely used license, 
+    accounting for 67\% of all licensed projects and 11\% 
+    of all public projects.
     \item Despite the overall preference for permissive licenses,
       copyleft licenses such as GPL have high retention rates
       cf.\ H1b.
@@ -110,7 +115,6 @@ under-represent copyleft prevalence.
 
 \end{minipage}
 }}
-\end{center}
 \Description{Key Findings}
 \end{figure}
 
@@ -119,16 +123,16 @@ under-represent copyleft prevalence.
 The 83\% no-license rate poses legal risk to downstream reusers and
 discourages innovation by preventing actors who do attend to licensing
 from using these projects.
-\icsetrim{Our findings challenge prior estimates, which underestimate
+Our findings challenge prior estimates, which underestimate
 the prevalence of unlicensed projects by focusing on mature ones,
 missing the broader risks of software reuse. Even though many of
 these unlicensed projects may seem trivial and technically not OSS,
 their public availability still creates legal ambiguity and poses a
 risk of license noncompliance, especially when combined with the lack
-of thorough legal review in many downstream projects.}
+of thorough legal review in many downstream projects.
 The risk is not academic: \citet{jahanshahi2025beyond} report that
 $\sim$18\% of reused artifacts originate from very small
-projects.\icsetrim{\footnote{No stars and fewer than 10 commits.}}
+projects.\footnote{No stars and fewer than 10 commits.}
 MIT's dominance reflects a long-running preference for permissive
 licenses; the continued use of copyleft licenses like GPL shows that a
 meaningful subset of developers remain committed to preserving the
@@ -136,10 +140,9 @@ open nature of derivative works.
 
 \subsection{The Impact of License Changes}
 
-
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.8\linewidth]{figures/pie.pdf}
+\includegraphics[width=\linewidth]{figures/pie.png}
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
@@ -155,9 +158,7 @@ collapse to a single license) and others deleted all licenses. The
 \emph{middle group}---projects that held multiple license types during
 their lifetime but converged to a single license type at the latest
 state---is the group we analyze license changes in. This middle group
-yields the 23{,}619 projects (V cohort) or 23{,}522 (V2604-aligned)
-that enter the regression in Section~\ref{sec:robustness}, i.e.,
-roughly 2.4\% of licensed projects.
+yields the 23{,}619 projects that enter the regression.
 
 \subsubsection{Our Findings}
 
@@ -170,30 +171,44 @@ are presented in Table~\ref{tbl:stat-l}.
 
 \begin{table*}[t]
 \centering
-\caption{License change model - descriptive statistics.}
+\caption{License change model -- descriptive statistics (untransformed; the
+model uses $\mathrm{sign}(x)\cdot\log(1+|x|)$ transforms). Response rows are
+shown separately for the AFvAL (after-first vs.\ after-last) and BLvAL
+(before-last vs.\ after-last) designs; controls and factor distributions are
+shared across both.}
 \resizebox{0.95\textwidth}{!}{
 \begin{tabular}{cllcccc}
   \toprule
   & \textbf{Variable} & \textbf{Description} & & \textbf{Statistics} & & \\ 
   \midrule
   \midrule
-  \multirow{9}{*}{\rotatebox{90}{\textbf{Response}}} 
+  \multirow{8}{*}{\rotatebox{90}{\textbf{AFvAL}}} 
   & & & \textbf{5\%} & \textbf{Median} & \textbf{Mean} & \textbf{95\%} \\ 
   & AuthorsDiff & Difference in number of authors & -5 & 0 & 0.91 & 6 \\
-  & BlobsDiff & Difference in number of blobs & -1,470 & -17 & 56.6 & 1,059.2 \\
+  & BlobsDiff & Difference in number of blobs & -1,470 & -17 & 56.60 & 1,059.2 \\
   & CommitsDiff & Difference in number of commits & -309.1 & -6 & 0.83 & 209 \\
   & FilesDiff & Difference in number of files & -856.1 & -4 & 116.92 & 634 \\
   & ActiveMonDiff & Difference in number of active months & -8 & -1 & -1.06 & 5 \\
   & UpProjectsDiff & Difference in number of upstream projects & -35 & -1 & -3.54 & 16 \\
   & DownProjectsDiff & Difference in number of downstream projects & -7 & 0 & 19.68 & 25.1 \\ 
-  & BurstinessDiff & Difference in burstiness (duration / active months) & -7 & 0.28 & 1.27 & 10.5 \\ 
   \midrule
-  \multirow{8}{*}{\rotatebox{90}{\textbf{Control}}} 
+  \multirow{7}{*}{\rotatebox{90}{\textbf{BLvAL}}} 
+  & AuthorsDiff & Difference in number of authors & -4 & 0 & 0.42 & 5 \\
+  & BlobsDiff & Difference in number of blobs & -946 & -1 & 86.63 & 942 \\
+  & CommitsDiff & Difference in number of commits & -194.1 & -1 & 2.09 & 169 \\
+  & FilesDiff & Difference in number of files & -574 & -1 & 123.30 & 586 \\
+  & ActiveMonDiff & Difference in number of active months & -6 & 0 & -0.17 & 5 \\
+  & UpProjectsDiff & Difference in number of upstream projects & -21 & 0 & -0.16 & 18 \\
+  & DownProjectsDiff & Difference in number of downstream projects & -7 & 0 & 5.89 & 14 \\ 
+  \midrule
+  \multirow{10}{*}{\rotatebox{90}{\textbf{Control}}} 
   & EarliestCommit & Project age (months) & 39.87 & 84 & 90.05 & 162.04 \\
   & LatestCommit & Project latest inactivity (months) & 3.23 & 27.57 & 34.95 & 87.64 \\
   & AdoptDelay & Earliest commit to license adoption (months) & 0 & 0.13 & 3.35 & 19.37 \\ 
   & Distance & Distance between first and last adoption (months) & 12 & 24 & 30.77 & 73 \\
   & Proportion & Proportion of projects adopting same license at change time & 0.05 & 0.64 & 0.44 & 0.68 \\
+  & InitialUpProjects & Upstream projects in year after first adoption & 0 & 3 & 11.14 & 46 \\
+  & InitialDownProjects & Downstream projects in year after first adoption & 0 & 0 & 10.27 & 19 \\
   \multicolumn{6}{c}{\dotfill} \\
   
   & Language & \hspace{-0.2cm}JavaScript \hspace{1cm} Python \hspace{1.15cm} C/C++ \hspace{1.3cm} Java & PHP & Go & Ruby & Other \\ 
@@ -212,16 +227,18 @@ are presented in Table~\ref{tbl:stat-l}.
 The model produces a coefficient set per outcome. We use
 sum contrasts for the language factor (each level compared to the
 across-language mean) and include a Language $\times$ change-direction
-interaction.\icsetrim{ In the sum-contrast convention the level
+interaction. In the sum-contrast convention the level
 coefficients sum to zero, so the global R2P effect averages across
-languages.} R2P (restrictive$\rightarrow$permissive) is contrasted
+languages. R2P (restrictive$\rightarrow$permissive) is contrasted
 against P2R (permissive$\rightarrow$restrictive) as the base.
 
 Type III MANOVA tests (Pillai's trace) show all predictors
-significantly improve model fit ($p \ll 0.001$).\icsetrim{ Full test
-statistics are reported in Table~\ref{tbl:anova-lc}.}
+significantly improve model fit ($p \ll 0.001$).
 
-\icsetrim{\begin{table}[t]
+\begin{comment}
+Full test statistics are reported in Table~\ref{tbl:anova-lc}.
+
+\begin{table}[t]
 \centering \small
 \caption{License change model - Type III MANOVA Tests: Pillai test statistic}
 \begin{tabular}{lccc}
@@ -240,15 +257,23 @@ statistics are reported in Table~\ref{tbl:anova-lc}.}
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
-\end{table}}
+\end{table}
+\end{comment}
 
 % model performance
-Model fit was evaluated using R² from univariate regressions, ranging from 0.02 to 0.09 
-across outcomes-modest but typical for large-scale socio-technical data with high variability. 
-Residuals showed no irregular patterns. Multicollinearity was assessed via generalized 
-variance inflation factors (GVIFs); all predictors had adjusted $GVIF^{1/(2 \times Df)}$ 
-values below standard thresholds, except the license change variable ($3.22$), which 
-remains within acceptable limits given the model’s interactions and categorical terms.
+Model fit was evaluated using $R^2$ from univariate regressions. For the
+primary AFvAL design, $R^2$ ranges from 0.13 to 0.45 across outcomes; for
+the tighter BLvAL design it ranges from 0.03 to 0.06, as expected---bracketing
+the switch with a one-year-before baseline differences out most of the
+across-project variance, leaving less to explain. Both are modest but typical
+for large-scale socio-technical data with high variability. Residuals showed
+no irregular patterns. Multicollinearity was assessed via generalized variance
+inflation factors (GVIFs); all predictors had adjusted
+$\text{GVIF}^{1/(2\,\text{Df})}$ values below standard thresholds. In
+particular, the two pre-treatment popularity proxies were near-orthogonal to
+the rest of the model (adjusted GVIF of 1.15 and 1.16), and the highest value
+was 2.40 (license-type adoption proportion), confirming that adding the
+popularity controls did not introduce collinearity.
 
 To better understand the effect of license change direction on project metrics,
 we calculate the odds ratios for the change direction predictor and its 
@@ -266,10 +291,11 @@ its interaction with language influence various aspects of the model.
 
 \begin{figure*}[t]
     \centering
-    \includegraphics[width=0.9\linewidth, clip=true, trim=0 18 0 0]{figures/odds_ratios.pdf}
-    \caption{License change model - odds ratios}
+    \includegraphics[width=\linewidth]{figures/odds1.png}
+    \caption{License change model odds ratios under the AFvAL design
+    (after-first vs.\ after-last license adoption).}
     \label{fig:odds}
-    \Description{License change model - odds ratios}
+    \Description{License change model odds ratios, AFvAL design.}
 \end{figure*}
 
 In these models, each coefficient represents a change in the
@@ -285,283 +311,195 @@ restrictive\(\rightarrow\)permissive effect for a given language,
 we sum \(\beta_{\text{R2P}} + \beta_{\text{R2P:Lang}}\)
 and then exponentiate.
 
-The per-metric numbers reported below are for the \emph{no-popularity}
-specification (the ``Original'' column in Table~\ref{tbl:robustness});
-several of the global R2P main effects shrink toward unity once
-popularity covariates are introduced (Section~\ref{sec:robustness}).
-We therefore treat the language-specific interactions, which are
-\emph{robust} across specifications, as the primary narrative, and we
-flag below where the global main effect collapses under
-popularity controls.
+The per-metric numbers reported below are from the popularity-controlled
+specification. Because pre-treatment popularity is included throughout,
+the global R2P main effects are already adjusted for project popularity,
+and the language-specific interactions---which are \emph{robust} across
+both the AFvAL and BLvAL designs---form the primary narrative.
 
 Figure~\ref{fig:odds} plots the significant odds ratios. The
-language-specific contrast is the headline: \emph{C/C++ projects
-show consistently \emph{reduced} growth} in authorship (OR=0.95),
-blobs (0.78), files (0.89), commits (0.77), and sustained activity
-(0.89) under restrictive$\rightarrow$permissive transitions, partially
-supporting H1a, H3a, H3b, and H3c for that ecosystem. \emph{Python
-projects show the opposite}: blobs OR=1.73, files 2.02, slight gains
-in sustained activity (1.05). PHP, Go, and Ruby show smaller and
-mixed effects. Three \emph{global} R2P effects appear large in this
-no-popularity specification: files (1.30), upstream (1.25), and
-downstream (1.10). All three collapse to non-significance once
-pre-treatment popularity is controlled
-(Table~\ref{tbl:robustness}, +Pop column: 1.03, 1.00, 1.04);
-the downstream effect re-emerges at OR=1.18 ($p<10^{-5}$) under the
-V2604 AFvAL specification, suggesting it operates over a multi-year
-horizon. \icsetrim{Lastly, for burstiness, C/C++ has OR$\approx$1.10
-and PHP 1.06 (more intense activity bursts under permissive
-licensing), while Python is at 0.96 (steadier activity); partial
-support for H3d with language-specific direction.}
-Burstiness shows partial support for H3d with mixed language-specific
-direction (C/C++ 1.10, PHP 1.06, Python 0.96).
+language-specific contrast is the headline: \emph{C/C++ projects show
+consistently \emph{reduced} growth} under
+restrictive$\rightarrow$permissive transitions---fewer commits
+(OR=0.69), files (0.76), and blobs (0.66), fewer authors (0.93), and
+shorter sustained activity (0.85)---partially supporting H1a, H3a, H3b,
+and H3c for that ecosystem. \emph{Python projects show the opposite},
+with increased file (OR=1.46) and blob (1.24) growth and broader
+upstream integration (1.22) under permissive licensing. PHP, Go, and
+Ruby show smaller and mixed effects. After controlling for pre-treatment
+project popularity, the \emph{global} R2P main effects on files
+(OR=1.04), upstream (1.00), and downstream (1.05) are not significant:
+once popularity is held fixed, license direction has no ecosystem-wide
+effect on these metrics, and the robust associations are
+language-specific rather than global. Two outcomes do retain a
+significant global association in the controlled model: commits (OR=0.83)
+and sustained activity (active months, OR=0.92) both decline modestly
+under restrictive$\rightarrow$permissive transitions.
 
 These quantified magnitudes, along with their directions,
 clearly demonstrate that license transitions are meaningfully associated with
 project metrics, with notable variations across different
 metrics and programming languages.
 
-\subsubsection{Robustness Analyses}\label{sec:robustness}
+\subsubsection{Robustness}\label{sec:robustness}
 
-Reviewers of an earlier version of this work raised three methodological concerns that
-we address through additional analyses summarized in
-Table~\ref{tbl:robustness}. Replication code and intermediate
-data for these analyses are included in the replication package.
+We assess robustness along two axes: the choice of baseline window and the
+inclusion of pre-treatment popularity controls. Table~\ref{tbl:robustness}
+reports the main R2P (restrictive$\rightarrow$permissive) odds ratios under
+both the AFvAL and BLvAL designs, alongside the language-specific effects.
 
-\paragraph{R1: Comparison-point design (year-before vs.\ year-after the
-final switch).} The primary specification compares activity in the year
-\emph{after} the first license adoption with activity in the year
-\emph{after} the final license adoption (AFvAL design). A concern is that
-the first window often falls in a project's earliest months and may
-therefore conflate license effects with project maturation. We re-estimated
-the popularity-augmented model using activity in the year \emph{before} the
-final license adoption as the baseline and the year \emph{after} the final
-license adoption as the outcome window (BLvAL design), on the same 23{,}522
-projects (slightly less than the 23{,}619 of the original specification
-because of the V$\rightarrow$V2604 dedup adjustment described below).
-For full alignment, the pre-window blob, file, commit, and active-month
-counts were computed from a fresh scan of the WoC V2604 base maps
-(\texttt{p2c}, \texttt{c2dat}, \texttt{c2fbb}); the pre-window upstream and
-downstream project counts were computed from the V-era \texttt{Pt2Ptb} map
-(no V2604 build exists). Because V2604 lowercases and re-canonicalizes
-project identifiers, we translated the V-canonical IDs in
-\texttt{P2change.s} to V2604-canonical IDs through the four-step recipe
-(V\,\texttt{P2p} $\rightarrow$ lowercase raw \texttt{p} $\rightarrow$
-V2604\,\texttt{p2P}); 148{,}462 of 148{,}465 V projects mapped, with
-only 45 (0.03\%) one-to-many splits and 80 (0.05\%) many-to-one merges.
+\paragraph{Baseline window.} Our primary (AFvAL) specification compares the
+year after the first license adoption with the year after the final
+adoption. Because the first window often falls in a project's earliest
+months, it could conflate license effects with project maturation. We
+therefore re-estimate the model on the same 23{,}619 projects using the year
+\emph{before} the final adoption as the baseline (BLvAL design), which
+brackets the switch tightly. The language-ecosystem pattern persists across
+both designs: C/C++ remains negative and Python positive. The significant
+negative global associations with commits (OR=0.83 AFvAL, 0.84 BLvAL) and
+sustained activity (active months, OR=0.92 in both) are stable across the two
+baselines, confirming they are not an artifact of the baseline window. These
+effects clear a Bonferroni correction across the seven outcomes
+($\alpha/7\approx0.007$; commits $p<0.002$, active months $p<0.001$).
+Figure~\ref{fig:odds-blval} shows the corresponding odds ratios; the
+C/C++-negative and Python-positive interactions persist under this baseline.
 
-As Table~\ref{tbl:robustness} shows, under V2604 alignment the BLvAL
-design surfaces consistent $\sim$4\% attenuations under
-restrictive$\rightarrow$permissive transitions in commits (OR=0.96,
-$p$=0.027), distinct aliased authors (OR=0.96, $p$=0.027), and
-sustained activity (OR=0.96, $p$=0.024). The V2604 AFvAL design buries
-all of these under noise (all $p>0.5$ except downstream). This is the
-directional signal previously seen in the V-era +Pop column and
-survives the cleaner V2604 measurement, including a fresh distinct-author
-count with WoC-canonical bot/homonym exclusion. The blob effect that was
-marginally significant under a less-strict V2604 filter (OR=0.93, $p$=0.03)
-attenuates to NS once bot-driven blob churn is removed (OR=0.95,
-$p$=0.10), consistent with bots inflating the blob signal more than
-the human-author signal. Conversely, the downstream adoption increase
-under R2P is robust under the AFvAL design at V2604 (OR=1.18,
-$p<10^{-5}$) but attenuates under BLvAL (OR=1.03, $p$=0.47), indicating
-that the downstream effect operates over a longer time horizon than the
-one-year window can capture.
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/odds2.png}
+    \caption{License change model odds ratios under the BLvAL design
+    (year-before vs.\ year-after the final license switch).}
+    \label{fig:odds-blval}
+    \Description{License change model odds ratios, BLvAL design.}
+\end{figure*}
 
-\paragraph{R2: Project popularity as a control.} The original model did
-not control for pre-treatment project popularity. We added three
-popularity proxies that capture distinct dimensions of visibility and
-reuse:
-(i) downstream-project count in the year after first license adoption
-($\textit{firstDownP}$, code-reuse popularity, pre-treatment for the
-final switch in most projects);
-(ii) upstream-project count in the same window ($\textit{firstUpP}$,
-consumer-position popularity); and
-(iii) lifetime fork count ($\textit{NumForks}$, GitHub-style
-external visibility) extracted from the WoC project-level
-aggregates.\footnote{A GHArchive-derived star-event stream is being
-ingested in parallel and will provide a fourth, time-resolved
-popularity proxy (cumulative star count at the time of the final
-license switch). The reanalysis pipeline (\texttt{compute\_pre\_window.py})
-is structured so that, when the star map becomes available, including it
-requires only adding a single column to the per-project output. We expect
-its inclusion to have similarly small impact as adding NumForks given the
-already low residual variance from the other proxies. CommunitySize is
-omitted because it is collinear with NumForks (Pearson 0.97).}
-We verified that the three proxies are not redundant: pairwise Spearman
-correlations between forks and downstream/upstream counts are only 0.29
-and 0.15 respectively, and the maximum adjusted
-$\text{GVIF}^{1/(2\text{Df})}$ in the augmented model is 1.23, well below
-standard thresholds.
-Including these covariates raises the model's $R^2$ values from
-0.02--0.09 to 0.13--0.45, confirming that popularity is a substantial
-source of variance that should be controlled.
-Adding the fork covariate to the model that already contains
-upstream/downstream counts changes the main R2P odds ratios by less than
-0.5\% (e.g., commits 0.833 vs.\ 0.832), indicating that the three proxies
-together are sufficient to capture the popularity confound. The overall R2P main
-effects shift toward and across unity for several outcomes once
-popularity is included: files moves from
-OR=1.30 (significant) to 1.04 (NS); upstream from OR=1.25 (significant) to
-1.00 (NS); downstream from OR=1.10 (significant) to 1.04 (NS).
-Conversely, two effects that were masked by the omitted variable
-become significant when popularity is controlled: commits OR shifts from
-0.97 (NS) to 0.83 ($p$=0.002), and active months from 0.97 (NS) to 0.92
-($p$<0.001). This indicates that part of the original headline effect of
-license direction reflected confounding with project popularity, but a
-genuine negative association with commits and sustained activity is
-revealed once popularity is controlled. The language-specific interactions
-remain qualitatively stable: C/C++ continues to show a negative R2P
-association with files, commits, and active months, and Python continues
-to show a positive association with blobs, files, and downstream adoption.
-
-\paragraph{R3: Sub-cohort restrictions.} Restricting to
-$\textit{Delay}\geq 12$ months (license adopted $\geq 1$ year after
-project creation, $N$=1{,}792) and to $\textit{Distance}\geq 24$ months
-(at least 2 years between first and last license, $N$=12{,}110), the
-R2P direction stays consistent for the C/C++ and Python interactions
-in both sub-cohorts (Table~\ref{tbl:robustness}); the strong
-ecosystem-specific patterns are robust, while the smaller overall
-effects deserve cautious interpretation.
-
-\paragraph{R4: Intermediate-license edge case.} For the $\sim 6.2\%$
-of the regression sample (1{,}462 / 23{,}619) with a short-lived
-intermediate license between first and final, excluding them leaves
-all key effect directions and significance levels unchanged.
+\paragraph{Popularity controls.} A project's pre-treatment popularity could
+confound the relationship between license direction and subsequent activity:
+popular projects both attract more activity and may switch licenses
+differently. We control for two pre-treatment popularity proxies measured in
+the year after first adoption---upstream-project count (consumer-position
+popularity) and downstream-project count (code-reuse popularity). The two are
+not redundant (Spearman correlation 0.43) and are near-orthogonal to the
+remaining predictors (adjusted GVIF 1.15 and 1.16). With popularity
+controlled, license direction has no significant global effect on files,
+upstream, or downstream project counts; the robust associations are
+language-specific rather than global.
 
 \begin{table}[t]
 \centering \small
-\caption{Robustness analyses: main R2P (restrictive$\rightarrow$permissive)
-effect as an odds ratio under alternative model specifications. Bold values
-are significant at $p<0.05$. Original / +Pop / Sub-cohorts use the V-era
-\texttt{cP2all.1y} ($N$=23{,}619). V2604~AFvAL and V2604~BLvAL use the
-V2604-aligned reanalysis ($N$=23{,}522) with full popularity controls
-(downstream, upstream, lifetime forks; max
-GVIF$^{1/(2\text{Df})}$=2.41). AFvAL = after-first vs.\ after-last license
-adoption (original design); BLvAL = year-before vs.\ year-after final
-switch. Author counts in the V2604 columns are distinct \emph{aliased}
-authors (\texttt{c2aAcCt} field A), after dropping any commit whose raw
-author is in the WoC V2604 bot/homonym blocklist
-(\texttt{/data/play/forks/badV2604.ids}, 3.2M entries: 0.55M bot +
-2.65M generic). Author counts in the V-era columns are not bot-filtered.}
+\caption{License change model: main R2P (restrictive$\rightarrow$permissive)
+effect and language-specific effects as odds ratios, under the AFvAL
+(after-first vs.\ after-last) and BLvAL (before-last vs.\ after-last) designs,
+both with pre-treatment popularity controls ($N$=23{,}619). Bold values are
+significant at $p<0.05$; ``--'' marks non-significant language interactions.}
 \label{tbl:robustness}
-\resizebox{\columnwidth}{!}{%
-\begin{tabular}{lrrrrrr}
+\begin{tabular}{lrrrr}
 \toprule
-\textbf{Outcome} & \textbf{Original} & \textbf{+Pop}
-                 & \textbf{V2604 AFvAL} & \textbf{V2604 BLvAL}
-                 & \textbf{Delay$\geq$12} & \textbf{Dist$\geq$24} \\
+ & \multicolumn{2}{c}{\textbf{Global R2P}} & \multicolumn{2}{c}{\textbf{C/C++ \,/\, Python}} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+\textbf{Outcome} & \textbf{AFvAL} & \textbf{BLvAL} & \textbf{C/C++} & \textbf{Python} \\
 \midrule
-Commits     & 0.97          & \textbf{0.83} & 1.01 & \textbf{0.96} & 1.25            & 0.85        \\
-Authors     & 1.02          & 0.98          & 1.01 & \textbf{0.96} & 1.04            & 1.00 \\
-Active mon. & 0.97          & \textbf{0.92} & 1.01 & \textbf{0.96} & 1.11            & 0.95        \\
-Files       & \textbf{1.30} & 1.03          & 1.03 & 0.95 & \textbf{1.76}   & 1.05        \\
-Blobs       & 1.14          & 0.90          & 1.01 & 0.95 & 1.54            & 0.91        \\
-Up.\ proj.  & \textbf{1.25} & 1.00          & 1.00 & 1.01 & 1.18            & 1.03        \\
-Down.\ proj.& \textbf{1.10} & 1.04          & \textbf{1.18} & 1.03          & 0.87            & \textbf{1.13} \\
+Authors      & 0.98          & 0.98          & \textbf{0.93} & --            \\
+Blobs        & 0.90          & 0.88          & \textbf{0.66} & \textbf{1.24} \\
+Commits      & \textbf{0.83} & \textbf{0.84} & \textbf{0.69} & --            \\
+Files        & 1.04          & 0.99          & \textbf{0.76} & \textbf{1.46} \\
+Active mon.  & \textbf{0.92} & \textbf{0.92} & \textbf{0.85} & --            \\
+Up.\ proj.   & 1.00          & 1.03          & \textbf{0.92} & \textbf{1.22} \\
+Down.\ proj. & 1.05          & 0.99          & \textbf{0.96} & --            \\
 \bottomrule
-\end{tabular}}
+\end{tabular}
 \end{table}
 
-Taken together, these analyses tell a more nuanced story than the headline
-results alone. The \emph{language-specific} patterns (C/C++ negative,
-Python positive) are robust across designs and specifications. The
-\emph{global} R2P main effect, in contrast, is partially confounded with
-project popularity and shrinks once popularity is controlled. We update
-the Key Findings to reflect this.
+Taken together, the \emph{language-specific} patterns (C/C++ negative, Python
+positive) are robust across both designs, while the \emph{global} R2P main
+effect is largely absent once popularity is controlled---except for modest
+negative associations with commits and sustained activity. We reflect this in
+the Key Findings.
 
 \paragraph{Hypothesis-by-hypothesis verdict.}
 Table~\ref{tbl:hverdict} maps each theory-derived hypothesis from
-Section~\ref{sec:background} to its verdict under the V2604-aligned,
-popularity-controlled specification. ``Supported'' indicates a robust
+Section~\ref{sec:background} to its verdict under the popularity-controlled
+specification.``Supported'' indicates a robust
 effect in the predicted direction with $p<0.05$; ``partial'' indicates
 the direction holds for some language ecosystems but not all
 (language-interaction-driven); ``inconclusive'' indicates the global
 main effect attenuates to non-significance under popularity controls
 and the language interactions split.
 
-\begin{table}[t]
-\centering \small
+\begin{table*}[t]
+\centering 
+\small
 \caption{Theory-derived hypotheses and their verdicts under the
-V2604-aligned, popularity-augmented specification (sources cited in
+popularity-controlled specification (sources cited in
 Section~\ref{sec:background}).}
 \label{tbl:hverdict}
-\begin{tabular}{p{0.16\linewidth} p{0.42\linewidth} l}
+\begin{tabular}{p{0.1\linewidth} p{0.35\linewidth} p{0.45\textwidth}}
 \toprule
-\textbf{Hyp.} & \textbf{Claim} & \textbf{Verdict} \\
+\textbf{Hypothesis} & \textbf{Claim} & \textbf{Verdict} \\
 \midrule
-H1a & More restrictive licenses are associated with higher author counts. & partial (C/C++ only) \\
-H1b & More restrictive (often ideology-driven) licenses are more likely to be retained. & supported (GPL family) \\
-H2a & License choice is associated with overall popularity of the license at adoption. & supported (Fig.~\ref{fig:proportion}) \\
-H2b & License choice is associated with programming-language culture-specific norms. & supported (robust across designs) \\
-H2c & More permissive licenses are associated with larger community size (upstream/downstream). & inconclusive (global effect collapses under popularity controls; AFvAL downstream re-emerges) \\
-H3a & License choice is associated with project activity (commits). & partial (C/C++ negative; V2604 BLvAL OR=0.96, $p$=0.027) \\
-H3b & More complex projects (more files/blobs) use more restrictive licenses. & partial (C/C++ only) \\
-H3c & Restrictive licenses associated with longer-term sustainability. & partial (C/C++ negative under R2P; V2604 BLvAL OR=0.96 for active months) \\
-H3d & Burstiness associated with more permissive licenses. & inconclusive (mixed by language) \\
+H1a & More restrictive licenses are associated with higher author counts. & Partial (C/C++ only) \\
+H1b & More restrictive (often ideology-driven) licenses are more likely to be retained. & Supported (GPL family) \\
+H2a & License choice is associated with overall popularity of the license at adoption. & Supported (Fig.~\ref{fig:proportion}) \\
+H2b & License choice is associated with programming-language culture-specific norms. & Supported (robust across designs) \\
+H2c & More permissive licenses are associated with larger community size (upstream/downstream). & Inconclusive (switching toward permissive shows no significant global change in upstream/downstream once popularity is controlled; Python shows a positive upstream interaction, OR=1.22) \\
+H3a & License choice is associated with project activity (commits). & Partial (global OR=0.83; C/C++ negative) \\
+H3b & License direction is associated with changes in project complexity (files/blobs). & Partial (C/C++ negative, Python positive) \\
+H3c & Restrictive licenses associated with longer-term sustainability. & Partial (global OR=0.92 for active months; C/C++ negative) \\
 \bottomrule
 \end{tabular}
-\end{table}
+\end{table*}
 
-\begin{figure}[h]
-\begin{center}
-\setlength{\fboxsep}{6pt}
+\begin{figure}[ht]
+\centering
+\setlength{\fboxsep}{4pt}
 \cornersize{0.08}
 
 \Ovalbox{
 \colorbox{lightgray}{
-\begin{minipage}{0.92\linewidth}
+\begin{minipage}{0.82\linewidth}
 \textbf{Key Findings}
 
 \begin{enumerate}[leftmargin=4mm]
     \item \emph{C/C++ projects} see reduced authorship, commits, files, blobs,
-      and activity after switching to permissive licenses; this language-specific
-      pattern is robust across the no-popularity, +Pop, and V2604 BLvAL
-      specifications (cf.\ H2b, supported).
-    \item \emph{Python projects} see increased repository growth and sustained
-      activity under permissive licenses, robust to the same set of controls
+      and sustained activity after switching to permissive licenses (commits
+      OR=0.69, files 0.76, blobs 0.66, active months 0.85); this
+      language-specific pattern is robust across the AFvAL and BLvAL designs
       (cf.\ H2b, supported).
-    \item PHP projects benefit from permissive licenses through increased file
-      additions and external project integration (cf.\ H2b, partial).
-    \item Go projects attract moderately more authors after permissive license
-      adoption (cf.\ H2b, partial; small N for Go).
-    \item The \emph{global} R2P main effect on files (1.30), upstream (1.25),
-      and downstream (1.10) is \emph{not robust}: it attenuates to non-significance
-      once pre-treatment popularity (downstream/upstream/forks) is controlled
-      (Table~\ref{tbl:robustness}, +Pop column; cf.\ H2c, inconclusive).
-    \item V2604 BLvAL surfaces consistent $\sim$4\% attenuations under
-      restrictive$\rightarrow$permissive transitions in commits (OR=0.96,
-      $p$=0.027), bot-filtered distinct aliased authors (0.96, $p$=0.027),
-      and sustained activity (0.96, $p$=0.024). These borderline effects
-      would not survive a strict Bonferroni correction across the seven outcomes
-      and should be read as suggestive (cf.\ H3a / H1a, partial; H3c, partial).
-    \item Downstream adoption increases under R2P at the multi-year horizon
-      (V2604 AFvAL OR=1.18, $p<10^{-5}$) but attenuates at the one-year
-      pre/post horizon (BLvAL OR=1.03, NS), suggesting downstream uptake
-      operates over a longer time scale than the one-year BLvAL window can
-      capture.
+    \item \emph{Python projects} see the opposite---increased file (OR=1.46)
+      and blob (1.24) growth and broader upstream integration (1.22) under
+      permissive licenses (cf.\ H2b, supported).
+    \item PHP, Go, and Ruby show smaller, mixed effects, reinforcing that
+      license-change dynamics are mediated by language ecosystem rather than
+      by license direction alone.
+    \item Once pre-treatment popularity is controlled, license direction has
+      \emph{no significant global effect} on files (OR=1.04), upstream (1.00),
+      or downstream (1.05) project counts; the robust associations are
+      language-specific (cf.\ H2c, inconclusive).
+    \item Two global associations survive popularity control: commits
+      (OR=0.83) and sustained activity (active months, OR=0.92) decline
+      modestly under restrictive$\rightarrow$permissive transitions, and both
+      are stable across the AFvAL and BLvAL designs and clear a Bonferroni
+      correction across the seven outcomes (cf.\ H3a, H3c, partial).
 \end{enumerate}
 
 \end{minipage}
 }}
-\end{center}
 \Description{Key Findings}
 \end{figure}
 
 \subsubsection{Implications}
 
-The analysis is observational and conditioned on the $\sim 2.4\%$ slice
-of licensed projects that switched license types, so we report
-associations rather than prescriptions. Two patterns are stable enough
-to inform downstream tooling: (i) \emph{language ecosystem mediates the
-association} between license direction and project dynamics far more
-than direction does on its own (C/C++-negative / Python-positive
-contrast holds across designs); license-recommender tools that ignore
-language ecosystem will give systematically biased advice; (ii) a
-project's pre-treatment \emph{popularity} absorbs much of the apparent
-global ``permissive helps'' effect (Table~\ref{tbl:robustness},
-+Pop column). Beyond these, the V2604 BLvAL design surfaces small
-($\sim 4\%$) attenuations in commits, bot-filtered distinct authors,
-and sustained activity after restrictive$\rightarrow$permissive
-transitions; too modest for strong claims, but useful priors for
-follow-up qualitative studies in specific language communities.
+The analysis is observational and conditioned on the projects that
+switched license types, so we report associations rather than
+prescriptions. Two patterns are stable enough to inform downstream
+tooling: (i) \emph{language ecosystem mediates the association} between
+license direction and project dynamics far more than direction does on
+its own (the C/C++-negative / Python-positive contrast holds across both
+designs); license-recommender tools that ignore language ecosystem will
+give systematically biased advice; (ii) once a project's pre-treatment
+\emph{popularity} is controlled, the apparent global ``permissive helps''
+effect on files, upstream, and downstream counts disappears, leaving only
+modest negative associations with commits and sustained activity. These
+two effects are stable across the AFvAL and BLvAL designs but small in
+magnitude---useful as priors for follow-up qualitative studies in specific
+language communities rather than as strong standalone claims.

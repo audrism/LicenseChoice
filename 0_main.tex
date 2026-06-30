@@ -1,18 +1,31 @@
-\documentclass[manuscript,screen,review]{acmart}
+\documentclass[10pt,conference]{IEEEtran}
+\IEEEoverridecommandlockouts
 
-\usepackage{amsfonts}
-\usepackage{algorithmic}
+\pagestyle{plain}
+
+\usepackage{balance}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
 \usepackage{textcomp}
+\usepackage{xcolor}
 \usepackage{verbatim}
 \usepackage{listings}
 \usepackage{multirow}
-\usepackage{subcaption}
 \usepackage{enumitem}
 \usepackage{colortbl}
 \usepackage{soul}
+\usepackage{booktabs}
 \usepackage{fancybox}
+\usepackage{cite}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=cyan,
+    citecolor=blue,
+}
 
-% colors
+% Reuse the color definitions from 0_main.tex.
 \definecolor{lightgray}{gray}{0.95}
 \definecolor{darkblue}{rgb}{0,0,0.5}
 \definecolor{lightred}{rgb}{1, 0.8, 0.8}
@@ -21,119 +34,90 @@
 \definecolor{mint}{rgb}{0.74, 0.99, 0.79}
 \definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
 
-\AtBeginDocument{%
-  \providecommand\BibTeX{{%
-    Bib\TeX}}}
+% acmart-only macros that may appear in the shared input files; make them
+% no-ops in the IEEEtran build.
+\providecommand{\Description}[1]{}
 
-\citestyle{acmauthoryear}
+% --- Cite vs natbib: 0_main.tex uses \citet via natbib; IEEEtran uses
+% standard \cite.  Provide \citet/\citep as aliases so the shared inputs
+% compile in both environments.
+\providecommand{\citet}[1]{\cite{#1}}
+\providecommand{\citep}[1]{\cite{#1}}
 
-% \icsetrim{...}: arXiv/manuscript build keeps the argument; the ICSE'27
-% two-column build (icse27_main.tex) drops it for space. See README.md.
-\providecommand{\icsetrim}[1]{#1}
 
 \begin{document}
 
 \title{License Choice, Prevalence, and Impact in Open Software Projects}
 
-\author{Mahmoud Jahanshahi}
-\email{mjahan@utk.edu}
-\affiliation{
-  \institution{University of Tennessee}
-  \city{Knoxville}
-  \country{USA}
+\author{
+  Anonymous Author(s)\\
+  Affiliation withheld for double-blind review
 }
 
-\author{Bogdan Vasilescu}
-\email{vasilescu@cmu.edu}
-\affiliation{
-  \institution{Carnegie Mellon University}
-  \city{Pittsburgh}
-  \country{USA}
-}
-
-\author{Audris Mockus}
-\email{audris@utk.edu}
-\affiliation{
-  \institution{University of Tennessee}
-  \city{Knoxville}
-  \country{USA}
-}
-
-\begin{abstract}
-  The terms of how publicly available source code can be used are
-  dictated by its license. The license (or its absence), in turn,
-  affects what code the project may reuse and how its code can be
-  (re)used and may also affect external participation and overall
-  activity of the project. We aim to better understand the general
-  state of license distribution overall and within language
-  ecosystems and to investigate if license changes are associated
-  with a noticeable variations of project output. To accomplish that
-  we identify licenses and license types for over 100M software
-  projects and find that most do not contain any license, that
-  permissive licenses represent the bulk of most licenses, and that
-  permissive licensing is representing an increasing proportion of
-  all licenses over time. Restrictive licenses are more likely to
-  be retained, however. There is a great variation among language
-  ecosystems with C-language strongly favoring restrictive
-  licenses. We then study the subset of projects (23,619, or roughly
-  2.4\% of licensed projects) that underwent a license-type change,
-  comparing activity within one year of the adoption of the initial
-  and final licenses. This analysis
-  shows that the change from restrictive to permissive license varies
-  with the ecosystem. C-language ecosystems show reduced activity
-  while Python shows increased activity when comparing restrictive to
-  permissive license transition. Our results demonstrate dramatic
-  changes in license type prevalence over time and find that the
-  effects of license changes may have opposite effects depending on
-  the language ecosystem.  
-\end{abstract}
-
-\begin{CCSXML}
-<ccs2012>
-   <concept>
-       <concept_id>10011007.10011074</concept_id>
-       <concept_desc>Software and its engineering~Software creation and management</concept_desc>
-       <concept_significance>500</concept_significance>
-       </concept>
-   <concept>
-       <concept_id>10002944.10011123.10010912</concept_id>
-       <concept_desc>General and reference~Empirical studies</concept_desc>
-       <concept_significance>500</concept_significance>
-       </concept>
- </ccs2012>
-\end{CCSXML}
-
-\ccsdesc[500]{Software and its engineering~Software creation and management}
-\ccsdesc[500]{General and reference~Empirical studies}
-
-\keywords{Software License, Open Source Software, Open Source License, World of Code}
+% \author{\IEEEauthorblockN{Mahmoud Jahanshahi}
+%   \IEEEauthorblockA{University of Tennessee\\
+%     Knoxville, USA\\
+%     \texttt{mjahan@utk.edu}}
+% \and
+% \IEEEauthorblockN{Bogdan Vasilescu}
+%   \IEEEauthorblockA{Carnegie Mellon University\\
+%     Pittsburgh, USA\\
+%     \texttt{vasilescu@cmu.edu}}
+% \and
+% \IEEEauthorblockN{Audris Mockus}
+%   \IEEEauthorblockA{University of Tennessee\\
+%     Knoxville, USA\\
+%     \texttt{audris@utk.edu}}
+% }
 
 \maketitle
+
+\begin{abstract}
+The terms of how publicly available source code can be used are dictated
+by its license. The license (or its absence), in turn, affects what code
+the project may reuse and how its code can be (re)used, and may also
+affect external participation and overall activity of the project. We
+study license distribution and impact in $131{,}171{,}379$ open-source
+projects from World of Code (WoC). We find that $83\%$ lack a formal
+license -- four times the rate reported by prior studies that filtered
+on stars, maturity, or package-manager presence. Restrictive licenses
+have higher retention rates; permissive licenses dominate new adoptions.
+We then analyze the $23{,}619$ projects that underwent a license-type
+change, modeling seven project metrics before and after the change with
+a multivariate multiple regression. Once pre-treatment project
+popularity (upstream and downstream project counts) is controlled, the
+apparent global effects of license direction on files, upstream, and
+downstream project counts collapse to non-significance. The robust
+finding is language-ecosystem mediation: switching to a permissive
+license is associated with reduced activity in C/C++ projects (commits
+OR~$0.69$, files~$0.76$) and increased growth in Python projects
+(files~$1.46$, blobs~$1.24$). Modest negative associations with commits
+(OR~$0.83$) and sustained activity (OR~$0.92$) persist globally, and a
+year-before/year-after reanalysis on the same projects confirms these
+patterns are not an artifact of the baseline window.
+\end{abstract}
+
+\begin{IEEEkeywords}
+Software license, open source software, license choice, mining software repositories, World of Code.
+\end{IEEEkeywords}
 
 \input{1_introduction}
 \input{2_background}
 \input{3_methodology}
 \input{4_results}
 \input{5_limitations}
-% \input{6_future}  % empty stub, content folded into limitations
 \input{7_conclusions}
 
-\section{Data Availability}
-The original replication package, including the cP2all.1y/2y datasets and the
-R notebook, is available at \url{https://zenodo.org/records/15031139}.
-Additional code and intermediate data for the robustness analyses in
-Section~\ref{sec:robustness}---including the pre-switch window aggregates
-(\texttt{cP2pre\_post.1y}), the popularity-augmented R script, and the
-year-before/year-after analysis script---are included in the supplementary
-materials submitted alongside this manuscript and will be added to a new
-Zenodo release upon acceptance.
+\section*{Data Availability}
+The replication package -- the curated license dataset, the
+license-change analysis notebook, and the scripts that produce all
+tables and figures in this paper -- is available at
+\url{https://zenodo.org/records/21084753}.
+
 
 \clearpage
-\bibliographystyle{ACM-Reference-Format}
+\clearpage
+\bibliographystyle{IEEEtran}
 \bibliography{ref}
-
-\clearpage
-\appendix
-\input{8_appendix}
 
 \end{document}

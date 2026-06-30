@@ -29,47 +29,22 @@ in open source software projects.
 \paragraph{Regression-cohort scope.} The within-project regression
 analysis is conditioned on the 23{,}619 projects that adopted exactly
 one license type initially, exactly one license type at the latest
-recorded state, and where these differ ($\sim$2.4\% of licensed
-projects, $\sim$0.4\% of the 131M-project ecosystem; 23{,}522 of these
-survived V$\to$V2604 dedup for the aligned reanalysis). Conclusions
-about license transitions therefore apply to a self-selected slice of
-projects that both reach licensing and then change it; they should
-not be read as describing the modal OSS project.
+recorded state, and where these differ ($\sim$0.4\% of the
+131M-project ecosystem). Conclusions about license transitions
+therefore apply to a self-selected slice of projects that both reach
+licensing and then change it; they should not be read as describing
+the modal OSS project.
 
-\paragraph{Primary vs.\ sensitivity specification.} The Original and
-+Pop columns of Table~\ref{tbl:robustness} disagree on several
-outcomes: the headline files / upstream / downstream effects in the
-no-popularity specification collapse to NS once
-pre-treatment popularity (downstream count, upstream count, lifetime
-forks) is controlled. We treat the popularity-augmented
-V2604-aligned specifications (+Pop, V2604 AFvAL, V2604 BLvAL) as
-primary and the no-popularity column as a sensitivity check that
-shows how much of the original effect was confounded with popularity.
-Readers should not combine the no-popularity ORs with the
-popularity-controlled CIs.
+\paragraph{Popularity proxies.} We control for project popularity using
+two pre-treatment dependency-graph measures (upstream and downstream
+project counts). Platform-visibility signals such as fork and star
+counts are not included; incorporating them is left to future work.
 
-\paragraph{Pre-window upstream/downstream not at V2604.} The
-year-before/year-after-final-switch (BLvAL) design (R1) can compute
-pre-window commits, authors, files, blobs and active months from
-V2604 base maps directly, but pre-window upstream/downstream counts
-require the project-blob-project map (\texttt{Pt2Ptb}) which has no
-V2604 build. We carry forward V-canonical edge data translated to
-V2604 IDs via \texttt{Pold2Pnew.modal.s} (148{,}462/148{,}465 mapped,
-$<$0.1\% churn). The BLvAL upstream/downstream row in Table~\ref{tbl:robustness}
-is therefore a hybrid measurement; its NS BLvAL value should not be
-interpreted as ruling out an upstream/downstream effect at the V2604
-horizon.
-
-\paragraph{Multiple comparisons.} We report 7 outcomes $\times$ 2
-designs with several language interactions and do not adjust for
-multiple testing; the borderline V2604 BLvAL effects
-(OR $\approx 0.96$, $p \approx 0.025$) would not survive a strict
-Bonferroni at family-wise $\alpha=0.05$. The larger
-language-interaction effects do.
-
-\paragraph{Author-count bot/homonym filter.} The V2604 author counts
-drop commits whose raw author is in
-\texttt{/data/play/forks/badV2604.ids} (3.2M entries: 2.65M generic +
-0.55M bot). The filter is applied symmetrically across the FIRST,
-LAST, and PRE windows of each project; earlier (V) author counts in
-the no-popularity column are not bot-filtered.
+\paragraph{Multiple comparisons.} We report seven outcomes across two
+designs with several language interactions. The two global effects we
+emphasize---commits and sustained activity under
+restrictive$\rightarrow$permissive transitions---survive a Bonferroni
+correction across the seven outcomes ($\alpha/7 \approx 0.007$; commits
+$p<0.002$, active months $p<0.001$) in both designs. We nonetheless
+interpret the smaller language-specific effects with appropriate caution
+given the number of comparisons.
