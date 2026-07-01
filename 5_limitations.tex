@@ -40,6 +40,25 @@ two pre-treatment dependency-graph measures (upstream and downstream
 project counts). Platform-visibility signals such as fork and star
 counts are not included; incorporating them is left to future work.
 
+\paragraph{Construct validity of activity metrics.} The seven outcomes we
+model (commits, files, blobs, authors, active months, upstream and downstream
+projects) are proxies rather than direct measures of project health.
+A commit may be a large refactor or a typo fix; blob and file growth mixes
+substantive additions with generated code; active-months treat a single
+maintenance commit the same as a productive burst. Our conclusions describe
+associations with these commit-graph proxies and should be re-tested with
+richer measures (e.g., reviewed contributions, issue turnaround) before being
+generalized to project ``health.''
+
+\paragraph{Switcher-cohort selection.} The 23{,}619-project regression cohort
+is drawn from the 22.3M projects that ever adopted a license and then narrowed
+to those with exactly one type at first and last adoption and at least one
+year separating them. Projects that never license, license briefly and go
+inactive, or churn among many license types are excluded by construction.
+The reported associations therefore apply to projects that both reach
+licensing and deliberately consolidate on a new license type, and should not
+be read as characterizing the median OSS project.
+
 \paragraph{Multiple comparisons.} We report seven outcomes across two
 designs with several language interactions. The two global effects we
 emphasize---commits and sustained activity under

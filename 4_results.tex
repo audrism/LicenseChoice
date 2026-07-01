@@ -68,7 +68,10 @@ repositories.
 
 \begin{table*}[t]
 \centering
-\caption{Comparison between our results and the literature.}
+\caption{Comparison between our results and the literature.
+The \emph{No License} share is a fraction of all projects in each study;
+the five license-type columns are shares of each study's licensed subset
+(rows sum to 100\% within licensed).}
 \label{tab:res1a}
 
 \begin{tabular}{lrr|rrrrr}
@@ -102,7 +105,7 @@ under-represent copyleft prevalence.
 \textbf{Key Findings}
 
 \begin{enumerate}[leftmargin=4mm]
-    \item Overall, 83\% of the projects in the dataset lack a formal license, which is significantly higher than previously reported.
+    \item Overall, 83\% of the projects in the dataset lack a formal license, which is substantially higher than previously reported.
     \item The MIT license is the most widely used license, 
     accounting for 67\% of all licensed projects and 11\% 
     of all public projects.
@@ -388,24 +391,28 @@ language-specific rather than global.
 \begin{table}[t]
 \centering \small
 \caption{License change model: main R2P (restrictive$\rightarrow$permissive)
-effect and language-specific effects as odds ratios, under the AFvAL
+effect and language-specific total effects as odds ratios, under the AFvAL
 (after-first vs.\ after-last) and BLvAL (before-last vs.\ after-last) designs,
-both with pre-treatment popularity controls ($N$=23{,}619). Bold values are
-significant at $p<0.05$; ``--'' marks non-significant language interactions.}
+both with pre-treatment popularity controls ($N$=23{,}619). 95\% CIs are
+shown for the AFvAL Global column; per-cell CIs for BLvAL Global and for
+C/C++ and Python are plotted in Figures~\ref{fig:odds} and
+\ref{fig:odds-blval} and reported in full in the replication package. Bold
+values are significant at $p<0.05$; ``--'' marks non-significant language
+interactions.}
 \label{tbl:robustness}
-\begin{tabular}{lrrrr}
+\begin{tabular}{lccccc}
 \toprule
- & \multicolumn{2}{c}{\textbf{Global R2P}} & \multicolumn{2}{c}{\textbf{C/C++ \,/\, Python}} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}
-\textbf{Outcome} & \textbf{AFvAL} & \textbf{BLvAL} & \textbf{C/C++} & \textbf{Python} \\
+ & \multicolumn{3}{c}{\textbf{Global R2P}} & \multicolumn{2}{c}{\textbf{C/C++ \,/\, Python}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+\textbf{Outcome} & \textbf{AFvAL} & \textbf{95\% CI} & \textbf{BLvAL} & \textbf{C/C++} & \textbf{Python} \\
 \midrule
-Authors      & 0.98          & 0.98          & \textbf{0.93} & --            \\
-Blobs        & 0.90          & 0.88          & \textbf{0.66} & \textbf{1.24} \\
-Commits      & \textbf{0.83} & \textbf{0.84} & \textbf{0.69} & --            \\
-Files        & 1.04          & 0.99          & \textbf{0.76} & \textbf{1.46} \\
-Active mon.  & \textbf{0.92} & \textbf{0.92} & \textbf{0.85} & --            \\
-Up.\ proj.   & 1.00          & 1.03          & \textbf{0.92} & \textbf{1.22} \\
-Down.\ proj. & 1.05          & 0.99          & \textbf{0.96} & --            \\
+Authors      & 0.98          & [0.93,\,1.02] & 0.98          & \textbf{0.93} & --            \\
+Blobs        & 0.90          & [0.78,\,1.04] & 0.88          & \textbf{0.66} & \textbf{1.24} \\
+Commits      & \textbf{0.83} & [0.74,\,0.93] & \textbf{0.84} & \textbf{0.69} & --            \\
+Files        & 1.04          & [0.91,\,1.19] & 0.99          & \textbf{0.76} & \textbf{1.46} \\
+Active mon.  & \textbf{0.92} & [0.87,\,0.96] & \textbf{0.92} & \textbf{0.85} & --            \\
+Up.\ proj.   & 1.00          & [0.93,\,1.07] & 1.03          & \textbf{0.92} & \textbf{1.22} \\
+Down.\ proj. & 1.05          & [0.98,\,1.12] & 0.99          & \textbf{0.96} & --            \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -417,7 +424,7 @@ negative associations with commits and sustained activity. We reflect this in
 the Key Findings.
 
 \paragraph{Hypothesis-by-hypothesis verdict.}
-Table~\ref{tbl:hverdict} maps each theory-derived hypothesis from
+Table~\ref{tbl:hverdict} maps each framework-derived hypothesis from
 Section~\ref{sec:background} to its verdict under the popularity-controlled
 specification.``Supported'' indicates a robust
 effect in the predicted direction with $p<0.05$; ``partial'' indicates
@@ -429,7 +436,7 @@ and the language interactions split.
 \begin{table*}[t]
 \centering 
 \small
-\caption{Theory-derived hypotheses and their verdicts under the
+\caption{Framework-derived hypotheses and their verdicts under the
 popularity-controlled specification (sources cited in
 Section~\ref{sec:background}).}
 \label{tbl:hverdict}
@@ -503,3 +510,11 @@ modest negative associations with commits and sustained activity. These
 two effects are stable across the AFvAL and BLvAL designs but small in
 magnitude---useful as priors for follow-up qualitative studies in specific
 language communities rather than as strong standalone claims.
+A plausible mechanism for the C/C++ vs.\ Python contrast is community
+composition: C/C++ projects that adopt copyleft early tend to attract
+contributors motivated by strong-copyleft values, and relaxing that
+constraint may erode that pool; Python projects, in contrast, sit in an
+ecosystem dominated by permissive norms~\cite{lerner2005economics}, so
+moving \emph{toward} permissive licenses aligns them with the ambient
+norm and may lower a barrier to reuse and contribution. We flag this
+as a candidate mechanism, not a tested claim.
