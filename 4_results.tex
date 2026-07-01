@@ -19,7 +19,7 @@ attribution-only CC-BY-3.0 the lowest.
 
 \begin{figure*}[t]
 \centering
-    \includegraphics[width=\textwidth]{figures/dis1.pdf}
+    \includegraphics[width=\textwidth]{figures/dis1.png}
     \caption{The distribution and retention rates of the most used licenses.}
     \label{fig:dis1}
     \Description{The distribution and retention rates of the most used licenses.}
@@ -32,7 +32,7 @@ consistent with H1b.
 
 \begin{figure}[t]
 \centering
-    \includegraphics[width=\linewidth]{figures/dis3.pdf}
+    \includegraphics[width=\linewidth]{figures/dis3.png}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
     \Description{The distribution of license types across projects.}
@@ -44,7 +44,7 @@ declined while permissive has risen (H2a).
 
 \begin{figure}[t]
     \centering
-    \includegraphics[width=\linewidth]{figures/proportion.pdf}
+    \includegraphics[width=\linewidth]{figures/proportion.png}
     \caption{Proportion of license type over time}
     \label{fig:proportion}
     \Description{Proportion of license type over time}
@@ -67,13 +67,14 @@ repositories.
 
 
 \begin{table*}[t]
-\centering
+\vspace{-.1in}
+  \centering
 \caption{Comparison between our results and the literature.
 The \emph{No License} share is a fraction of all projects in each study;
 the five license-type columns are shares of each study's licensed subset
 (rows sum to 100\% within licensed).}
 \label{tab:res1a}
-
+\vspace{-.1in}
 \begin{tabular}{lrr|rrrrr}
     \toprule
     & \textbf{Projects} & \textbf{No License} & \textbf{Copyleft} & \textbf{Weak} & \textbf{Conditional} & \textbf{Permissive} & \textbf{Public} \\
@@ -84,7 +85,7 @@ the five license-type columns are shares of each study's licensed subset
     \textbf{This Study} & 131,171,379 & 83.01\% & 15.35\% & 5.26\% & 4.82\% & 70.18\% & 4.39\% \\
     \bottomrule
 \end{tabular}
-
+\vspace{-.1in}
 \end{table*}
 
 
@@ -95,7 +96,8 @@ copyleft share than our cross-platform sample
 under-represent copyleft prevalence.
 
 \begin{figure}[h]
-\centering
+  \vspace{-.1in}
+  \centering
 \setlength{\fboxsep}{4pt}
 \cornersize{0.08}
 
@@ -144,11 +146,14 @@ open nature of derivative works.
 \subsection{The Impact of License Changes}
 
 \begin{figure}[t]
-\centering
-\includegraphics[width=\linewidth]{figures/pie.pdf}
+  \vspace{-.15in}
+  \centering
+\includegraphics[width=.8\linewidth]{figures/pie.png}
+\vspace{-.1in}
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
+\vspace{-.15in}
 \end{figure}
 
 Examining the distribution of license type counts in projects
@@ -359,14 +364,12 @@ therefore re-estimate the model on the same 23{,}619 projects using the year
 \emph{before} the final adoption as the baseline (BLvAL design), which
 brackets the switch tightly. The language-ecosystem pattern persists across
 both designs: C/C++ remains negative and Python positive. The significant
-negative global associations with commits (OR=0.83 AFvAL, 0.86 BLvAL) and
-sustained activity (active months, OR=0.92 AFvAL, 0.93 BLvAL) are stable
+negative global associations with commits (OR=0.83 AFvAL, 0.84 BLvAL) and
+sustained activity (active months, OR=0.92 in both designs) are stable
 across the two baselines, confirming they are not an artifact of the
-baseline window. In the BLvAL design a global negative association with
-authors also emerges (OR=0.94, $p=0.02$) that was not significant in the
-AFvAL design. The AFvAL commits and active-month effects clear a
-Bonferroni correction across the seven outcomes
-($\alpha/7\approx0.007$; commits $p<0.002$, active months $p<0.001$).
+baseline window. Both effects clear a Bonferroni correction across the
+seven outcomes ($\alpha/7\approx0.007$; commits $p<0.002$ AFvAL /
+$p<0.002$ BLvAL, active months $p<0.001$ in both).
 Figure~\ref{fig:odds-blval} shows the corresponding odds ratios; the
 C/C++-negative and Python-positive interactions persist under this baseline.
 
@@ -396,12 +399,9 @@ language-specific rather than global.
 \caption{License change model: main R2P (restrictive$\rightarrow$permissive)
 effect and language-specific total effects as odds ratios, under the AFvAL
 (after-first vs.\ after-last) and BLvAL (before-last vs.\ after-last) designs,
-both with pre-treatment popularity controls ($N$=23{,}619). 95\% CIs are
-shown for both Global columns. Pre-window Blobs, Files, and
-upstream/downstream project counts are not available in the current
-pre/post dataset, so those BLvAL cells are marked ``n/a''; the AFvAL
-column reports the primary specification for all seven outcomes. Per-cell
-CIs for the C/C++ and Python columns are plotted in
+both fit on the same $N$=23{,}619 sample with the same predictors
+(popularity controls included). 95\% CIs are shown for both Global
+columns; per-cell CIs for the C/C++ and Python columns are plotted in
 Figures~\ref{fig:odds} and~\ref{fig:odds-blval} and reported in full in
 the replication package. Bold values are significant at $p<0.05$;
 ``--'' marks non-significant language interactions.}
@@ -413,13 +413,13 @@ the replication package. Bold values are significant at $p<0.05$;
 \cmidrule(lr){2-5}\cmidrule(lr){6-7}
 \textbf{Outcome} & \textbf{AFvAL} & \textbf{95\% CI} & \textbf{BLvAL} & \textbf{95\% CI} & \textbf{C/C++} & \textbf{Python} \\
 \midrule
-Authors      & 0.98          & [0.93,\,1.02] & \textbf{0.94} & [0.88,\,0.99] & \textbf{0.93} & --            \\
-Blobs        & 0.90          & [0.78,\,1.04] & n/a           & n/a           & \textbf{0.66} & \textbf{1.24} \\
-Commits      & \textbf{0.83} & [0.74,\,0.93] & \textbf{0.86} & [0.77,\,0.95] & \textbf{0.69} & --            \\
-Files        & 1.04          & [0.91,\,1.19] & n/a           & n/a           & \textbf{0.76} & \textbf{1.46} \\
-Active mon.  & \textbf{0.92} & [0.87,\,0.96] & \textbf{0.93} & [0.89,\,0.98] & \textbf{0.85} & --            \\
-Up.\ proj.   & 1.00          & [0.93,\,1.07] & n/a           & n/a           & \textbf{0.92} & \textbf{1.22} \\
-Down.\ proj. & 1.05          & [0.98,\,1.12] & n/a           & n/a           & \textbf{0.96} & --            \\
+Authors      & 0.98          & [0.93,\,1.02] & 0.98          & [0.94,\,1.03] & \textbf{0.93} & --            \\
+Blobs        & 0.90          & [0.78,\,1.04] & 0.88          & [0.75,\,1.03] & \textbf{0.66} & \textbf{1.24} \\
+Commits      & \textbf{0.83} & [0.74,\,0.93] & \textbf{0.84} & [0.75,\,0.93] & \textbf{0.69} & --            \\
+Files        & 1.04          & [0.91,\,1.19] & 0.99          & [0.85,\,1.15] & \textbf{0.76} & \textbf{1.46} \\
+Active mon.  & \textbf{0.92} & [0.87,\,0.96] & \textbf{0.92} & [0.87,\,0.97] & \textbf{0.85} & --            \\
+Up.\ proj.   & 1.00          & [0.93,\,1.07] & 1.03          & [0.94,\,1.13] & \textbf{0.92} & \textbf{1.22} \\
+Down.\ proj. & 1.05          & [0.98,\,1.12] & 0.99          & [0.94,\,1.05] & \textbf{0.96} & --            \\
 \bottomrule
 \end{tabular}}
 \end{table}
