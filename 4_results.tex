@@ -21,6 +21,7 @@ attribution-only CC-BY-3.0 the lowest.
   \vspace{-.1in}
   \centering
     \includegraphics[width=\textwidth]{figures/dis1.png}\vspace{-.1in}
+    \vspace{-.2in}
     \caption{The distribution and retention rates of the most used licenses.}
     \label{fig:dis1}
     \Description{The distribution and retention rates of the most used licenses.}
@@ -35,11 +36,12 @@ consistent with H1b.
 \begin{figure}[t]
 \vspace{-.1in}\centering
     \includegraphics[width=\linewidth]{figures/dis3.png}
-    \vspace{-.1in}
+    \vspace{-.2in}
     \caption{The distribution of license types across projects.}
     \label{fig:dis3}
     \Description{The distribution of license types across projects.}
-\vspace{-.1in}\end{figure}
+    \vspace{-.1in}
+  \end{figure}
 
 Tracking adopted-license proportions over time
 (Figure~\ref{fig:proportion}) shows copyleft adoption has steadily
@@ -48,7 +50,7 @@ declined while permissive has risen (H2a).
 \begin{figure}[t]
 \vspace{-.1in}    \centering
     \includegraphics[width=\linewidth]{figures/proportion.png}
-    \vspace{-.1in}
+    \vspace{-.2in}
     \caption{Proportion of license type over time}
     \label{fig:proportion}
     \Description{Proportion of license type over time}
@@ -154,7 +156,7 @@ open nature of derivative works.
   \vspace{-.15in}
   \centering
 \includegraphics[width=.8\linewidth]{figures/pie.png}
-\vspace{-.1in}
+\vspace{-.15in}
 \caption{Distribution of license type count in projects}
 \Description{Distribution of license type count in projects}
 \label{fig:pie}
@@ -183,12 +185,14 @@ as well as the counts of different levels for the factor variables,
 are presented in Table~\ref{tbl:stat-l}.
 
 \begin{table*}[t]
-\centering
+  \vspace{-.15in}
+  \centering
 \caption{License change model -- descriptive statistics (untransformed; the
 model uses $\mathrm{sign}(x)\cdot\log(1+|x|)$ transforms). Response rows are
 shown separately for the AFvAL (after-first vs.\ after-last) and BLvAL
 (before-last vs.\ after-last) designs; controls and factor distributions are
 shared across both.}
+\vspace{-.05in}
 \resizebox{0.95\textwidth}{!}{
 \begin{tabular}{cllcccc}
   \toprule
@@ -235,6 +239,7 @@ shared across both.}
   \bottomrule
 \end{tabular}}
 \label{tbl:stat-l}
+\vspace{-.15in}
 \end{table*}
 
 The model produces a coefficient set per outcome. We use
@@ -252,9 +257,10 @@ significantly improve model fit ($p \ll 0.001$).
 Full test statistics are reported in Table~\ref{tbl:anova-lc}.
 
 \begin{table}[t]
-\centering \small
+  \vspace{-.15in}
+  \centering \small
 \caption{License change model - Type III MANOVA Tests: Pillai test statistic}
-\begin{tabular}{lccc}
+\vspace{-.15in}\begin{tabular}{lccc}
     \toprule
     \textbf{Variable} & \textbf{DF} & \textbf{Test Stat} & \textbf{p.value} \\
     \midrule
@@ -270,7 +276,7 @@ Full test statistics are reported in Table~\ref{tbl:anova-lc}.
     \bottomrule
 \end{tabular}
 \label{tbl:anova-lc}
-\end{table}
+\vspace{-.15in}\end{table}
 \end{comment}
 
 % model performance
@@ -303,13 +309,15 @@ for a comparison of how the change direction predictor and
 its interaction with language influence various aspects of the model.
 
 \begin{figure*}[t]
-    \centering
+ \vspace{-.15in}   \centering
     \includegraphics[width=\linewidth]{figures/odds1.png}
+    \vspace{-.35in}
     \caption{License change model odds ratios under the AFvAL design
     (after-first vs.\ after-last license adoption).}
     \label{fig:odds}
     \Description{License change model odds ratios, AFvAL design.}
-\end{figure*}
+    \vspace{-.15in}
+  \end{figure*}
 
 In these models, each coefficient represents a change in the
 log-odds (or log-count) of the outcome. The main R2P effect
@@ -349,11 +357,6 @@ significant global association in the controlled model: commits (OR=0.83)
 and sustained activity (active months, OR=0.92) both decline modestly
 under restrictive$\rightarrow$permissive transitions.
 
-These quantified magnitudes, along with their directions,
-clearly demonstrate that license transitions are meaningfully associated with
-project metrics, with notable variations across different
-metrics and programming languages.
-
 \subsubsection{Robustness}\label{sec:robustness}
 
 We assess robustness along two axes: the choice of baseline window and the
@@ -379,13 +382,16 @@ Figure~\ref{fig:odds-blval} shows the corresponding odds ratios; the
 C/C++-negative and Python-positive interactions persist under this baseline.
 
 \begin{figure*}[t]
+  \vspace{-.15in}
     \centering
     \includegraphics[width=\linewidth]{figures/odds2.png}
+    \vspace{-.25in}
     \caption{License change model odds ratios under the BLvAL design
     (year-before vs.\ year-after the final license switch).}
     \label{fig:odds-blval}
     \Description{License change model odds ratios, BLvAL design.}
-\end{figure*}
+    %\vspace{-.15in}
+  \end{figure*}
 
 \paragraph{Popularity controls.} A project's pre-treatment popularity could
 confound the relationship between license direction and subsequent activity:
@@ -400,7 +406,8 @@ upstream, or downstream project counts; the robust associations are
 language-specific rather than global.
 
 \begin{table}[t]
-\centering \small
+  %\vspace{-.15in}
+  \centering \small
 \caption{License change model: main R2P (restrictive$\rightarrow$permissive)
 effect and language-specific total effects as odds ratios, under the AFvAL
 (after-first vs.\ after-last) and BLvAL (before-last vs.\ after-last) designs,
@@ -411,7 +418,7 @@ Figures~\ref{fig:odds} and~\ref{fig:odds-blval} and reported in full in
 the replication package. Bold values are significant at $p<0.05$;
 ``--'' marks non-significant language interactions.}
 \label{tbl:robustness}
-\resizebox{\linewidth}{!}{
+\vspace{-.15in}\resizebox{\linewidth}{!}{
 \begin{tabular}{lcccccc}
 \toprule
  & \multicolumn{4}{c}{\textbf{Global R2P}} & \multicolumn{2}{c}{\textbf{C/C++ \,/\, Python}} \\
@@ -427,13 +434,17 @@ Up.\ proj.   & 1.00          & [0.93,\,1.07] & 1.03          & [0.94,\,1.13] & \
 Down.\ proj. & 1.05          & [0.98,\,1.12] & 0.99          & [0.94,\,1.05] & \textbf{0.96} & --            \\
 \bottomrule
 \end{tabular}}
+\vspace{-.15in}
 \end{table}
 
 Taken together, the \emph{language-specific} patterns (C/C++ negative, Python
 positive) are robust across both designs, while the \emph{global} R2P main
 effect is largely absent once popularity is controlled---except for modest
-negative associations with commits and sustained activity. We reflect this in
-the Key Findings.
+negative associations with commits and sustained activity. The two designs'
+point estimates agree to within their CIs for every outcome; the Files
+global effect ($1.04$ AFvAL vs.\ $0.99$ BLvAL) is not significant in either
+design, and the shift reflects the tighter, symmetric BLvAL window rather
+than a difference in direction. We reflect this in the Key Findings.
 
 \paragraph{Hypothesis-by-hypothesis verdict.}
 Table~\ref{tbl:hverdict} maps each framework-derived hypothesis from
@@ -446,13 +457,13 @@ main effect attenuates to non-significance under popularity controls
 and the language interactions split.
 
 \begin{table*}[t]
-\centering 
+\vspace{-.15in}\centering 
 \small
 \caption{Framework-derived hypotheses and their verdicts under the
 popularity-controlled specification (sources cited in
 Section~\ref{sec:background}).}
 \label{tbl:hverdict}
-\begin{tabular}{p{0.1\linewidth} p{0.35\linewidth} p{0.45\textwidth}}
+\vspace{-.15in}\begin{tabular}{p{0.1\linewidth} p{0.35\linewidth} p{0.45\textwidth}}
 \toprule
 \textbf{Hypothesis} & \textbf{Claim} & \textbf{Verdict} \\
 \midrule
@@ -466,7 +477,7 @@ H3b & License direction is associated with changes in project complexity (files/
 H3c & Restrictive licenses associated with longer-term sustainability. & Partial (global OR=0.92 for active months; C/C++ negative) \\
 \bottomrule
 \end{tabular}
-\end{table*}
+\vspace{-.15in}\end{table*}
 
 \begin{figure}[ht]
 \centering

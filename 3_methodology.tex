@@ -54,13 +54,9 @@ To investigate license switching, we select projects with more than
 one license type in their lifetime and exactly one license type at
 both first adoption and the latest state.
 
-This also means that if a project starts with license A, then changes to B,
-and later changes to license C, we consider it as one change from A to C,
-rather than two separate changes.
-Consequently, we excluded projects where the first license type and
-the latest license type were the same.
-Although these projects had other licenses at some point, they were
-removed, resulting in no change between the first and last license types.
+A project that moves A$\rightarrow$B$\rightarrow$C is treated as a single
+A$\rightarrow$C change; projects whose first and last license types match
+are excluded even if they held other license types in between.
 
 \begin{comment}
 A subtle case arises when the comparison interval immediately following
@@ -80,8 +76,8 @@ copyleft, weak-copyleft, and conditional open licenses.
 Within these groups, we select projects that switched from a permissive to a 
 restrictive license or vice versa.
 
-To measure performance changes, we compute key project metrics during two separate 
-one-year intervals: one immediately following the first license adoption and 
+To measure performance changes, we compute the project metrics during two separate
+one-year intervals: one immediately following the first license adoption and
 another immediately following the last license adoption.
 Projects are excluded if less than one year separates the adoption dates of the
 first and last licenses or if less than one year has elapsed since the last 
@@ -101,13 +97,11 @@ adopting that license type at the time of the last license change, and the
 project's pre-treatment popularity, measured as the number of upstream and
 downstream projects in the year following the first license adoption.
 
-To test our hypotheses, we selected a regression model appropriate to the 
-nature of our response variable, specifically, multivariate multiple regression.
-This model is an extension of multiple 
-regression that allows for multiple dependent variables (outcomes) to be predicted
-by multiple independent variables (predictors) simultaneously.
-This model is useful when the dependent variables are correlated and need to be 
-analyzed together to improve prediction accuracy and interpretation.
-All count- and duration-valued response and control variables are log-transformed
-as $\mathrm{sign}(x)\cdot\log(1+|x|)$ before entering the model to reduce skew;
-the descriptive statistics report untransformed values for interpretability.
+We fit a multivariate multiple regression (a linear model with multiple
+correlated response variables sharing one predictor set), which lets us
+jointly test how license direction relates to the seven outcomes while
+accounting for their correlation. All count- and duration-valued response
+and control variables are log-transformed as
+$\mathrm{sign}(x)\cdot\log(1+|x|)$ before entering the model to reduce
+skew; descriptive statistics report untransformed values for
+interpretability.
