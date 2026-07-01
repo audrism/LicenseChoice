@@ -142,7 +142,7 @@ results <- list()
 for (tag in c("AFvAL", "BLvAL")) {
   for (resp in c("lCommitsDif", "lAuthorsDif", "lActMonDif")) {
     nm <- paste0(resp, "_", tag)
-    fit <- fit_uni(nm, m, with_pop=TRUE)
+    fit <- fit_uni(nm, m, with_pop=TRUE, with_forks=FALSE)
     co  <- summary(fit)$coef
     # extract C2R2P main + interaction rows
     rn <- rownames(co)
